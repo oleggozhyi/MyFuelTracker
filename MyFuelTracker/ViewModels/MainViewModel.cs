@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Windows.Input;
 using MyFuelTracker.Resources;
 
 namespace MyFuelTracker.ViewModels
@@ -10,6 +11,7 @@ namespace MyFuelTracker.ViewModels
 		public MainViewModel()
 		{
 			this.Items = new ObservableCollection<ItemViewModel>();
+			AddFillupCommand = new RelayCommand(_ => { AvgConsumption = 100; });
 		}
 
 		/// <summary>
@@ -18,6 +20,10 @@ namespace MyFuelTracker.ViewModels
 		public ObservableCollection<ItemViewModel> Items { get; private set; }
 
 		private string _sampleProperty = "Sample Runtime Property Value";
+		private decimal _avgConsumption;
+		private decimal _minConsumption;
+		private decimal _maxConsumption;
+
 		/// <summary>
 		/// Sample ViewModel property; this property is used in the view to display its value using a Binding
 		/// </summary>
@@ -54,6 +60,46 @@ namespace MyFuelTracker.ViewModels
 			get;
 			private set;
 		}
+
+		public decimal AvgConsumption
+		{
+			get { return _avgConsumption; }
+			set
+			{
+				if (_avgConsumption != value)
+				{
+					_avgConsumption = value;
+					NotifyPropertyChanged("AvgConsumption");
+				}
+			}
+		}
+		public decimal MinConsumption
+		{
+			get { return _minConsumption; }
+			set
+			{
+				if (_minConsumption != value)
+				{
+					_minConsumption = value;
+					NotifyPropertyChanged("MinConsumption");
+				}
+			}
+		}
+
+		public decimal MaxConsumption
+		{
+			get { return _maxConsumption; }
+			set
+			{
+				if (_maxConsumption != value)
+				{
+					_maxConsumption = value;
+					NotifyPropertyChanged("MaxConsumption");
+				}
+			}
+		}
+
+		public ICommand AddFillupCommand { get; set; }
 
 		/// <summary>
 		/// Creates and adds a few ItemViewModel objects into the Items collection.

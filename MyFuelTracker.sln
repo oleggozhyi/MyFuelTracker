@@ -3,13 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyFuelTracker", "MyFuelTracker\MyFuelTracker.csproj", "{423F8EE1-AB26-4348-95DB-2AAE41CDFEF8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyFuelTracker.Tests", "MyFuelTracker.Tests\MyFuelTracker.Tests.csproj", "{BAC525BD-9242-4679-833B-F30B18155835}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|ARM = Debug|ARM
+		Debug|Mixed Platforms = Debug|Mixed Platforms
 		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
 		Release|ARM = Release|ARM
+		Release|Mixed Platforms = Release|Mixed Platforms
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
@@ -19,6 +23,9 @@ Global
 		{423F8EE1-AB26-4348-95DB-2AAE41CDFEF8}.Debug|ARM.ActiveCfg = Debug|ARM
 		{423F8EE1-AB26-4348-95DB-2AAE41CDFEF8}.Debug|ARM.Build.0 = Debug|ARM
 		{423F8EE1-AB26-4348-95DB-2AAE41CDFEF8}.Debug|ARM.Deploy.0 = Debug|ARM
+		{423F8EE1-AB26-4348-95DB-2AAE41CDFEF8}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{423F8EE1-AB26-4348-95DB-2AAE41CDFEF8}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{423F8EE1-AB26-4348-95DB-2AAE41CDFEF8}.Debug|Mixed Platforms.Deploy.0 = Debug|x86
 		{423F8EE1-AB26-4348-95DB-2AAE41CDFEF8}.Debug|x86.ActiveCfg = Debug|x86
 		{423F8EE1-AB26-4348-95DB-2AAE41CDFEF8}.Debug|x86.Build.0 = Debug|x86
 		{423F8EE1-AB26-4348-95DB-2AAE41CDFEF8}.Debug|x86.Deploy.0 = Debug|x86
@@ -28,9 +35,32 @@ Global
 		{423F8EE1-AB26-4348-95DB-2AAE41CDFEF8}.Release|ARM.ActiveCfg = Release|ARM
 		{423F8EE1-AB26-4348-95DB-2AAE41CDFEF8}.Release|ARM.Build.0 = Release|ARM
 		{423F8EE1-AB26-4348-95DB-2AAE41CDFEF8}.Release|ARM.Deploy.0 = Release|ARM
+		{423F8EE1-AB26-4348-95DB-2AAE41CDFEF8}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{423F8EE1-AB26-4348-95DB-2AAE41CDFEF8}.Release|Mixed Platforms.Build.0 = Release|x86
+		{423F8EE1-AB26-4348-95DB-2AAE41CDFEF8}.Release|Mixed Platforms.Deploy.0 = Release|x86
 		{423F8EE1-AB26-4348-95DB-2AAE41CDFEF8}.Release|x86.ActiveCfg = Release|x86
 		{423F8EE1-AB26-4348-95DB-2AAE41CDFEF8}.Release|x86.Build.0 = Release|x86
 		{423F8EE1-AB26-4348-95DB-2AAE41CDFEF8}.Release|x86.Deploy.0 = Release|x86
+		{BAC525BD-9242-4679-833B-F30B18155835}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{BAC525BD-9242-4679-833B-F30B18155835}.Debug|ARM.ActiveCfg = Debug|ARM
+		{BAC525BD-9242-4679-833B-F30B18155835}.Debug|ARM.Build.0 = Debug|ARM
+		{BAC525BD-9242-4679-833B-F30B18155835}.Debug|ARM.Deploy.0 = Debug|ARM
+		{BAC525BD-9242-4679-833B-F30B18155835}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{BAC525BD-9242-4679-833B-F30B18155835}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{BAC525BD-9242-4679-833B-F30B18155835}.Debug|Mixed Platforms.Deploy.0 = Debug|x86
+		{BAC525BD-9242-4679-833B-F30B18155835}.Debug|x86.ActiveCfg = Debug|x86
+		{BAC525BD-9242-4679-833B-F30B18155835}.Debug|x86.Build.0 = Debug|x86
+		{BAC525BD-9242-4679-833B-F30B18155835}.Debug|x86.Deploy.0 = Debug|x86
+		{BAC525BD-9242-4679-833B-F30B18155835}.Release|Any CPU.ActiveCfg = Release|x86
+		{BAC525BD-9242-4679-833B-F30B18155835}.Release|ARM.ActiveCfg = Release|ARM
+		{BAC525BD-9242-4679-833B-F30B18155835}.Release|ARM.Build.0 = Release|ARM
+		{BAC525BD-9242-4679-833B-F30B18155835}.Release|ARM.Deploy.0 = Release|ARM
+		{BAC525BD-9242-4679-833B-F30B18155835}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{BAC525BD-9242-4679-833B-F30B18155835}.Release|Mixed Platforms.Build.0 = Release|x86
+		{BAC525BD-9242-4679-833B-F30B18155835}.Release|Mixed Platforms.Deploy.0 = Release|x86
+		{BAC525BD-9242-4679-833B-F30B18155835}.Release|x86.ActiveCfg = Release|x86
+		{BAC525BD-9242-4679-833B-F30B18155835}.Release|x86.Build.0 = Release|x86
+		{BAC525BD-9242-4679-833B-F30B18155835}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
