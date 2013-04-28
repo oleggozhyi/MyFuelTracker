@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Windows;
 using System.Windows.Input;
+using Microsoft.Phone.Controls;
 using MyFuelTracker.Resources;
 
 namespace MyFuelTracker.ViewModels
@@ -11,7 +13,12 @@ namespace MyFuelTracker.ViewModels
 		public MainViewModel()
 		{
 			this.Items = new ObservableCollection<ItemViewModel>();
-			AddFillupCommand = new RelayCommand(_ => { AvgConsumption = 100; });
+			AddFillupCommand = new RelayCommand(_ =>
+			                                    {
+				                                    ((PhoneApplicationFrame) Application.Current.RootVisual).Navigate(
+					                                    new Uri("/AddFillupPage.xaml", UriKind.Relative));
+				                                    AvgConsumption = 100;
+			                                    });
 		}
 
 		/// <summary>
