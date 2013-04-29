@@ -85,21 +85,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Entities\Fillup.cs" />
-    <Compile Include="FuelTrackerDbInstance.cs" />
+    <Compile Include="DataAccess\FuelTrackerDataContext.cs" />
+    <Compile Include="Models\Fillup.cs" />
+    <Compile Include="Models\Petrol.cs" />
+    <Compile Include="NotificationObject.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Reference Include="Wintellect.Sterling.WindowsPhone">
-      <HintPath>..\packages\SterlingPhone.1.6.2\lib\sl3-wp\Wintellect.Sterling.WindowsPhone.dll</HintPath>
-    </Reference>
-    <Reference Include="Wintellect.Sterling.WindowsPhone.IsolatedStorage">
-      <HintPath>..\packages\SterlingPhone.1.6.2\lib\sl3-wp\Wintellect.Sterling.WindowsPhone.IsolatedStorage.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
   <ProjectExtensions />
