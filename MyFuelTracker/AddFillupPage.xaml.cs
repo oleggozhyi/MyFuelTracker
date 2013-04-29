@@ -15,6 +15,7 @@ namespace MyFuelTracker
 		public AddFillupPage()
 		{
 			InitializeComponent();
+			gasTypes.ItemsSource = new[] { "Okko Pulls", "Okko 95", "Wog Mustang" };
 		}
 	}
 }

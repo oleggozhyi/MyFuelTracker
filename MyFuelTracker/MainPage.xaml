@@ -15,32 +15,29 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait"  Orientation="Portrait"
     shell:SystemTray.IsVisible="True">
+    <toolkit:TransitionService.NavigationInTransition>
+        <toolkit:NavigationInTransition>
+            <toolkit:NavigationInTransition.Backward>
+                <toolkit:RotateTransition Mode="In180Clockwise"/>
+            </toolkit:NavigationInTransition.Backward>
+            <toolkit:NavigationInTransition.Forward>
+                <toolkit:RotateTransition Mode="In180Counterclockwise"/>
+            </toolkit:NavigationInTransition.Forward>
+        </toolkit:NavigationInTransition>
+    </toolkit:TransitionService.NavigationInTransition>
+    <toolkit:TransitionService.NavigationOutTransition>
+        <toolkit:NavigationOutTransition>
+            <toolkit:NavigationOutTransition.Backward>
+                <toolkit:RotateTransition Mode="Out180Clockwise"/>
+            </toolkit:NavigationOutTransition.Backward>
+            <toolkit:NavigationOutTransition.Forward>
+                <toolkit:RotateTransition Mode="Out180Counterclockwise"/>
+            </toolkit:NavigationOutTransition.Forward>
+        </toolkit:NavigationOutTransition>
+    </toolkit:TransitionService.NavigationOutTransition>
 
-    <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
-
-        <!-- LOCALIZATION NOTE:
-            To localize the displayed strings copy their values to appropriately named
-            keys in the app's neutral language resource file (AppResources.resx) then
-            replace the hard-coded text value between the attributes' quotation marks
-            with the binding clause whose path points to that string name.
-
-            For example:
-
-                Text="{Binding Path=LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}"
-
-            This binding points to the template's string resource named "ApplicationTitle".
-
-            Adding supported languages in the Project Properties tab will create a
-            new resx file per language that can carry the translated values of your
-            UI strings. The binding in these examples will cause the value of the
-            attributes to be drawn from the .resx file that matches the
-            CurrentUICulture of the app at run time.
-         -->
-
-        <!--Pivot Control-->
         <phone:Pivot Title="My Fuel Tracker" SelectedIndex="0">
-            <!--Pivot item one-->
             <phone:PivotItem Header="summary">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -66,29 +63,20 @@
                     <TextBlock Grid.ColumnSpan="2" Grid.Row="4" Style="{StaticResource PhoneTextTitle2Style}" Text="{Binding LocalizedResources.MaxConsumptionLabel, Source={StaticResource LocalizedStrings}}"></TextBlock>
                     <TextBlock Grid.ColumnSpan="2" Grid.Row="5" Margin="30 5 5 5" Text="{Binding MaxConsumption}" />
 
-                    <toolkit:HubTile  Grid.Row="6" Source="Assets/add.png"  Message="Add fillup">
+                    <toolkit:HubTile  Grid.Row="6" Source="Assets/add.png"  Message="Add fillup" Margin="45,151,10,39">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="Tap">
                                 <i:InvokeCommandAction Command="{Binding AddFillupCommand}"/>
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </toolkit:HubTile>
-                    <toolkit:HubTile Grid.Row="6" Grid.Column="1" Source="Assets/feature.settings.png" Message="Settings"></toolkit:HubTile>
+                    <toolkit:HubTile Grid.Row="6" Grid.Column="1" Source="Assets/feature.settings.png" Message="Settings" Margin="10,151,45,39"></toolkit:HubTile>
                 </Grid>
             </phone:PivotItem>
 
-            <!--Pivot item two-->
             <phone:PivotItem Header="history">
             </phone:PivotItem>
         </phone:Pivot>
-
-        <!--Uncomment to see an alignment grid to help ensure your controls are
-            aligned on common boundaries.  The image has a top margin of -32px to
-            account for the System Tray. Set this to 0 (or remove the margin altogether)
-            if the System Tray is hidden.
-
-            Before shipping remove this XAML and the image itself.-->
-        <!--<Image Source="/Assets/AlignmentGrid.png" VerticalAlignment="Top" Height="800" Width="480" Margin="0,-32,0,0" Grid.Row="0" IsHitTestVisible="False" />-->
     </Grid>
 
 </phone:PhoneApplicationPage>

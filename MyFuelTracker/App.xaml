@@ -8,6 +8,10 @@
     <!--Application Resources-->
     <Application.Resources>
         <local:LocalizedStrings xmlns:local="clr-namespace:MyFuelTracker" x:Key="LocalizedStrings"/>
+        <Style x:Key="PageTitle" BasedOn="{StaticResource PhoneTextBlockBase}" TargetType="TextBlock">
+        	<Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilySemiLight}"/>
+        	<Setter Property="FontSize" Value="{StaticResource PhoneFontSizeExtraLarge}"/>
+        </Style>
     </Application.Resources>
 
     <Application.ApplicationLifetimeObjects>
