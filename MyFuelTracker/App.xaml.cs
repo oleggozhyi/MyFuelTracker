@@ -7,7 +7,7 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using MyFuelTracker.Resources;
-using MyFuelTracker.ViewModels;
+using MyFuelTracker.Core.ViewModels;
 
 namespace MyFuelTracker
 {
@@ -15,53 +15,29 @@ namespace MyFuelTracker
 	{
 		private static MainViewModel viewModel = null;
 
-		/// <summary>
-		/// A static ViewModel used by the views to bind against.
-		/// </summary>
-		/// <returns>The MainViewModel object.</returns>
 		public static MainViewModel ViewModel
 		{
 			get
 			{
-				// Delay creation of the view model until necessary
 				if (viewModel == null)
 					viewModel = new MainViewModel();
 
 				return viewModel;
 			}
 		}
-
-		/// <summary>
-		/// Provides easy access to the root frame of the Phone Application.
-		/// </summary>
-		/// <returns>The root frame of the Phone Application.</returns>
+		
 		public static PhoneApplicationFrame RootFrame { get; private set; }
 
-		/// <summary>
-		/// Constructor for the Application object.
-		/// </summary>
+		
 		public App()
 		{
-			// Global handler for uncaught exceptions.
 			UnhandledException += Application_UnhandledException;
-
-			// Standard XAML initialization
 			InitializeComponent();
-
-			// Phone-specific initialization
 			InitializePhoneApplication();
-
-			// Language display initialization
 			InitializeLanguage();
-
-			// Show graphics profiling information while debugging.
 			if (Debugger.IsAttached)
 			{
-				// Display the current frame rate counters
 				Application.Current.Host.Settings.EnableFrameRateCounter = true;
-
-				// Show the areas of the app that are being redrawn in each frame.
-				//Application.Current.Host.Settings.EnableRedrawRegions = true;
 
 				// Enable non-production analysis visualization mode,
 				// which shows areas of a page that are handed off to GPU with a colored overlay.
@@ -75,37 +51,28 @@ namespace MyFuelTracker
 			}
 		}
 
-		// Code to execute when the application is launching (eg, from Start)
-		// This code will not execute when the application is reactivated
 		private void Application_Launching(object sender, LaunchingEventArgs e)
 		{
 		}
 
-		// Code to execute when the application is activated (brought to foreground)
-		// This code will not execute when the application is first launched
 		private void Application_Activated(object sender, ActivatedEventArgs e)
 		{
 			// Ensure that application state is restored appropriately
-			if (!App.ViewModel.IsDataLoaded)
-			{
-				App.ViewModel.LoadData();
-			}
+			//if (!App.ViewModel.IsDataLoaded)
+			//{
+			//	App.ViewModel.LoadData();
+			//}
 		}
 
-		// Code to execute when the application is deactivated (sent to background)
-		// This code will not execute when the application is closing
 		private void Application_Deactivated(object sender, DeactivatedEventArgs e)
 		{
 		}
 
-		// Code to execute when the application is closing (eg, user hit Back)
-		// This code will not execute when the application is deactivated
 		private void Application_Closing(object sender, ClosingEventArgs e)
 		{
 			// Ensure that required application state is persisted here.
 		}
 
-		// Code to execute if a navigation fails
 		private void RootFrame_NavigationFailed(object sender, NavigationFailedEventArgs e)
 		{
 			if (Debugger.IsAttached)
@@ -115,22 +82,18 @@ namespace MyFuelTracker
 			}
 		}
 
-		// Code to execute on Unhandled Exceptions
 		private void Application_UnhandledException(object sender, ApplicationUnhandledExceptionEventArgs e)
 		{
 			if (Debugger.IsAttached)
 			{
-				// An unhandled exception has occurred; break into the debugger
 				Debugger.Break();
 			}
 		}
 
 		#region Phone application initialization
 
-		// Avoid double-initialization
 		private bool phoneApplicationInitialized = false;
 
-		// Do not add any additional code to this method
 		private void InitializePhoneApplication()
 		{
 			if (phoneApplicationInitialized)
@@ -141,38 +104,27 @@ namespace MyFuelTracker
 			RootFrame = new TransitionFrame();
 			RootFrame.Navigated += CompleteInitializePhoneApplication;
 
-			// Handle navigation failures
 			RootFrame.NavigationFailed += RootFrame_NavigationFailed;
-
-			// Handle reset requests for clearing the backstack
 			RootFrame.Navigated += CheckForResetNavigation;
-
-			// Ensure we don't initialize again
 			phoneApplicationInitialized = true;
 		}
 
-		// Do not add any additional code to this method
 		private void CompleteInitializePhoneApplication(object sender, NavigationEventArgs e)
 		{
-			// Set the root visual to allow the application to render
 			if (RootVisual != RootFrame)
 				RootVisual = RootFrame;
 
-			// Remove this handler since it is no longer needed
 			RootFrame.Navigated -= CompleteInitializePhoneApplication;
 		}
 
 		private void CheckForResetNavigation(object sender, NavigationEventArgs e)
 		{
-			// If the app has received a 'reset' navigation, then we need to check
-			// on the next navigation to see if the page stack should be reset
 			if (e.NavigationMode == NavigationMode.Reset)
 				RootFrame.Navigated += ClearBackStackAfterReset;
 		}
 
 		private void ClearBackStackAfterReset(object sender, NavigationEventArgs e)
 		{
-			// Unregister the event so it doesn't get called again
 			RootFrame.Navigated -= ClearBackStackAfterReset;
 
 			// Only clear the stack for 'new' (forward) and 'refresh' navigations
