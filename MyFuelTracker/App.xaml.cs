@@ -8,29 +8,38 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using MyFuelTracker.Resources;
 using MyFuelTracker.Core.ViewModels;
+using MyFuelTracker.Core;
+using MyFuelTracker.Core.DataAccess;
+using System.Threading.Tasks;
 
 namespace MyFuelTracker
 {
-	public partial class App : Application
+	public partial class App : Application, IMyFuelTrackerApp
 	{
-		private static MainViewModel viewModel = null;
-
-		public static MainViewModel ViewModel
-		{
-			get
-			{
-				if (viewModel == null)
-					viewModel = new MainViewModel();
-
-				return viewModel;
-			}
-		}
-		
 		public static PhoneApplicationFrame RootFrame { get; private set; }
-
+		public bool IsDatabaseReady { get; private set; }
+		public FuelTrackerDataContext DbContext { get; private set; }
+		public MainViewModel MainViewModel { get; private set; }
+		public INavigator Navigator { get; private set; }
+		public event EventHandler DatabaseReady;
 		
+		private void OnDatabaseReady()
+		{
+			IsDatabaseReady = true;
+			var handler = DatabaseReady;
+			if (handler != null)
+				handler(this, EventArgs.Empty);
+		}
+
+		private async Task EnsureDatabase()
+		{
+			DbContext = await FuelTrackerDataContext.EnsureDatabase();
+			OnDatabaseReady();
+		}
+
 		public App()
 		{
+			
 			UnhandledException += Application_UnhandledException;
 			InitializeComponent();
 			InitializePhoneApplication();
@@ -51,12 +60,16 @@ namespace MyFuelTracker
 			}
 		}
 
-		private void Application_Launching(object sender, LaunchingEventArgs e)
+		private async void Application_Launching(object sender, LaunchingEventArgs e)
 		{
+			await EnsureDatabase();
 		}
 
 		private void Application_Activated(object sender, ActivatedEventArgs e)
 		{
+			if (!e.IsApplicationInstancePreserved)
+			{
+			}
 			// Ensure that application state is restored appropriately
 			//if (!App.ViewModel.IsDataLoaded)
 			//{
@@ -99,9 +112,12 @@ namespace MyFuelTracker
 			if (phoneApplicationInitialized)
 				return;
 
+			MainViewModel = new MainViewModel(this);
+
 			// Create the frame but don't set it as RootVisual yet; this allows the splash
 			// screen to remain active until the application is ready to render.
 			RootFrame = new TransitionFrame();
+			Navigator = new Navigator(RootFrame);
 			RootFrame.Navigated += CompleteInitializePhoneApplication;
 
 			RootFrame.NavigationFailed += RootFrame_NavigationFailed;

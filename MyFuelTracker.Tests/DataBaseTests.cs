@@ -44,7 +44,7 @@ namespace MyFuelTracker.Tests
 				        {
 					        Date = DateTime.Now,
 					        Odometer = 20000,
-					        Petrol = new Petrol {Name = "Okko"},
+					        //Petrol = new Petrol {Name = "Okko"},
 					        Price = 10.29M,
 					        Volume = 100
 				        };

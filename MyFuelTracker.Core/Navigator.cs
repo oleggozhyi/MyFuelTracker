@@ -12,26 +12,19 @@ namespace MyFuelTracker.Core
 	{
 		private PhoneApplicationFrame _rootFrame;
 
-		public PhoneApplicationFrame RootFrame
+		public Navigator(PhoneApplicationFrame rootFrame)
 		{
-			get
-			{
-				if (_rootFrame == null)
-				{
-					_rootFrame = ((PhoneApplicationFrame)Application.Current.RootVisual);
-				}
-				return _rootFrame;
-			}
+			_rootFrame = rootFrame;
 		}
 
 		public void Navigate(string relativeUri)
 		{
-			RootFrame.Navigate(new Uri(relativeUri, UriKind.Relative));
+			_rootFrame.Navigate(new Uri(relativeUri, UriKind.Relative));
 		}
 
 		public void GoBack()
 		{
-			RootFrame.GoBack();
+			_rootFrame.GoBack();
 		}
 	}
 }

@@ -18,19 +18,26 @@ namespace MyFuelTracker.Core.ViewModels
 		private decimal _avgConsumption;
 		private decimal _minConsumption;
 		private decimal _maxConsumption;
+		private IMyFuelTrackerApp _app;
 
 		#endregion
 
 		#region ctor
 
 		public SummaryViewModel()
-			: this(new Navigator())
-		{ }
-
-		public SummaryViewModel(INavigator navigator)
 		{
-			_navigator = navigator;
-			AddFillupCommand = new RelayCommand(_ => _navigator.Navigate("/Views/AddFillupPage.xaml"));
+ 			//For designer support
+		}
+
+		public SummaryViewModel(IMyFuelTrackerApp  app)
+		{
+			_app = app;
+			_app.DatabaseReady += OnDatabaseReady;
+			AddFillupCommand = new RelayCommand(_ => _app.Navigator.Navigate("/Views/AddFillupPage.xaml"));
+		}
+
+		private void OnDatabaseReady(object sender, EventArgs e)
+		{
 		}
 
 		#endregion

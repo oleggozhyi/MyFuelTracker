@@ -11,6 +11,8 @@ namespace MyFuelTracker.Core.DataAccess
 {
 	public class FuelTrackerDataContext : DataContext
 	{
+		private static FuelTrackerDataContext _instance;
+
 		public FuelTrackerDataContext(string connectionString = null)
 			: base(connectionString ?? "isostore:/FuelTrackerDb.sdf")
 		{
@@ -27,12 +29,14 @@ namespace MyFuelTracker.Core.DataAccess
 		}
 
 		public static async Task<FuelTrackerDataContext> EnsureDatabase(string connectionString = null)
-		{
+		{			
 			var dataContext = await Task.Factory.StartNew(() =>
 			{
 				var db = new FuelTrackerDataContext(connectionString);
-				if (!db.DatabaseExists())
-					db.CreateDatabase();
+				if (db.DatabaseExists())
+					db.DeleteDatabase();
+
+				db.CreateDatabase();
 
 				return db;
 			});

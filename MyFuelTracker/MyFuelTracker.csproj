@@ -94,6 +94,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="SampleData\ObservableFillups.cs" />
     <Compile Include="Views\AddFillupPage.xaml.cs">
       <DependentUpon>AddFillupPage.xaml</DependentUpon>
     </Compile>

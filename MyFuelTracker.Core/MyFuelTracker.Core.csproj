@@ -86,9 +86,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="DataAccess\FuelTrackerDataContext.cs" />
+    <Compile Include="IMyFuelTrackerApp.cs" />
     <Compile Include="INavigation.cs" />
     <Compile Include="Navigator.cs" />
-    <Compile Include="ViewModels\FillupViewModel.cs" />
+    <Compile Include="ViewModels\FillupItemViewModel.cs" />
+    <Compile Include="ViewModels\EditFillupViewModel.cs" />
+    <Compile Include="ViewModels\HistoryViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Models\Fillup.cs" />
     <Compile Include="Models\Petrol.cs" />

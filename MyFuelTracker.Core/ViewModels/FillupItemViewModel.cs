@@ -7,32 +7,38 @@ using System.Threading.Tasks;
 
 namespace MyFuelTracker.Core.ViewModels
 {
-	public class FillupViewModel : ViewModelBase
+	public class FillupItemViewModel : ViewModelBase
 	{
 		#region Fields
 
+		private Fillup _fillup;
 		private DateTime _date;
 		private decimal _volume;
 		private decimal _price;
 		private decimal _odometer;
-		private INavigator _navigator;
+		private IMyFuelTrackerApp _app;
 
 		#endregion
 
 		#region ctor
 
-		public FillupViewModel()
-			: this(new Navigator())
-		{ }
+		public FillupItemViewModel() : this (null)
+		{ 
+		}
 
-		public FillupViewModel(INavigator navigator)
+		public FillupItemViewModel(Fillup fillup)
 		{
-			_navigator = navigator;
+			bool isNew = fillup == null;
+			_fillup = fillup ?? new Fillup();
+			Date = isNew ? DateTime.Now : fillup.Date;
+			Odometer = isNew ? 0m : fillup.Odometer;
+			Volume = isNew ? 0m : fillup.Volume;
+			Price = isNew ? 0m : fillup.Price;
 		}
 
 		#endregion
 
-		#region Properties
+		#region properties
 
 		public DateTime Date
 		{
@@ -56,23 +62,23 @@ namespace MyFuelTracker.Core.ViewModels
 		{
 			get { return _odometer; }
 			set { SetProperty(value, ref _odometer); }
-		}
+		} 
 
 		#endregion
 
 		#region methods
 
-		public void Save()
+		public Fillup GetFillup()
 		{
-			//TODO:
-			_navigator.GoBack();
-		}
+			_fillup.Date = Date;
+			_fillup.Odometer = Odometer;
+			_fillup.Price = Price;
+			_fillup.Odometer = Odometer;
+			_fillup.Volume = Volume;
 
-		public void Cancel()
-		{
-			_navigator.GoBack();
-		}
+			return _fillup;
+		} 
+
 		#endregion
-
 	}
 }

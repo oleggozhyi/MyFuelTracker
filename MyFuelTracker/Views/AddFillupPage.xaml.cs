@@ -8,14 +8,15 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using MyFuelTracker.Core.ViewModels;
+using MyFuelTracker.Core;
 
 namespace MyFuelTracker.Views
 {
 	public partial class AddFillupPage : PhoneApplicationPage
 	{
-		public FillupViewModel ViewModel
+		public EditFillupViewModel ViewModel
 		{
-			get { return (FillupViewModel)DataContext; }
+			get { return (EditFillupViewModel)DataContext; }
 			set { DataContext = value; }
 		}
 
@@ -23,7 +24,7 @@ namespace MyFuelTracker.Views
 		{
 			InitializeComponent();
 			gasTypes.ItemsSource = new[] { "Okko Pulls", "Okko 95", "Wog Mustang" };
-			ViewModel = new FillupViewModel();
+			ViewModel = new EditFillupViewModel((IMyFuelTrackerApp)App.Current);
 		}
 
 		private void OnSaveButtonClick(object sender, EventArgs e)

@@ -7,10 +7,10 @@ namespace MyFuelTracker.Core.Models
 	[Table]
 	public class Fillup
 	{
-		private EntityRef<Petrol> _petrol;
+		//private EntityRef<Petrol> _petrol;
 
-		[Column]
-		internal int _petrolId;
+		//[Column(CanBeNull = true)]
+		//internal int? _petrolId;
 
 		[Column(IsPrimaryKey = true, IsDbGenerated = true)]
 		public int Id { get; set; }
@@ -27,11 +27,11 @@ namespace MyFuelTracker.Core.Models
 		[Column]
 		public decimal Odometer { get; set; }
 
-		[Association(Storage = "_petrol", IsForeignKey = true, ThisKey = "_petrolId", OtherKey = "Id")]
-		public Petrol Petrol
-		{
-			get { return _petrol.Entity; }
-			set { _petrol.Entity = value; }
-		}
+		//[Association(Storage = "_petrol", IsForeignKey = true, ThisKey = "_petrolId", OtherKey = "Id", IsUnique=false)]
+		//public Petrol Petrol
+		//{
+		//	get { return _petrol.Entity; }
+		//	set { _petrol.Entity = value; }
+		//}
 	}
 }

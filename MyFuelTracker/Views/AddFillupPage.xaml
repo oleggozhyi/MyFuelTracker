@@ -66,13 +66,13 @@
         		<RowDefinition Height="Auto"/>
         		<RowDefinition Height="Auto"/>
         	</Grid.RowDefinitions>
-        	<toolkit:DatePicker VerticalAlignment="Top"/>
-               
-        	<toolkit:PhoneTextBox TextWrapping="Wrap" VerticalAlignment="Top" Hint="Odometer" Grid.Row="1"/>
-        	<toolkit:PhoneTextBox TextWrapping="Wrap" VerticalAlignment="Top" Hint="Volume" Grid.Row="2" InputScope="Number"/>
-        	<toolkit:PhoneTextBox TextWrapping="Wrap" VerticalAlignment="Top" Hint="Price" Grid.Row="3" InputScope="Number"/>
-        	<toolkit:ListPicker Grid.Row="4" VerticalContentAlignment="Stretch" VerticalAlignment="Center" Name="gasTypes">
-               
+            
+            <toolkit:DatePicker Value="{Binding FillupItemViewModel.Date}" VerticalAlignment="Top"/>
+            <toolkit:PhoneTextBox Text="{Binding FillupItemViewModel.Odometer}" TextWrapping="Wrap" VerticalAlignment="Top" Hint="Odometer" Grid.Row="1" InputScope="Number"/>
+            <toolkit:PhoneTextBox Text="{Binding FillupItemViewModel.Volume}" TextWrapping="Wrap" VerticalAlignment="Top" Hint="Volume" Grid.Row="2" InputScope="Number"/>
+            <toolkit:PhoneTextBox Text="{Binding FillupItemViewModel.Price}" TextWrapping="Wrap" VerticalAlignment="Top" Hint="Price" Grid.Row="3" InputScope="Number"/>
+        	
+            <toolkit:ListPicker Grid.Row="4" VerticalContentAlignment="Stretch" VerticalAlignment="Center" Name="gasTypes">
         	</toolkit:ListPicker>
         	<CheckBox Content="Is partial fillup" Grid.Row="5"/>
                

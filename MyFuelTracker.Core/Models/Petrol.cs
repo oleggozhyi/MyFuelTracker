@@ -6,7 +6,7 @@ namespace MyFuelTracker.Core.Models
 	[Table]
 	public class Petrol
 	{
-		public EntitySet<Fillup> _fillups = new EntitySet<Fillup>();
+		//public EntitySet<Fillup> _fillups = new EntitySet<Fillup>();
 
 		[Column(IsPrimaryKey = true, IsDbGenerated = true)]
 		public int Id { get; set; }
@@ -14,11 +14,11 @@ namespace MyFuelTracker.Core.Models
 		[Column]
 		public string Name { get; set; }
 
-		[Association(Storage = "_fillups", OtherKey = "_petrolId", ThisKey = "Id")]
-		public EntitySet<Fillup> Fillups
-		{
-			get { return _fillups; }
-			set { _fillups.Assign(value); }
-		}  
+		//[Association(Storage = "_fillups", OtherKey = "_petrolId", ThisKey = "Id")]
+		//public EntitySet<Fillup> Fillups
+		//{
+		//	get { return _fillups; }
+		//	set { _fillups.Assign(value); }
+		//}  
 	}
 }

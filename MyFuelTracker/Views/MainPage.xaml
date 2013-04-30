@@ -9,11 +9,30 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
     mc:Ignorable="d"
+    d:DataContext="{d:DesignData /SampleData/MainViewModelSampleData.xaml}"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait"  Orientation="Portrait"
     shell:SystemTray.IsVisible="True">
+	<phone:PhoneApplicationPage.Resources>
+		<DataTemplate x:Key="FilllupTemplate">
+			<Grid >
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+				</Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal" >
+                    <TextBlock  Text="{Binding Date}" FontWeight="ExtraBold" />
+                    <TextBlock Margin="20 0 0 0" Text="{Binding Consumption}" FontWeight="ExtraBold" />
+                </StackPanel>
+                <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10 0 0 0">
+                    <TextBlock  Text="{Binding Volume}" />
+                    <TextBlock Margin="20 0 0 0" Text="{Binding Price}"  />
+                </StackPanel>
+			</Grid>
+		</DataTemplate>
+	</phone:PhoneApplicationPage.Resources>
     <toolkit:TransitionService.NavigationInTransition>
         <toolkit:NavigationInTransition>
             <toolkit:NavigationInTransition.Backward>
@@ -52,7 +71,7 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    
+
                     <TextBlock Grid.ColumnSpan="2" Style="{StaticResource PhoneTextTitle2Style}" Text="{Binding LocalizedResources.AvgConsumptionLabel, Source={StaticResource LocalizedStrings}}"></TextBlock>
                     <TextBlock Grid.ColumnSpan="2" Margin="30 5 5 5" Grid.Row="1" Text="{Binding AvgConsumption}" />
 
@@ -73,7 +92,11 @@
                 </Grid>
             </phone:PivotItem>
 
-            <phone:PivotItem Header="history">
+            <phone:PivotItem Header="history" DataContext="{Binding History}">
+                <Grid>
+                    <ItemsControl ItemsSource="{Binding Fillups}" ItemTemplate="{StaticResource FilllupTemplate}">
+                    </ItemsControl>
+                </Grid>
             </phone:PivotItem>
         </phone:Pivot>
     </Grid>

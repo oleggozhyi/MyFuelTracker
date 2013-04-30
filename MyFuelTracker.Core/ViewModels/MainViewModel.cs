@@ -8,11 +8,21 @@ namespace MyFuelTracker.Core.ViewModels
 {
 	public class MainViewModel
 	{
+		private IMyFuelTrackerApp _app;
+
 		public MainViewModel()
 		{
-			Summary = new SummaryViewModel();
+			//for design time support
 		}
 
-		public SummaryViewModel Summary { get; private set; }
+		public MainViewModel(IMyFuelTrackerApp app)
+		{
+			_app = app;
+			Summary = new SummaryViewModel(app);
+			History = new HistoryViewModel(app);
+		}
+
+		public SummaryViewModel Summary { get; set; }
+		public HistoryViewModel History { get; set; }
 	}
 }

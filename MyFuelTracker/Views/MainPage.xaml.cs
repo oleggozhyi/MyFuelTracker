@@ -8,6 +8,7 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using MyFuelTracker.Resources;
+using MyFuelTracker.Core;
 
 namespace MyFuelTracker.Views
 {
@@ -18,7 +19,7 @@ namespace MyFuelTracker.Views
 		{
 			InitializeComponent();
 
-			DataContext = App.ViewModel;
+			DataContext = ((IMyFuelTrackerApp)App.Current).MainViewModel;
 
 			// Sample code to localize the ApplicationBar
 			//BuildLocalizedApplicationBar();
