@@ -10,7 +10,7 @@ using System.Windows.Navigation;
 
 namespace MyFuelTracker.Core.ViewModels
 {
-	public class SummaryViewModel : NotificationObject
+	public class SummaryViewModel : ViewModelBase
 	{
 		#region Fields
 

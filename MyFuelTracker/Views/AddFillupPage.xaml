@@ -18,8 +18,8 @@
     </phone:PhoneApplicationPage.Resources>
 	<phone:PhoneApplicationPage.ApplicationBar>
 		<shell:ApplicationBar>
-			<shell:ApplicationBarIconButton IconUri="/Assets/AppBar/save.png" IsEnabled="True" Text="Save"/>
-			<shell:ApplicationBarIconButton IconUri="/Toolkit.Content/ApplicationBar.Cancel.png" IsEnabled="True" Text="Cancel"/>
+			<shell:ApplicationBarIconButton Click="OnSaveButtonClick" IconUri="/Assets/AppBar/save.png" IsEnabled="True" Text="Save"/>
+            <shell:ApplicationBarIconButton Click="OnCancelButtonClick" IconUri="/Toolkit.Content/ApplicationBar.Cancel.png" IsEnabled="True" Text="Cancel"/>
 		</shell:ApplicationBar>
 	</phone:PhoneApplicationPage.ApplicationBar>
     <toolkit:TransitionService.NavigationInTransition>
