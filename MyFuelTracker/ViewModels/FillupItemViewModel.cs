@@ -1,13 +1,11 @@
-﻿using MyFuelTracker.Core.Models;
+﻿using Caliburn.Micro;
+using MyFuelTracker.Core;
+using MyFuelTracker.Core.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace MyFuelTracker.Core.ViewModels
+namespace MyFuelTracker.ViewModels
 {
-	public class FillupItemViewModel : ViewModelBase
+	public class FillupItemViewModel : PropertyChangedBase
 	{
 		#region Fields
 
@@ -16,14 +14,14 @@ namespace MyFuelTracker.Core.ViewModels
 		private decimal _volume;
 		private decimal _price;
 		private decimal _odometer;
-		private IMyFuelTrackerApp _app;
 
 		#endregion
 
 		#region ctor
 
-		public FillupItemViewModel() : this (null)
-		{ 
+		public FillupItemViewModel()
+			: this(null)
+		{
 		}
 
 		public FillupItemViewModel(Fillup fillup)
@@ -43,26 +41,42 @@ namespace MyFuelTracker.Core.ViewModels
 		public DateTime Date
 		{
 			get { return _date; }
-			set { SetProperty(value, ref _date); }
+			set
+			{
+				_date = value;
+				NotifyOfPropertyChange(() => Date);
+			}
 		}
 
 		public decimal Volume
 		{
 			get { return _volume; }
-			set { SetProperty(value, ref _volume); }
+			set
+			{
+				_volume = value;
+				NotifyOfPropertyChange(() => Volume);
+			}
 		}
 
 		public decimal Price
 		{
 			get { return _price; }
-			set { SetProperty(value, ref _price); }
+			set
+			{
+				_price = value;
+				NotifyOfPropertyChange(() => Price);
+			}
 		}
 
 		public decimal Odometer
 		{
 			get { return _odometer; }
-			set { SetProperty(value, ref _odometer); }
-		} 
+			set
+			{
+				_odometer = value;
+				NotifyOfPropertyChange(() => Odometer);
+			}
+		}
 
 		#endregion
 
@@ -77,7 +91,7 @@ namespace MyFuelTracker.Core.ViewModels
 			_fillup.Volume = Volume;
 
 			return _fillup;
-		} 
+		}
 
 		#endregion
 	}

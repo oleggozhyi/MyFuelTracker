@@ -1,8 +1,7 @@
 ﻿<phone:PhoneApplicationPage
-    x:Class="MyFuelTracker.Views.AddFillupPage"
+    x:Class="MyFuelTracker.Views.EditFillupView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-     xmlns:col="clr-namespace:System.Collections;assembly=System.Collections.Generic" 
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -18,8 +17,8 @@
     </phone:PhoneApplicationPage.Resources>
 	<phone:PhoneApplicationPage.ApplicationBar>
 		<shell:ApplicationBar>
-			<shell:ApplicationBarIconButton Click="OnSaveButtonClick" IconUri="/Assets/AppBar/save.png" IsEnabled="True" Text="Save"/>
-            <shell:ApplicationBarIconButton Click="OnCancelButtonClick" IconUri="/Toolkit.Content/ApplicationBar.Cancel.png" IsEnabled="True" Text="Cancel"/>
+			<!--<shell:ApplicationBarIconButton Click="OnSaveButtonClick" IconUri="/Assets/AppBar/save.png" IsEnabled="True" Text="Save"/>
+            <shell:ApplicationBarIconButton Click="OnCancelButtonClick" IconUri="/Toolkit.Content/ApplicationBar.Cancel.png" IsEnabled="True" Text="Cancel"/>-->
 		</shell:ApplicationBar>
 	</phone:PhoneApplicationPage.ApplicationBar>
     <toolkit:TransitionService.NavigationInTransition>
@@ -67,10 +66,10 @@
         		<RowDefinition Height="Auto"/>
         	</Grid.RowDefinitions>
             
-            <toolkit:DatePicker Value="{Binding FillupItemViewModel.Date}" VerticalAlignment="Top"/>
-            <toolkit:PhoneTextBox Text="{Binding FillupItemViewModel.Odometer}" TextWrapping="Wrap" VerticalAlignment="Top" Hint="Odometer" Grid.Row="1" InputScope="Number"/>
-            <toolkit:PhoneTextBox Text="{Binding FillupItemViewModel.Volume}" TextWrapping="Wrap" VerticalAlignment="Top" Hint="Volume" Grid.Row="2" InputScope="Number"/>
-            <toolkit:PhoneTextBox Text="{Binding FillupItemViewModel.Price}" TextWrapping="Wrap" VerticalAlignment="Top" Hint="Price" Grid.Row="3" InputScope="Number"/>
+            <toolkit:DatePicker Value="{Binding FillupItemViewModel.Date, Mode=TwoWay}" VerticalAlignment="Top"/>
+            <toolkit:PhoneTextBox Text="{Binding FillupItemViewModel.Odometer, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Hint="Odometer" Grid.Row="1" InputScope="Number"/>
+            <toolkit:PhoneTextBox Text="{Binding FillupItemViewModel.Volume, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Hint="Volume" Grid.Row="2" InputScope="Number"/>
+            <toolkit:PhoneTextBox Text="{Binding FillupItemViewModel.Price, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Hint="Price" Grid.Row="3" InputScope="Number"/>
         	
             <toolkit:ListPicker Grid.Row="4" VerticalContentAlignment="Stretch" VerticalAlignment="Center" Name="gasTypes">
         	</toolkit:ListPicker>
