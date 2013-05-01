@@ -95,7 +95,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
-    <Compile Include="DebugLogger.cs" />
+    <Compile Include="Infrastructure\DebugLogger.cs" />
+    <Compile Include="Infrastructure\IMessageBox.cs" />
+    <Compile Include="Infrastructure\MyMessageBox.cs" />
     <Compile Include="SampleData\ObservableFillups.cs" />
     <Compile Include="ViewModels\EditFillupViewModel.cs" />
     <Compile Include="ViewModels\FillupItemViewModel.cs" />
@@ -108,7 +110,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="LocalizedStrings.cs" />
+    <Compile Include="Infrastructure\LocalizedStrings.cs" />
     <Compile Include="Views\HistoryView.xaml.cs">
       <DependentUpon>HistoryView.xaml</DependentUpon>
     </Compile>

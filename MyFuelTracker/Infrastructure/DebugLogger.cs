@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using Caliburn.Micro;
 
-namespace MyFuelTracker
+namespace MyFuelTracker.Infrastructure
 {
 	public class DebugLogger : ILog
 	{

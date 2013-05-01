@@ -1,6 +1,6 @@
 ﻿using MyFuelTracker.Resources;
 
-namespace MyFuelTracker
+namespace MyFuelTracker.Infrastructure
 {
 	/// <summary>
 	/// Provides access to string resources.

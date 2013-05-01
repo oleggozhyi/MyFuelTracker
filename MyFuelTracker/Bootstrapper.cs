@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using Caliburn.Micro;
 using Microsoft.Phone.Controls;
+using MyFuelTracker.Infrastructure;
 using MyFuelTracker.ViewModels;
 
 namespace MyFuelTracker
@@ -21,13 +22,17 @@ namespace MyFuelTracker
 			container.PerRequest<MainViewModel>();
 			container.PerRequest<SummaryViewModel>();
 			container.PerRequest<HistoryViewModel>();
+			container.PerRequest<EditFillupViewModel>();
+
 			container.PerRequest<ILog, DebugLogger>();
+			container.Singleton<IMessageBox, MyMessageBox>();
+
 			LogManager.GetLog = type => new DebugLogger(type);
 
 			AddCustomConventions();
 		}
 
-		protected override Microsoft.Phone.Controls.PhoneApplicationFrame CreatePhoneApplicationFrame()
+		protected override PhoneApplicationFrame CreatePhoneApplicationFrame()
 		{
 			return  new TransitionFrame();
 		}
