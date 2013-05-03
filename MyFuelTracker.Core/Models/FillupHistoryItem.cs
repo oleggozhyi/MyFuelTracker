@@ -9,7 +9,7 @@ namespace MyFuelTracker.Core.Models
 	public class FillupHistoryItem
 	{
 		public Fillup Fillup { get; set; }
-		public decimal? FuelEconomy { get; set; }
+		public double? Consumption { get; set; }
 		public bool IsGreaterThanAverage { get; set; }
 	}
 }

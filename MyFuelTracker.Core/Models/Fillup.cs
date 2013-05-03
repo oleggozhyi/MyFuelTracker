@@ -6,17 +6,17 @@ namespace MyFuelTracker.Core.Models
 {
 	public class Fillup
 	{
-		public int Id { get; set; }
+		public Guid Id { get; set; }
 
 		public DateTime Date { get; set; }
 
-		public decimal Volume { get; set; }
+		public double Volume { get; set; }
 
-		public decimal Price { get; set; }
+		public double Price { get; set; }
 
-		public decimal OdometerStart { get; set; }
+		public double OdometerStart { get; set; }
 
-		public decimal OdometerEnd { get; set; }
+		public double OdometerEnd { get; set; }
 
 		public bool IsPartial { get; set; } 
 	}

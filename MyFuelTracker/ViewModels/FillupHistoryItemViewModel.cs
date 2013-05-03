@@ -24,7 +24,7 @@ namespace MyFuelTracker.ViewModels
 
 		public string FuelEconomy
 		{
-			get { return string.Format("{0:#.##}", HistoryItem.FuelEconomy) + "L/100km"; }
+			get { return string.Format("{0:#.##}", HistoryItem.Consumption) + "L/100km"; }
 		}
 
 		public Brush FillupBrush

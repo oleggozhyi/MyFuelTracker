@@ -7,6 +7,7 @@ using Caliburn.Micro;
 using Caliburn.Micro.BindableAppBar;
 using Microsoft.Phone.Controls;
 using MyFuelTracker.Core;
+using MyFuelTracker.Core.DataAccess;
 using MyFuelTracker.Infrastructure;
 using MyFuelTracker.ViewModels;
 
@@ -31,6 +32,8 @@ namespace MyFuelTracker
 			container.PerRequest<ILog, DebugLogger>();
 			container.Singleton<IMessageBox, MyMessageBox>();
 			container.Singleton<IFillupService, FillupService>();
+			container.Singleton<IFuelTrackerDb, FuelTrackerDb>();
+			container.Singleton<IStatisticsService, StatisticsService>();
 
 			LogManager.GetLog = type => new DebugLogger(type);
 

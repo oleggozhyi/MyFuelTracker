@@ -22,7 +22,6 @@
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <TextBlock>Summary content</TextBlock>
             <bab:BindableAppBar>
                 <bab:BindableAppBarButton
                             x:Name="GoToAddFillup"

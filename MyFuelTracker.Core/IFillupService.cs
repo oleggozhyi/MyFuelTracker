@@ -6,6 +6,7 @@ namespace MyFuelTracker.Core
 {
 	public interface IFillupService
 	{
+		Task<Fillup> CreateNewFillupAsync();
 		Task SaveFillupAsync(Fillup fillup);
 		Task<IEnumerable<FillupHistoryItem>> GetHistoryAsync();
 	}

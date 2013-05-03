@@ -13,11 +13,12 @@ namespace MyFuelTracker.ViewModels
 		private readonly ILog _log;
 		private readonly IFillupService _fillupService;
 		private DateTime _date;
-		private decimal _volume;
-		private decimal _price;
-		private decimal _odometerStart;
-		private decimal _odometerEnd;
+		private double _volume;
+		private double _price;
+		private double _odometerStart;
+		private double _odometerEnd;
 		private bool _isPartial;
+		private const double EPSILON = 0.01;
 
 		#endregion
 
@@ -48,45 +49,45 @@ namespace MyFuelTracker.ViewModels
 			}
 		}
 
-		public decimal Volume
+		public double Volume
 		{
 			get { return _volume; }
 			set
 			{
-				if (value == _volume) return;
+				if (Math.Abs(value - _volume) < EPSILON) return;
 				_volume = value;
 				NotifyOfPropertyChange(() => Volume);
 			}
 		}
 
-		public decimal Price
+		public double Price
 		{
 			get { return _price; }
 			set
 			{
-				if (value == _price) return;
+				if (Math.Abs(value - _price) < EPSILON) return;
 				_price = value;
 				NotifyOfPropertyChange(() => Price);
 			}
 		}
 
-		public decimal OdometerStart
+		public double OdometerStart
 		{
 			get { return _odometerStart; }
 			set
 			{
-				if (value == _odometerStart) return;
+				if (Math.Abs(value - _odometerStart) < EPSILON) return;
 				_odometerStart = value;
 				NotifyOfPropertyChange(() => OdometerStart);
 			}
 		}
 
-		public decimal OdometerEnd
+		public double OdometerEnd
 		{
 			get { return _odometerEnd; }
 			set
 			{
-				if (value == _odometerEnd) return;
+				if (Math.Abs(value - _odometerEnd) < EPSILON) return;
 				_odometerEnd = value;
 				NotifyOfPropertyChange(() => OdometerEnd);
 			}
