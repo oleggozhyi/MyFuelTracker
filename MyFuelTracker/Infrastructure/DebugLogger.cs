@@ -25,7 +25,7 @@ namespace MyFuelTracker.Infrastructure
 
 		public void Warn(string format, params object[] args)
 		{
-			Warn("INFO", format, args);
+			WriteLog("WARN", format, args);
 		}
 
 		public void Error(Exception exception)

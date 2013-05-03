@@ -10,7 +10,7 @@ using Microsoft.Phone.Shell;
 
 namespace MyFuelTracker.Views
 {
-	public partial class SummaryView : PhoneApplicationPage
+	public partial class SummaryView : UserControl
 	{
 		public SummaryView()
 		{

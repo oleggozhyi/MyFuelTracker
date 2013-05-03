@@ -9,6 +9,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
     xmlns:micro="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro"
+    xmlns:bab="clr-namespace:Caliburn.Micro.BindableAppBar;assembly=Caliburn.Micro.BindableAppBar"
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -36,22 +37,11 @@
 			</Grid>
 		</DataTemplate>
 	</phone:PhoneApplicationPage.Resources>
-    <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar>
-            <micro:AppBarButton Message="GoToAddFillup"
-                                IconUri="/Assets/add.png"  
-                                Text="add fillup"
-                                />
-            <micro:AppBarButton Message="GoToSettings"
-                                IconUri="/Assets/feature.settings.png" 
-                                Text="settings" />
-        </shell:ApplicationBar>
-    </phone:PhoneApplicationPage.ApplicationBar>
-   
+
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
         
-        <phone:Pivot Title="My Fuel Tracker" x:Name="Items" >
+        <phone:Pivot Title="My Fuel Tracker" x:Name="Items" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" >
             <phone:Pivot.HeaderTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding DisplayName}" />

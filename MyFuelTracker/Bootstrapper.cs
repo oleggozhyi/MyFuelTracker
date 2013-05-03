@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Windows;
+using System.Windows.Controls;
 using Caliburn.Micro;
+using Caliburn.Micro.BindableAppBar;
 using Microsoft.Phone.Controls;
+using MyFuelTracker.Core;
 using MyFuelTracker.Infrastructure;
 using MyFuelTracker.ViewModels;
 
@@ -26,6 +30,7 @@ namespace MyFuelTracker
 
 			container.PerRequest<ILog, DebugLogger>();
 			container.Singleton<IMessageBox, MyMessageBox>();
+			container.Singleton<IFillupService, FillupService>();
 
 			LogManager.GetLog = type => new DebugLogger(type);
 
@@ -39,12 +44,20 @@ namespace MyFuelTracker
 
 		static void AddCustomConventions()
 		{
-			//ellided  
+			ConventionManager.AddElementConvention<BindableAppBarButton>(Control.IsEnabledProperty, "DataContext", "Click");
+			ConventionManager.AddElementConvention<BindableAppBarMenuItem>(Control.IsEnabledProperty, "DataContext", "Click");
 		}
 
 		protected override object GetInstance(Type service, string key)
 		{
-			return container.GetInstance(service, key);
+			var instance = container.GetInstance(service, key);
+			if (instance == null)
+			{
+				MessageBox.Show(service + " is not mapped in IoC container");
+				throw new KeyNotFoundException(service + " is not mapped in IoC container");
+			}
+
+			return instance;
 		}
 
 		protected override IEnumerable<object> GetAllInstances(Type service)

@@ -2,11 +2,15 @@
 using System.Diagnostics;
 using Caliburn.Micro;
 using MyFuelTracker.Core;
+using MyFuelTracker.Infrastructure;
 
 namespace MyFuelTracker.ViewModels
 {
 	public class SummaryViewModel : Screen
 	{
+		private readonly INavigationService _navigationService;
+		private readonly IMessageBox _messageBox;
+
 		#region Fields
 
 		private decimal _avgConsumption;
@@ -17,17 +21,18 @@ namespace MyFuelTracker.ViewModels
 
 		#region ctor
 
-		public SummaryViewModel()
+		public SummaryViewModel(INavigationService navigationService, IMessageBox messageBox)
 		{
+			_navigationService = navigationService;
+			_messageBox = messageBox;
 			Debug.WriteLine("SummaryViewModel created");
+			DisplayName = "summary";
 			//For designer support
 		}
 
 		#endregion
 
 		#region Properties
-
-		public string DisplayName { get { return "summary"; } }
 
 		public decimal AvgConsumption
 		{
@@ -70,5 +75,15 @@ namespace MyFuelTracker.ViewModels
 		}
 
 		#endregion
+
+		public void GoToAddFillup()
+		{
+			_navigationService.UriFor<EditFillupViewModel>().Navigate();
+		}
+
+		public void GoToSettings()
+		{
+			_messageBox.Show("not implemented");
+		}
 	}
 }

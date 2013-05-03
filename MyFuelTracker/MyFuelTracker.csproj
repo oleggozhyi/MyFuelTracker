@@ -98,9 +98,8 @@
     <Compile Include="Infrastructure\DebugLogger.cs" />
     <Compile Include="Infrastructure\IMessageBox.cs" />
     <Compile Include="Infrastructure\MyMessageBox.cs" />
-    <Compile Include="SampleData\ObservableFillups.cs" />
     <Compile Include="ViewModels\EditFillupViewModel.cs" />
-    <Compile Include="ViewModels\FillupItemViewModel.cs" />
+    <Compile Include="ViewModels\FillupHistoryItemViewModel.cs" />
     <Compile Include="ViewModels\HistoryViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\SummaryViewModel.cs" />
@@ -166,6 +165,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\feature.settings.png" />
+    <Content Include="Assets\fuel.png" />
     <Content Include="Assets\Tiles\FlipCycleTileLarge.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -183,7 +183,9 @@
     </Content>
     <Content Include="README_FIRST.txt" />
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
+    <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
+    <Content Include="Toolkit.Content\ApplicationBar.Delete.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Delete.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Select.png" />
   </ItemGroup>
@@ -196,6 +198,9 @@
   <ItemGroup>
     <Reference Include="Caliburn.Micro">
       <HintPath>..\packages\Caliburn.Micro.1.5.1\lib\wp8\Caliburn.Micro.dll</HintPath>
+    </Reference>
+    <Reference Include="Caliburn.Micro.BindableAppBar">
+      <HintPath>..\packages\Caliburn.Micro.BindableAppBar.1.0.3.0\lib\wp80\Caliburn.Micro.BindableAppBar.dll</HintPath>
     </Reference>
     <Reference Include="Caliburn.Micro.Extensions">
       <HintPath>..\packages\Caliburn.Micro.1.5.1\lib\wp8\Caliburn.Micro.Extensions.dll</HintPath>
@@ -212,6 +217,9 @@
       <Project>{5EBE5CA3-518F-4E7B-90A2-3D04B180F72D}</Project>
       <Name>MyFuelTracker.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="SampleData\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
