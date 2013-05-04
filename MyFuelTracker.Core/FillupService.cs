@@ -18,17 +18,6 @@ namespace MyFuelTracker.Core
 		{
 			Db = db;
 		}
-
-		//private readonly List<Fillup> _fillups = new List<Fillup>
-		//{
-		//	new Fillup {Date = new DateTime(2013,04, 13), OdometerStart = 2000, OdometerEnd = 2360, Volume = 37.2m, Price = 12.59M },
-		//	new Fillup {Date = new DateTime(2013,04, 20), OdometerStart = 2360, OdometerEnd = 2700, Volume = 35.6m, Price = 12.59M },
-		//	new Fillup {Date = new DateTime(2013,04, 25), OdometerStart = 2700, OdometerEnd = 3050, Volume = 34.2m, Price = 12.59M },
-		//	new Fillup {Date = new DateTime(2013,04, 29), OdometerStart = 3050, OdometerEnd = 3460, Volume = 39.2m, Price = 12.59M },
-		//	new Fillup {Date = new DateTime(2013,05, 1), OdometerStart = 3460, OdometerEnd = 3850, Volume = 42.2m, Price = 12.59M },
-		//};
-
-
 		public async Task<Fillup> CreateNewFillupAsync()
 		{
 			var fillup = new Fillup { Id = Guid.NewGuid(), Date = DateTime.Now };

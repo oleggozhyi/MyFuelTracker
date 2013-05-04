@@ -7,12 +7,17 @@ using MyFuelTracker.Infrastructure;
 
 namespace MyFuelTracker.ViewModels
 {
-	public class MainViewModel : Conductor<IScreen>.Collection.OneActive
+	public class MainViewModel : Conductor<IScreen>.Collection.OneActive, IHandle<FillupItemChangedEvent>
 	{
-		private readonly INavigationService _navigationService;
-		private readonly IMessageBox _messageBox;
-		private readonly ILog _log;
+		#region fields
+
+		private readonly IEventAggregator _eventAggregator;
 		private object _selectedItem;
+
+		#endregion
+
+		#region properties
+
 		public SummaryViewModel SummaryViewModel { get; set; }
 		public HistoryViewModel HistoryViewModel { get; set; }
 
@@ -21,35 +26,33 @@ namespace MyFuelTracker.ViewModels
 			get { return _selectedItem; }
 			set
 			{
+				if (Equals(value, _selectedItem)) return;
 				_selectedItem = value;
-				var updatable = _selectedItem as IUpdatable;
-				if (updatable != null)
-				{
-					updatable.UpdateAsync();
-				}
+				NotifyOfPropertyChange(() => SelectedItem);
 			}
 		}
 
-		public MainViewModel()
-		{
-			//for design time support
-		}
+		#endregion
+
+		#region ctors
+
+		public MainViewModel() { /* for design time support */ }
 
 		public MainViewModel(SummaryViewModel summaryViewModel,
-							HistoryViewModel historyViewModel,
-							INavigationService navigationService,
-							IMessageBox messageBox,
-							ILog log)
+							 HistoryViewModel historyViewModel,
+							 IEventAggregator eventAggregator)
 		{
-			_navigationService = navigationService;
-			_messageBox = messageBox;
-			_log = log;
+			_eventAggregator = eventAggregator;
 			Debug.WriteLine("MainViewModel created");
 
 			SummaryViewModel = summaryViewModel;
 			HistoryViewModel = historyViewModel;
-
+			_eventAggregator.Subscribe(this);
 		}
+
+		#endregion
+
+		#region methods
 
 		protected override void OnInitialize()
 		{
@@ -62,8 +65,14 @@ namespace MyFuelTracker.ViewModels
 
 			AppBarConductor.Mixin(this);
 
+			_eventAggregator.Publish(new FillupHistoryChangedEvent());
+		}
+	
+		public void Handle(FillupItemChangedEvent message)
+		{
+			SelectedItem = HistoryViewModel;
 		}
 
-	
+		#endregion
 	}
 }

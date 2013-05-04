@@ -1,0 +1,10 @@
+﻿<vm:SummaryViewModel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                     xmlns:vm="clr-namespace:MyFuelTracker.ViewModels"
+                     
+            MinConsumption="8.89 "
+            MaxConsumption="12.51"
+            LastConsumption="10.52"
+            AllTimeAvgConsumption="10.75"
+            Last4FillupsAvgConsumption="10.59"
+            LastMonthCost="1885"
+            AllTimeAvgMonthCost="2000" />

@@ -91,7 +91,6 @@
     <Compile Include="FillupService.cs" />
     <Compile Include="IFillupService.cs" />
     <Compile Include="IStatisticsService.cs" />
-    <Compile Include="IUpdatable.cs" />
     <Compile Include="Models\Fillup.cs" />
     <Compile Include="Models\FillupHistoryItem.cs" />
     <Compile Include="Models\FuelConsumptionStatistics.cs" />

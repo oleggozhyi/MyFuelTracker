@@ -10,6 +10,5 @@ namespace MyFuelTracker.Core.Models
 	{
 		public Fillup Fillup { get; set; }
 		public double? Consumption { get; set; }
-		public bool IsGreaterThanAverage { get; set; }
 	}
 }

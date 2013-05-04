@@ -12,10 +12,13 @@ namespace MyFuelTracker.Core.DataAccess
 {
 	public class InMemoryFuelTrackerDb : IFuelTrackerDb
 	{
+		private readonly Task _loadHistoryTask;
+
 		public InMemoryFuelTrackerDb(bool loaded)
 		{
-			_loaded = loaded;
+			_loadHistoryTask = LoadHistoryAsync();
 		}
+
 		public InMemoryFuelTrackerDb()
 			: this(false)
 		{
@@ -27,30 +30,36 @@ namespace MyFuelTracker.Core.DataAccess
 
 		public async Task SaveFillupAsync(Fillup fillup)
 		{
-			if (!_loaded)
-				await LoadTestDataAsync();
+			if (!_loadHistoryTask.IsCompleted)
+				await _loadHistoryTask;
 
 			await Task.Factory.StartNew(() => Fillups.Add(fillup));
 		}
 
 		public async Task<Fillup[]> LoadAllFillupsAsync()
 		{
-			if (!_loaded)
-				await LoadTestDataAsync();
+			if (!_loadHistoryTask.IsCompleted)
+				await _loadHistoryTask;
+
 			return await Task.FromResult(Fillups.ToArray());
 		}
 
-		private async Task LoadTestDataAsync()
+		private static DateTime ParseDate(string date)
 		{
-			await Task.Factory.StartNew(() =>
+			return DateTime.Parse(date, CultureInfo.CurrentCulture);
+		}
+
+		private Task LoadHistoryAsync()
+		{
+			return Task.Factory.StartNew(() =>
 			{
-				using (var stream = Assembly.GetExecutingAssembly()
-											.GetManifestResourceStream("MyFuelTracker.Core.DataAccess.fillups.xml"))
+				using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("MyFuelTracker.Core.DataAccess.fillups.xml"))
 				{
 					var xDocument = XDocument.Load(stream);
 					lock (_locker)
 					{
-
+						if (_loaded)
+							return;
 						foreach (var f in xDocument.Root.Elements("fillup"))
 						{
 							var fillup = new Fillup();
@@ -67,12 +76,6 @@ namespace MyFuelTracker.Core.DataAccess
 					}
 				}
 			});
-			_loaded = true;
-		}
-
-		private static DateTime ParseDate(string date)
-		{
-			return DateTime.Parse(date, CultureInfo.CurrentCulture);
 		}
 	}
 }

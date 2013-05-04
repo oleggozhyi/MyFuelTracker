@@ -8,33 +8,64 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:micro="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro"
+    xmlns:bab="clr-namespace:Caliburn.Micro.BindableAppBar;assembly=Caliburn.Micro.BindableAppBar"
+    micro:Bind.AtDesignTime="True"
+    d:DataContext="{d:DesignData Source=/SampleData/HistoryViewModel.xaml}"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True">
+    <UserControl.Resources>
+        <Style x:Key="detailsText" TargetType="TextBlock" BasedOn="{StaticResource PhoneTextNormalStyle}">
+            <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeMedium}"></Setter>
+        </Style>
+        <Style x:Key="detailsDimension" TargetType="TextBlock" BasedOn="{StaticResource PhoneTextNormalStyle}">
+            <Setter Property="Margin" Value="0 0 40 0"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeNormal}"></Setter>
+        </Style>
+    </UserControl.Resources>
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-
-
-        <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <toolkit:LongListMultiSelector ItemsSource="{Binding Items}">
-                <toolkit:LongListMultiSelector.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel  Orientation="Horizontal" Margin="3 10 3 10" >
-                            <Image  Source="/Assets/fuel.png" Height="50" Width="50"></Image>
-                            <TextBlock Text="{Binding Date}" Style="{StaticResource PhoneTextLargeStyle}" VerticalAlignment="Center" />
-                            <TextBlock Text="{Binding FuelEconomy}" Foreground="{Binding FillupBrush}" Style="{StaticResource PhoneTextLargeStyle}"/>
+        <toolkit:LongListMultiSelector ItemsSource="{Binding Items}">
+            <toolkit:LongListMultiSelector.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="0 0 0 15">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image  Source="/Assets/fuel.png" Height="50" Width="50" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
+                        <StackPanel Grid.Column="1">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Date}" Style="{StaticResource PhoneTextLargeStyle}"  />
+                                <TextBlock Text="{Binding FuelEconomy}" FontWeight="ExtraBold" Foreground="{Binding FillupBrush}" Style="{StaticResource PhoneTextLargeStyle}"/>
+                                <TextBlock Text="{Binding ConsumptionDimension}" VerticalAlignment="Center" Margin="0" Foreground="{Binding FillupBrush}" Style="{StaticResource PhoneTextNormalStyle}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Visibility="{Binding ElementName=LayoutRoot, Path=DataContext.ShowDetails}">
+                                <TextBlock Text="{Binding Volume}" Style="{StaticResource detailsText}" Foreground="{StaticResource PhoneAccentBrush}"/>
+                                <TextBlock Text="{Binding VolumeDimension}" Foreground="{StaticResource PhoneAccentBrush}" Style="{StaticResource detailsDimension}"/>
+                                <TextBlock Text="{Binding Distance}" Style="{StaticResource detailsText}" Foreground="{StaticResource PhoneAccentBrush}"/>
+                                <TextBlock Text="{Binding DistanceDimension}" Foreground="{StaticResource PhoneAccentBrush}" Style="{StaticResource detailsDimension}"/>
+                                <TextBlock Text="{Binding Cost}" Style="{StaticResource detailsText}" Foreground="{StaticResource PhoneAccentBrush}"/>
+                                <TextBlock Text="{Binding CostDimension}" Foreground="{StaticResource PhoneAccentBrush}" Style="{StaticResource detailsDimension}"/>
+                            </StackPanel>
                         </StackPanel>
-                    </DataTemplate>
-                </toolkit:LongListMultiSelector.ItemTemplate>
-            </toolkit:LongListMultiSelector>
-        </Grid>
+                    </Grid>
+                </DataTemplate>
+            </toolkit:LongListMultiSelector.ItemTemplate>
+        </toolkit:LongListMultiSelector>
+        <bab:BindableAppBar>
+            <bab:BindableAppBarButton
+                            x:Name="GoToAddFillup"
+                            Text="add fillup"
+                            IconUri="/Assets/fuel.png"/>
+            <bab:BindableAppBarButton
+                            x:Name="GoToSettings"
+                            Text="add fillup"
+                            IconUri="/Assets/feature.settings.png"/>
+        </bab:BindableAppBar>
     </Grid>
 
 </UserControl>

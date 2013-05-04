@@ -6,25 +6,39 @@ using System.Threading.Tasks;
 using Caliburn.Micro;
 using MyFuelTracker.Core;
 using MyFuelTracker.Core.Models;
+using MyFuelTracker.Infrastructure;
 
 namespace MyFuelTracker.ViewModels
 {
-	public class HistoryViewModel : Screen, IUpdatable
+	public class HistoryViewModel : Screen, IHandle<FillupHistoryChangedEvent>
 	{
 		#region fields
 
 		private readonly IFillupService _fillupService;
+		private readonly IStatisticsService _statisticsService;
+		private readonly IMessageBox _messageBox;
+		private readonly INavigationService _navigationService;
 		private IEnumerable<FillupHistoryItemViewModel> _items;
 
 		#endregion
 
 		#region ctors
 
-		public HistoryViewModel(IFillupService fillupService)
+		public HistoryViewModel() { /* for design time support */ }
+
+		public HistoryViewModel(IFillupService fillupService, 
+								IStatisticsService statisticsService, 
+								IEventAggregator eventAggregator,
+								IMessageBox messageBox,
+								INavigationService navigationService)
 		{
 			Debug.WriteLine("HistoryViewModel created");
 			DisplayName = "history";
 			_fillupService = fillupService;
+			_statisticsService = statisticsService;
+			_messageBox = messageBox;
+			_navigationService = navigationService;
+			eventAggregator.Subscribe(this);
 		}
 
 		#endregion
@@ -46,16 +60,26 @@ namespace MyFuelTracker.ViewModels
 
 		#region methods
 
-		protected async override void OnActivate()
+		public void GoToAddFillup()
 		{
-			base.OnActivate();
-			await UpdateAsync();
+			_navigationService.UriFor<EditFillupViewModel>().Navigate();
+		}
+
+		public void GoToSettings()
+		{
+			_messageBox.Show("not implemented");
 		}
 
 		public async Task UpdateAsync()
 		{
 			var historyItems = await _fillupService.GetHistoryAsync();
-			Items = historyItems.Select(i => new FillupHistoryItemViewModel(i)).ToArray();
+			var statistics = await _statisticsService.CalculateStatisticsAsync(historyItems);
+			Items = historyItems.Select(i => new FillupHistoryItemViewModel(i, statistics.AllTimeAvgConsumption)).ToArray();
+		}
+
+		public async void Handle(FillupHistoryChangedEvent message)
+		{
+			await UpdateAsync();
 		}
 
 		#endregion

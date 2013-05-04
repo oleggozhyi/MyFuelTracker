@@ -5,31 +5,53 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using MyFuelTracker.Core.Models;
+using MyFuelTracker.Infrastructure;
 
 namespace MyFuelTracker.ViewModels
 {
 	public class FillupHistoryItemViewModel
 	{
-		public FillupHistoryItem HistoryItem { get; set; }
+		private bool _isPartial;
+		public FillupHistoryItemViewModel() { /* for design time support */}
 
-		public FillupHistoryItemViewModel(FillupHistoryItem historyItem)
+		public FillupHistoryItemViewModel(FillupHistoryItem historyItem, double avgConsumption)
 		{
-			HistoryItem = historyItem;
+			_isPartial = historyItem.Fillup.IsPartial;
+			FuelEconomy = historyItem.Consumption.HasValue ? historyItem.Consumption.Value.FormatForDisplay() : "<partial>";
+			Date = historyItem.Fillup.Date.ToString("dd MMM yyyy");
+			FillupBrush = GetFillupBrush(historyItem, avgConsumption);
+				
+			Distance = (historyItem.Fillup.OdometerEnd - historyItem.Fillup.OdometerStart).FormatForDisplay();
+			Volume = historyItem.Fillup.Volume.FormatForDisplay();
+			Cost = (historyItem.Fillup.Volume*historyItem.Fillup.Price).FormatForDisplay();
 		}
 
-		public string Date
+		private Brush GetFillupBrush(FillupHistoryItem historyItem, double avgConsumption)
 		{
-			get { return HistoryItem.Fillup.Date.ToShortDateString(); }
+			if (historyItem.Fillup.IsPartial)
+				return new SolidColorBrush(Colors.Gray);
+
+			return new SolidColorBrush(historyItem.Consumption > avgConsumption ? Colors.Red : Colors.Green);
 		}
 
-		public string FuelEconomy
-		{
-			get { return string.Format("{0:#.##}", HistoryItem.Consumption) + "L/100km"; }
-		}
+		public string Date { get; set; }
 
-		public Brush FillupBrush
-		{
-			get { return new SolidColorBrush(HistoryItem.IsGreaterThanAverage ? Colors.Red : Colors.Green); }
-		}
+		public string FuelEconomy { get; set; }
+
+		public Brush FillupBrush { get; set; }
+
+		public string Distance { get; set; }
+		
+		public string Cost { get; set; }
+		
+		public string Volume { get; set; }
+
+		public string ConsumptionDimension { get { return _isPartial? "" : "l/100km"; } }
+
+		public string CostDimension { get { return "гр"; } }
+
+		public string VolumeDimension { get { return "L"; } }
+
+		public string DistanceDimension { get { return "km"; } }
 	}
 }

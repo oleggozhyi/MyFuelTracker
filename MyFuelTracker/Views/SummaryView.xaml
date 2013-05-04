@@ -7,17 +7,25 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:bab="clr-namespace:Caliburn.Micro.BindableAppBar;assembly=Caliburn.Micro.BindableAppBar"
+    xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     mc:Ignorable="d"
+    cal:Bind.AtDesignTime="True"
+    d:DataContext="{d:DesignData Source=/SampleData/SummaryViewModel.xaml}"
     shell:SystemTray.IsVisible="True">
     <UserControl.Resources>
         <Style TargetType="TextBlock" x:Key="valueText" BasedOn="{StaticResource PhoneTextLargeStyle}">
             <Setter Property="Margin" Value="50 5 5 5"/>
-            <Setter Property="Foreground" Value="{StaticResource PhoneAccentBrush}"></Setter>
+            <Setter Property="Foreground" Value="{StaticResource PhoneAccentBrush}"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
         </Style>
-
+        <Style TargetType="TextBlock" x:Key="valueDimension" BasedOn="{StaticResource PhoneTextNormalStyle}">
+            <Setter Property="Foreground" Value="{StaticResource PhoneAccentBrush}"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="Margin" Value="5 0 0 10"/>
+        </Style>
         <Style TargetType="TextBlock" x:Key="caption" BasedOn="{StaticResource PhoneTextExtraLargeStyle}">
 
         </Style>
@@ -28,25 +36,50 @@
 
             <StackPanel>
                 <TextBlock Text="last consumption"  Style="{StaticResource caption}"/>
+                <StackPanel Orientation="Horizontal">
                     <TextBlock x:Name="LastConsumption" Style="{StaticResource valueText}"/>
+                    <TextBlock Text="{Binding ConsumptionDimension}" Style="{StaticResource valueDimension}"/>
+                </StackPanel>
 
                 <TextBlock Text="avg consumption"  Style="{StaticResource caption}"/>
-                <TextBlock x:Name="AllTimeAvgConsumption" Style="{StaticResource valueText}"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock x:Name="AllTimeAvgConsumption" Style="{StaticResource valueText}"/>
+                    <TextBlock Text="{Binding ConsumptionDimension}" Style="{StaticResource valueDimension}"/>
+                </StackPanel>
+
 
                 <TextBlock Text="prev 4 consumption"  Style="{StaticResource caption}"/>
-                <TextBlock x:Name="Last4FillupsAvgConsumption" Style="{StaticResource valueText}"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock x:Name="Last4FillupsAvgConsumption" Style="{StaticResource valueText}"/>
+                    <TextBlock Text="{Binding ConsumptionDimension}" Style="{StaticResource valueDimension}"/>
+                </StackPanel>
 
                 <TextBlock Text="max consumption" Style="{StaticResource caption}"/>
-                <TextBlock x:Name="MaxConsumption" Style="{StaticResource valueText}"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock x:Name="MaxConsumption" Style="{StaticResource valueText}"/>
+                    <TextBlock Text="{Binding ConsumptionDimension}" Style="{StaticResource valueDimension}"/>
+                </StackPanel>
+
 
                 <TextBlock Text="min consumption" Style="{StaticResource caption}"/>
-                <TextBlock x:Name="MinConsumption" Style="{StaticResource valueText}"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock x:Name="MinConsumption" Style="{StaticResource valueText}"/>
+                    <TextBlock Text="{Binding ConsumptionDimension}" Style="{StaticResource valueDimension}"/>
+                </StackPanel>
+
 
                 <TextBlock Text="avg month cost" Style="{StaticResource caption}"/>
-                <TextBlock x:Name="AllTimeAvgMonthCost" Style="{StaticResource valueText}"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock x:Name="AllTimeAvgMonthCost" Style="{StaticResource valueText}"/>
+                    <TextBlock Text="{Binding CostDimension}" Style="{StaticResource valueDimension}"/>
+                </StackPanel>
 
                 <TextBlock Text="last month cost" Style="{StaticResource caption}"/>
-                <TextBlock x:Name="LastMonthCost" Style="{StaticResource valueText}"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock x:Name="LastMonthCost" Style="{StaticResource valueText}"/>
+                    <TextBlock Text="{Binding CostDimension}" Style="{StaticResource valueDimension}"/>
+                </StackPanel>
+
             </StackPanel>
         </ScrollViewer>
         <bab:BindableAppBar>

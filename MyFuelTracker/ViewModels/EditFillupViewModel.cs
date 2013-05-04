@@ -1,37 +1,50 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using Caliburn.Micro;
 using MyFuelTracker.Core;
 using MyFuelTracker.Core.Models;
+using MyFuelTracker.Infrastructure;
 
 namespace MyFuelTracker.ViewModels
 {
-	public class EditFillupViewModel : PropertyChangedBase
+	public class EditFillupViewModel : Screen
 	{
 		#region Fields
 
 		private readonly INavigationService _navigationService;
 		private readonly ILog _log;
+		private readonly IMessageBox _messageBox;
 		private readonly IFillupService _fillupService;
-		private DateTime _date;
-		private double _volume;
-		private double _price;
-		private double _odometerStart;
-		private double _odometerEnd;
+		private readonly IEventAggregator _eventAggregator;
+
 		private bool _isPartial;
-		private const double EPSILON = 0.01;
+		private DateTime _date;
+		private string _volume;
+		private string _price;
+		private string _odometerStart;
+		private string _odometerEnd;
+		private Fillup _fillup;
 
 		#endregion
 
 		#region ctor
 
-		public EditFillupViewModel(INavigationService navigationService, 
+		public EditFillupViewModel(INavigationService navigationService,
 									ILog log,
-									IFillupService fillupService)
+									IMessageBox messageBox,
+									IFillupService fillupService,
+									IEventAggregator eventAggregator)
 		{
 			_navigationService = navigationService;
 			_log = log;
+			_messageBox = messageBox;
 			_fillupService = fillupService;
-			_date = DateTime.Now;
+			_eventAggregator = eventAggregator;
 		}
 
 		#endregion
@@ -49,49 +62,50 @@ namespace MyFuelTracker.ViewModels
 			}
 		}
 
-		public double Volume
+		public string Volume
 		{
 			get { return _volume; }
 			set
 			{
-				if (Math.Abs(value - _volume) < EPSILON) return;
+				if (value == _volume) return;
 				_volume = value;
 				NotifyOfPropertyChange(() => Volume);
 			}
 		}
 
-		public double Price
+		public string Price
 		{
 			get { return _price; }
 			set
 			{
-				if (Math.Abs(value - _price) < EPSILON) return;
+				if (value == _price) return;
 				_price = value;
 				NotifyOfPropertyChange(() => Price);
 			}
 		}
 
-		public double OdometerStart
+		public string OdometerStart
 		{
 			get { return _odometerStart; }
 			set
 			{
-				if (Math.Abs(value - _odometerStart) < EPSILON) return;
+				if (value == _odometerStart) return;
 				_odometerStart = value;
 				NotifyOfPropertyChange(() => OdometerStart);
 			}
 		}
 
-		public double OdometerEnd
+		public string OdometerEnd
 		{
 			get { return _odometerEnd; }
 			set
 			{
-				if (Math.Abs(value - _odometerEnd) < EPSILON) return;
+				if (value == _odometerEnd) return;
 				_odometerEnd = value;
 				NotifyOfPropertyChange(() => OdometerEnd);
 			}
 		}
+
 
 		public bool IsPartial
 		{
@@ -108,20 +122,37 @@ namespace MyFuelTracker.ViewModels
 
 		#region methods
 
-		public void SaveFillup()
+		protected async override void OnActivate()
 		{
-			_log.Info("Start saving fillup");
-			var fillup = new Fillup
-			{
-				Date = Date,
-				IsPartial = IsPartial,
-				OdometerEnd = OdometerEnd,
-				OdometerStart = OdometerStart,
-				Price = Price,
-				Volume = Volume
-			};
+			base.OnActivate();
 
-			_fillupService.SaveFillupAsync(fillup);
+			_fillup = await _fillupService.CreateNewFillupAsync();
+			Date = _fillup.Date;
+			IsPartial = _fillup.IsPartial;
+			OdometerEnd = _fillup.OdometerEnd.FormatForDisplay();
+			OdometerStart = _fillup.OdometerStart.FormatForDisplay();
+		}
+
+		public async void SaveFillup()
+		{
+			try
+			{
+				_fillup.Date = Date;
+				_fillup.IsPartial = IsPartial;
+				_fillup.OdometerEnd = OdometerEnd.GetPositiveDoubleFor("odometer end");
+				_fillup.OdometerStart = OdometerStart.GetPositiveDoubleFor("odometer start");
+				_fillup.Volume = Volume.GetPositiveDoubleFor("volume");
+				_fillup.Price = Price.GetPositiveDoubleFor("price");
+				ValidateFillup(_fillup);
+			}
+			catch (ValidationException ex)
+			{
+				_messageBox.Show(ex.Message);
+				return;
+			}
+			await _fillupService.SaveFillupAsync(_fillup);
+			_eventAggregator.Publish(new FillupHistoryChangedEvent());
+			_eventAggregator.Publish(new FillupItemChangedEvent());
 			_navigationService.GoBack();
 		}
 
@@ -129,6 +160,12 @@ namespace MyFuelTracker.ViewModels
 		{
 			_log.Info("Cancel editing fillup and go back");
 			_navigationService.GoBack();
+		}
+
+		private static void ValidateFillup(Fillup f)
+		{
+			if (f.OdometerStart >= f.OdometerEnd)
+				throw new ValidationException("odometer start should be less than odometer end");
 		}
 
 		#endregion

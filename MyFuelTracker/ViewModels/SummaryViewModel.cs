@@ -9,7 +9,7 @@ using MyFuelTracker.Infrastructure;
 
 namespace MyFuelTracker.ViewModels
 {
-	public class SummaryViewModel : Screen, IUpdatable
+	public class SummaryViewModel : Screen, IHandle<FillupHistoryChangedEvent>
 	{
 		#region Fields
 
@@ -31,10 +31,13 @@ namespace MyFuelTracker.ViewModels
 
 		#region ctor
 
-		public SummaryViewModel(INavigationService navigationService, 
-								IMessageBox messageBox, 
-								IFillupService fillupService, 
-								IStatisticsService statisticsService)
+		public SummaryViewModel() { /* for design time support */ }
+
+		public SummaryViewModel(INavigationService navigationService,
+								IMessageBox messageBox,
+								IFillupService fillupService,
+								IStatisticsService statisticsService,
+								IEventAggregator eventAggregator)
 		{
 			_navigationService = navigationService;
 			_messageBox = messageBox;
@@ -42,11 +45,16 @@ namespace MyFuelTracker.ViewModels
 			_statisticsService = statisticsService;
 			Debug.WriteLine("SummaryViewModel created");
 			DisplayName = "summary";
+			eventAggregator.Subscribe(this);
 		}
 
 		#endregion
 
 		#region Properties
+
+		public string ConsumptionDimension { get { return "l/100km"; } }
+
+		public string CostDimension { get { return "гр"; } }
 
 		public string LastConsumption
 		{
@@ -127,11 +135,7 @@ namespace MyFuelTracker.ViewModels
 
 		#endregion
 
-		protected async override void OnActivate()
-		{
-			base.OnActivate();
-			await UpdateAsync();
-		}
+		#region methods
 
 		public void GoToAddFillup()
 		{
@@ -148,13 +152,21 @@ namespace MyFuelTracker.ViewModels
 			var fillupHistoryItems = await _fillupService.GetHistoryAsync();
 			var statistics = await _statisticsService.CalculateStatisticsAsync(fillupHistoryItems);
 
-			this.AllTimeAvgConsumption = statistics.AllTimeAvgConsumption.FormatForDisplay(L_100LM);
-			this.AllTimeAvgMonthCost = statistics.AllTimeAvgMonthCost.FormatForDisplay(UAH);
-			this.Last4FillupsAvgConsumption = statistics.Last4FillupsAvgConsumption.FormatForDisplay(L_100LM);
-			this.LastConsumption = statistics.LastConsumption.FormatForDisplay(L_100LM);
-			this.LastMonthCost = statistics.LastMonthCost.FormatForDisplay(UAH);
-			this.MaxConsumption = statistics.MaxConsumption.FormatForDisplay(L_100LM);
-			this.MinConsumption = statistics.MinConsumption.FormatForDisplay(L_100LM);
+			this.AllTimeAvgConsumption = statistics.AllTimeAvgConsumption.FormatForDisplay();
+			this.AllTimeAvgMonthCost = statistics.AllTimeAvgMonthCost.FormatForDisplay();
+			this.Last4FillupsAvgConsumption = statistics.Last4FillupsAvgConsumption.FormatForDisplay();
+			this.LastConsumption = statistics.LastConsumption.FormatForDisplay();
+			this.LastMonthCost = statistics.LastMonthCost.FormatForDisplay();
+			this.MaxConsumption = statistics.MaxConsumption.FormatForDisplay();
+			this.MinConsumption = statistics.MinConsumption.FormatForDisplay();
 		}
+
+		public async void Handle(FillupHistoryChangedEvent message)
+		{
+			await UpdateAsync();
+		}
+
+		#endregion
+
 	}
 }

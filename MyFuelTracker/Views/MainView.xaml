@@ -7,18 +7,13 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-    xmlns:micro="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro"
     xmlns:bab="clr-namespace:Caliburn.Micro.BindableAppBar;assembly=Caliburn.Micro.BindableAppBar"
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait"  Orientation="Portrait"
-    shell:SystemTray.IsVisible="True"
-    toolkit:TransitionService.NavigationInTransition="{StaticResource navigationInTransition}"
-    toolkit:TransitionService.NavigationOutTransition="{StaticResource navigationOutTransition}"
-    >
+    shell:SystemTray.IsVisible="True">
 	<phone:PhoneApplicationPage.Resources>
 		<DataTemplate x:Key="FilllupTemplate">
 			<Grid >
@@ -40,8 +35,8 @@
 
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
-        
-        <phone:Pivot Title="My Fuel Tracker" x:Name="Items" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" >
+
+        <phone:Pivot Title="My Fuel Tracker" x:Name="Items" SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
             <phone:Pivot.HeaderTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding DisplayName}" />
