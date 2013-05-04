@@ -32,7 +32,7 @@ namespace MyFuelTracker
 			container.PerRequest<ILog, DebugLogger>();
 			container.Singleton<IMessageBox, MyMessageBox>();
 			container.Singleton<IFillupService, FillupService>();
-			container.Singleton<IFuelTrackerDb, FuelTrackerDb>();
+			container.Singleton<IFuelTrackerDb, InMemoryFuelTrackerDb>();
 			container.Singleton<IStatisticsService, StatisticsService>();
 
 			LogManager.GetLog = type => new DebugLogger(type);

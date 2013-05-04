@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 using MyFuelTracker.Core;
 using MyFuelTracker.Core.DataAccess;
@@ -172,21 +171,6 @@ namespace MyFuelTracker.Tests
 		public FillupService CreateService()
 		{
 			return new FillupService(DB);
-		}
-	}
-
-	public class InMemoryFuelTrackerDb : IFuelTrackerDb
-	{
-		public List<Fillup> Fillups = new List<Fillup>();
-
-		public async Task SaveFillupAsync(Fillup fillup)
-		{
-			await Task.Factory.StartNew(() => Fillups.Add(fillup));
-		}
-
-		public async Task<Fillup[]> LoadAllFillupsAsync()
-		{
-			return await Task.FromResult(Fillups.ToArray());
 		}
 	}
 }

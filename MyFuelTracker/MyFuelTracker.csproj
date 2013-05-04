@@ -96,6 +96,7 @@
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Infrastructure\DebugLogger.cs" />
+    <Compile Include="Infrastructure\ExtensionHelpers.cs" />
     <Compile Include="Infrastructure\IMessageBox.cs" />
     <Compile Include="Infrastructure\MyMessageBox.cs" />
     <Compile Include="ViewModels\EditFillupViewModel.cs" />

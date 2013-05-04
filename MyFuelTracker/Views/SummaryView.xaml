@@ -12,27 +12,52 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True">
+    <UserControl.Resources>
+        <Style TargetType="TextBlock" x:Key="valueText" BasedOn="{StaticResource PhoneTextLargeStyle}">
+            <Setter Property="Margin" Value="50 5 5 5"/>
+            <Setter Property="Foreground" Value="{StaticResource PhoneAccentBrush}"></Setter>
+        </Style>
 
-    <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+        <Style TargetType="TextBlock" x:Key="caption" BasedOn="{StaticResource PhoneTextExtraLargeStyle}">
 
-        <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <bab:BindableAppBar>
-                <bab:BindableAppBarButton
+        </Style>
+    </UserControl.Resources>
+    <!--ContentPanel - place additional content here-->
+    <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+        <ScrollViewer>
+
+            <StackPanel>
+                <TextBlock Text="last consumption"  Style="{StaticResource caption}"/>
+                    <TextBlock x:Name="LastConsumption" Style="{StaticResource valueText}"/>
+
+                <TextBlock Text="avg consumption"  Style="{StaticResource caption}"/>
+                <TextBlock x:Name="AllTimeAvgConsumption" Style="{StaticResource valueText}"/>
+
+                <TextBlock Text="prev 4 consumption"  Style="{StaticResource caption}"/>
+                <TextBlock x:Name="Last4FillupsAvgConsumption" Style="{StaticResource valueText}"/>
+
+                <TextBlock Text="max consumption" Style="{StaticResource caption}"/>
+                <TextBlock x:Name="MaxConsumption" Style="{StaticResource valueText}"/>
+
+                <TextBlock Text="min consumption" Style="{StaticResource caption}"/>
+                <TextBlock x:Name="MinConsumption" Style="{StaticResource valueText}"/>
+
+                <TextBlock Text="avg month cost" Style="{StaticResource caption}"/>
+                <TextBlock x:Name="AllTimeAvgMonthCost" Style="{StaticResource valueText}"/>
+
+                <TextBlock Text="last month cost" Style="{StaticResource caption}"/>
+                <TextBlock x:Name="LastMonthCost" Style="{StaticResource valueText}"/>
+            </StackPanel>
+        </ScrollViewer>
+        <bab:BindableAppBar>
+            <bab:BindableAppBarButton
                             x:Name="GoToAddFillup"
                             Text="add fillup"
                             IconUri="/Assets/fuel.png"/>
-                <bab:BindableAppBarButton
+            <bab:BindableAppBarButton
                             x:Name="GoToSettings"
                             Text="add fillup"
                             IconUri="/Assets/feature.settings.png"/>
-            </bab:BindableAppBar>
-        </Grid>
+        </bab:BindableAppBar>
     </Grid>
-
 </UserControl>

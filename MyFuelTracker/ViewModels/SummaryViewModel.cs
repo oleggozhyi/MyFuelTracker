@@ -13,17 +13,19 @@ namespace MyFuelTracker.ViewModels
 	{
 		#region Fields
 
+		private const string L_100LM = "l/100km";
+		private const string UAH = "гр";
 		private readonly INavigationService _navigationService;
 		private readonly IMessageBox _messageBox;
 		private readonly IFillupService _fillupService;
 		private readonly IStatisticsService _statisticsService;
-		private double _lastConsumption;
-		private double _minConsumption;
-		private double _maxConsumption;
-		private double _allTimeAvgConsumption;
-		private double _last4FillupsAvgConsumption;
-		private double _allTimeAvgMonthCost;
-		private double _lastMonthCost;
+		private string _lastConsumption;
+		private string _minConsumption;
+		private string _maxConsumption;
+		private string _allTimeAvgConsumption;
+		private string _last4FillupsAvgConsumption;
+		private string _allTimeAvgMonthCost;
+		private string _lastMonthCost;
 
 		#endregion
 
@@ -40,14 +42,13 @@ namespace MyFuelTracker.ViewModels
 			_statisticsService = statisticsService;
 			Debug.WriteLine("SummaryViewModel created");
 			DisplayName = "summary";
-			//For designer support
 		}
 
 		#endregion
 
 		#region Properties
 
-		public double LastConsumption
+		public string LastConsumption
 		{
 			get { return _lastConsumption; }
 			set
@@ -58,7 +59,7 @@ namespace MyFuelTracker.ViewModels
 			}
 		}
 
-		public double MinConsumption
+		public string MinConsumption
 		{
 			get { return _minConsumption; }
 			set
@@ -69,7 +70,7 @@ namespace MyFuelTracker.ViewModels
 			}
 		}
 
-		public double MaxConsumption
+		public string MaxConsumption
 		{
 			get { return _maxConsumption; }
 			set
@@ -80,7 +81,7 @@ namespace MyFuelTracker.ViewModels
 			}
 		}
 
-		public double AllTimeAvgConsumption
+		public string AllTimeAvgConsumption
 		{
 			get { return _allTimeAvgConsumption; }
 			set
@@ -91,7 +92,7 @@ namespace MyFuelTracker.ViewModels
 			}
 		}
 
-		public double Last4FillupsAvgConsumption
+		public string Last4FillupsAvgConsumption
 		{
 			get { return _last4FillupsAvgConsumption; }
 			set
@@ -102,7 +103,7 @@ namespace MyFuelTracker.ViewModels
 			}
 		}
 
-		public double AllTimeAvgMonthCost
+		public string AllTimeAvgMonthCost
 		{
 			get { return _allTimeAvgMonthCost; }
 			set
@@ -113,7 +114,7 @@ namespace MyFuelTracker.ViewModels
 			}
 		}
 
-		public double LastMonthCost
+		public string LastMonthCost
 		{
 			get { return _lastMonthCost; }
 			set
@@ -125,6 +126,12 @@ namespace MyFuelTracker.ViewModels
 		}
 
 		#endregion
+
+		protected async override void OnActivate()
+		{
+			base.OnActivate();
+			await UpdateAsync();
+		}
 
 		public void GoToAddFillup()
 		{
@@ -141,13 +148,13 @@ namespace MyFuelTracker.ViewModels
 			var fillupHistoryItems = await _fillupService.GetHistoryAsync();
 			var statistics = await _statisticsService.CalculateStatisticsAsync(fillupHistoryItems);
 
-			this.AllTimeAvgConsumption = statistics.AllTimeAvgConsumption;
-			this.AllTimeAvgMonthCost = statistics.AllTimeAvgMonthCost;
-			this.Last4FillupsAvgConsumption = statistics.Last4FillupsAvgConsumption;
-			this.LastConsumption = statistics.LastConsumption;
-			this.LastMonthCost = statistics.LastMonthCost;
-			this.MaxConsumption = statistics.MaxConsumption;
-			this.MinConsumption = statistics.MinConsumption;
+			this.AllTimeAvgConsumption = statistics.AllTimeAvgConsumption.FormatForDisplay(L_100LM);
+			this.AllTimeAvgMonthCost = statistics.AllTimeAvgMonthCost.FormatForDisplay(UAH);
+			this.Last4FillupsAvgConsumption = statistics.Last4FillupsAvgConsumption.FormatForDisplay(L_100LM);
+			this.LastConsumption = statistics.LastConsumption.FormatForDisplay(L_100LM);
+			this.LastMonthCost = statistics.LastMonthCost.FormatForDisplay(UAH);
+			this.MaxConsumption = statistics.MaxConsumption.FormatForDisplay(L_100LM);
+			this.MinConsumption = statistics.MinConsumption.FormatForDisplay(L_100LM);
 		}
 	}
 }
