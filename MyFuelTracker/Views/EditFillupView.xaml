@@ -17,7 +17,6 @@
     shell:SystemTray.IsVisible="True"
     toolkit:TransitionService.NavigationInTransition="{StaticResource navigationInTransition}"
     toolkit:TransitionService.NavigationOutTransition="{StaticResource navigationOutTransition}"
-    Loaded="EditFillupView_OnLoaded"
     >
     <phone:PhoneApplicationPage.Resources>
         <Style TargetType="TextBlock">

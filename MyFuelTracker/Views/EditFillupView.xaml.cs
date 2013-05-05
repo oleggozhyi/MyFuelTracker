@@ -15,15 +15,5 @@ namespace MyFuelTracker.Views
 		{
 			InitializeComponent();
 		}
-
-		private void EditFillupView_OnLoaded(object sender, RoutedEventArgs routedEventArgs)
-		{
-			OdometerEnd.Focus();
-			int selectionStart = OdometerEnd.Text.Length - 3;
-			selectionStart = selectionStart < 0 ? 0 : selectionStart;
-			int selectionLength = OdometerEnd.Text.Length >= 3 ? 3 : OdometerEnd.Text.Length;
-			OdometerEnd.SelectionStart = selectionStart;
-			OdometerEnd.SelectionLength = selectionLength;
-		}
 	}
 }

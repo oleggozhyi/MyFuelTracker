@@ -24,6 +24,7 @@ namespace MyFuelTracker.ViewModels
 			Distance = (historyItem.Fillup.OdometerEnd - historyItem.Fillup.OdometerStart).FormatForDisplay();
 			Volume = historyItem.Fillup.Volume.FormatForDisplay();
 			Cost = (historyItem.Fillup.Volume*historyItem.Fillup.Price).FormatForDisplay();
+			Petrol = historyItem.Fillup.Petrol;
 		}
 
 		private Brush GetFillupBrush(FillupHistoryItem historyItem, double avgConsumption)
@@ -33,6 +34,8 @@ namespace MyFuelTracker.ViewModels
 
 			return new SolidColorBrush(historyItem.Consumption > avgConsumption ? Colors.Red : Colors.Green);
 		}
+
+		public string Petrol { get; set; }
 
 		public string Date { get; set; }
 

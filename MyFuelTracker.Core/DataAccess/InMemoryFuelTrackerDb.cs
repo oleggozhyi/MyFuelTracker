@@ -64,9 +64,10 @@ namespace MyFuelTracker.Core.DataAccess
 						{
 							var fillup = new Fillup();
 							Fillups.Add(fillup);
-
+							fillup.Id = Guid.Parse(f.Element("id").Value);
 							fillup.Date = ParseDate(f.Element("date").Value);
 							fillup.Volume = double.Parse(f.Element("volume").Value, CultureInfo.CurrentCulture);
+							fillup.Petrol = f.Element("petrol").Value;
 							fillup.Price = double.Parse(f.Element("price").Value, CultureInfo.CurrentCulture);
 							fillup.IsPartial = bool.Parse(f.Element("is-partial").Value);
 							fillup.OdometerStart = double.Parse(f.Element("odometer-start").Value, CultureInfo.CurrentCulture);

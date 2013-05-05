@@ -18,6 +18,8 @@ namespace MyFuelTracker.Core.Models
 
 		public double OdometerEnd { get; set; }
 
-		public bool IsPartial { get; set; } 
+		public bool IsPartial { get; set; }
+
+		public string Petrol { get; set; }
 	}
 }

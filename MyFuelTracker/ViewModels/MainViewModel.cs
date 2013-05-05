@@ -56,6 +56,7 @@ namespace MyFuelTracker.ViewModels
 
 		protected override void OnInitialize()
 		{
+			Debug.WriteLine("MainViewModel OnInitialize");
 			base.OnInitialize();
 
 			Items.Add(SummaryViewModel);
@@ -64,9 +65,15 @@ namespace MyFuelTracker.ViewModels
 			ActivateItem(SummaryViewModel);
 
 			AppBarConductor.Mixin(this);
+		}
 
+		protected override void OnViewLoaded(object view)
+		{
+			base.OnViewLoaded(view);
+			Debug.WriteLine("MainViewModel OnViewLoaded");
 			_eventAggregator.Publish(new FillupHistoryChangedEvent());
 		}
+
 	
 		public void Handle(FillupItemChangedEvent message)
 		{

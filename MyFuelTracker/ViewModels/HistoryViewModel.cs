@@ -19,6 +19,8 @@ namespace MyFuelTracker.ViewModels
 		private readonly IMessageBox _messageBox;
 		private readonly INavigationService _navigationService;
 		private IEnumerable<FillupHistoryItemViewModel> _items;
+		private FillupHistoryItemViewModel[] _fullHistory;
+		private bool _isShowOlderVisible;
 
 		#endregion
 
@@ -45,6 +47,19 @@ namespace MyFuelTracker.ViewModels
 
 		#region properties
 
+		public bool ShowOlderFillups { get; set; }
+
+		public bool IsShowOlderVisible
+		{
+			get { return _isShowOlderVisible; }
+			set
+			{
+				if (value.Equals(_isShowOlderVisible)) return;
+				_isShowOlderVisible = value;
+				NotifyOfPropertyChange(() => IsShowOlderVisible);
+			}
+		}
+
 		public IEnumerable<FillupHistoryItemViewModel> Items
 		{
 			get { return _items; }
@@ -60,6 +75,11 @@ namespace MyFuelTracker.ViewModels
 
 		#region methods
 
+		public void ShowOlder()
+		{
+			_messageBox.Show("show older");
+		}
+
 		public void GoToAddFillup()
 		{
 			_navigationService.UriFor<EditFillupViewModel>().Navigate();
@@ -74,7 +94,9 @@ namespace MyFuelTracker.ViewModels
 		{
 			var historyItems = await _fillupService.GetHistoryAsync();
 			var statistics = await _statisticsService.CalculateStatisticsAsync(historyItems);
-			Items = historyItems.Select(i => new FillupHistoryItemViewModel(i, statistics.AllTimeAvgConsumption)).ToArray();
+			_fullHistory = historyItems.Select(i => new FillupHistoryItemViewModel(i, statistics.AllTimeAvgConsumption)).ToArray();
+
+			Items = _fullHistory.Take(5).ToArray();
 		}
 
 		public async void Handle(FillupHistoryChangedEvent message)

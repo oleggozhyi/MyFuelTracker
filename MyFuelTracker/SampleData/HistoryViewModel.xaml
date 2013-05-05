@@ -3,9 +3,9 @@
                      xmlns:sampleData="clr-namespace:MyFuelTracker.SampleData">
     <vm:HistoryViewModel.Items>
         <sampleData:XamlFriendlyCollectionOfFillupHistoryItemViewModel>
-            <vm:FillupHistoryItemViewModel Date="31 Jan 2013" FuelEconomy="12.57" FillupBrush="Red"  Cost="1885" Distance="352" Volume="36.5" />
-            <vm:FillupHistoryItemViewModel Date="25 Jan 2013" FuelEconomy="12.00" FillupBrush="Red"  Cost="1885" Distance="352" Volume="36.5"/>
-            <vm:FillupHistoryItemViewModel Date="20 Jan 2013" FuelEconomy="11.3" FillupBrush="Green" Cost="1885" Distance="352" Volume="36.5"/>
+            <vm:FillupHistoryItemViewModel Date="31 Jan 2013" FuelEconomy="12.57" FillupBrush="Red"  Cost="1885" Distance="352" Volume="36.5" Petrol="okko pulls" />
+            <vm:FillupHistoryItemViewModel Date="25 Jan 2013" FuelEconomy="12.00" FillupBrush="Red"  Cost="1885" Distance="352" Volume="36.5" Petrol="okko pulls"/>
+            <vm:FillupHistoryItemViewModel Date="20 Jan 2013" FuelEconomy="11.3" FillupBrush="Green" Cost="1885" Distance="352" Volume="36.5" Petrol="wog mustang"/>
         </sampleData:XamlFriendlyCollectionOfFillupHistoryItemViewModel>
     </vm:HistoryViewModel.Items>
 </vm:HistoryViewModel>
