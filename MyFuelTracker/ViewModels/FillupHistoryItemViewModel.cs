@@ -12,19 +12,22 @@ namespace MyFuelTracker.ViewModels
 	public class FillupHistoryItemViewModel
 	{
 		private bool _isPartial;
+
 		public FillupHistoryItemViewModel() { /* for design time support */}
 
 		public FillupHistoryItemViewModel(FillupHistoryItem historyItem, double avgConsumption)
 		{
 			_isPartial = historyItem.Fillup.IsPartial;
-			FuelEconomy = historyItem.Consumption.HasValue ? historyItem.Consumption.Value.FormatForDisplay() : "<partial>";
+			FuelEconomy = historyItem.Consumption.HasValue ? historyItem.Consumption.Value.FormatForDisplay(2) : "<partial>";
 			Date = historyItem.Fillup.Date.ToString("dd MMM yyyy");
 			FillupBrush = GetFillupBrush(historyItem, avgConsumption);
 				
-			Distance = (historyItem.Fillup.OdometerEnd - historyItem.Fillup.OdometerStart).FormatForDisplay();
-			Volume = historyItem.Fillup.Volume.FormatForDisplay();
-			Cost = (historyItem.Fillup.Volume*historyItem.Fillup.Price).FormatForDisplay();
+			Distance = (historyItem.Fillup.OdometerEnd - historyItem.Fillup.OdometerStart).FormatForDisplay(0);
+			Volume = historyItem.Fillup.Volume.FormatForDisplay(2);
+			Cost = (historyItem.Fillup.Volume*historyItem.Fillup.Price).FormatForDisplay(2);
 			Petrol = historyItem.Fillup.Petrol;
+
+			FillupDate = historyItem.Fillup.Date;
 		}
 
 		private Brush GetFillupBrush(FillupHistoryItem historyItem, double avgConsumption)
@@ -34,6 +37,8 @@ namespace MyFuelTracker.ViewModels
 
 			return new SolidColorBrush(historyItem.Consumption > avgConsumption ? Colors.Red : Colors.Green);
 		}
+
+		public DateTime FillupDate { get; set; }
 
 		public string Petrol { get; set; }
 

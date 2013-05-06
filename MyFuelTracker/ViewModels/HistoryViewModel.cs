@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
@@ -18,9 +19,10 @@ namespace MyFuelTracker.ViewModels
 		private readonly IStatisticsService _statisticsService;
 		private readonly IMessageBox _messageBox;
 		private readonly INavigationService _navigationService;
-		private IEnumerable<FillupHistoryItemViewModel> _items;
+		private IEnumerable _items;
 		private FillupHistoryItemViewModel[] _fullHistory;
-		private bool _isShowOlderVisible;
+		private bool _isShowMoreVisible;
+		private bool _showAllFillups;
 
 		#endregion
 
@@ -41,26 +43,36 @@ namespace MyFuelTracker.ViewModels
 			_messageBox = messageBox;
 			_navigationService = navigationService;
 			eventAggregator.Subscribe(this);
+			IsShowMoreVisible = true;
 		}
 
 		#endregion
 
 		#region properties
 
-		public bool ShowOlderFillups { get; set; }
-
-		public bool IsShowOlderVisible
+		public bool ShowAllFillups
 		{
-			get { return _isShowOlderVisible; }
+			get { return _showAllFillups; }
 			set
 			{
-				if (value.Equals(_isShowOlderVisible)) return;
-				_isShowOlderVisible = value;
-				NotifyOfPropertyChange(() => IsShowOlderVisible);
+				if (value.Equals(_showAllFillups)) return;
+				_showAllFillups = value;
+				NotifyOfPropertyChange(() => ShowAllFillups);
 			}
 		}
 
-		public IEnumerable<FillupHistoryItemViewModel> Items
+		public bool IsShowMoreVisible
+		{
+			get { return _isShowMoreVisible; }
+			set
+			{
+				if (value.Equals(_isShowMoreVisible)) return;
+				_isShowMoreVisible = value;
+				NotifyOfPropertyChange(() => IsShowMoreVisible);
+			}
+		}
+
+		public IEnumerable Items
 		{
 			get { return _items; }
 			set
@@ -77,7 +89,9 @@ namespace MyFuelTracker.ViewModels
 
 		public void ShowOlder()
 		{
-			_messageBox.Show("show older");
+			ShowAllFillups = true;
+			IsShowMoreVisible = false;
+			SetItemsSource();
 		}
 
 		public void GoToAddFillup()
@@ -96,12 +110,19 @@ namespace MyFuelTracker.ViewModels
 			var statistics = await _statisticsService.CalculateStatisticsAsync(historyItems);
 			_fullHistory = historyItems.Select(i => new FillupHistoryItemViewModel(i, statistics.AllTimeAvgConsumption)).ToArray();
 
-			Items = _fullHistory.Take(5).ToArray();
+			SetItemsSource();
 		}
 
 		public async void Handle(FillupHistoryChangedEvent message)
 		{
 			await UpdateAsync();
+		}
+
+		private void SetItemsSource()
+		{
+			Items = ShowAllFillups
+				        ? (IEnumerable) FillupsGroupingHelper.GroupFillups(_fullHistory)
+				        : (IEnumerable) _fullHistory.Take(5).ToArray();
 		}
 
 		#endregion

@@ -40,42 +40,54 @@
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
+            <ScrollViewer>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
 
-            <TextBlock Text="date" Grid.Row="0" Grid.Column="0" />
-            <toolkit:DatePicker x:Name="Date" ValueStringFormat="{}{0:dd MMM yyyy}" Grid.Row="0" Grid.Column="1"  />
+                    <TextBlock Text="date" Grid.Row="0" Grid.Column="0" />
+                    <toolkit:DatePicker x:Name="Date" ValueStringFormat="{}{0:dd MMM yyyy}" Grid.Row="0" Grid.Column="1"  />
 
-            <StackPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" >
-                <TextBlock Text="odometer" />
-                <TextBlock Text="start" />
-            </StackPanel>
-            <toolkit:PhoneTextBox x:Name="OdometerStart" Grid.Row="1" Grid.Column="1"  Hint="odometer start"  InputScope="Number"/>
+                    <TextBlock Text="petrol" Grid.Row="1" Grid.Column="0" />
+                    <toolkit:ListPicker Grid.Row="1" Grid.Column="1"
+                                SelectedItem="{Binding Petrol}"
+                                ItemsSource="{Binding Petrols}"/>
 
-            <StackPanel Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" >
-                <TextBlock Text="odometer" />
-                <TextBlock Text="end" />
-            </StackPanel>
-            <toolkit:PhoneTextBox x:Name="OdometerEnd" Grid.Row="2" Grid.Column="1"  Hint="odometer start"  InputScope="Number"/>
+                    <TextBlock Text="price" Grid.Row="2" Grid.Column="0" />
+                    <toolkit:PhoneTextBox  x:Name="Price" Grid.Row="2" Grid.Column="1" Hint="price" InputScope="Number"/>
 
-            <TextBlock Text="volume" Grid.Row="3" Grid.Column="0" />
-            <toolkit:PhoneTextBox x:Name="Volume" Grid.Row="3" Grid.Column="1"  Hint="volume" InputScope="Number"/>
 
-            <TextBlock Text="price" Grid.Row="4" Grid.Column="0" />
-            <toolkit:PhoneTextBox  x:Name="Price" Grid.Row="4" Grid.Column="1" Hint="price" InputScope="Number"/>
+                    <StackPanel Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" >
+                        <TextBlock Text="odometer" />
+                        <TextBlock Text="start" />
+                    </StackPanel>
+                    <toolkit:PhoneTextBox x:Name="OdometerStart" Grid.Row="3" Grid.Column="1"  Hint="odometer start"  InputScope="Number"/>
 
-            <CheckBox  x:Name="IsPartial" Grid.Row="5" Grid.Column="1" Content="is partial fillup" />
+                    <StackPanel Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" >
+                        <TextBlock Text="odometer" />
+                        <TextBlock Text="end" />
+                    </StackPanel>
+                    <toolkit:PhoneTextBox x:Name="OdometerEnd" Grid.Row="4" Grid.Column="1"  Hint="odometer start"  InputScope="Number"/>
+
+                    <TextBlock Text="volume" Grid.Row="5" Grid.Column="0" />
+                    <toolkit:PhoneTextBox x:Name="Volume" Grid.Row="5" Grid.Column="1"  Hint="volume" InputScope="Number"/>
+
+
+                    <CheckBox  x:Name="IsPartial" Grid.Row="6" Grid.Column="1" Content="is partial fillup" />
+                </Grid>
+            </ScrollViewer>
         </Grid>
 
         <bab:BindableAppBar>

@@ -19,7 +19,7 @@
     <UserControl.Resources>
         <Style x:Key="detailsText" TargetType="TextBlock" BasedOn="{StaticResource PhoneTextNormalStyle}">
             <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeMedium}"></Setter>
-            <Setter Property="Foreground" Value=""></Setter>
+            <Setter Property="Foreground" Value="Silver"></Setter>
         </Style>
         <Style x:Key="detailsDimension" TargetType="TextBlock" BasedOn="{StaticResource PhoneTextNormalStyle}">
             <Setter Property="Margin" Value="-8 2 10 0"></Setter>
@@ -27,7 +27,8 @@
 
             <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeNormal}"></Setter>
         </Style>
-        <DataTemplate x:Key="fillupTemplate">
+        
+        <DataTemplate x:Key="fillupItemTemplate">
             <Grid Margin="0 0 0 25">
                 <StackPanel >
                     <StackPanel Orientation="Horizontal">
@@ -35,7 +36,7 @@
                         <TextBlock Text="{Binding FuelEconomy}" FontWeight="ExtraBold" Foreground="{Binding FillupBrush}" Style="{StaticResource PhoneTextLargeStyle}"/>
                         <TextBlock Text="{Binding ConsumptionDimension}" VerticalAlignment="Center" Margin="0" Style="{StaticResource detailsDimension}"/>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal" Visibility="{Binding ElementName=LayoutRoot, Path=DataContext.ShowDetails}">
+                    <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{Binding Volume}" Style="{StaticResource detailsText}" />
                         <TextBlock Text="{Binding VolumeDimension}" Style="{StaticResource detailsDimension}"/>
                         <TextBlock Text="{Binding Distance}" Style="{StaticResource detailsText}" />
@@ -47,6 +48,14 @@
                 </StackPanel>
             </Grid>
         </DataTemplate>
+
+        <DataTemplate x:Key="fillupGroupTemplate">
+            <Grid Margin="10">
+                <Rectangle Fill="DarkSlateGray"></Rectangle>
+                <TextBlock HorizontalAlignment="Center" Text="{Binding Month}" Style="{StaticResource PhoneTextLargeStyle}" />
+            </Grid>
+        </DataTemplate>
+
     </UserControl.Resources>
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -54,15 +63,24 @@
             <RowDefinition/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <toolkit:LongListMultiSelector ItemsSource="{Binding Items}" ItemTemplate="{StaticResource fillupTemplate}" />
-        <HyperlinkButton Grid.Row="1" Content="Show older" Margin="0 0 0 10" FontSize="{StaticResource PhoneFontSizeLarge}"
-            micro:Message.Attach="[Event Tap] = [Handler ShowOlder]" />
-        
+        <toolkit:LongListMultiSelector ItemsSource="{Binding Items}" 
+                                       ItemTemplate="{StaticResource fillupItemTemplate}" 
+                                       IsGroupingEnabled="{Binding ShowAllFillups}"
+                                       GroupHeaderTemplate="{StaticResource fillupGroupTemplate}" 
+                                       HideEmptyGroups="True"
+                                       >
+           
+        </toolkit:LongListMultiSelector>
+        <HyperlinkButton Grid.Row="1" Margin="0 0 0 10" FontSize="{StaticResource PhoneFontSizeLarge}" Foreground="Gray"
+                         Content="show more"
+                         micro:Message.Attach="[Event Tap] = [Action ShowOlder]"
+                         Visibility="{Binding IsShowMoreVisible, Converter={StaticResource booleanToVisibilityConverter}}"/>
+
         <bab:BindableAppBar>
             <bab:BindableAppBarButton
                             x:Name="GoToAddFillup"
                             Text="add fillup"
-                            IconUri="/Assets/fuel.png"/>
+                            IconUri="/Assets/add.png"/>
             <bab:BindableAppBarButton
                             x:Name="GoToSettings"
                             Text="add fillup"

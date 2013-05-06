@@ -16,7 +16,10 @@ namespace MyFuelTracker.Core.DataAccess
 
 		public InMemoryFuelTrackerDb(bool loaded)
 		{
-			_loadHistoryTask = LoadHistoryAsync();
+			if (loaded)
+				_loadHistoryTask = Task.Factory.StartNew(() => { });
+			else
+				_loadHistoryTask = LoadHistoryAsync();
 		}
 
 		public InMemoryFuelTrackerDb()
@@ -24,7 +27,6 @@ namespace MyFuelTracker.Core.DataAccess
 		{
 		}
 
-		private bool _loaded;
 		private object _locker = new object();
 		public List<Fillup> Fillups = new List<Fillup>();
 
@@ -58,8 +60,6 @@ namespace MyFuelTracker.Core.DataAccess
 					var xDocument = XDocument.Load(stream);
 					lock (_locker)
 					{
-						if (_loaded)
-							return;
 						foreach (var f in xDocument.Root.Elements("fillup"))
 						{
 							var fillup = new Fillup();

@@ -29,6 +29,9 @@ namespace MyFuelTracker.ViewModels
 		private string _odometerStart;
 		private string _odometerEnd;
 		private Fillup _fillup;
+		private string _petrol;
+		private List<string> _petrols;
+		private IEnumerable<FillupHistoryItem> _historyItems;
 
 		#endregion
 
@@ -45,6 +48,7 @@ namespace MyFuelTracker.ViewModels
 			_messageBox = messageBox;
 			_fillupService = fillupService;
 			_eventAggregator = eventAggregator;
+			Petrols = new List<string>();
 		}
 
 		#endregion
@@ -106,7 +110,6 @@ namespace MyFuelTracker.ViewModels
 			}
 		}
 
-
 		public bool IsPartial
 		{
 			get { return _isPartial; }
@@ -115,6 +118,36 @@ namespace MyFuelTracker.ViewModels
 				if (value.Equals(_isPartial)) return;
 				_isPartial = value;
 				NotifyOfPropertyChange(() => IsPartial);
+			}
+		}
+
+		public string Petrol
+		{
+			get { return _petrol; }
+			set
+			{
+				if (value == _petrol) return;
+				if (value == "enter new...")
+				{
+					Petrols.Add("new petrol");
+					_petrol = "new petrol";
+				}
+				else
+					_petrol = value;
+
+				NotifyOfPropertyChange(() => Petrol);
+				NotifyOfPropertyChange(() => Petrol);
+			}
+		}
+
+		public List<string> Petrols
+		{
+			get { return _petrols; }
+			set
+			{
+				if (value == _petrols) return;
+				_petrols = value;
+				NotifyOfPropertyChange(() => Petrols);
 			}
 		}
 
@@ -127,10 +160,17 @@ namespace MyFuelTracker.ViewModels
 			base.OnActivate();
 
 			_fillup = await _fillupService.CreateNewFillupAsync();
+			_historyItems = await _fillupService.GetHistoryAsync();
 			Date = _fillup.Date;
 			IsPartial = _fillup.IsPartial;
-			OdometerEnd = _fillup.OdometerEnd.FormatForDisplay();
-			OdometerStart = _fillup.OdometerStart.FormatForDisplay();
+			OdometerEnd = _fillup.OdometerEnd.FormatForDisplay(0);
+			OdometerStart = _fillup.OdometerStart.FormatForDisplay(0);
+
+			var petrols = _historyItems.Select(i => i.Fillup.Petrol).Distinct(StringComparer.OrdinalIgnoreCase).ToList();
+			petrols.Add("enter new...");
+
+			Petrols = petrols;
+			Petrol = _fillup.Petrol;
 		}
 
 		public async void SaveFillup()

@@ -7,7 +7,7 @@ using MyFuelTracker.ViewModels;
 
 namespace MyFuelTracker.SampleData
 {
-	public class XamlFriendlyCollectionOfFillupHistoryItemViewModel : List<FillupHistoryItemViewModel>
+	public class XamlFriendlyCollectionOfFillupHistoryItemViewModel : List<object>
 	{
 	}
 }

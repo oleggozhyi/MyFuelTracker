@@ -8,9 +8,14 @@ namespace MyFuelTracker.Infrastructure
 {
 	public static class ExtensionHelpers
 	{
-		public static string FormatForDisplay(this double d, string dimension = "")
+		public static string FormatForDisplay(this double d, int digits)
 		{
-			return string.Format("{0:#.##}", d) + (dimension.IsNullOrWhitespace() ? "" : " " + dimension);
+			d = Math.Round(d, digits, MidpointRounding.AwayFromZero);
+			//Sorry, just quick and dirty
+			if (digits !=  2)
+				return d.ToString();
+			
+			return String.Format("{0:#.00}", d);
 		}
 
 		public static bool IsNullOrWhitespace(this string s)

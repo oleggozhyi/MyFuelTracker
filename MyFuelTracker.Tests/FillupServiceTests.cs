@@ -18,7 +18,7 @@ namespace MyFuelTracker.Tests
 		[TestInitialize]
 		public void Init()
 		{
-			DB = new InMemoryFuelTrackerDb();
+			DB = new InMemoryFuelTrackerDb(true);
 		}
 
 		[TestMethod]

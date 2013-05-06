@@ -152,13 +152,13 @@ namespace MyFuelTracker.ViewModels
 			var fillupHistoryItems = await _fillupService.GetHistoryAsync();
 			var statistics = await _statisticsService.CalculateStatisticsAsync(fillupHistoryItems);
 
-			this.AllTimeAvgConsumption = statistics.AllTimeAvgConsumption.FormatForDisplay();
-			this.AllTimeAvgMonthCost = statistics.AllTimeAvgMonthCost.FormatForDisplay();
-			this.Last4FillupsAvgConsumption = statistics.Last4FillupsAvgConsumption.FormatForDisplay();
-			this.LastConsumption = statistics.LastConsumption.FormatForDisplay();
-			this.LastMonthCost = statistics.LastMonthCost.FormatForDisplay();
-			this.MaxConsumption = statistics.MaxConsumption.FormatForDisplay();
-			this.MinConsumption = statistics.MinConsumption.FormatForDisplay();
+			this.AllTimeAvgConsumption = statistics.AllTimeAvgConsumption.FormatForDisplay(2);
+			this.AllTimeAvgMonthCost = statistics.AllTimeAvgMonthCost.FormatForDisplay(2);
+			this.Last4FillupsAvgConsumption = statistics.Last4FillupsAvgConsumption.FormatForDisplay(2);
+			this.LastConsumption = statistics.LastConsumption.FormatForDisplay(2);
+			this.LastMonthCost = statistics.LastMonthCost.FormatForDisplay(2);
+			this.MaxConsumption = statistics.MaxConsumption.FormatForDisplay(2);
+			this.MinConsumption = statistics.MinConsumption.FormatForDisplay(2);
 		}
 
 		public async void Handle(FillupHistoryChangedEvent message)

@@ -27,6 +27,7 @@ namespace MyFuelTracker.Core
 				var lastOdometerEnd = fillups.OrderBy(f => f.OdometerEnd).Last().OdometerEnd;
 				fillup.OdometerStart = lastOdometerEnd;
 				fillup.OdometerEnd = lastOdometerEnd;
+				fillup.Petrol = fillups.First().Petrol;
 			}
 			return await Task.FromResult(fillup);
 		}
