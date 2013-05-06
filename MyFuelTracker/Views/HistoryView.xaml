@@ -27,7 +27,7 @@
 
             <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeNormal}"></Setter>
         </Style>
-        
+
         <DataTemplate x:Key="fillupItemTemplate">
             <Grid Margin="0 0 0 25">
                 <StackPanel >
@@ -49,12 +49,22 @@
             </Grid>
         </DataTemplate>
 
-        <DataTemplate x:Key="fillupGroupTemplate">
+        <DataTemplate x:Key="fillupGroupHeaderTemplate">
             <Grid Margin="10">
-                <Rectangle Fill="DarkSlateGray"></Rectangle>
-                <TextBlock HorizontalAlignment="Center" Text="{Binding Month}" Style="{StaticResource PhoneTextLargeStyle}" />
+                <Rectangle Fill="#3F20AFFC"></Rectangle>
+                <TextBlock HorizontalAlignment="Center" Text="{Binding MonthLongName}" Style="{StaticResource PhoneTextLargeStyle}" />
             </Grid>
         </DataTemplate>
+        <DataTemplate x:Key="fillupGroupItemTemplate">
+            <Grid Margin="10" Height="80">
+                <Rectangle Fill="#3F20AFFC"></Rectangle>
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"  Text="{Binding MonthLongName}" Style="{StaticResource PhoneTextLargeStyle}" />
+            </Grid>
+        </DataTemplate>
+        <Style x:Key="JumpListStyle" TargetType="phone:LongListSelector">
+            <Setter Property="ItemTemplate" Value="{StaticResource fillupGroupItemTemplate}" />
+            <Setter Property="GridCellSize" Value="200, 90"/>
+        </Style>
 
     </UserControl.Resources>
     <!--LayoutRoot is the root grid where all page content is placed-->
@@ -63,20 +73,21 @@
             <RowDefinition/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <toolkit:LongListMultiSelector ItemsSource="{Binding Items}" 
-                                       ItemTemplate="{StaticResource fillupItemTemplate}" 
-                                       IsGroupingEnabled="{Binding ShowAllFillups}"
-                                       GroupHeaderTemplate="{StaticResource fillupGroupTemplate}" 
-                                       HideEmptyGroups="True"
-                                       >
-           
-        </toolkit:LongListMultiSelector>
+        <phone:LongListSelector ItemsSource="{Binding Items}" 
+                                ItemTemplate="{StaticResource fillupItemTemplate}" 
+                                IsGroupingEnabled="{Binding ShowAllFillups}"
+                                GroupHeaderTemplate="{StaticResource fillupGroupHeaderTemplate}" 
+                                HideEmptyGroups="True"
+                                
+                                JumpListStyle="{StaticResource JumpListStyle}">
+
+        </phone:LongListSelector>
         <HyperlinkButton Grid.Row="1" Margin="0 0 0 10" FontSize="{StaticResource PhoneFontSizeLarge}" Foreground="Gray"
                          Content="show more"
                          micro:Message.Attach="[Event Tap] = [Action ShowOlder]"
                          Visibility="{Binding IsShowMoreVisible, Converter={StaticResource booleanToVisibilityConverter}}"/>
 
-        <bab:BindableAppBar>
+        <bab:BindableAppBar Margin="10,-10,-10,10">
             <bab:BindableAppBarButton
                             x:Name="GoToAddFillup"
                             Text="add fillup"

@@ -6,6 +6,7 @@ namespace MyFuelTracker.ViewModels
 	public class FillupHistoryGroupViewModel : List<FillupHistoryItemViewModel>
 	{
 		public string Month { get { return MonthDateTime.ToString("MMM yyyy"); } }
+		public string MonthLongName { get { return MonthDateTime.ToString("MMMM yyyy"); } }
 
 		public DateTime MonthDateTime { get; set; }
 
