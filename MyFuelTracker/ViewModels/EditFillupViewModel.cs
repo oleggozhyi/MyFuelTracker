@@ -12,7 +12,7 @@ using MyFuelTracker.Infrastructure;
 
 namespace MyFuelTracker.ViewModels
 {
-	public class EditFillupViewModel : Screen
+	public class EditFillupViewModel : Screen, IHandle<PetrolAddedEvent>
 	{
 		#region Fields
 
@@ -48,6 +48,7 @@ namespace MyFuelTracker.ViewModels
 			_messageBox = messageBox;
 			_fillupService = fillupService;
 			_eventAggregator = eventAggregator;
+			_eventAggregator.Subscribe(this);
 			Petrols = new List<string>();
 		}
 
@@ -127,15 +128,7 @@ namespace MyFuelTracker.ViewModels
 			set
 			{
 				if (value == _petrol) return;
-				if (value == "enter new...")
-				{
-					Petrols.Add("new petrol");
-					_petrol = "new petrol";
-				}
-				else
-					_petrol = value;
-
-				NotifyOfPropertyChange(() => Petrol);
+				_petrol = value;
 				NotifyOfPropertyChange(() => Petrol);
 			}
 		}
@@ -155,9 +148,9 @@ namespace MyFuelTracker.ViewModels
 
 		#region methods
 
-		protected async override void OnActivate()
+		protected async override void OnViewLoaded(object view)
 		{
-			base.OnActivate();
+			base.OnViewLoaded(view);
 
 			_fillup = await _fillupService.CreateNewFillupAsync();
 			_historyItems = await _fillupService.GetHistoryAsync();
@@ -167,9 +160,9 @@ namespace MyFuelTracker.ViewModels
 			OdometerStart = _fillup.OdometerStart.FormatForDisplay(0);
 
 			var petrols = _historyItems.Select(i => i.Fillup.Petrol).Distinct(StringComparer.OrdinalIgnoreCase).ToList();
-			petrols.Add("enter new...");
 
 			Petrols = petrols;
+			Price = _fillup.Price.FormatForDisplay(2);
 			Petrol = _fillup.Petrol;
 		}
 
@@ -178,6 +171,7 @@ namespace MyFuelTracker.ViewModels
 			try
 			{
 				_fillup.Date = Date;
+				_fillup.Petrol = Petrol;
 				_fillup.IsPartial = IsPartial;
 				_fillup.OdometerEnd = OdometerEnd.GetPositiveDoubleFor("odometer end");
 				_fillup.OdometerStart = OdometerStart.GetPositiveDoubleFor("odometer start");
@@ -205,9 +199,26 @@ namespace MyFuelTracker.ViewModels
 		private static void ValidateFillup(Fillup f)
 		{
 			if (f.OdometerStart >= f.OdometerEnd)
-				throw new ValidationException("odometer start should be less than odometer end");
+				throw new ValidationException("enter current odometer value - it should be greater than previous value");
+		}
+
+		public void AddPetrol()
+		{
+			_navigationService.UriFor<AddPetrolViewModel>().Navigate();
+		}
+
+		public void Handle(PetrolAddedEvent message)
+		{
+			if (message.PetrolName == null)
+				return;
+
+			var petrols = _historyItems.Select(i => i.Fillup.Petrol).Distinct(StringComparer.OrdinalIgnoreCase).ToList();
+			petrols.Add(message.PetrolName);
+			Petrols = petrols;
+			Petrol = message.PetrolName;
 		}
 
 		#endregion
+
 	}
 }

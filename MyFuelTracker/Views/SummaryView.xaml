@@ -7,7 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:bab="clr-namespace:Caliburn.Micro.BindableAppBar;assembly=Caliburn.Micro.BindableAppBar"
-    xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro"
+    xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro" xmlns:views="clr-namespace:MyFuelTracker.Views"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -16,18 +16,14 @@
     d:DataContext="{d:DesignData Source=/SampleData/SummaryViewModel.xaml}"
     shell:SystemTray.IsVisible="True">
     <UserControl.Resources>
-        <Style TargetType="TextBlock" x:Key="valueText" BasedOn="{StaticResource PhoneTextLargeStyle}">
-            <Setter Property="Margin" Value="50 5 5 5"/>
-            <Setter Property="Foreground" Value="{StaticResource PhoneAccentBrush}"/>
-            <Setter Property="VerticalAlignment" Value="Bottom"/>
+        <Style TargetType="views:ValueWithDimention" x:Key="detail">
+            <Setter Property="ValueDimensionBrush" Value="DimGray"/>
+            <Setter Property="ValueTextBrush" Value="Silver"/>
+            <Setter Property="ValueTextSize" Value="{StaticResource PhoneFontSizeMedium}"/>
+            <Setter Property="ValueDimensionSize" Value="{StaticResource PhoneFontSizeNormal}"/>
         </Style>
-        <Style TargetType="TextBlock" x:Key="valueDimension" BasedOn="{StaticResource PhoneTextNormalStyle}">
-            <Setter Property="Foreground" Value="{StaticResource PhoneAccentBrush}"/>
-            <Setter Property="VerticalAlignment" Value="Bottom"/>
-            <Setter Property="Margin" Value="5 0 0 10"/>
-        </Style>
-        <Style TargetType="TextBlock" x:Key="caption" BasedOn="{StaticResource PhoneTextExtraLargeStyle}">
-
+        <Style TargetType="TextBlock" x:Key="groupHeader" BasedOn="{StaticResource PhoneTextExtraLargeStyle}" />
+        <Style TargetType="TextBlock" x:Key="valueLabel" BasedOn="{StaticResource PhoneTextLargeStyle}">
         </Style>
     </UserControl.Resources>
     <!--ContentPanel - place additional content here-->
@@ -86,7 +82,7 @@
             <bab:BindableAppBarButton
                             x:Name="GoToAddFillup"
                             Text="add fillup"
-                            IconUri="/Assets/fuel.png"/>
+                            IconUri="/Assets/add.png"/>
             <bab:BindableAppBarButton
                             x:Name="GoToSettings"
                             Text="add fillup"

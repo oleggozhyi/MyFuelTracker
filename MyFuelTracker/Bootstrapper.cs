@@ -28,6 +28,7 @@ namespace MyFuelTracker
 			container.PerRequest<SummaryViewModel>();
 			container.PerRequest<HistoryViewModel>();
 			container.PerRequest<EditFillupViewModel>();
+			container.PerRequest<AddPetrolViewModel>();
 
 			container.PerRequest<ILog, DebugLogger>();
 			container.Singleton<IMessageBox, MyMessageBox>();

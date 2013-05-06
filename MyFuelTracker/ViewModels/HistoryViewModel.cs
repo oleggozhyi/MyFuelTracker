@@ -87,7 +87,7 @@ namespace MyFuelTracker.ViewModels
 
 		#region methods
 
-		public void ShowOlder()
+		public void ViewMore()
 		{
 			ShowAllFillups = true;
 			IsShowMoreVisible = false;
@@ -108,7 +108,7 @@ namespace MyFuelTracker.ViewModels
 		{
 			var historyItems = await _fillupService.GetHistoryAsync();
 			var statistics = await _statisticsService.CalculateStatisticsAsync(historyItems);
-			_fullHistory = historyItems.Select(i => new FillupHistoryItemViewModel(i, statistics.AllTimeAvgConsumption)).ToArray();
+			_fullHistory = historyItems.Select(i => new FillupHistoryItemViewModel(i, statistics)).ToArray();
 
 			SetItemsSource();
 		}

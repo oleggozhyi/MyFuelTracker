@@ -99,16 +99,22 @@
     <Compile Include="Infrastructure\ExtensionHelpers.cs" />
     <Compile Include="Infrastructure\FillupHistoryChangedEvent.cs" />
     <Compile Include="Infrastructure\FillupsGroupingHelper.cs" />
+    <Compile Include="Infrastructure\HslColor.cs" />
     <Compile Include="Infrastructure\IMessageBox.cs" />
     <Compile Include="Infrastructure\MyMessageBox.cs" />
+    <Compile Include="Infrastructure\PetrolAddedEvent.cs" />
     <Compile Include="Infrastructure\ValidationException.cs" />
     <Compile Include="SampleData\XamlFriendlyCollection.cs" />
+    <Compile Include="ViewModels\AddPetrolViewModel.cs" />
     <Compile Include="ViewModels\EditFillupViewModel.cs" />
     <Compile Include="ViewModels\FillupHistoryGroupViewModel.cs" />
     <Compile Include="ViewModels\FillupHistoryItemViewModel.cs" />
     <Compile Include="ViewModels\HistoryViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\SummaryViewModel.cs" />
+    <Compile Include="Views\AddPetrolView.xaml.cs">
+      <DependentUpon>AddPetrolView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\EditFillupView.xaml.cs">
       <DependentUpon>EditFillupView.xaml</DependentUpon>
     </Compile>
@@ -131,6 +137,9 @@
     <Compile Include="Views\SummaryView.xaml.cs">
       <DependentUpon>SummaryView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ValueWithDimention.xaml.cs">
+      <DependentUpon>ValueWithDimention.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -142,6 +151,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="SampleData\SummaryViewModel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddPetrolView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -158,6 +171,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SummaryView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ValueWithDimention.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -216,6 +233,9 @@
     </Reference>
     <Reference Include="Caliburn.Micro.Extensions">
       <HintPath>..\packages\Caliburn.Micro.1.5.1\lib\wp8\Caliburn.Micro.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Coding4Fun.Toolkit.Controls">
+      <HintPath>..\packages\Coding4Fun.Toolkit.Controls.2.0.5\lib\windowsphone8\Coding4Fun.Toolkit.Controls.dll</HintPath>
     </Reference>
     <Reference Include="Lex.Db">
       <HintPath>..\packages\Lex.Db.1.1.3.0\lib\wp8\Lex.Db.dll</HintPath>

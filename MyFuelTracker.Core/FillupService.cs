@@ -21,13 +21,15 @@ namespace MyFuelTracker.Core
 		public async Task<Fillup> CreateNewFillupAsync()
 		{
 			var fillup = new Fillup { Id = Guid.NewGuid(), Date = DateTime.Now };
-			var fillups = await Db.LoadAllFillupsAsync();
+			var fillups = await GetHistoryAsync();
+			var latestFillup = fillups.First();
 			if (fillups.Any())
 			{
-				var lastOdometerEnd = fillups.OrderBy(f => f.OdometerEnd).Last().OdometerEnd;
+				var lastOdometerEnd = fillups.OrderBy(f => f.Fillup.OdometerEnd).Last().Fillup.OdometerEnd;
 				fillup.OdometerStart = lastOdometerEnd;
 				fillup.OdometerEnd = lastOdometerEnd;
-				fillup.Petrol = fillups.First().Petrol;
+				fillup.Petrol = latestFillup.Fillup.Petrol;
+				fillup.Price= latestFillup.Fillup.Price;
 			}
 			return await Task.FromResult(fillup);
 		}
@@ -52,33 +54,36 @@ namespace MyFuelTracker.Core
 		private IEnumerable<FillupHistoryItem> CalculateHistory(Fillup[] fillups)
 		{
 			var historyItems = new List<FillupHistoryItem>();
-			if (!fillups.Any())
-				return historyItems;
-
-			double partialFillupOdoStart = -1;
-			double partialFillupVolume = 0;
-			foreach (var fillup in fillups)
+			lock (this)
 			{
-				var historyItem = new FillupHistoryItem { Fillup = fillup };
-				historyItems.Add(historyItem);
+				if (!fillups.Any())
+					return historyItems;
 
-				if (fillup.IsPartial)
+				double partialFillupOdoStart = -1;
+				double partialFillupVolume = 0;
+				foreach (var fillup in fillups)
 				{
-					if (partialFillupOdoStart < 0)
-						partialFillupOdoStart = fillup.OdometerStart;
-					partialFillupVolume += fillup.Volume;
-				}
-				else
-				{
-					double actualVolume = fillup.Volume + partialFillupVolume;
-					double actualDistance = fillup.OdometerEnd - (partialFillupOdoStart > 0 ? partialFillupOdoStart : fillup.OdometerStart);
-					historyItem.Consumption = actualVolume * 100 / actualDistance;
+					var historyItem = new FillupHistoryItem { Fillup = fillup };
+					historyItems.Add(historyItem);
 
-					partialFillupOdoStart = -1;
-					partialFillupVolume = 0;
+					if (fillup.IsPartial)
+					{
+						if (partialFillupOdoStart < 0)
+							partialFillupOdoStart = fillup.OdometerStart;
+						partialFillupVolume += fillup.Volume;
+					}
+					else
+					{
+						double actualVolume = fillup.Volume + partialFillupVolume;
+						double actualDistance = fillup.OdometerEnd -
+												(partialFillupOdoStart > 0 ? partialFillupOdoStart : fillup.OdometerStart);
+						historyItem.Consumption = actualVolume * 100 / actualDistance;
+
+						partialFillupOdoStart = -1;
+						partialFillupVolume = 0;
+					}
 				}
 			}
-
 			//double average = historyItems.Where(i => i.FuelEconomy.HasValue).Average(i => i.FuelEconomy.Value);
 			//foreach (var fillupHistoryItem in historyItems.Where(i => i.FuelEconomy.HasValue))
 			//{

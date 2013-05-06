@@ -9,6 +9,7 @@
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:micro="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro"
     xmlns:bab="clr-namespace:Caliburn.Micro.BindableAppBar;assembly=Caliburn.Micro.BindableAppBar"
+    xmlns:views="clr-namespace:MyFuelTracker.Views"
     micro:Bind.AtDesignTime="True"
     d:DataContext="{d:DesignData Source=/SampleData/HistoryViewModel.xaml}"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
@@ -21,32 +22,28 @@
             <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeMedium}"></Setter>
             <Setter Property="Foreground" Value="Silver"></Setter>
         </Style>
-        <Style x:Key="detailsDimension" TargetType="TextBlock" BasedOn="{StaticResource PhoneTextNormalStyle}">
-            <Setter Property="Margin" Value="-8 2 10 0"></Setter>
-            <Setter Property="Foreground" Value="DimGray"></Setter>
 
-            <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeNormal}"></Setter>
+        <Style TargetType="views:ValueWithDimention" x:Key="detail">
+            <Setter Property="ValueDimensionBrush" Value="DimGray"/>
+            <Setter Property="ValueTextBrush" Value="Silver"/>
+            <Setter Property="ValueTextSize" Value="{StaticResource PhoneFontSizeMedium}"/>
+            <Setter Property="ValueDimensionSize" Value="{StaticResource PhoneFontSizeNormal}"/>
         </Style>
 
         <DataTemplate x:Key="fillupItemTemplate">
-            <Grid Margin="0 0 0 25">
-                <StackPanel >
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Date}" Style="{StaticResource PhoneTextLargeStyle}"  />
-                        <TextBlock Text="{Binding FuelEconomy}" FontWeight="ExtraBold" Foreground="{Binding FillupBrush}" Style="{StaticResource PhoneTextLargeStyle}"/>
-                        <TextBlock Text="{Binding ConsumptionDimension}" VerticalAlignment="Center" Margin="0" Style="{StaticResource detailsDimension}"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Volume}" Style="{StaticResource detailsText}" />
-                        <TextBlock Text="{Binding VolumeDimension}" Style="{StaticResource detailsDimension}"/>
-                        <TextBlock Text="{Binding Distance}" Style="{StaticResource detailsText}" />
-                        <TextBlock Text="{Binding DistanceDimension}" Style="{StaticResource detailsDimension}"/>
-                        <TextBlock Text="{Binding Cost}" Style="{StaticResource detailsText}" />
-                        <TextBlock Text="{Binding CostDimension}"  Style="{StaticResource detailsDimension}"/>
-                        <TextBlock Text="{Binding Petrol}" Style="{StaticResource detailsText}" Foreground="Goldenrod"/>
-                    </StackPanel>
+            <StackPanel Margin="0 0 0 25">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{Binding Date}" Style="{StaticResource PhoneTextLargeStyle}"  />
+                    <views:ValueWithDimention ValueText="{Binding FuelEconomy}"  ValueTextSize="{StaticResource PhoneFontSizeLarge}" ValueTextBrush="{Binding FillupBrush}"
+                                                  ValueDimension="{Binding ConsumptionDimension}" ValueDimensionSize="{StaticResource PhoneFontSizeNormal}" ValueDimensionBrush="DimGray"/>
                 </StackPanel>
-            </Grid>
+                <StackPanel Orientation="Horizontal">
+                    <views:ValueWithDimention ValueText="{Binding Volume}"   ValueDimension="{Binding VolumeDimension}" Style="{StaticResource detail}" />
+                    <views:ValueWithDimention ValueText="{Binding Distance}" ValueDimension="{Binding DistanceDimension}" Style="{StaticResource detail}" />
+                    <views:ValueWithDimention ValueText="{Binding Cost}"     ValueDimension="{Binding CostDimension}" Style="{StaticResource detail}"/>
+                    <TextBlock Text="{Binding Petrol}" Style="{StaticResource detailsText}" Foreground="DeepSkyBlue" FontWeight="Light"/>
+                </StackPanel>
+            </StackPanel>
         </DataTemplate>
 
         <DataTemplate x:Key="fillupGroupHeaderTemplate">
@@ -68,6 +65,7 @@
 
     </UserControl.Resources>
     <!--LayoutRoot is the root grid where all page content is placed-->
+
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -78,13 +76,10 @@
                                 IsGroupingEnabled="{Binding ShowAllFillups}"
                                 GroupHeaderTemplate="{StaticResource fillupGroupHeaderTemplate}" 
                                 HideEmptyGroups="True"
-                                
-                                JumpListStyle="{StaticResource JumpListStyle}">
-
-        </phone:LongListSelector>
+                                JumpListStyle="{StaticResource JumpListStyle}"/>
         <HyperlinkButton Grid.Row="1" Margin="0 0 0 10" FontSize="{StaticResource PhoneFontSizeLarge}" Foreground="Gray"
-                         Content="show more"
-                         micro:Message.Attach="[Event Tap] = [Action ShowOlder]"
+                         Content="view more"
+                         micro:Message.Attach="[Event Tap] = [Action ViewMore]"
                          Visibility="{Binding IsShowMoreVisible, Converter={StaticResource booleanToVisibilityConverter}}"/>
 
         <bab:BindableAppBar Margin="10,-10,-10,10">
