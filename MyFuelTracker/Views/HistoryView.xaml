@@ -9,8 +9,10 @@
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:micro="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro"
     xmlns:bab="clr-namespace:Caliburn.Micro.BindableAppBar;assembly=Caliburn.Micro.BindableAppBar"
-    xmlns:views="clr-namespace:MyFuelTracker.Views"
+    xmlns:views="clr-namespace:MyFuelTracker.Views" xmlns:local="clr-namespace:MyFuelTracker.Infrastructure"
     micro:Bind.AtDesignTime="True"
+    toolkit:TiltEffect.IsTiltEnabled="True"
+    
     d:DataContext="{d:DesignData Source=/SampleData/HistoryViewModel.xaml}"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -87,10 +89,6 @@
                             x:Name="GoToAddFillup"
                             Text="add fillup"
                             IconUri="/Assets/add.png"/>
-            <bab:BindableAppBarButton
-                            x:Name="GoToSettings"
-                            Text="add fillup"
-                            IconUri="/Assets/feature.settings.png"/>
         </bab:BindableAppBar>
     </Grid>
 

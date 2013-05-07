@@ -95,6 +95,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Infrastructure\ColorHelper.cs" />
     <Compile Include="Infrastructure\DebugLogger.cs" />
     <Compile Include="Infrastructure\ExtensionHelpers.cs" />
     <Compile Include="Infrastructure\FillupHistoryChangedEvent.cs" />

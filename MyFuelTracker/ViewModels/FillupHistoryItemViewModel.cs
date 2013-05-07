@@ -35,28 +35,10 @@ namespace MyFuelTracker.ViewModels
 			if (historyItem.Fillup.IsPartial)
 				return new SolidColorBrush(Colors.Gray);
 
-			double maxConsumptionHue = 0.0;
-			double minConsumptionHue = 140.0;
-			double avgConsumptionHue = 60;
-			double hue;
-			
 			double consumption = historyItem.Consumption.Value;
-			if (consumption >= statistics.MinConsumption &&
-			    consumption < statistics.AllTimeAvgConsumption)
-			{
-				double d = (consumption - statistics.MinConsumption)/
-				           (statistics.AllTimeAvgConsumption - statistics.MinConsumption);
-				hue = minConsumptionHue - (minConsumptionHue - avgConsumptionHue)*d;
-			}
-			else
-			{
-				double d = (consumption - statistics.AllTimeAvgConsumption) /
-					   (statistics.MaxConsumption - statistics.AllTimeAvgConsumption);
-				hue = avgConsumptionHue - (avgConsumptionHue - maxConsumptionHue) * d;
-			}
-
-			var color = new HslColor {A = 1, H = hue, L = 0.5, S = 1}.ToColor();
-
+			var color = ColorHelper.GetColor(consumption, statistics.MinConsumption, 
+											statistics.AllTimeAvgConsumption, statistics.MaxConsumption);
+			
 			return new SolidColorBrush(color);
 		}
 

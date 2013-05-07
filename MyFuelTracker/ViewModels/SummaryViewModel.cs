@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using System.Windows.Media;
 using Caliburn.Micro;
 using MyFuelTracker.Core;
 using MyFuelTracker.Core.Models;
@@ -26,6 +27,11 @@ namespace MyFuelTracker.ViewModels
 		private string _last4FillupsAvgConsumption;
 		private string _allTimeAvgMonthCost;
 		private string _lastMonthCost;
+		private Brush _lastConsumptionBrush;
+		private Brush _minConsumptionBrush;
+		private Brush _maxConsumptionBrush;
+		private Brush _allTimeAvgConsumptionBrush;
+		private Brush _last4FillupsAvgConsumptionBrush;
 
 		#endregion
 
@@ -67,6 +73,18 @@ namespace MyFuelTracker.ViewModels
 			}
 		}
 
+		public Brush LastConsumptionBrush
+		{
+			get { return _lastConsumptionBrush; }
+			set
+			{
+				if (Equals(value, _lastConsumptionBrush)) return;
+				_lastConsumptionBrush = value;
+				NotifyOfPropertyChange(() => LastConsumptionBrush);
+			}
+		}
+
+
 		public string MinConsumption
 		{
 			get { return _minConsumption; }
@@ -75,6 +93,17 @@ namespace MyFuelTracker.ViewModels
 				if (value.Equals(_minConsumption)) return;
 				_minConsumption = value;
 				NotifyOfPropertyChange(() => MinConsumption);
+			}
+		}
+
+		public Brush MinConsumptionBrush
+		{
+			get { return _minConsumptionBrush; }
+			set
+			{
+				if (Equals(value, _minConsumptionBrush)) return;
+				_minConsumptionBrush = value;
+				NotifyOfPropertyChange(() => MinConsumptionBrush);
 			}
 		}
 
@@ -89,6 +118,17 @@ namespace MyFuelTracker.ViewModels
 			}
 		}
 
+		public Brush MaxConsumptionBrush
+		{
+			get { return _maxConsumptionBrush; }
+			set
+			{
+				if (Equals(value, _maxConsumptionBrush)) return;
+				_maxConsumptionBrush = value;
+				NotifyOfPropertyChange(() => MaxConsumptionBrush);
+			}
+		}
+
 		public string AllTimeAvgConsumption
 		{
 			get { return _allTimeAvgConsumption; }
@@ -100,6 +140,17 @@ namespace MyFuelTracker.ViewModels
 			}
 		}
 
+		public Brush AllTimeAvgConsumptionBrush
+		{
+			get { return _allTimeAvgConsumptionBrush; }
+			set
+			{
+				if (Equals(value, _allTimeAvgConsumptionBrush)) return;
+				_allTimeAvgConsumptionBrush = value;
+				NotifyOfPropertyChange(() => AllTimeAvgConsumptionBrush);
+			}
+		}
+
 		public string Last4FillupsAvgConsumption
 		{
 			get { return _last4FillupsAvgConsumption; }
@@ -108,6 +159,17 @@ namespace MyFuelTracker.ViewModels
 				if (value.Equals(_last4FillupsAvgConsumption)) return;
 				_last4FillupsAvgConsumption = value;
 				NotifyOfPropertyChange(() => Last4FillupsAvgConsumption);
+			}
+		}
+
+		public Brush Last4FillupsAvgConsumptionBrush
+		{
+			get { return _last4FillupsAvgConsumptionBrush; }
+			set
+			{
+				if (Equals(value, _last4FillupsAvgConsumptionBrush)) return;
+				_last4FillupsAvgConsumptionBrush = value;
+				NotifyOfPropertyChange(() => Last4FillupsAvgConsumptionBrush);
 			}
 		}
 
@@ -152,13 +214,32 @@ namespace MyFuelTracker.ViewModels
 			var fillupHistoryItems = await _fillupService.GetHistoryAsync();
 			var statistics = await _statisticsService.CalculateStatisticsAsync(fillupHistoryItems);
 
-			this.AllTimeAvgConsumption = statistics.AllTimeAvgConsumption.FormatForDisplay(2);
-			this.AllTimeAvgMonthCost = statistics.AllTimeAvgMonthCost.FormatForDisplay(2);
-			this.Last4FillupsAvgConsumption = statistics.Last4FillupsAvgConsumption.FormatForDisplay(2);
-			this.LastConsumption = statistics.LastConsumption.FormatForDisplay(2);
-			this.LastMonthCost = statistics.LastMonthCost.FormatForDisplay(2);
-			this.MaxConsumption = statistics.MaxConsumption.FormatForDisplay(2);
-			this.MinConsumption = statistics.MinConsumption.FormatForDisplay(2);
+			AllTimeAvgConsumption = statistics.AllTimeAvgConsumption.FormatForDisplay(2);
+			AllTimeAvgConsumptionBrush = ColorHelper.AvgColor.ToBrush();
+
+			MaxConsumption = statistics.MaxConsumption.FormatForDisplay(2);
+			MaxConsumptionBrush = ColorHelper.MaxColor.ToBrush();
+
+			MinConsumption = statistics.MinConsumption.FormatForDisplay(2);
+			MinConsumptionBrush = ColorHelper.MinColor.ToBrush();
+
+			Last4FillupsAvgConsumption = statistics.Last4FillupsAvgConsumption.FormatForDisplay(2);
+			Last4FillupsAvgConsumptionBrush = ColorHelper.GetColor(statistics.Last4FillupsAvgConsumption,
+																	statistics.MinConsumption,
+																	statistics.AllTimeAvgConsumption,
+																	statistics.MaxConsumption)
+														.ToBrush();
+			LastConsumption = statistics.LastConsumption.FormatForDisplay(2);
+			LastConsumptionBrush = ColorHelper.GetColor(statistics.LastConsumption,
+																	statistics.MinConsumption,
+																	statistics.AllTimeAvgConsumption,
+																	statistics.MaxConsumption)
+														.ToBrush();
+			
+
+
+			AllTimeAvgMonthCost = statistics.AllTimeAvgMonthCost.FormatForDisplay(2);
+			LastMonthCost = statistics.LastMonthCost.FormatForDisplay(2);
 		}
 
 		public async void Handle(FillupHistoryChangedEvent message)
