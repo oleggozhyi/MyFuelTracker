@@ -44,7 +44,7 @@
                 <Image Source="/Assets/fuel.png" Width="25" Height="25"></Image>
                 <TextBlock Text="MY FUEL TRACKER" Style="{StaticResource PhoneTextNormalStyle}" FontWeight="Bold"/>
             </StackPanel>
-            <TextBlock Text="add fillup" Margin="9,-7,0,0" Style="{StaticResource PageTitle}"/>
+            <TextBlock Text="{Binding DisplayName}" Margin="9,-7,0,0" Style="{StaticResource PageTitle}"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->

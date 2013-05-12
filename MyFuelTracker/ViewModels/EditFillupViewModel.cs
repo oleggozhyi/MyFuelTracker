@@ -155,9 +155,16 @@ namespace MyFuelTracker.ViewModels
 			base.OnViewLoaded(view);
 
 			if (FillupId != null)
+			{
 				_fillup = await _fillupService.GetFillupAsync(Guid.Parse(FillupId));
+				DisplayName = "edit fillup";
+			}
 			else
+			{
 				_fillup = await _fillupService.CreateNewFillupAsync();
+				DisplayName = "add fillup";
+			}
+
 			_historyItems = await _fillupService.GetHistoryAsync();
 			Date = _fillup.Date;
 			IsPartial = _fillup.IsPartial;

@@ -98,7 +98,7 @@ namespace MyFuelTracker.ViewModels
 
 		public async void EditFillup(FillupHistoryItemViewModel viewModel)
 		{
-			await Task.Delay(500);
+			//await Task.Delay(500);
 			_navigationService.UriFor<EditFillupViewModel>()
 							  .WithParam(e => e.FillupId, viewModel.HistoryItem.Fillup.Id.ToString())
 							  .Navigate();

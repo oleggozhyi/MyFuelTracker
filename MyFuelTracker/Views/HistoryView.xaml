@@ -35,7 +35,7 @@
         <DataTemplate x:Key="fillupItemTemplate">
             <StackPanel Tag="{Binding DataContext, ElementName=LayoutRoot}" Background="Black" micro:Message.Attach="[Event Tap] = [Action DisplayFillupDetails($datacontext)]" >
                 <toolkit:ContextMenuService.ContextMenu>
-                    <toolkit:ContextMenu micro:Action.TargetWithoutContext="{Binding DataContext, ElementName=FillupsList}">
+                    <toolkit:ContextMenu IsZoomEnabled="False" micro:Action.TargetWithoutContext="{Binding DataContext, ElementName=FillupsList}">
                         <toolkit:MenuItem Header="edit" micro:Message.Attach="[Event Click] = [Action EditFillup($datacontext)]" />
                         <toolkit:MenuItem Header="delete" micro:Message.Attach="[Event Click] = [Action DeleteFillup($datacontext)]" />
                     </toolkit:ContextMenu>
