@@ -32,6 +32,9 @@ namespace MyFuelTracker.ViewModels
 		private Brush _maxConsumptionBrush;
 		private Brush _allTimeAvgConsumptionBrush;
 		private Brush _last4FillupsAvgConsumptionBrush;
+		private string _avgFillupCost;
+		private string _mostOftenFuelType;
+		private string _lastFillupCost;
 
 		#endregion
 
@@ -195,6 +198,39 @@ namespace MyFuelTracker.ViewModels
 			}
 		}
 
+		public string AvgFillupCost
+		{
+			get { return _avgFillupCost; }
+			set
+			{
+				if (value == _avgFillupCost) return;
+				_avgFillupCost = value;
+				NotifyOfPropertyChange(() => AvgFillupCost);
+			}
+		}
+
+		public string LastFillupCost
+		{
+			get { return _lastFillupCost; }
+			set
+			{
+				if (value == _lastFillupCost) return;
+				_lastFillupCost = value;
+				NotifyOfPropertyChange(() => LastFillupCost);
+			}
+		}
+
+		public string MostOftenFuelType
+		{
+			get { return _mostOftenFuelType; }
+			set
+			{
+				if (value == _mostOftenFuelType) return;
+				_mostOftenFuelType = value;
+				NotifyOfPropertyChange(() => MostOftenFuelType);
+			}
+		}
+
 		#endregion
 
 		#region methods
@@ -240,6 +276,11 @@ namespace MyFuelTracker.ViewModels
 
 			AllTimeAvgMonthCost = statistics.AllTimeAvgMonthCost.FormatForDisplay(2);
 			LastMonthCost = statistics.LastMonthCost.FormatForDisplay(2);
+
+			AvgFillupCost = statistics.AvgFillupCost.FormatForDisplay(2);
+			LastFillupCost = statistics.LastFillupCost.FormatForDisplay(2);
+
+			MostOftenFuelType = statistics.MostOftenFuelType;
 		}
 
 		public async void Handle(FillupHistoryChangedEvent message)

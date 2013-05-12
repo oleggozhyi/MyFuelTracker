@@ -37,15 +37,10 @@
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
-                <TextBlock Text="fuel type"  VerticalAlignment="Center" Margin="15 0 10 0"/>
-            <toolkit:PhoneTextBox x:Name="FuelType" Grid.Column="1" Hint="petrol name"/>
+            <toolkit:PhoneTextBox x:Name="FuelType" Grid.Column="1" Hint="fuel type"/>
             <bab:BindableAppBar>
                 <bab:BindableAppBarButton
                             x:Name="SaveFuelType"

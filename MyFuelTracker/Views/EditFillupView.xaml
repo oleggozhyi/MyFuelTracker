@@ -69,17 +69,17 @@
                     <TextBlock Text="date" Grid.Row="1" Grid.Column="0" />
                     <toolkit:DatePicker Value="{Binding Date, Mode=TwoWay}" ValueStringFormat="{}{0:dd MMM yyyy}" Grid.Row="1" Grid.Column="1"  />
 
-                    <TextBlock Text="petrol" Grid.Row="2" Grid.Column="0" />
+                    <TextBlock Text="fuel type" Grid.Row="2" Grid.Column="0" />
                     <Grid Grid.Row="2" Grid.Column="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
 
-                        <toolkit:ListPicker x:Name="PetrolPicker"  ExpansionMode="ExpansionAllowed" SelectionMode="Single"
+                        <toolkit:ListPicker ExpansionMode="ExpansionAllowed" SelectionMode="Single"
                                 SelectedItem="{Binding FuelType, Mode=TwoWay}"
                                 ItemsSource="{Binding FuelTypes}" Margin="12 3 0 12"
-                                        FullModeHeader="Select petrol"
+                                        FullModeHeader="Select fuel type"
                                 FullModeItemTemplate="{StaticResource listPickerItemTemplate}" />
                         <controls:RoundButton Grid.Column="1" micro:Message.Attach="[Event Tap] = [Action AddFuelType]"  HorizontalAlignment="Left" PressedBrush="{StaticResource PhoneAccentBrush}" VerticalAlignment="Center" Margin="5,13,-5,10" Height="52" >
                             <Image Source="/Assets/add.png" Width="50" ></Image>

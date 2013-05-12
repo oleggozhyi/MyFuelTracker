@@ -28,7 +28,7 @@
 
         <Style TargetType="TextBlock" x:Key="Value">
             <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeMediumLarge}"/>
-            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Foreground" Value="DarkGray"/>
             <Setter Property="VerticalAlignment" Value="Bottom"/>
             <Setter Property="Margin" Value="10 0 0 0"/>
         </Style>
@@ -52,7 +52,7 @@
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
             <StackPanel Orientation="Horizontal">
                 <Image Source="/Assets/fuel.png" Width="25" Height="25"></Image>
-                <TextBlock Text="MY FUEL TRACKER" Style="{StaticResource PhoneTextNormalStyle}"/>
+                <TextBlock Text="MY FUEL TRACKER" Style="{StaticResource PhoneTextNormalStyle}" FontWeight="Bold"/>
             </StackPanel>
             <TextBlock Text="fillup details" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
@@ -90,7 +90,7 @@
                     <TextBlock Grid.Row="9" Style="{StaticResource Label}" Text="is partial fillup" />
                     <TextBlock Grid.Row="10" Style="{StaticResource Label}" Text="consumption" Visibility="{Binding ShowConsumption, Converter={StaticResource booleanToVisibilityConverter}}" />
 
-                    <TextBlock                Grid.Column="1" Grid.Row="0" Style="{StaticResource Value}"  Text="{Binding Details.Date}" />
+                    <TextBlock                Grid.Column="1" Grid.Row="0" Style="{StaticResource Value}"  Text="{Binding Details.Date}" Foreground="White" />
                     <views:ValueWithDimention Grid.Column="1" Grid.Row="2" ValueText="{Binding Details.OdometerStart}" ValueDimension="{Binding Details.DistanceDimension}"  />
                     <views:ValueWithDimention Grid.Column="1" Grid.Row="3" ValueText="{Binding Details.OdometerEnd}" ValueDimension="{Binding Details.DistanceDimension}"  />
                     <views:ValueWithDimention Grid.Column="1" Grid.Row="4" ValueText="{Binding Details.Distance}" ValueDimension="{Binding Details.DistanceDimension}"  />

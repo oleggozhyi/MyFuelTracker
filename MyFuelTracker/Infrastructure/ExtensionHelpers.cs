@@ -33,12 +33,12 @@ namespace MyFuelTracker.Infrastructure
 		public static double GetPositiveDoubleFor(this string s, string fieldName)
 		{
 			if (s.IsNullOrWhitespace())
-				throw new ValidationException("enter " + fieldName);
+				throw new ValidationException(string.Format("'{0}' should not be empty", fieldName));
 			s = s.Replace(",", ".");
 
 			double result;
 			if (!double.TryParse(s, NumberStyles.Float, CultureInfo.InvariantCulture, out result) || result < 0)
-				throw new ValidationException(fieldName + " should be a postitive number");
+				throw new ValidationException(string.Format("'{0}' should be a postitive number", fieldName));
 
 			return result;
 		}

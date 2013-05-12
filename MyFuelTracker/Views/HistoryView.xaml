@@ -41,8 +41,8 @@
                     </toolkit:ContextMenu>
                 </toolkit:ContextMenuService.ContextMenu>
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="{Binding Date}" Style="{StaticResource PhoneTextLargeStyle}"  />
-                    <views:ValueWithDimention ValueText="{Binding Consumption}"  ValueTextSize="{StaticResource PhoneFontSizeLarge}" ValueTextBrush="{Binding FillupBrush}"
+                    <TextBlock Text="{Binding Date}" FontSize="{StaticResource PhoneFontSizeMediumLarge}" Margin="10 0 25 0" />
+                    <views:ValueWithDimention ValueText="{Binding Consumption}"  ValueTextSize="{StaticResource PhoneFontSizeMediumLarge}" ValueTextBrush="{Binding FillupBrush}"
                                                   ValueDimension="{Binding ConsumptionDimension}" ValueDimensionSize="{StaticResource PhoneFontSizeNormal}" ValueDimensionBrush="DimGray"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">

@@ -16,6 +16,10 @@ namespace MyFuelTracker.ViewModels
 	{
 		#region Fields
 
+		private const double DISTANCE_TRESHOLD = 2000.0;
+		private const double VOLUME_TRESHOLD = 1000.0;
+		private const double CONSUMPTION_TRESHOLD = 25.0;
+
 		private readonly INavigationService _navigationService;
 		private readonly ILog _log;
 		private readonly IMessageBox _messageBox;
@@ -56,7 +60,7 @@ namespace MyFuelTracker.ViewModels
 
 		#region Properties
 
-		public string FillupId { get;set; }
+		public string FillupId { get; set; }
 
 		public DateTime Date
 		{
@@ -171,9 +175,9 @@ namespace MyFuelTracker.ViewModels
 			OdometerEnd = _fillup.OdometerEnd.FormatForDisplay(0);
 			OdometerStart = _fillup.OdometerStart.FormatForDisplay(0);
 			Volume = _fillup.Volume == default(double) ? String.Empty : _fillup.Volume.FormatForDisplay(2);
-			var petrols = _historyItems.Select(i => i.Fillup.FuelType).Distinct(StringComparer.OrdinalIgnoreCase).ToList();
+			var fuelTypes = _historyItems.Select(i => i.Fillup.FuelType).Distinct(StringComparer.OrdinalIgnoreCase).ToList();
 
-			FuelTypes = petrols;
+			FuelTypes = fuelTypes;
 			Price = _fillup.Price.FormatForDisplay(2);
 			FuelType = _fillup.FuelType;
 		}
@@ -185,21 +189,51 @@ namespace MyFuelTracker.ViewModels
 				_fillup.Date = Date;
 				_fillup.FuelType = FuelType;
 				_fillup.IsPartial = IsPartial;
-				_fillup.OdometerEnd = OdometerEnd.GetPositiveDoubleFor("odometer end");
-				_fillup.OdometerStart = OdometerStart.GetPositiveDoubleFor("odometer start");
+				_fillup.OdometerEnd = OdometerEnd.GetPositiveDoubleFor("previos odometer");
+				_fillup.OdometerStart = OdometerStart.GetPositiveDoubleFor("current odometer");
 				_fillup.Volume = Volume.GetPositiveDoubleFor("volume");
 				_fillup.Price = Price.GetPositiveDoubleFor("price");
 				ValidateFillup(_fillup);
+				bool userCancelled = CheckForExtremalValues(_fillup);
+				if (userCancelled)
+					return;
 			}
 			catch (ValidationException ex)
 			{
-				_messageBox.Show(ex.Message);
+				_messageBox.Show(ex.Message, "cannot save fillup");
 				return;
 			}
 			await _fillupService.SaveFillupAsync(_fillup);
 			_eventAggregator.Publish(new FillupHistoryChangedEvent());
 			_eventAggregator.Publish(new FillupItemChangedEvent());
 			_navigationService.GoBack();
+		}
+
+		private bool CheckForExtremalValues(Fillup fillup)
+		{
+			bool cancel = false;
+			double distance = fillup.OdometerEnd - fillup.OdometerStart;
+			double consumption = fillup.Volume*100.0/distance;
+			if (distance > DISTANCE_TRESHOLD)
+			{
+				cancel = !_messageBox.Confirm("The distance seems to be too big (" + distance.FormatForDisplay(0) + "km), are you sure to save this fillup? ", "Please confirm");
+				if (cancel)
+					return true;
+			}
+
+			if (fillup.Volume > VOLUME_TRESHOLD)
+			{
+				cancel = !_messageBox.Confirm("The volume seems to be too big (" + fillup.Volume.FormatForDisplay(2) + "L), are you sure to save this fillup? ", "Please confirm");
+				if (cancel)
+					return true;
+			}
+			if (consumption> CONSUMPTION_TRESHOLD)
+			{
+				cancel = !_messageBox.Confirm("The comsumption seems to be too big (" + consumption.FormatForDisplay(2) + "L/100km), are you sure to save this fillup? ", "Please confirm");
+				if (cancel)
+					return true;
+			}
+			return false;
 		}
 
 		public void Cancel()

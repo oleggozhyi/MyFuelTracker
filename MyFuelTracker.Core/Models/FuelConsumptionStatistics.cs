@@ -15,5 +15,8 @@ namespace MyFuelTracker.Core.Models
 		public double Last4FillupsAvgConsumption { get; set; }
 		public double AllTimeAvgMonthCost { get; set; }
 		public double LastMonthCost { get; set; }
+		public double AvgFillupCost { get; set; }
+		public double LastFillupCost { get; set; }
+		public string MostOftenFuelType { get; set; }
 	}
 }

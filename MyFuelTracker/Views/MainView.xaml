@@ -41,7 +41,7 @@
 	</phone:PhoneApplicationPage.Resources>
 
 
-    <Grid x:Name="LayoutRoot" Background="Transparent">
+    <Grid x:Name="LayoutRoot">
         <phone:Pivot x:Name="Items" SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
             <phone:Pivot.TitleTemplate>
                 <DataTemplate>
