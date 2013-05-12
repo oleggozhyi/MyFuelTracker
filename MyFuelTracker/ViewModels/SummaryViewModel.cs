@@ -58,9 +58,9 @@ namespace MyFuelTracker.ViewModels
 
 		#region Properties
 
-		public string ConsumptionDimension { get { return "l/100km"; } }
+		public string ConsumptionDimension { get { return "L/100km"; } }
 
-		public string CostDimension { get { return "гр"; } }
+		public string CostDimension { get { return "hr"; } }
 
 		public string LastConsumption
 		{
@@ -248,6 +248,5 @@ namespace MyFuelTracker.ViewModels
 		}
 
 		#endregion
-
 	}
 }

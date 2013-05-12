@@ -1,14 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment" AppPlatformVersion="8.0">
-  <DefaultLanguage xmlns="" code="en-US" />
-  <App xmlns="" ProductID="{423f8ee1-ab26-4348-95db-2aae41cdfef8}" Title="My Fuel Tracker" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="MyFuelTracker author" Description="//TODO" Publisher="MyFuelTracker" PublisherID="{c2d6c7bf-7242-4c40-b04c-2cbb98cd82ab}">
-    <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
+  <DefaultLanguage xmlns="" code="" />
+  <App xmlns="" ProductID="{423f8ee1-ab26-4348-95db-2aae41cdfef8}" Title="My Fuel Tracker" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="Oleg Gozhyi" Description="//TODO" Publisher="Oleg Gozhyi" PublisherID="{c2d6c7bf-7242-4c40-b04c-2cbb98cd82ab}">
+    <IconPath IsRelative="true" IsResource="false">Assets\fuel.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING" />
-      <Capability Name="ID_CAP_MEDIALIB_AUDIO" />
-      <Capability Name="ID_CAP_MEDIALIB_PLAYBACK" />
-      <Capability Name="ID_CAP_SENSORS" />
-      <Capability Name="ID_CAP_WEBBROWSERCOMPONENT" />
     </Capabilities>
     <Tasks>
       <DefaultTask Name="_default" NavigationPage="/Views/MainView.xaml" />
@@ -16,9 +12,9 @@
     <Tokens>
       <PrimaryToken TokenID="MyFuelTrackerToken" TaskName="_default">
         <TemplateFlip>
-          <SmallImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileSmall.png</SmallImageURI>
+          <SmallImageURI IsRelative="true" IsResource="false">Assets\fuel.png</SmallImageURI>
           <Count>0</Count>
-          <BackgroundImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileMedium.png</BackgroundImageURI>
+          <BackgroundImageURI IsRelative="true" IsResource="false">Assets\fuel.png</BackgroundImageURI>
           <Title>My Fuel Tracker</Title>
           <BackContent>
           </BackContent>

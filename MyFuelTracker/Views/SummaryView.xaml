@@ -48,11 +48,11 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     
-                    <TextBlock Grid.Row="0" Text="last:" Style="{StaticResource valueLabel}"/>
-                    <TextBlock Grid.Row="1" Text="average:" Style="{StaticResource valueLabel}"/>
-                    <TextBlock Grid.Row="2" Text="last 4 average:" Style="{StaticResource valueLabel}"/>
-                    <TextBlock Grid.Row="3" Text="min:" Style="{StaticResource valueLabel}"/>
-                    <TextBlock Grid.Row="4" Text="max:" Style="{StaticResource valueLabel}"/>
+                    <TextBlock Grid.Row="0" Text="last" Style="{StaticResource valueLabel}"/>
+                    <TextBlock Grid.Row="1" Text="average" Style="{StaticResource valueLabel}"/>
+                    <TextBlock Grid.Row="2" Text="last 4 average" Style="{StaticResource valueLabel}"/>
+                    <TextBlock Grid.Row="3" Text="min" Style="{StaticResource valueLabel}"/>
+                    <TextBlock Grid.Row="4" Text="max" Style="{StaticResource valueLabel}"/>
 
                     <views:ValueWithDimention Grid.Row="0" Grid.Column="1" Style="{StaticResource detail}"
                                               ValueTextBrush="{Binding LastConsumptionBrush}"
@@ -81,13 +81,13 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Grid.Row="0" Text="average:" Style="{StaticResource valueLabel}"/>
-                    <TextBlock Grid.Row="1" Text="last month:" Style="{StaticResource valueLabel}"/>
+                    <TextBlock Grid.Row="0" Text="average" Style="{StaticResource valueLabel}"/>
+                    <TextBlock Grid.Row="1" Text="last month" Style="{StaticResource valueLabel}"/>
 
                     <views:ValueWithDimention Grid.Row="0" Grid.Column="1" Style="{StaticResource detail}"
-                                              ValueText="{Binding AllTimeAvgMonthCost}" ValueDimension="{Binding ConsumptionDimension}"/>
+                                              ValueText="{Binding AllTimeAvgMonthCost}" ValueDimension="{Binding CostDimension}"/>
                     <views:ValueWithDimention Grid.Row="1" Grid.Column="1" Style="{StaticResource detail}"
-                                              ValueText="{Binding LastMonthCost}" ValueDimension="{Binding ConsumptionDimension}"/>
+                                              ValueText="{Binding LastMonthCost}" ValueDimension="{Binding CostDimension}"/>
 
 
                 </Grid>

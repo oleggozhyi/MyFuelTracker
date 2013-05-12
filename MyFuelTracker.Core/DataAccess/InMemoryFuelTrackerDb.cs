@@ -30,17 +30,27 @@ namespace MyFuelTracker.Core.DataAccess
 		private object _locker = new object();
 		public List<Fillup> Fillups = new List<Fillup>();
 
+		public async Task<Fillup> GetFillupAsync(Guid id)
+		{
+			await _loadHistoryTask;
+			return Fillups.Single(f => f.Id == id);
+		}
+
 		public async Task SaveFillupAsync(Fillup fillup)
 		{
-			if (!_loadHistoryTask.IsCompleted)
-				await _loadHistoryTask;
+			await _loadHistoryTask;
+			if (!Fillups.Contains(fillup))
+				Fillups.Add(fillup);
+		}
 
-			await Task.Factory.StartNew(() => Fillups.Add(fillup));
+		public async Task DeleteFillupAsync(Fillup fillup)
+		{
+			await _loadHistoryTask;
+			Fillups.Remove(fillup);
 		}
 
 		public async Task<Fillup[]> LoadAllFillupsAsync()
 		{
-			if (!_loadHistoryTask.IsCompleted)
 				await _loadHistoryTask;
 
 			return await Task.FromResult(Fillups.ToArray());
@@ -67,7 +77,7 @@ namespace MyFuelTracker.Core.DataAccess
 							fillup.Id = Guid.Parse(f.Element("id").Value);
 							fillup.Date = ParseDate(f.Element("date").Value);
 							fillup.Volume = double.Parse(f.Element("volume").Value, CultureInfo.CurrentCulture);
-							fillup.Petrol = f.Element("petrol").Value;
+							fillup.FuelType = f.Element("petrol").Value;
 							fillup.Price = double.Parse(f.Element("price").Value, CultureInfo.CurrentCulture);
 							fillup.IsPartial = bool.Parse(f.Element("is-partial").Value);
 							fillup.OdometerStart = double.Parse(f.Element("odometer-start").Value, CultureInfo.CurrentCulture);

@@ -20,6 +20,6 @@ namespace MyFuelTracker.Core.Models
 
 		public bool IsPartial { get; set; }
 
-		public string Petrol { get; set; }
+		public string FuelType { get; set; }
 	}
 }

@@ -28,7 +28,7 @@ namespace MyFuelTracker.Core
 				var lastOdometerEnd = fillups.OrderBy(f => f.Fillup.OdometerEnd).Last().Fillup.OdometerEnd;
 				fillup.OdometerStart = lastOdometerEnd;
 				fillup.OdometerEnd = lastOdometerEnd;
-				fillup.Petrol = latestFillup.Fillup.Petrol;
+				fillup.FuelType = latestFillup.Fillup.FuelType;
 				fillup.Price= latestFillup.Fillup.Price;
 			}
 			return await Task.FromResult(fillup);
@@ -41,6 +41,16 @@ namespace MyFuelTracker.Core
 				throw new InvalidOperationException("Odometer start should be less than end");
 
 			await Db.SaveFillupAsync(fillup);
+		}
+
+		public async Task DeleteFillupAsync(Fillup fillup)
+		{
+			await Db.DeleteFillupAsync(fillup);
+		}
+
+		public async Task<Fillup> GetFillupAsync(Guid id)
+		{
+			return await Db.GetFillupAsync(id);
 		}
 
 		public async Task<IEnumerable<FillupHistoryItem>> GetHistoryAsync()

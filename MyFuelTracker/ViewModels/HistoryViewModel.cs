@@ -17,6 +17,7 @@ namespace MyFuelTracker.ViewModels
 
 		private readonly IFillupService _fillupService;
 		private readonly IStatisticsService _statisticsService;
+		private readonly IEventAggregator _eventAggregator;
 		private readonly IMessageBox _messageBox;
 		private readonly INavigationService _navigationService;
 		private IEnumerable _items;
@@ -30,8 +31,8 @@ namespace MyFuelTracker.ViewModels
 
 		public HistoryViewModel() { /* for design time support */ }
 
-		public HistoryViewModel(IFillupService fillupService, 
-								IStatisticsService statisticsService, 
+		public HistoryViewModel(IFillupService fillupService,
+								IStatisticsService statisticsService,
 								IEventAggregator eventAggregator,
 								IMessageBox messageBox,
 								INavigationService navigationService)
@@ -40,6 +41,7 @@ namespace MyFuelTracker.ViewModels
 			DisplayName = "history";
 			_fillupService = fillupService;
 			_statisticsService = statisticsService;
+			_eventAggregator = eventAggregator;
 			_messageBox = messageBox;
 			_navigationService = navigationService;
 			eventAggregator.Subscribe(this);
@@ -87,6 +89,30 @@ namespace MyFuelTracker.ViewModels
 
 		#region methods
 
+		public void DisplayFillupDetails(FillupHistoryItemViewModel viewModel)
+		{
+			_navigationService.UriFor<DisplayFillupViewModel>()
+							  .WithParam(e => e.FillupId, viewModel.HistoryItem.Fillup.Id.ToString())
+							  .Navigate();
+		}
+
+		public async void EditFillup(FillupHistoryItemViewModel viewModel)
+		{
+			await Task.Delay(500);
+			_navigationService.UriFor<EditFillupViewModel>()
+							  .WithParam(e => e.FillupId, viewModel.HistoryItem.Fillup.Id.ToString())
+							  .Navigate();
+		}
+
+		public async void DeleteFillup(FillupHistoryItemViewModel viewModel)
+		{
+			bool proceedWithDeletion = _messageBox.Confirm("are you sure to delete fillup on " + viewModel.Date + "?");
+			if (!proceedWithDeletion)
+				return;
+			await _fillupService.DeleteFillupAsync(viewModel.HistoryItem.Fillup);
+			_eventAggregator.Publish(new FillupHistoryChangedEvent());
+		}
+
 		public void ViewMore()
 		{
 			ShowAllFillups = true;
@@ -121,8 +147,8 @@ namespace MyFuelTracker.ViewModels
 		private void SetItemsSource()
 		{
 			Items = ShowAllFillups
-				        ? (IEnumerable) FillupsGroupingHelper.GroupFillups(_fullHistory)
-				        : (IEnumerable) _fullHistory.Take(5).ToArray();
+						? (IEnumerable)FillupsGroupingHelper.GroupFillups(_fullHistory)
+						: (IEnumerable)_fullHistory.Take(5).ToArray();
 		}
 
 		#endregion

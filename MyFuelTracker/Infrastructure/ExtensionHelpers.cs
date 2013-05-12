@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,9 +34,10 @@ namespace MyFuelTracker.Infrastructure
 		{
 			if (s.IsNullOrWhitespace())
 				throw new ValidationException("enter " + fieldName);
+			s = s.Replace(",", ".");
 
 			double result;
-			if (!double.TryParse(s, out result) || result < 0)
+			if (!double.TryParse(s, NumberStyles.Float, CultureInfo.InvariantCulture, out result) || result < 0)
 				throw new ValidationException(fieldName + " should be a postitive number");
 
 			return result;

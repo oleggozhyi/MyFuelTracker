@@ -42,7 +42,15 @@
 
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
-        <phone:Pivot Title="MY FUEL TRACKER" x:Name="Items" SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
+        <phone:Pivot x:Name="Items" SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
+            <phone:Pivot.TitleTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Assets/fuel.png" Width="25" Height="25"></Image>
+                        <TextBlock Text="MY FUEL TRACKER" Style="{StaticResource PhoneTextNormalStyle}" FontWeight="Bold"/>
+                    </StackPanel>
+                </DataTemplate>
+            </phone:Pivot.TitleTemplate>
             <phone:Pivot.HeaderTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding DisplayName}" />

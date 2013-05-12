@@ -37,9 +37,19 @@ namespace MyFuelTracker.Core.DataAccess
 
 		#endregion
 
+		public Task<Fillup> GetFillupAsync(Guid id)
+		{
+			throw new NotImplementedException();
+		}
+
 		public async Task SaveFillupAsync(Fillup fillup)
 		{
 			await Fillups.SaveAsync(fillup);
+		}
+
+		public Task DeleteFillupAsync(Fillup fillup)
+		{
+			throw new NotImplementedException();
 		}
 
 		public async Task<Fillup[]> LoadAllFillupsAsync()

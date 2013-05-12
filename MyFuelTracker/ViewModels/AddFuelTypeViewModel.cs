@@ -4,32 +4,32 @@ using MyFuelTracker.Infrastructure;
 
 namespace MyFuelTracker.ViewModels
 {
-	public class AddPetrolViewModel : Screen
+	public class AddFuelTypeViewModel : Screen
 	{
 		private readonly INavigationService _navigationService;
 		private readonly IEventAggregator _eventAggregator;
-		private string _petrolName;
-		public string PetrolName
+		private string _fuelType;
+		public string FuelType
 		{
-			get { return _petrolName; }
+			get { return _fuelType; }
 			set
 			{
-				if (value == _petrolName) return;
-				_petrolName = value;
-				NotifyOfPropertyChange(() => PetrolName);
+				if (value == _fuelType) return;
+				_fuelType = value;
+				NotifyOfPropertyChange(() => FuelType);
 			}
 		}
 
-		public AddPetrolViewModel(INavigationService navigationService,
+		public AddFuelTypeViewModel(INavigationService navigationService,
 								  IEventAggregator eventAggregator)
 		{
 			_navigationService = navigationService;
 			_eventAggregator = eventAggregator;
 		}
 
-		public void SavePetrol()
+		public void SaveFuelType()
 		{
-			_eventAggregator.Publish(new PetrolAddedEvent { PetrolName = PetrolName });
+			_eventAggregator.Publish(new FuelTypeAddedEvent { FuelType = FuelType });
 			_navigationService.GoBack();
 		}
 

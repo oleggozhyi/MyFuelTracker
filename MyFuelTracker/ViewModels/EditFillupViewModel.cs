@@ -12,7 +12,7 @@ using MyFuelTracker.Infrastructure;
 
 namespace MyFuelTracker.ViewModels
 {
-	public class EditFillupViewModel : Screen, IHandle<PetrolAddedEvent>
+	public class EditFillupViewModel : Screen, IHandle<FuelTypeAddedEvent>
 	{
 		#region Fields
 
@@ -29,8 +29,8 @@ namespace MyFuelTracker.ViewModels
 		private string _odometerStart;
 		private string _odometerEnd;
 		private Fillup _fillup;
-		private string _petrol;
-		private List<string> _petrols;
+		private string _fuelType;
+		private List<string> _fuelTypes;
 		private IEnumerable<FillupHistoryItem> _historyItems;
 
 		#endregion
@@ -49,12 +49,14 @@ namespace MyFuelTracker.ViewModels
 			_fillupService = fillupService;
 			_eventAggregator = eventAggregator;
 			_eventAggregator.Subscribe(this);
-			Petrols = new List<string>();
+			FuelTypes = new List<string>();
 		}
 
 		#endregion
 
 		#region Properties
+
+		public string FillupId { get;set; }
 
 		public DateTime Date
 		{
@@ -122,25 +124,25 @@ namespace MyFuelTracker.ViewModels
 			}
 		}
 
-		public string Petrol
+		public string FuelType
 		{
-			get { return _petrol; }
+			get { return _fuelType; }
 			set
 			{
-				if (value == _petrol) return;
-				_petrol = value;
-				NotifyOfPropertyChange(() => Petrol);
+				if (value == _fuelType) return;
+				_fuelType = value;
+				NotifyOfPropertyChange(() => FuelType);
 			}
 		}
 
-		public List<string> Petrols
+		public List<string> FuelTypes
 		{
-			get { return _petrols; }
+			get { return _fuelTypes; }
 			set
 			{
-				if (value == _petrols) return;
-				_petrols = value;
-				NotifyOfPropertyChange(() => Petrols);
+				if (value == _fuelTypes) return;
+				_fuelTypes = value;
+				NotifyOfPropertyChange(() => FuelTypes);
 			}
 		}
 
@@ -152,18 +154,21 @@ namespace MyFuelTracker.ViewModels
 		{
 			base.OnViewLoaded(view);
 
-			_fillup = await _fillupService.CreateNewFillupAsync();
+			if (FillupId != null)
+				_fillup = await _fillupService.GetFillupAsync(Guid.Parse(FillupId));
+			else
+				_fillup = await _fillupService.CreateNewFillupAsync();
 			_historyItems = await _fillupService.GetHistoryAsync();
 			Date = _fillup.Date;
 			IsPartial = _fillup.IsPartial;
 			OdometerEnd = _fillup.OdometerEnd.FormatForDisplay(0);
 			OdometerStart = _fillup.OdometerStart.FormatForDisplay(0);
+			Volume = _fillup.Volume == default(double) ? String.Empty : _fillup.Volume.FormatForDisplay(2);
+			var petrols = _historyItems.Select(i => i.Fillup.FuelType).Distinct(StringComparer.OrdinalIgnoreCase).ToList();
 
-			var petrols = _historyItems.Select(i => i.Fillup.Petrol).Distinct(StringComparer.OrdinalIgnoreCase).ToList();
-
-			Petrols = petrols;
+			FuelTypes = petrols;
 			Price = _fillup.Price.FormatForDisplay(2);
-			Petrol = _fillup.Petrol;
+			FuelType = _fillup.FuelType;
 		}
 
 		public async void SaveFillup()
@@ -171,7 +176,7 @@ namespace MyFuelTracker.ViewModels
 			try
 			{
 				_fillup.Date = Date;
-				_fillup.Petrol = Petrol;
+				_fillup.FuelType = FuelType;
 				_fillup.IsPartial = IsPartial;
 				_fillup.OdometerEnd = OdometerEnd.GetPositiveDoubleFor("odometer end");
 				_fillup.OdometerStart = OdometerStart.GetPositiveDoubleFor("odometer start");
@@ -202,23 +207,22 @@ namespace MyFuelTracker.ViewModels
 				throw new ValidationException("enter current odometer value - it should be greater than previous value");
 		}
 
-		public void AddPetrol()
+		public void AddFuelType()
 		{
-			_navigationService.UriFor<AddPetrolViewModel>().Navigate();
+			_navigationService.UriFor<AddFuelTypeViewModel>().Navigate();
 		}
 
-		public void Handle(PetrolAddedEvent message)
+		public void Handle(FuelTypeAddedEvent message)
 		{
-			if (message.PetrolName == null)
+			if (message.FuelType == null)
 				return;
 
-			var petrols = _historyItems.Select(i => i.Fillup.Petrol).Distinct(StringComparer.OrdinalIgnoreCase).ToList();
-			petrols.Add(message.PetrolName);
-			Petrols = petrols;
-			Petrol = message.PetrolName;
+			var fuelTypes = _historyItems.Select(i => i.Fillup.FuelType).Distinct(StringComparer.OrdinalIgnoreCase).ToList();
+			fuelTypes.Add(message.FuelType);
+			FuelTypes = fuelTypes;
+			FuelType = message.FuelType;
 		}
 
 		#endregion
-
 	}
 }

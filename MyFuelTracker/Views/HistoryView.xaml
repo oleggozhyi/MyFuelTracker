@@ -33,18 +33,25 @@
         </Style>
 
         <DataTemplate x:Key="fillupItemTemplate">
-            <StackPanel Margin="0 0 0 25">
+            <StackPanel Tag="{Binding DataContext, ElementName=LayoutRoot}" Background="Black" micro:Message.Attach="[Event Tap] = [Action DisplayFillupDetails($datacontext)]" >
+                <toolkit:ContextMenuService.ContextMenu>
+                    <toolkit:ContextMenu micro:Action.TargetWithoutContext="{Binding DataContext, ElementName=FillupsList}">
+                        <toolkit:MenuItem Header="edit" micro:Message.Attach="[Event Click] = [Action EditFillup($datacontext)]" />
+                        <toolkit:MenuItem Header="delete" micro:Message.Attach="[Event Click] = [Action DeleteFillup($datacontext)]" />
+                    </toolkit:ContextMenu>
+                </toolkit:ContextMenuService.ContextMenu>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="{Binding Date}" Style="{StaticResource PhoneTextLargeStyle}"  />
-                    <views:ValueWithDimention ValueText="{Binding FuelEconomy}"  ValueTextSize="{StaticResource PhoneFontSizeLarge}" ValueTextBrush="{Binding FillupBrush}"
+                    <views:ValueWithDimention ValueText="{Binding Consumption}"  ValueTextSize="{StaticResource PhoneFontSizeLarge}" ValueTextBrush="{Binding FillupBrush}"
                                                   ValueDimension="{Binding ConsumptionDimension}" ValueDimensionSize="{StaticResource PhoneFontSizeNormal}" ValueDimensionBrush="DimGray"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <views:ValueWithDimention ValueText="{Binding Volume}"   ValueDimension="{Binding VolumeDimension}" Style="{StaticResource detail}" />
                     <views:ValueWithDimention ValueText="{Binding Distance}" ValueDimension="{Binding DistanceDimension}" Style="{StaticResource detail}" />
                     <views:ValueWithDimention ValueText="{Binding Cost}"     ValueDimension="{Binding CostDimension}" Style="{StaticResource detail}"/>
-                    <TextBlock Text="{Binding Petrol}" Style="{StaticResource detailsText}" Foreground="DeepSkyBlue" FontWeight="Light"/>
+                    <TextBlock Text="{Binding FuelType}" Style="{StaticResource detailsText}" Foreground="DeepSkyBlue" FontWeight="Light"/>
                 </StackPanel>
+                <StackPanel Height="25"/>
             </StackPanel>
         </DataTemplate>
 
@@ -56,6 +63,7 @@
         </DataTemplate>
         <DataTemplate x:Key="fillupGroupItemTemplate">
             <Grid Margin="10" Height="80">
+
                 <Rectangle Fill="#3F20AFFC"></Rectangle>
                 <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"  Text="{Binding MonthLongName}" Style="{StaticResource PhoneTextLargeStyle}" />
             </Grid>
@@ -73,7 +81,8 @@
             <RowDefinition/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <phone:LongListSelector ItemsSource="{Binding Items}" 
+        <phone:LongListSelector x:Name="FillupsList"
+                                ItemsSource="{Binding Items}" 
                                 ItemTemplate="{StaticResource fillupItemTemplate}" 
                                 IsGroupingEnabled="{Binding ShowAllFillups}"
                                 GroupHeaderTemplate="{StaticResource fillupGroupHeaderTemplate}" 

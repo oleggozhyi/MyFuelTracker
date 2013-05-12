@@ -28,7 +28,8 @@ namespace MyFuelTracker
 			container.PerRequest<SummaryViewModel>();
 			container.PerRequest<HistoryViewModel>();
 			container.PerRequest<EditFillupViewModel>();
-			container.PerRequest<AddPetrolViewModel>();
+			container.PerRequest<AddFuelTypeViewModel>();
+			container.PerRequest<DisplayFillupViewModel>();
 
 			container.PerRequest<ILog, DebugLogger>();
 			container.Singleton<IMessageBox, MyMessageBox>();
@@ -39,6 +40,13 @@ namespace MyFuelTracker
 			LogManager.GetLog = type => new DebugLogger(type);
 
 			AddCustomConventions();
+		}
+
+		protected override void OnUnhandledException(object sender, ApplicationUnhandledExceptionEventArgs e)
+		{
+			base.OnUnhandledException(sender, e);
+			if(Debugger.IsAttached)
+				Debugger.Break(); 
 		}
 
 		protected override PhoneApplicationFrame CreatePhoneApplicationFrame()

@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace MyFuelTracker.Infrastructure
 {
-	public class PetrolAddedEvent
+	public class FuelTypeAddedEvent
 	{
-		public string PetrolName { get; set; }
+		public string FuelType { get; set; }
 	}
 }

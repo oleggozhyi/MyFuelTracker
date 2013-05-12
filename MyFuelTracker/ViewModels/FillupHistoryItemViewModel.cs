@@ -11,23 +11,30 @@ namespace MyFuelTracker.ViewModels
 {
 	public class FillupHistoryItemViewModel
 	{
+		public FillupHistoryItem HistoryItem { get; set; }
 		private bool _isPartial;
 
 		public FillupHistoryItemViewModel() { /* for design time support */}
 
 		public FillupHistoryItemViewModel(FillupHistoryItem historyItem, FuelConsumptionStatistics statistics)
 		{
+			HistoryItem = historyItem;
 			_isPartial = historyItem.Fillup.IsPartial;
-			FuelEconomy = historyItem.Consumption.HasValue ? historyItem.Consumption.Value.FormatForDisplay(2) : "<partial>";
+			Consumption = historyItem.Consumption.HasValue ? historyItem.Consumption.Value.FormatForDisplay(2) : "<partial>";
 			Date = historyItem.Fillup.Date.ToString("dd MMM yyyy");
 			FillupBrush = GetFillupBrush(historyItem, statistics);
 
 			Distance = (historyItem.Fillup.OdometerEnd - historyItem.Fillup.OdometerStart).FormatForDisplay(0);
 			Volume = historyItem.Fillup.Volume.FormatForDisplay(2);
 			Cost = (historyItem.Fillup.Volume * historyItem.Fillup.Price).FormatForDisplay(2);
-			Petrol = historyItem.Fillup.Petrol;
+			FuelType = historyItem.Fillup.FuelType;
 
 			FillupDate = historyItem.Fillup.Date;
+			OdometerStart = HistoryItem.Fillup.OdometerStart.FormatForDisplay(0);
+			OdometerEnd = HistoryItem.Fillup.OdometerEnd.FormatForDisplay(0);
+			Price = HistoryItem.Fillup.Price.FormatForDisplay(2);
+			ShowConsumption = !historyItem.Fillup.IsPartial;
+			IsPartialFillup = historyItem.Fillup.IsPartial ? "yes" : "no";
 		}
 
 		private Brush GetFillupBrush(FillupHistoryItem historyItem, FuelConsumptionStatistics statistics)
@@ -44,11 +51,13 @@ namespace MyFuelTracker.ViewModels
 
 		public DateTime FillupDate { get; set; }
 
-		public string Petrol { get; set; }
+		public string FuelType { get; set; }
+
+		public string Price { get; set; }
 
 		public string Date { get; set; }
 
-		public string FuelEconomy { get; set; }
+		public string Consumption { get; set; }
 
 		public Brush FillupBrush { get; set; }
 
@@ -65,5 +74,12 @@ namespace MyFuelTracker.ViewModels
 		public string VolumeDimension { get { return "L"; } }
 
 		public string DistanceDimension { get { return "km"; } }
+
+		public string OdometerStart { get; set; }
+
+		public string OdometerEnd { get; set; }
+
+		public string IsPartialFillup { get; set; }
+		public bool ShowConsumption { get; set; }
 	}
 }

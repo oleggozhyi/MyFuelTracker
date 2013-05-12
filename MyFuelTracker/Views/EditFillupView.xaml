@@ -40,7 +40,10 @@
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="MY FUEL TRACKER" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <StackPanel Orientation="Horizontal">
+                <Image Source="/Assets/fuel.png" Width="25" Height="25"></Image>
+                <TextBlock Text="MY FUEL TRACKER" Style="{StaticResource PhoneTextNormalStyle}" FontWeight="Bold"/>
+            </StackPanel>
             <TextBlock Text="add fillup" Margin="9,-7,0,0" Style="{StaticResource PageTitle}"/>
         </StackPanel>
 
@@ -74,11 +77,11 @@
                         </Grid.ColumnDefinitions>
 
                         <toolkit:ListPicker x:Name="PetrolPicker"  ExpansionMode="ExpansionAllowed" SelectionMode="Single"
-                                SelectedItem="{Binding Petrol, Mode=TwoWay}"
-                                ItemsSource="{Binding Petrols}" Margin="12 3 0 12"
+                                SelectedItem="{Binding FuelType, Mode=TwoWay}"
+                                ItemsSource="{Binding FuelTypes}" Margin="12 3 0 12"
                                         FullModeHeader="Select petrol"
                                 FullModeItemTemplate="{StaticResource listPickerItemTemplate}" />
-                        <controls:RoundButton Grid.Column="1" micro:Message.Attach="[Event Tap] = [Action AddPetrol]"  HorizontalAlignment="Left" PressedBrush="{StaticResource PhoneAccentBrush}" VerticalAlignment="Center" Margin="5,13,-5,10" Height="52" >
+                        <controls:RoundButton Grid.Column="1" micro:Message.Attach="[Event Tap] = [Action AddFuelType]"  HorizontalAlignment="Left" PressedBrush="{StaticResource PhoneAccentBrush}" VerticalAlignment="Center" Margin="5,13,-5,10" Height="52" >
                             <Image Source="/Assets/add.png" Width="50" ></Image>
                         </controls:RoundButton>
                     </Grid>
@@ -115,8 +118,8 @@
                             IconUri="/Assets/AppBar/save.png"/>
             <bab:BindableAppBarButton
                             x:Name="Cancel"
-                            Text="cancel"
-                            IconUri="/Toolkit.Content/ApplicationBar.Cancel.png"/>
+                            Text="go back"
+                            IconUri="/Assets/AppBar/back.png"/>
         </bab:BindableAppBar>
     </Grid>
 

@@ -1,5 +1,5 @@
 ﻿<phone:PhoneApplicationPage
-    x:Class="MyFuelTracker.Views.AddPetrolView"
+    x:Class="MyFuelTracker.Views.AddFuelTypeView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
@@ -28,8 +28,11 @@
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="MY FUEL TRACKER" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock Text="add petrol" Margin="9,-7,0,0" Style="{StaticResource PageTitle}"/>
+            <StackPanel Orientation="Horizontal">
+                <Image Source="/Assets/fuel.png" Width="25" Height="25"></Image>
+                <TextBlock Text="MY FUEL TRACKER" Style="{StaticResource PhoneTextNormalStyle}" FontWeight="Bold"/>
+            </StackPanel>
+            <TextBlock Text="add fuel type" Margin="9,-7,0,0" Style="{StaticResource PageTitle}"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
@@ -41,17 +44,17 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
-                <TextBlock Text="petrol name"  VerticalAlignment="Center" Margin="15 0 10 0"/>
-            <toolkit:PhoneTextBox x:Name="PetrolName" Grid.Column="1" Hint="petrol name"/>
+                <TextBlock Text="fuel type"  VerticalAlignment="Center" Margin="15 0 10 0"/>
+            <toolkit:PhoneTextBox x:Name="FuelType" Grid.Column="1" Hint="petrol name"/>
             <bab:BindableAppBar>
                 <bab:BindableAppBarButton
-                            x:Name="SavePetrol"
-                            Text="save petrol"
+                            x:Name="SaveFuelType"
+                            Text="save"
                             IconUri="/Assets/AppBar/save.png"/>
                 <bab:BindableAppBarButton
                             x:Name="Cancel"
-                            Text="cancel"
-                            IconUri="/Toolkit.Content/ApplicationBar.Cancel.png"/>
+                            Text="go back"
+                            IconUri="/Assets/AppBar/back.png"/>
             </bab:BindableAppBar>
         </Grid>
     </Grid>
