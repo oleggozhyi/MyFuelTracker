@@ -6,7 +6,6 @@ namespace MyFuelTracker.Core.DataAccess
 {
 	public interface IFuelTrackerDb
 	{
-		Task<Fillup> GetFillupAsync(Guid id);
 		Task SaveFillupAsync(Fillup fillup);
 		Task DeleteFillupAsync(Fillup fillup);
 		Task<Fillup[]> LoadAllFillupsAsync();
