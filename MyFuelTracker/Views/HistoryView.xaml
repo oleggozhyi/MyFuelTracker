@@ -8,11 +8,10 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:micro="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro"
-    xmlns:bab="clr-namespace:Caliburn.Micro.BindableAppBar;assembly=Caliburn.Micro.BindableAppBar"
     xmlns:views="clr-namespace:MyFuelTracker.Views" xmlns:local="clr-namespace:MyFuelTracker.Infrastructure"
     micro:Bind.AtDesignTime="True"
     toolkit:TiltEffect.IsTiltEnabled="True"
-    
+        Background="#FF222222"
     d:DataContext="{d:DesignData Source=/SampleData/HistoryViewModel.xaml}"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -41,7 +40,10 @@
                     </toolkit:ContextMenu>
                 </toolkit:ContextMenuService.ContextMenu>
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="{Binding Date}" FontSize="{StaticResource PhoneFontSizeMediumLarge}" Margin="10 0 25 0" />
+                    <Border Background="{Binding FillupBackgrondBrush}" Width="40" Height="40">
+                        <Image Source="/Assets/fuel.png"/>
+                    </Border>           
+                    <TextBlock Text="{Binding Date}" FontSize="{StaticResource PhoneFontSizeMediumLarge}" Margin="10 15 25 0" />
                     <views:ValueWithDimention ValueText="{Binding Consumption}"  ValueTextSize="{StaticResource PhoneFontSizeMediumLarge}" ValueTextBrush="{Binding FillupBrush}"
                                                   ValueDimension="{Binding ConsumptionDimension}" ValueDimensionSize="{StaticResource PhoneFontSizeNormal}" ValueDimensionBrush="DimGray"/>
                 </StackPanel>
@@ -88,17 +90,6 @@
                                 GroupHeaderTemplate="{StaticResource fillupGroupHeaderTemplate}" 
                                 HideEmptyGroups="True"
                                 JumpListStyle="{StaticResource JumpListStyle}"/>
-        <HyperlinkButton Grid.Row="1" Margin="0 0 0 10" FontSize="{StaticResource PhoneFontSizeLarge}" Foreground="Gray"
-                         Content="view more"
-                         micro:Message.Attach="[Event Tap] = [Action ViewMore]"
-                         Visibility="{Binding IsShowMoreVisible, Converter={StaticResource booleanToVisibilityConverter}}"/>
-
-        <bab:BindableAppBar Margin="10,-10,-10,10">
-            <bab:BindableAppBarButton
-                            x:Name="GoToAddFillup"
-                            Text="add fillup"
-                            IconUri="/Assets/add.png"/>
-        </bab:BindableAppBar>
     </Grid>
 
 </UserControl>

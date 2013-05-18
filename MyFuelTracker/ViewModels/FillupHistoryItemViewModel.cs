@@ -22,7 +22,8 @@ namespace MyFuelTracker.ViewModels
 			_isPartial = historyItem.Fillup.IsPartial;
 			Consumption = historyItem.Consumption.HasValue ? historyItem.Consumption.Value.FormatForDisplay(2) : "<partial>";
 			Date = historyItem.Fillup.Date.ToString("dd MMM yyyy");
-			FillupBrush = GetFillupBrush(historyItem, statistics);
+			FillupBrush = GetFillupBrush(historyItem, statistics, true);
+            FillupBackgrondBrush = GetFillupBrush(historyItem, statistics, false);
 
 			Distance = (historyItem.Fillup.OdometerEnd - historyItem.Fillup.OdometerStart).FormatForDisplay(0);
 			Volume = historyItem.Fillup.Volume.FormatForDisplay(2);
@@ -37,14 +38,14 @@ namespace MyFuelTracker.ViewModels
 			IsPartialFillup = historyItem.Fillup.IsPartial ? "yes" : "no";
 		}
 
-		private Brush GetFillupBrush(FillupHistoryItem historyItem, FuelConsumptionStatistics statistics)
+		private Brush GetFillupBrush(FillupHistoryItem historyItem, FuelConsumptionStatistics statistics, bool foreground)
 		{
 			if (historyItem.Fillup.IsPartial)
-				return new SolidColorBrush(Colors.Gray);
+                return new SolidColorBrush(foreground? Colors.Gray: Colors.Transparent);
 
 			double consumption = historyItem.Consumption.Value;
-			var color = ColorHelper.GetColor(consumption, statistics.MinConsumption, 
-											statistics.AllTimeAvgConsumption, statistics.MaxConsumption);
+			var color = ColorHelper.GetColor(consumption, statistics.MinConsumption,
+                                            statistics.AllTimeAvgConsumption, statistics.MaxConsumption, foreground);
 			
 			return new SolidColorBrush(color);
 		}
@@ -59,7 +60,9 @@ namespace MyFuelTracker.ViewModels
 
 		public string Consumption { get; set; }
 
-		public Brush FillupBrush { get; set; }
+        public Brush FillupBrush { get; set; }
+
+        public Brush FillupBackgrondBrush { get; set; }
 
 		public string Distance { get; set; }
 

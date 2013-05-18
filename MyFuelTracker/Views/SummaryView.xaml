@@ -6,12 +6,12 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:bab="clr-namespace:Caliburn.Micro.BindableAppBar;assembly=Caliburn.Micro.BindableAppBar"
     xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro" xmlns:views="clr-namespace:MyFuelTracker.Views"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     mc:Ignorable="d"
+        Background="#FF222222"
     cal:Bind.AtDesignTime="True"
     d:DataContext="{d:DesignData Source=/SampleData/SummaryViewModel.xaml}"
     shell:SystemTray.IsVisible="True">
@@ -116,11 +116,5 @@
                 <TextBlock Grid.Row="18" Grid.Column="1"  Text="{Binding MostOftenFuelType}" Foreground="DeepSkyBlue" Style="{StaticResource value}"/>
             </Grid>
         </ScrollViewer>
-        <bab:BindableAppBar>
-            <bab:BindableAppBarButton
-                            x:Name="GoToAddFillup"
-                            Text="add fillup"
-                            IconUri="/Assets/add.png"/>
-        </bab:BindableAppBar>
     </Grid>
 </UserControl>

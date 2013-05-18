@@ -82,6 +82,7 @@
     <NoConfig>true</NoConfig>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|ARM' ">
     <DebugType>pdbonly</DebugType>
@@ -97,15 +98,19 @@
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Infrastructure\ColorHelper.cs" />
     <Compile Include="Infrastructure\DebugLogger.cs" />
+    <Compile Include="Infrastructure\DynamicAppBarBehavior.cs" />
     <Compile Include="Infrastructure\ExtensionHelpers.cs" />
     <Compile Include="Infrastructure\FillupHistoryChangedEvent.cs" />
     <Compile Include="Infrastructure\FillupsGroupingHelper.cs" />
     <Compile Include="Infrastructure\HslColor.cs" />
+    <Compile Include="Infrastructure\Icons.cs" />
     <Compile Include="Infrastructure\IMessageBox.cs" />
     <Compile Include="Infrastructure\MyMessageBox.cs" />
     <Compile Include="Infrastructure\FuelTypeAddedEvent.cs" />
     <Compile Include="Infrastructure\ValidationException.cs" />
-    <Compile Include="SampleData\XamlFriendlyCollection.cs" />
+    <Compile Include="SampleData\XamlFriendlyCollection.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ViewModels\AddFuelTypeViewModel.cs" />
     <Compile Include="ViewModels\DisplayFillupViewModel.cs" />
     <Compile Include="ViewModels\EditFillupViewModel.cs" />
@@ -152,8 +157,8 @@
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
     <Page Include="SampleData\HistoryViewModel.xaml">
-      <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SampleData\SummaryViewModel.xaml">
       <SubType>Designer</SubType>
@@ -206,6 +211,7 @@
     <Content Include="Assets\ApplicationIcon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\view_less.png" />
     <Content Include="Assets\feature.settings.png" />
     <Content Include="Assets\fuel.png" />
     <Content Include="Assets\Tiles\FlipCycleTileLarge.png">
@@ -223,6 +229,7 @@
     <Content Include="Assets\Tiles\IconicTileSmall.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\view_more.png" />
     <Content Include="README_FIRST.txt" />
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
@@ -238,9 +245,6 @@
   <ItemGroup>
     <Reference Include="Caliburn.Micro">
       <HintPath>..\packages\Caliburn.Micro.1.5.1\lib\wp8\Caliburn.Micro.dll</HintPath>
-    </Reference>
-    <Reference Include="Caliburn.Micro.BindableAppBar">
-      <HintPath>..\packages\Caliburn.Micro.BindableAppBar.1.0.3.0\lib\wp80\Caliburn.Micro.BindableAppBar.dll</HintPath>
     </Reference>
     <Reference Include="Caliburn.Micro.Extensions">
       <HintPath>..\packages\Caliburn.Micro.1.5.1\lib\wp8\Caliburn.Micro.Extensions.dll</HintPath>

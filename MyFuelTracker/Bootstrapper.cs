@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using Caliburn.Micro;
-using Caliburn.Micro.BindableAppBar;
 using Microsoft.Phone.Controls;
 using MyFuelTracker.Core;
 using MyFuelTracker.Core.DataAccess;
@@ -15,31 +14,41 @@ namespace MyFuelTracker
 {
 	public class Bootstrapper : PhoneBootstrapper
 	{
-		PhoneContainer container;
+	    public static Bootstrapper Current
+	    {
+	        get
+	        {
+	            var bootstrapper = Application.Current.Resources["bootstrapper"] as Bootstrapper;
+                if(bootstrapper == null)
+                    throw new InvalidOperationException("bootstrapper was not found in app resources");
 
-		protected override void Configure()
+	            return bootstrapper;
+	        }
+	    }
+
+        public PhoneContainer Container { get; set; }
+
+	    protected override void Configure()
 		{
 			Debug.WriteLine("Configure CM Bootstrapper");
 
-			container = new PhoneContainer(RootFrame);
+			Container = new PhoneContainer(RootFrame);
 
-			container.RegisterPhoneServices();
-			container.PerRequest<MainViewModel>();
-			container.PerRequest<SummaryViewModel>();
-			container.PerRequest<HistoryViewModel>();
-			container.PerRequest<EditFillupViewModel>();
-			container.PerRequest<AddFuelTypeViewModel>();
-			container.PerRequest<DisplayFillupViewModel>();
+			Container.RegisterPhoneServices();
+			Container.PerRequest<MainViewModel>();
+			Container.PerRequest<SummaryViewModel>();
+			Container.PerRequest<HistoryViewModel>();
+			Container.PerRequest<EditFillupViewModel>();
+			Container.PerRequest<AddFuelTypeViewModel>();
+			Container.PerRequest<DisplayFillupViewModel>();
 
-			container.PerRequest<ILog, DebugLogger>();
-			container.Singleton<IMessageBox, MyMessageBox>();
-			container.Singleton<IFillupService, FillupService>();
-			container.Singleton<IFuelTrackerDb, InMemoryFuelTrackerDb>();
-			container.Singleton<IStatisticsService, StatisticsService>();
+			Container.PerRequest<ILog, DebugLogger>();
+			Container.Singleton<IMessageBox, MyMessageBox>();
+			Container.Singleton<IFillupService, FillupService>();
+			Container.Singleton<IFuelTrackerDb, InMemoryFuelTrackerDb>();
+			Container.Singleton<IStatisticsService, StatisticsService>();
 
 			LogManager.GetLog = type => new DebugLogger(type);
-
-			AddCustomConventions();
 		}
 
 		protected override void OnUnhandledException(object sender, ApplicationUnhandledExceptionEventArgs e)
@@ -54,15 +63,9 @@ namespace MyFuelTracker
 			return  new TransitionFrame();
 		}
 
-		static void AddCustomConventions()
-		{
-			ConventionManager.AddElementConvention<BindableAppBarButton>(Control.IsEnabledProperty, "DataContext", "Click");
-			ConventionManager.AddElementConvention<BindableAppBarMenuItem>(Control.IsEnabledProperty, "DataContext", "Click");
-		}
-
 		protected override object GetInstance(Type service, string key)
 		{
-			var instance = container.GetInstance(service, key);
+			var instance = Container.GetInstance(service, key);
 			if (instance == null)
 			{
 				MessageBox.Show(service + " is not mapped in IoC container");
@@ -74,12 +77,12 @@ namespace MyFuelTracker
 
 		protected override IEnumerable<object> GetAllInstances(Type service)
 		{
-			return container.GetAllInstances(service);
+			return Container.GetAllInstances(service);
 		}
 
 		protected override void BuildUp(object instance)
 		{
-			container.BuildUp(instance);
+			Container.BuildUp(instance);
 		}
 	}
 }

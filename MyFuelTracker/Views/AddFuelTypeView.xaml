@@ -7,7 +7,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
-    xmlns:bab="clr-namespace:Caliburn.Micro.BindableAppBar;assembly=Caliburn.Micro.BindableAppBar"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:local="clr-namespace:MyFuelTracker.Infrastructure"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -16,9 +17,10 @@
     shell:SystemTray.IsVisible="True"
     toolkit:TransitionService.NavigationInTransition="{StaticResource navigationInTransition}"
     toolkit:TransitionService.NavigationOutTransition="{StaticResource navigationOutTransition}"
-
     >
-
+    <i:Interaction.Behaviors>
+        <local:DynamicAppBarBehavior />
+    </i:Interaction.Behaviors>
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
@@ -41,16 +43,6 @@
                 <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
             <toolkit:PhoneTextBox x:Name="FuelType" Grid.Column="1" Hint="fuel type"/>
-            <bab:BindableAppBar>
-                <bab:BindableAppBarButton
-                            x:Name="SaveFuelType"
-                            Text="save"
-                            IconUri="/Assets/AppBar/save.png"/>
-                <bab:BindableAppBarButton
-                            x:Name="Cancel"
-                            Text="go back"
-                            IconUri="/Assets/AppBar/back.png"/>
-            </bab:BindableAppBar>
         </Grid>
     </Grid>
 

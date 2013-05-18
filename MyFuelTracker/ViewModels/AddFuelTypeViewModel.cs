@@ -1,41 +1,52 @@
-﻿using Caliburn.Micro;
+﻿using System.Collections.Generic;
+using Caliburn.Micro;
 using MyFuelTracker.Core;
 using MyFuelTracker.Infrastructure;
 
 namespace MyFuelTracker.ViewModels
 {
-	public class AddFuelTypeViewModel : Screen
-	{
-		private readonly INavigationService _navigationService;
-		private readonly IEventAggregator _eventAggregator;
-		private string _fuelType;
-		public string FuelType
-		{
-			get { return _fuelType; }
-			set
-			{
-				if (value == _fuelType) return;
-				_fuelType = value;
-				NotifyOfPropertyChange(() => FuelType);
-			}
-		}
+    public class AddFuelTypeViewModel : Screen, IAppBarButtonsProvider
+    {
+        private readonly DynamicAppBarButton _saveFuelTypeButton = new DynamicAppBarButton { IconUri = Icons.Save, Text = "save fillup" };
+        private readonly DynamicAppBarButton _cancelButton = new DynamicAppBarButton { IconUri = Icons.Back, Text = "cancel" };
+        private readonly DynamicAppBarButton[] _appButtons;
 
-		public AddFuelTypeViewModel(INavigationService navigationService,
-								  IEventAggregator eventAggregator)
-		{
-			_navigationService = navigationService;
-			_eventAggregator = eventAggregator;
-		}
+        private readonly INavigationService _navigationService;
+        private readonly IEventAggregator _eventAggregator;
+        private string _fuelType;
 
-		public void SaveFuelType()
-		{
-			_eventAggregator.Publish(new FuelTypeAddedEvent { FuelType = FuelType });
-			_navigationService.GoBack();
-		}
+        public IEnumerable<DynamicAppBarButton> Buttons { get { return _appButtons; } }
 
-		public void Cancel()
-		{
-			_navigationService.GoBack();
-		}
-	}
+        public string FuelType
+        {
+            get { return _fuelType; }
+            set
+            {
+                if (value == _fuelType) return;
+                _fuelType = value;
+                NotifyOfPropertyChange(() => FuelType);
+            }
+        }
+
+        public AddFuelTypeViewModel(INavigationService navigationService,
+                                  IEventAggregator eventAggregator)
+        {
+            _navigationService = navigationService;
+            _eventAggregator = eventAggregator;
+            _appButtons = new[] { _saveFuelTypeButton, _cancelButton };
+            _saveFuelTypeButton.OnClick = SaveFuelType;
+            _cancelButton.OnClick = Cancel;
+        }
+
+        public void SaveFuelType()
+        {
+            _eventAggregator.Publish(new FuelTypeAddedEvent { FuelType = FuelType });
+            _navigationService.GoBack();
+        }
+
+        public void Cancel()
+        {
+            _navigationService.GoBack();
+        }
+    }
 }

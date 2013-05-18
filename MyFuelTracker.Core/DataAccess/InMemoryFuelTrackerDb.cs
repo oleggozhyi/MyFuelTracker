@@ -76,12 +76,12 @@ namespace MyFuelTracker.Core.DataAccess
 							Fillups.Add(fillup);
 							fillup.Id = Guid.Parse(f.Element("id").Value);
 							fillup.Date = ParseDate(f.Element("date").Value);
-							fillup.Volume = double.Parse(f.Element("volume").Value, CultureInfo.CurrentCulture);
+							fillup.Volume = double.Parse(f.Element("volume").Value, CultureInfo.InvariantCulture);
 							fillup.FuelType = f.Element("petrol").Value;
-							fillup.Price = double.Parse(f.Element("price").Value, CultureInfo.CurrentCulture);
+                            fillup.Price = double.Parse(f.Element("price").Value, CultureInfo.InvariantCulture);
 							fillup.IsPartial = bool.Parse(f.Element("is-partial").Value);
-							fillup.OdometerStart = double.Parse(f.Element("odometer-start").Value, CultureInfo.CurrentCulture);
-							fillup.OdometerEnd = double.Parse(f.Element("odometer-end").Value, CultureInfo.CurrentCulture);
+                            fillup.OdometerStart = double.Parse(f.Element("odometer-start").Value, CultureInfo.InvariantCulture);
+                            fillup.OdometerEnd = double.Parse(f.Element("odometer-end").Value, CultureInfo.InvariantCulture);
 						}
 						Fillups.Reverse();
 					}

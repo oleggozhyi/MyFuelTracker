@@ -7,9 +7,9 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:bab="clr-namespace:Caliburn.Micro.BindableAppBar;assembly=Caliburn.Micro.BindableAppBar"
     xmlns:micro="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro"
     xmlns:local="clr-namespace:MyFuelTracker.Infrastructure"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -17,7 +17,6 @@
     SupportedOrientations="Portrait"  Orientation="Portrait"
     shell:SystemTray.IsVisible="True"
     toolkit:TiltEffect.IsTiltEnabled="True"
-
     toolkit:TransitionService.NavigationInTransition="{StaticResource navigationInTransition}"
     toolkit:TransitionService.NavigationOutTransition="{StaticResource navigationOutTransition}"
     >
@@ -39,10 +38,12 @@
 			</Grid>
 		</DataTemplate>
 	</phone:PhoneApplicationPage.Resources>
-
+    <i:Interaction.Behaviors>
+        <local:DynamicAppBarBehavior PivotElementName="Items" />
+    </i:Interaction.Behaviors>
 
     <Grid x:Name="LayoutRoot">
-        <phone:Pivot x:Name="Items" SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
+        <phone:Pivot x:Name="Items">
             <phone:Pivot.TitleTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">

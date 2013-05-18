@@ -5,6 +5,7 @@ using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
+using Caliburn.Micro;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using MyFuelTracker.Resources;
@@ -19,5 +20,12 @@ namespace MyFuelTracker.Views
 		{
 			InitializeComponent();
 		}
+
+        private void ApplicationBarIconButton_Click(object sender, EventArgs e)
+        {
+            var eventAggregator = (IEventAggregator)Bootstrapper.Current.Container.GetAllInstances(typeof(IEventAggregator)).First();
+            eventAggregator.Publish("");
+        }
 	}
+
 }

@@ -8,8 +8,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
      xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:micro="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro"
-    xmlns:bab="clr-namespace:Caliburn.Micro.BindableAppBar;assembly=Caliburn.Micro.BindableAppBar"
     xmlns:controls="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:local="clr-namespace:MyFuelTracker.Infrastructure"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -31,6 +32,9 @@
             </StackPanel>
         </DataTemplate>
     </phone:PhoneApplicationPage.Resources>
+    <i:Interaction.Behaviors>
+        <local:DynamicAppBarBehavior />
+    </i:Interaction.Behaviors>
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
@@ -105,22 +109,10 @@
                     <TextBlock Text="volume" Grid.Row="5" Grid.Column="0" />
                     <toolkit:PhoneTextBox x:Name="Volume" Grid.Row="5" Grid.Column="1"  Hint="volume" InputScope="Number"/>
 
-
                     <CheckBox  x:Name="IsPartial" Grid.Row="6" Grid.Column="1" Content="is partial fillup" />
                 </Grid>
             </ScrollViewer>
         </Grid>
-
-        <bab:BindableAppBar>
-            <bab:BindableAppBarButton
-                            x:Name="SaveFillup"
-                            Text="save fillup"
-                            IconUri="/Assets/AppBar/save.png"/>
-            <bab:BindableAppBarButton
-                            x:Name="Cancel"
-                            Text="go back"
-                            IconUri="/Assets/AppBar/back.png"/>
-        </bab:BindableAppBar>
     </Grid>
 
 </phone:PhoneApplicationPage>
