@@ -22,7 +22,6 @@ namespace MyFuelTracker.ViewModels
         private readonly INavigationService _navigationService;
         private readonly IMessageBox _messageBox;
         private readonly IFillupService _fillupService;
-        private readonly IStatisticsService _statisticsService;
         private string _lastConsumption;
         private string _minConsumption;
         private string _maxConsumption;
@@ -48,13 +47,11 @@ namespace MyFuelTracker.ViewModels
         public SummaryViewModel(INavigationService navigationService,
                                 IMessageBox messageBox,
                                 IFillupService fillupService,
-                                IStatisticsService statisticsService,
                                 IEventAggregator eventAggregator)
         {
             _navigationService = navigationService;
             _messageBox = messageBox;
             _fillupService = fillupService;
-            _statisticsService = statisticsService;
             Debug.WriteLine("SummaryViewModel created");
             DisplayName = "summary";
             eventAggregator.Subscribe(this);
@@ -256,8 +253,7 @@ namespace MyFuelTracker.ViewModels
 
         public async Task UpdateAsync()
         {
-            var fillupHistoryItems = await _fillupService.GetHistoryAsync();
-            var statistics = await _statisticsService.CalculateStatisticsAsync(fillupHistoryItems);
+            var statistics = await _fillupService.GetStatisticsAsync();
 
             AllTimeAvgConsumption = statistics.AllTimeAvgConsumption.FormatForDisplay(2);
             AllTimeAvgConsumptionBrush = ColorHelper.AvgColor.ToBrush();

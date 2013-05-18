@@ -53,7 +53,8 @@ namespace MyFuelTracker.Core.DataAccess
 		{
 				await _loadHistoryTask;
 
-			return await Task.FromResult(Fillups.ToArray());
+		    Fillup[] fillups = await Task.FromResult(Fillups.OrderBy(f => f.Date).ToArray());
+		    return fillups;
 		}
 
 		private static DateTime ParseDate(string date)

@@ -12,7 +12,7 @@ using MyFuelTracker.Infrastructure;
 
 namespace MyFuelTracker.ViewModels
 {
-    public class HistoryViewModel : Screen, IHandle<FillupHistoryChangedEvent>, IDynamycButtonsProvider
+    public class HistoryViewModel : Screen, IHandle<FillupHistoryChangedEvent>, IDynamicAppBarButtonsProvider
     {
         #region fields
 

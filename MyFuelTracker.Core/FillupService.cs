@@ -3,105 +3,145 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Lex.Db;
 using MyFuelTracker.Core.Annotations;
 using MyFuelTracker.Core.DataAccess;
 using MyFuelTracker.Core.Models;
 
 namespace MyFuelTracker.Core
 {
-	public class FillupService : IFillupService
-	{
-		private IFuelTrackerDb Db { get; set; }
+    public class FillupService : IFillupService
+    {
+        private readonly IStatisticsService _statisticsService;
+        private IFuelTrackerDb Db { get; set; }
+        private volatile Task<Fillup[]> _loadFillupsTasks;
+        private volatile Task<FillupHistoryItem[]> _calculateHistoryTask;
+        private volatile Task<FuelConsumptionStatistics> _calculateStatisticsTask;
+        private readonly object _sync1 = new object();
+        private readonly object _sync2 = new object();
+        private readonly object _sync3 = new object();
 
-		public FillupService(IFuelTrackerDb db)
-		{
-			Db = db;
-		}
-		public async Task<Fillup> CreateNewFillupAsync()
-		{
-			var fillup = new Fillup { Id = Guid.NewGuid(), Date = DateTime.Now };
-			var fillups = await GetHistoryAsync();
-			var latestFillup = fillups.First();
-			if (fillups.Any())
-			{
-				var lastOdometerEnd = fillups.OrderBy(f => f.Fillup.OdometerEnd).Last().Fillup.OdometerEnd;
-				fillup.OdometerStart = lastOdometerEnd;
-				fillup.OdometerEnd = lastOdometerEnd;
-				fillup.FuelType = latestFillup.Fillup.FuelType;
-				fillup.Price= latestFillup.Fillup.Price;
-			}
-			return await Task.FromResult(fillup);
-		}
+        public FillupService(IFuelTrackerDb db, IStatisticsService statisticsService)
+        {
+            _statisticsService = statisticsService;
+            Db = db;
+        }
 
-		public async Task SaveFillupAsync([NotNull] Fillup fillup)
-		{
-			if (fillup == null) throw new ArgumentNullException("fillup");
-			if (fillup.OdometerEnd <= fillup.OdometerStart)
-				throw new InvalidOperationException("Odometer start should be less than end");
+        private void ClearCache()
+        {
+            _loadFillupsTasks = null;
+            _calculateHistoryTask = null;
+            _calculateStatisticsTask = null;
+        }
 
-			await Db.SaveFillupAsync(fillup);
-		}
+        private async Task<Fillup[]> GetFillupsAsync()
+        {
+            if (_loadFillupsTasks == null)
+                lock (_sync1)
+                {
+                    if (_loadFillupsTasks == null)
+                        _loadFillupsTasks = Db.LoadAllFillupsAsync();
+                }
+            return await _loadFillupsTasks;
+        }
 
-		public async Task DeleteFillupAsync(Fillup fillup)
-		{
-			await Db.DeleteFillupAsync(fillup);
-		}
+        public async Task<FillupHistoryItem[]> GetHistoryAsync()
+        {
+            Fillup[] fillups = await GetFillupsAsync();
+            if (_calculateHistoryTask == null)
+                lock (_sync2)
+                {
+                    if (_calculateHistoryTask == null)
+                        _calculateHistoryTask = Task.Run(() => CalculateHistory(fillups));
+                }
+            return await _calculateHistoryTask;
+        }
 
-		public async Task<Fillup> GetFillupAsync(Guid id)
-		{
-			return await Db.GetFillupAsync(id);
-		}
+        public async Task<FuelConsumptionStatistics> GetStatisticsAsync()
+        {
+            FillupHistoryItem[] fillupHistoryItems = await GetHistoryAsync();
+            if (_calculateStatisticsTask == null)
+                lock (_sync3)
+                {
+                    if (_calculateStatisticsTask == null)
+                        _calculateStatisticsTask = _statisticsService.CalculateStatisticsAsync(fillupHistoryItems);
+                }
+            return await _calculateStatisticsTask;
+        }
 
-		public async Task<IEnumerable<FillupHistoryItem>> GetHistoryAsync()
-		{
-			var fillups = await Db.LoadAllFillupsAsync();
-			fillups = fillups.OrderBy(f => f.Date).ToArray();
-			return await Task.Factory.StartNew(() =>
-				CalculateHistory(fillups));
-		}
+        public async Task<Fillup> CreateNewFillupAsync()
+        {
+            Fillup[] fillups = await GetFillupsAsync();
+            var fillup = new Fillup { Id = Guid.NewGuid(), Date = DateTime.Now };
+            var latestFillup = fillups.LastOrDefault();
+            if (latestFillup != null)
+            {
+                var lastOdometerEnd = fillups.OrderBy(f => f.OdometerEnd).Last().OdometerEnd;
+                fillup.OdometerStart = lastOdometerEnd;
+                fillup.OdometerEnd = lastOdometerEnd;
+                fillup.FuelType = latestFillup.FuelType;
+                fillup.Price = latestFillup.Price;
+            }
+            return await Task.FromResult(fillup);
+        }
 
-		private IEnumerable<FillupHistoryItem> CalculateHistory(Fillup[] fillups)
-		{
-			var historyItems = new List<FillupHistoryItem>();
-			lock (this)
-			{
-				if (!fillups.Any())
-					return historyItems;
+        public async Task SaveFillupAsync([NotNull] Fillup fillup)
+        {
+            if (fillup == null) throw new ArgumentNullException("fillup");
+            if (fillup.OdometerEnd <= fillup.OdometerStart)
+                throw new InvalidOperationException("Odometer start should be less than end");
 
-				double partialFillupOdoStart = -1;
-				double partialFillupVolume = 0;
-				foreach (var fillup in fillups)
-				{
-					var historyItem = new FillupHistoryItem { Fillup = fillup };
-					historyItems.Add(historyItem);
+            await Db.SaveFillupAsync(fillup);
+            ClearCache();
+        }
 
-					if (fillup.IsPartial)
-					{
-						if (partialFillupOdoStart < 0)
-							partialFillupOdoStart = fillup.OdometerStart;
-						partialFillupVolume += fillup.Volume;
-					}
-					else
-					{
-						double actualVolume = fillup.Volume + partialFillupVolume;
-						double actualDistance = fillup.OdometerEnd -
-												(partialFillupOdoStart > 0 ? partialFillupOdoStart : fillup.OdometerStart);
-						historyItem.Consumption = actualVolume * 100 / actualDistance;
+        public async Task DeleteFillupAsync(Fillup fillup)
+        {
+            await Db.DeleteFillupAsync(fillup);
+            ClearCache();
+        }
 
-						partialFillupOdoStart = -1;
-						partialFillupVolume = 0;
-					}
-				}
-			}
-			//double average = historyItems.Where(i => i.FuelEconomy.HasValue).Average(i => i.FuelEconomy.Value);
-			//foreach (var fillupHistoryItem in historyItems.Where(i => i.FuelEconomy.HasValue))
-			//{
-			//	fillupHistoryItem.IsGreaterThanAverage = fillupHistoryItem.FuelEconomy > average;
-			//}
+        public async Task<Fillup> GetFillupAsync(Guid id)
+        {
+            Fillup[] fillups = await GetFillupsAsync();
+            return fillups.First(f => f.Id == id);
+        }
 
-			historyItems.Reverse();
-			return historyItems;
-		}
-	}
+        private FillupHistoryItem[] CalculateHistory(Fillup[] fillups)
+        {
+            var historyItems = new List<FillupHistoryItem>();
+            lock (this)
+            {
+                if (!fillups.Any())
+                    return historyItems.ToArray();
+
+                double partialFillupOdoStart = -1;
+                double partialFillupVolume = 0;
+                foreach (var fillup in fillups)
+                {
+                    var historyItem = new FillupHistoryItem { Fillup = fillup };
+                    historyItems.Add(historyItem);
+
+                    if (fillup.IsPartial)
+                    {
+                        if (partialFillupOdoStart < 0)
+                            partialFillupOdoStart = fillup.OdometerStart;
+                        partialFillupVolume += fillup.Volume;
+                    }
+                    else
+                    {
+                        double actualVolume = fillup.Volume + partialFillupVolume;
+                        double actualDistance = fillup.OdometerEnd -
+                                                (partialFillupOdoStart > 0 ? partialFillupOdoStart : fillup.OdometerStart);
+                        historyItem.Consumption = actualVolume * 100 / actualDistance;
+
+                        partialFillupOdoStart = -1;
+                        partialFillupVolume = 0;
+                    }
+                }
+            }
+
+            historyItems.Reverse();
+            return historyItems.ToArray();
+        }
+    }
 }

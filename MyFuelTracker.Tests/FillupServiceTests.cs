@@ -170,7 +170,7 @@ namespace MyFuelTracker.Tests
 
 		public FillupService CreateService()
 		{
-			return new FillupService(DB);
+			return new FillupService(DB, new StatisticsService());
 		}
 	}
 }

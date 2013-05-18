@@ -63,19 +63,19 @@ namespace MyFuelTracker.Infrastructure
                 UpdateAppBar(_pivot.SelectedItem as IAppBarButtonsProvider);
                 foreach (var item in _pivot.Items)
                 {
-                    SubscribeToButtonsChange(item as IDynamycButtonsProvider);
+                    SubscribeToButtonsChange(item as IDynamicAppBarButtonsProvider);
                 }
             }
             else
             {
                 UpdateAppBar(_page.DataContext as IAppBarButtonsProvider);
-                SubscribeToButtonsChange(_page.DataContext as IDynamycButtonsProvider);
+                SubscribeToButtonsChange(_page.DataContext as IDynamicAppBarButtonsProvider);
             }
 
             _appBarInitialized = true;
         }
 
-        private void SubscribeToButtonsChange(IDynamycButtonsProvider provider)
+        private void SubscribeToButtonsChange(IDynamicAppBarButtonsProvider provider)
         {
             if (provider == null)
                 return;
@@ -126,7 +126,7 @@ namespace MyFuelTracker.Infrastructure
         IEnumerable<DynamicAppBarButton> Buttons { get; }
     }
 
-    public interface IDynamycButtonsProvider : IAppBarButtonsProvider
+    public interface IDynamicAppBarButtonsProvider : IAppBarButtonsProvider
     {
         event EventHandler ButtonsChanged;
     }
