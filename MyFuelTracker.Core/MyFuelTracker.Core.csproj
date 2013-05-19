@@ -96,7 +96,7 @@
     <Compile Include="Models\FuelConsumptionStatistics.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SqlCeFuelTrackerDb.cs" />
+    <Compile Include="DataAccess\SqlCeFuelTrackerDb.cs" />
     <Compile Include="StatisticsService.cs" />
   </ItemGroup>
   <ItemGroup>

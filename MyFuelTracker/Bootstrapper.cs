@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows;
@@ -41,8 +42,10 @@ namespace MyFuelTracker
 			Container.PerRequest<EditFillupViewModel>();
 			Container.PerRequest<AddFuelTypeViewModel>();
 			Container.PerRequest<DisplayFillupViewModel>();
-
+            Container.PerRequest<BackupToSkyDriveViewModel>();
+            
 			Container.PerRequest<ILog, DebugLogger>();
+	        Container.Singleton<AppBarMenuModel>();
 			Container.Singleton<IMessageBox, MyMessageBox>();
 			Container.Singleton<IFillupService, FillupService>();
 			Container.Singleton<IFuelTrackerDb, SqlCeFuelTrackerDb>();
@@ -84,5 +87,10 @@ namespace MyFuelTracker
 		{
 			Container.BuildUp(instance);
 		}
+
+	    public T Resolve<T>()
+	    {
+	        return GetAllInstances(typeof (T)).Cast<T>().Single();
+	    }
 	}
 }
