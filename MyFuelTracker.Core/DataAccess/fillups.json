@@ -1,0 +1,932 @@
+﻿[
+  {
+    "Id": "8a78aaff-cf34-4222-93cd-c4159fda88ee",
+    "Date": "2011-01-01T01:22:24+02:00",
+    "Volume": 29.77,
+    "Price": 8.5,
+    "OdometerStart": 64027.0,
+    "OdometerEnd": 64324.0,
+    "IsPartial": false,
+    "FuelType": "okko pulls"
+  },
+  {
+    "Id": "12c2e837-1827-4fe8-9f3c-0f9f0456af33",
+    "Date": "2011-01-10T01:23:21+02:00",
+    "Volume": 30.23,
+    "Price": 8.55,
+    "OdometerStart": 64324.0,
+    "OdometerEnd": 64643.0,
+    "IsPartial": false,
+    "FuelType": "okko pulls"
+  },
+  {
+    "Id": "6a614256-710f-4de2-863e-e072b5a357cb",
+    "Date": "2011-01-18T19:48:50+02:00",
+    "Volume": 34.29,
+    "Price": 8.75,
+    "OdometerStart": 64643.0,
+    "OdometerEnd": 64964.0,
+    "IsPartial": false,
+    "FuelType": "okko pulls"
+  },
+  {
+    "Id": "b47f3581-c288-4d3c-9660-443c6a30d30b",
+    "Date": "2011-01-27T19:49:37+02:00",
+    "Volume": 37.7,
+    "Price": 9.4,
+    "OdometerStart": 64964.0,
+    "OdometerEnd": 65318.0,
+    "IsPartial": false,
+    "FuelType": "okko pulls"
+  },
+  {
+    "Id": "338fc9b5-2e11-48e3-af71-9a74028ef59b",
+    "Date": "2011-02-01T14:24:55+02:00",
+    "Volume": 31.55,
+    "Price": 8.8,
+    "OdometerStart": 65318.0,
+    "OdometerEnd": 65638.0,
+    "IsPartial": false,
+    "FuelType": "okko pulls"
+  },
+  {
+    "Id": "300fe869-5914-45bf-ad1b-24676e1700f5",
+    "Date": "2011-02-08T21:08:18+02:00",
+    "Volume": 37.69,
+    "Price": 8.95,
+    "OdometerStart": 65638.0,
+    "OdometerEnd": 66005.0,
+    "IsPartial": false,
+    "FuelType": "okko pulls"
+  },
+  {
+    "Id": "05e00c9a-dba3-4850-85ef-b9774e257d9c",
+    "Date": "2011-02-16T19:24:27+02:00",
+    "Volume": 37.42,
+    "Price": 8.95,
+    "OdometerStart": 66005.0,
+    "OdometerEnd": 66329.0,
+    "IsPartial": false,
+    "FuelType": "okko pulls"
+  },
+  {
+    "Id": "32eb3b26-da65-4430-b6c8-58a474962868",
+    "Date": "2011-02-23T19:13:17+02:00",
+    "Volume": 37.79,
+    "Price": 9.6,
+    "OdometerStart": 66329.0,
+    "OdometerEnd": 66670.0,
+    "IsPartial": false,
+    "FuelType": "okko pulls"
+  },
+  {
+    "Id": "6ae4400c-0a0c-49c6-8e94-e7c1b8727f42",
+    "Date": "2011-03-04T19:56:36+02:00",
+    "Volume": 40.82,
+    "Price": 9.99,
+    "OdometerStart": 66670.0,
+    "OdometerEnd": 67038.0,
+    "IsPartial": false,
+    "FuelType": "okko pulls"
+  },
+  {
+    "Id": "850f81f3-64e7-4a0a-b5fa-691879ea98b5",
+    "Date": "2011-03-13T20:27:36+02:00",
+    "Volume": 35.22,
+    "Price": 10.5,
+    "OdometerStart": 67038.0,
+    "OdometerEnd": 67381.0,
+    "IsPartial": false,
+    "FuelType": "okko pulls"
+  },
+  {
+    "Id": "c451be7b-2da0-4a62-bc96-9ee79e0256ec",
+    "Date": "2011-03-21T10:56:02+02:00",
+    "Volume": 10.0,
+    "Price": 10.0,
+    "OdometerStart": 67381.0,
+    "OdometerEnd": 67743.0,
+    "IsPartial": true,
+    "FuelType": "okko pulls"
+  },
+  {
+    "Id": "dfa06f31-a367-4763-a15b-f2bd4d03aa40",
+    "Date": "2011-03-21T14:55:40+02:00",
+    "Volume": 23.8,
+    "Price": 10.5,
+    "OdometerStart": 67743.0,
+    "OdometerEnd": 67804.0,
+    "IsPartial": true,
+    "FuelType": "okko pulls"
+  },
+  {
+    "Id": "4cbaf813-7266-40dc-8e62-df364f7b1197",
+    "Date": "2011-03-28T12:17:27+03:00",
+    "Volume": 36.12,
+    "Price": 9.99,
+    "OdometerStart": 67804.0,
+    "OdometerEnd": 68058.0,
+    "IsPartial": false,
+    "FuelType": "okko pulls"
+  },
+  {
+    "Id": "29d1ad0b-657a-4492-9a2d-dd9789ce1eb4",
+    "Date": "2011-04-06T18:08:36+03:00",
+    "Volume": 35.02,
+    "Price": 10.65,
+    "OdometerStart": 68058.0,
+    "OdometerEnd": 68430.0,
+    "IsPartial": false,
+    "FuelType": "okko pulls"
+  },
+  {
+    "Id": "997a0129-6a37-4969-8c24-0dbcafbee1bd",
+    "Date": "2011-05-12T17:32:19+03:00",
+    "Volume": 140.27,
+    "Price": 10.49,
+    "OdometerStart": 68430.0,
+    "OdometerEnd": 69795.0,
+    "IsPartial": false,
+    "FuelType": "okko pulls"
+  },
+  {
+    "Id": "1c4529e4-779a-4d6c-85e9-e66ab3d248b1",
+    "Date": "2011-05-23T11:06:52+03:00",
+    "Volume": 37.75,
+    "Price": 11.0,
+    "OdometerStart": 69795.0,
+    "OdometerEnd": 70152.0,
+    "IsPartial": false,
+    "FuelType": "okko pulls"
+  },
+  {
+    "Id": "c8ee23a1-d8da-413f-9e20-9ed0a5b2158e",
+    "Date": "2011-05-30T18:06:03+03:00",
+    "Volume": 31.0,
+    "Price": 10.55,
+    "OdometerStart": 70152.0,
+    "OdometerEnd": 70489.0,
+    "IsPartial": false,
+    "FuelType": "okko pulls"
+  },
+  {
+    "Id": "ad32e634-11dc-4039-aa0f-e19c9ad8dcc6",
+    "Date": "2011-06-07T18:57:16+03:00",
+    "Volume": 36.33,
+    "Price": 10.55,
+    "OdometerStart": 70489.0,
+    "OdometerEnd": 70858.0,
+    "IsPartial": false,
+    "FuelType": "okko pulls"
+  },
+  {
+    "Id": "390f13e9-98c0-4fb8-a840-af51a7139efb",
+    "Date": "2011-06-13T13:37:29+03:00",
+    "Volume": 25.5,
+    "Price": 10.55,
+    "OdometerStart": 70858.0,
+    "OdometerEnd": 71094.0,
+    "IsPartial": false,
+    "FuelType": "okko pulls"
+  },
+  {
+    "Id": "01091899-c677-48fe-9ff5-3d786338865f",
+    "Date": "2011-07-03T15:53:53+03:00",
+    "Volume": 31.84,
+    "Price": 11.15,
+    "OdometerStart": 71094.0,
+    "OdometerEnd": 71398.0,
+    "IsPartial": false,
+    "FuelType": "okko pulls"
+  },
+  {
+    "Id": "333998e7-aebb-4e0b-915d-d00eacaff0f4",
+    "Date": "2011-07-06T12:35:58+03:00",
+    "Volume": 34.89,
+    "Price": 10.39,
+    "OdometerStart": 71398.0,
+    "OdometerEnd": 71751.0,
+    "IsPartial": false,
+    "FuelType": "okko pulls"
+  },
+  {
+    "Id": "480a7be7-68d9-4c41-8c21-e61a934b51d4",
+    "Date": "2011-07-18T20:02:15+03:00",
+    "Volume": 38.82,
+    "Price": 10.39,
+    "OdometerStart": 71751.0,
+    "OdometerEnd": 72124.0,
+    "IsPartial": false,
+    "FuelType": "okko pulls"
+  },
+  {
+    "Id": "1f6c8f37-2aec-4505-b95c-807f1a134e6c",
+    "Date": "2011-07-27T09:14:59+03:00",
+    "Volume": 38.76,
+    "Price": 11.14,
+    "OdometerStart": 72124.0,
+    "OdometerEnd": 72476.0,
+    "IsPartial": false,
+    "FuelType": "okko pulls"
+  },
+  {
+    "Id": "402699c0-c36d-4994-b08b-c0394f58285d",
+    "Date": "2011-08-04T20:21:55+03:00",
+    "Volume": 36.83,
+    "Price": 10.49,
+    "OdometerStart": 72476.0,
+    "OdometerEnd": 72843.0,
+    "IsPartial": false,
+    "FuelType": "okko pulls"
+  },
+  {
+    "Id": "2ea099e4-a6c3-4555-9932-8bd101d50add",
+    "Date": "2011-08-11T19:55:32+03:00",
+    "Volume": 33.79,
+    "Price": 10.49,
+    "OdometerStart": 72843.0,
+    "OdometerEnd": 73187.0,
+    "IsPartial": false,
+    "FuelType": "okko pulls"
+  },
+  {
+    "Id": "1317e346-ef3b-4d14-9d5c-715ef0783bc8",
+    "Date": "2011-08-18T19:56:02+03:00",
+    "Volume": 34.86,
+    "Price": 11.15,
+    "OdometerStart": 73187.0,
+    "OdometerEnd": 73567.0,
+    "IsPartial": false,
+    "FuelType": "okko pulls"
+  },
+  {
+    "Id": "f3bca633-708d-4601-874a-bb46b24f61f4",
+    "Date": "2011-08-24T16:21:51+03:00",
+    "Volume": 32.18,
+    "Price": 10.49,
+    "OdometerStart": 73567.0,
+    "OdometerEnd": 73898.0,
+    "IsPartial": false,
+    "FuelType": "okko pulls"
+  },
+  {
+    "Id": "1857a044-2401-4a81-afbe-ddbfa604e2c0",
+    "Date": "2011-08-30T18:04:37+03:00",
+    "Volume": 34.17,
+    "Price": 10.49,
+    "OdometerStart": 73898.0,
+    "OdometerEnd": 74243.0,
+    "IsPartial": false,
+    "FuelType": "okko pulls"
+  },
+  {
+    "Id": "9ea14491-d828-463a-a082-f2a5451568c9",
+    "Date": "2011-09-06T14:44:56+03:00",
+    "Volume": 37.81,
+    "Price": 10.49,
+    "OdometerStart": 74243.0,
+    "OdometerEnd": 74611.0,
+    "IsPartial": false,
+    "FuelType": "okko pulls"
+  },
+  {
+    "Id": "db8693ac-11a4-4857-89ba-00acf241924b",
+    "Date": "2011-09-15T19:03:46+03:00",
+    "Volume": 37.5,
+    "Price": 11.25,
+    "OdometerStart": 74611.0,
+    "OdometerEnd": 74974.0,
+    "IsPartial": false,
+    "FuelType": "okko pulls"
+  },
+  {
+    "Id": "a2123b8b-86cd-4fc6-b4a8-f4c308a01a30",
+    "Date": "2011-09-25T19:04:29+03:00",
+    "Volume": 38.24,
+    "Price": 11.35,
+    "OdometerStart": 74974.0,
+    "OdometerEnd": 75352.0,
+    "IsPartial": false,
+    "FuelType": "okko pulls"
+  },
+  {
+    "Id": "d1ad5240-c656-4ba1-ae2c-30f633869afa",
+    "Date": "2011-10-02T12:25:06+03:00",
+    "Volume": 34.53,
+    "Price": 11.29,
+    "OdometerStart": 75352.0,
+    "OdometerEnd": 75690.0,
+    "IsPartial": false,
+    "FuelType": "okko pulls"
+  },
+  {
+    "Id": "15d59543-d6bf-4aa6-a70d-7c9c123e36ca",
+    "Date": "2011-10-10T19:36:29+03:00",
+    "Volume": 37.67,
+    "Price": 10.49,
+    "OdometerStart": 75690.0,
+    "OdometerEnd": 76029.0,
+    "IsPartial": false,
+    "FuelType": "okko 95"
+  },
+  {
+    "Id": "e9993e0a-6adf-44ce-a9d0-c90a764b943c",
+    "Date": "2011-10-17T19:37:10+03:00",
+    "Volume": 38.7,
+    "Price": 10.49,
+    "OdometerStart": 76029.0,
+    "OdometerEnd": 76383.0,
+    "IsPartial": false,
+    "FuelType": "okko 95"
+  },
+  {
+    "Id": "ebead31f-83a4-403e-947d-49150f084c55",
+    "Date": "2011-10-27T20:52:02+03:00",
+    "Volume": 40.22,
+    "Price": 11.28,
+    "OdometerStart": 76383.0,
+    "OdometerEnd": 76732.0,
+    "IsPartial": false,
+    "FuelType": "wog mustang"
+  },
+  {
+    "Id": "233d0e91-75f4-4dcd-b197-a5b984b691f4",
+    "Date": "2011-11-03T20:18:49+02:00",
+    "Volume": 36.6,
+    "Price": 10.49,
+    "OdometerStart": 76732.0,
+    "OdometerEnd": 77067.0,
+    "IsPartial": false,
+    "FuelType": "okko 95"
+  },
+  {
+    "Id": "842875dc-08b4-474d-be0c-9fdc94cf8cbe",
+    "Date": "2011-11-11T19:56:39+02:00",
+    "Volume": 36.75,
+    "Price": 11.29,
+    "OdometerStart": 77067.0,
+    "OdometerEnd": 77409.0,
+    "IsPartial": false,
+    "FuelType": "wog mustang"
+  },
+  {
+    "Id": "90ede3a5-2eb5-4a36-a254-3b499580248d",
+    "Date": "2011-11-23T20:42:43+02:00",
+    "Volume": 37.73,
+    "Price": 11.29,
+    "OdometerStart": 77409.0,
+    "OdometerEnd": 77770.0,
+    "IsPartial": false,
+    "FuelType": "wog mustang"
+  },
+  {
+    "Id": "32579569-ca01-47d2-8650-25b118ed2d3f",
+    "Date": "2011-11-30T20:43:21+02:00",
+    "Volume": 36.35,
+    "Price": 10.49,
+    "OdometerStart": 77770.0,
+    "OdometerEnd": 78118.0,
+    "IsPartial": false,
+    "FuelType": "okko 95"
+  },
+  {
+    "Id": "7030a3e9-4212-40b6-9f05-22c563a4c845",
+    "Date": "2011-12-09T08:37:58+02:00",
+    "Volume": 38.44,
+    "Price": 10.49,
+    "OdometerStart": 78118.0,
+    "OdometerEnd": 78479.0,
+    "IsPartial": false,
+    "FuelType": "okko 95"
+  },
+  {
+    "Id": "f5014140-4ab7-4a23-b8fb-1ee79d381e0f",
+    "Date": "2011-12-18T10:38:44+02:00",
+    "Volume": 36.85,
+    "Price": 11.29,
+    "OdometerStart": 78479.0,
+    "OdometerEnd": 78808.0,
+    "IsPartial": false,
+    "FuelType": "wog mustang"
+  },
+  {
+    "Id": "d35bfed7-e532-476a-a66e-1cdb9bb5a97d",
+    "Date": "2011-12-28T09:36:33+02:00",
+    "Volume": 38.09,
+    "Price": 11.29,
+    "OdometerStart": 78808.0,
+    "OdometerEnd": 79156.0,
+    "IsPartial": false,
+    "FuelType": "okko pulls"
+  },
+  {
+    "Id": "ddeb6f53-1299-4631-a67f-e7959181f37d",
+    "Date": "2012-01-07T09:37:19+02:00",
+    "Volume": 37.0,
+    "Price": 11.29,
+    "OdometerStart": 79156.0,
+    "OdometerEnd": 79523.0,
+    "IsPartial": false,
+    "FuelType": "wog mustang"
+  },
+  {
+    "Id": "1886fbca-cd92-482b-88ef-f33326d32f15",
+    "Date": "2012-01-24T19:56:38+02:00",
+    "Volume": 41.7,
+    "Price": 10.49,
+    "OdometerStart": 79523.0,
+    "OdometerEnd": 79891.0,
+    "IsPartial": false,
+    "FuelType": "okko 95"
+  },
+  {
+    "Id": "cf6a6fc7-385b-4c74-8b2e-41d1c0d3f294",
+    "Date": "2012-02-01T19:12:40+02:00",
+    "Volume": 38.51,
+    "Price": 10.49,
+    "OdometerStart": 79891.0,
+    "OdometerEnd": 80188.0,
+    "IsPartial": false,
+    "FuelType": "okko 95"
+  },
+  {
+    "Id": "77968fc7-aa39-4f9f-aae2-95017a308301",
+    "Date": "2012-02-10T20:01:00+02:00",
+    "Volume": 38.88,
+    "Price": 10.59,
+    "OdometerStart": 80188.0,
+    "OdometerEnd": 80499.0,
+    "IsPartial": false,
+    "FuelType": "okko 95"
+  },
+  {
+    "Id": "360b8365-63c7-44f0-af03-46ce60160697",
+    "Date": "2012-02-17T19:43:49+02:00",
+    "Volume": 37.11,
+    "Price": 10.59,
+    "OdometerStart": 80499.0,
+    "OdometerEnd": 80805.0,
+    "IsPartial": false,
+    "FuelType": "okko 95"
+  },
+  {
+    "Id": "21aec031-06d9-43ce-9078-93dce810ac27",
+    "Date": "2012-02-24T15:58:42+02:00",
+    "Volume": 35.81,
+    "Price": 10.59,
+    "OdometerStart": 80805.0,
+    "OdometerEnd": 81135.0,
+    "IsPartial": false,
+    "FuelType": "okko 95"
+  },
+  {
+    "Id": "97bfdaf2-3cea-412a-b2ff-ce424fc2be35",
+    "Date": "2012-03-02T20:08:40+02:00",
+    "Volume": 39.24,
+    "Price": 10.8,
+    "OdometerStart": 81135.0,
+    "OdometerEnd": 81486.0,
+    "IsPartial": false,
+    "FuelType": "okko 95"
+  },
+  {
+    "Id": "f57d8fb4-f030-4b15-85e5-e5c9fd65e236",
+    "Date": "2012-03-12T10:22:49+02:00",
+    "Volume": 39.39,
+    "Price": 11.69,
+    "OdometerStart": 81486.0,
+    "OdometerEnd": 81858.0,
+    "IsPartial": false,
+    "FuelType": "wog mustang"
+  },
+  {
+    "Id": "bc4f9bd2-ec9d-4ee7-b2d0-bcafc591005a",
+    "Date": "2012-03-19T10:11:07+02:00",
+    "Volume": 37.91,
+    "Price": 11.79,
+    "OdometerStart": 81858.0,
+    "OdometerEnd": 82219.0,
+    "IsPartial": false,
+    "FuelType": "wog mustang"
+  },
+  {
+    "Id": "bce3accc-082a-473e-a1bb-373ae2ee45c3",
+    "Date": "2012-03-27T09:36:52+03:00",
+    "Volume": 39.67,
+    "Price": 12.09,
+    "OdometerStart": 82219.0,
+    "OdometerEnd": 82570.0,
+    "IsPartial": false,
+    "FuelType": "wog mustang"
+  },
+  {
+    "Id": "8a27fc21-7ba7-4940-bd03-5363a5e482b1",
+    "Date": "2012-04-05T20:03:43+03:00",
+    "Volume": 39.36,
+    "Price": 11.45,
+    "OdometerStart": 82570.0,
+    "OdometerEnd": 82955.0,
+    "IsPartial": false,
+    "FuelType": "okko 95"
+  },
+  {
+    "Id": "9d61feb1-97a8-4e80-ba20-30cded0ff83c",
+    "Date": "2012-04-11T19:55:08+03:00",
+    "Volume": 34.54,
+    "Price": 11.55,
+    "OdometerStart": 82955.0,
+    "OdometerEnd": 83299.0,
+    "IsPartial": false,
+    "FuelType": "okko 95"
+  },
+  {
+    "Id": "b71191e4-d5bf-49c2-87ef-8c069c380712",
+    "Date": "2012-04-22T11:01:11+03:00",
+    "Volume": 39.11,
+    "Price": 11.65,
+    "OdometerStart": 83299.0,
+    "OdometerEnd": 83657.0,
+    "IsPartial": false,
+    "FuelType": "okko 95"
+  },
+  {
+    "Id": "e1b1b517-9c2c-40e7-8d50-c0dfe1c11b8e",
+    "Date": "2012-04-30T09:13:46+03:00",
+    "Volume": 36.57,
+    "Price": 11.65,
+    "OdometerStart": 83657.0,
+    "OdometerEnd": 84033.0,
+    "IsPartial": false,
+    "FuelType": "okko 95"
+  },
+  {
+    "Id": "2501ca96-e2ff-4ed9-a9ea-ee14b31764bd",
+    "Date": "2012-05-01T18:56:30+03:00",
+    "Volume": 20.0,
+    "Price": 12.3,
+    "OdometerStart": 84033.0,
+    "OdometerEnd": 84404.0,
+    "IsPartial": true,
+    "FuelType": "wog mustang"
+  },
+  {
+    "Id": "cae7303d-d162-4584-b1e2-fdcd2e265997",
+    "Date": "2012-05-05T15:23:06+03:00",
+    "Volume": 34.68,
+    "Price": 11.59,
+    "OdometerStart": 84404.0,
+    "OdometerEnd": 84633.0,
+    "IsPartial": false,
+    "FuelType": "klo 95 super"
+  },
+  {
+    "Id": "d21dbc25-ecbc-4a74-aff1-9db9d8889534",
+    "Date": "2012-05-13T10:16:34+03:00",
+    "Volume": 35.95,
+    "Price": 11.59,
+    "OdometerStart": 84633.0,
+    "OdometerEnd": 85016.0,
+    "IsPartial": false,
+    "FuelType": "okko 95"
+  },
+  {
+    "Id": "b047446c-aef5-4052-8b0b-993b095b5ac1",
+    "Date": "2012-05-22T19:50:59+03:00",
+    "Volume": 38.98,
+    "Price": 11.49,
+    "OdometerStart": 85016.0,
+    "OdometerEnd": 85384.0,
+    "IsPartial": false,
+    "FuelType": "okko 95"
+  },
+  {
+    "Id": "6fb58446-3835-4a7c-a223-99f8ec24f27e",
+    "Date": "2012-05-31T19:49:02+03:00",
+    "Volume": 42.06,
+    "Price": 11.29,
+    "OdometerStart": 85384.0,
+    "OdometerEnd": 85771.0,
+    "IsPartial": false,
+    "FuelType": "okko 95"
+  },
+  {
+    "Id": "f245f60d-4364-41d0-891e-0ae17ec20035",
+    "Date": "2012-06-08T19:42:24+03:00",
+    "Volume": 33.93,
+    "Price": 11.29,
+    "OdometerStart": 85771.0,
+    "OdometerEnd": 86111.0,
+    "IsPartial": false,
+    "FuelType": "okko 95"
+  },
+  {
+    "Id": "352e9dff-6f64-4da5-8337-c9d30160ccc1",
+    "Date": "2012-06-30T12:37:03+03:00",
+    "Volume": 35.03,
+    "Price": 10.99,
+    "OdometerStart": 86111.0,
+    "OdometerEnd": 86480.0,
+    "IsPartial": false,
+    "FuelType": "okko 95"
+  },
+  {
+    "Id": "2ef327cd-f5e0-4184-85a2-4d46a98cb057",
+    "Date": "2012-07-03T12:21:05+03:00",
+    "Volume": 40.54,
+    "Price": 11.99,
+    "OdometerStart": 86480.0,
+    "OdometerEnd": 86921.0,
+    "IsPartial": false,
+    "FuelType": "okko pulls"
+  },
+  {
+    "Id": "d07372fe-b0a3-44a8-8029-10485d08d5d7",
+    "Date": "2012-07-16T19:27:57+03:00",
+    "Volume": 38.3,
+    "Price": 11.99,
+    "OdometerStart": 86921.0,
+    "OdometerEnd": 87307.0,
+    "IsPartial": false,
+    "FuelType": "okko pulls"
+  },
+  {
+    "Id": "c58bfc7e-ae90-42aa-9239-d0039d2017ef",
+    "Date": "2012-07-25T19:54:33+03:00",
+    "Volume": 32.96,
+    "Price": 11.99,
+    "OdometerStart": 87307.0,
+    "OdometerEnd": 87681.0,
+    "IsPartial": false,
+    "FuelType": "okko pulls"
+  },
+  {
+    "Id": "31cc3a7a-57b2-483d-bca9-7efb225162fa",
+    "Date": "2012-08-03T18:45:09+03:00",
+    "Volume": 38.0,
+    "Price": 11.99,
+    "OdometerStart": 87681.0,
+    "OdometerEnd": 88070.0,
+    "IsPartial": false,
+    "FuelType": "okko pulls"
+  },
+  {
+    "Id": "3e760a92-3567-4ae8-8083-8100cf91acc2",
+    "Date": "2012-08-12T13:26:44+03:00",
+    "Volume": 39.46,
+    "Price": 11.99,
+    "OdometerStart": 88070.0,
+    "OdometerEnd": 88456.0,
+    "IsPartial": false,
+    "FuelType": "okko pulls"
+  },
+  {
+    "Id": "e175a714-0e4e-4bee-895d-dbae9f51b299",
+    "Date": "2012-08-20T13:27:35+03:00",
+    "Volume": 41.77,
+    "Price": 11.99,
+    "OdometerStart": 88456.0,
+    "OdometerEnd": 88868.0,
+    "IsPartial": false,
+    "FuelType": "okko pulls"
+  },
+  {
+    "Id": "543870fe-5c8c-4fdf-88e4-d288c9b55336",
+    "Date": "2012-08-28T20:41:18+03:00",
+    "Volume": 31.34,
+    "Price": 11.99,
+    "OdometerStart": 88868.0,
+    "OdometerEnd": 89212.0,
+    "IsPartial": false,
+    "FuelType": "okko pulls"
+  },
+  {
+    "Id": "e3f609bd-0d36-44f0-abec-318c836c203c",
+    "Date": "2012-09-07T19:23:53+03:00",
+    "Volume": 39.92,
+    "Price": 12.19,
+    "OdometerStart": 89212.0,
+    "OdometerEnd": 89608.0,
+    "IsPartial": false,
+    "FuelType": "okko pulls"
+  },
+  {
+    "Id": "ef901dff-e1e7-4f9f-984a-af009d3ac02c",
+    "Date": "2012-09-18T19:45:29+03:00",
+    "Volume": 36.76,
+    "Price": 11.29,
+    "OdometerStart": 89608.0,
+    "OdometerEnd": 90000.0,
+    "IsPartial": false,
+    "FuelType": "okko 95"
+  },
+  {
+    "Id": "0b61f09a-493a-4c17-97b7-f190e2ec8385",
+    "Date": "2012-09-27T19:30:49+03:00",
+    "Volume": 37.6,
+    "Price": 11.29,
+    "OdometerStart": 90000.0,
+    "OdometerEnd": 90355.0,
+    "IsPartial": false,
+    "FuelType": "okko 95"
+  },
+  {
+    "Id": "bcfecf9e-0fe5-44cf-b9b0-b99c1e8bff90",
+    "Date": "2012-10-06T19:31:22+03:00",
+    "Volume": 35.49,
+    "Price": 11.29,
+    "OdometerStart": 90355.0,
+    "OdometerEnd": 90710.0,
+    "IsPartial": false,
+    "FuelType": "okko 95"
+  },
+  {
+    "Id": "01c6ed0a-3884-46c1-9a7c-e06b7d4626cc",
+    "Date": "2012-10-15T17:39:15+03:00",
+    "Volume": 39.41,
+    "Price": 11.29,
+    "OdometerStart": 90710.0,
+    "OdometerEnd": 91094.0,
+    "IsPartial": false,
+    "FuelType": "okko 95"
+  },
+  {
+    "Id": "98f33669-dd40-4cc8-b802-6588f1436e47",
+    "Date": "2012-10-24T19:30:49+03:00",
+    "Volume": 42.52,
+    "Price": 11.29,
+    "OdometerStart": 91094.0,
+    "OdometerEnd": 91507.0,
+    "IsPartial": false,
+    "FuelType": "okko 95"
+  },
+  {
+    "Id": "fc9fd837-125b-4023-855f-dad0bae47eeb",
+    "Date": "2012-10-29T19:29:08+02:00",
+    "Volume": 34.05,
+    "Price": 10.29,
+    "OdometerStart": 91507.0,
+    "OdometerEnd": 91850.0,
+    "IsPartial": false,
+    "FuelType": "okko 95"
+  },
+  {
+    "Id": "815e918d-c905-410e-b2f9-19fdcbc0ae8d",
+    "Date": "2012-11-07T19:20:19+02:00",
+    "Volume": 38.28,
+    "Price": 11.29,
+    "OdometerStart": 91850.0,
+    "OdometerEnd": 92201.0,
+    "IsPartial": false,
+    "FuelType": "okko 95"
+  },
+  {
+    "Id": "0f7a3e5a-8f36-43ab-b3bf-54e09dde3036",
+    "Date": "2012-11-07T19:20:53+02:00",
+    "Volume": 37.54,
+    "Price": 11.59,
+    "OdometerStart": 92201.0,
+    "OdometerEnd": 92562.0,
+    "IsPartial": false,
+    "FuelType": "okko 95"
+  },
+  {
+    "Id": "4581b9d2-2729-473c-bf21-3cf06259ef4d",
+    "Date": "2012-11-23T19:24:34+02:00",
+    "Volume": 37.86,
+    "Price": 11.29,
+    "OdometerStart": 92562.0,
+    "OdometerEnd": 92926.0,
+    "IsPartial": false,
+    "FuelType": "okko 95"
+  },
+  {
+    "Id": "ef41ca25-29e1-48ec-b073-cfbb4cad370b",
+    "Date": "2012-12-01T19:54:34+02:00",
+    "Volume": 36.05,
+    "Price": 11.29,
+    "OdometerStart": 92926.0,
+    "OdometerEnd": 93274.0,
+    "IsPartial": false,
+    "FuelType": "okko 95"
+  },
+  {
+    "Id": "b1970b08-ff0b-43ac-bf62-246b7fd2a6c8",
+    "Date": "2012-12-09T10:56:06+02:00",
+    "Volume": 33.85,
+    "Price": 11.29,
+    "OdometerStart": 93274.0,
+    "OdometerEnd": 93591.0,
+    "IsPartial": false,
+    "FuelType": "okko 95"
+  },
+  {
+    "Id": "9e9bc852-9388-4a8c-b698-935a15106c2e",
+    "Date": "2012-12-17T20:35:21+02:00",
+    "Volume": 42.07,
+    "Price": 12.29,
+    "OdometerStart": 93591.0,
+    "OdometerEnd": 93962.0,
+    "IsPartial": false,
+    "FuelType": "okko pulls"
+  },
+  {
+    "Id": "bb5d59ce-87f5-4d7a-ab8a-2b7a6426c99c",
+    "Date": "2012-12-26T19:33:58+02:00",
+    "Volume": 41.24,
+    "Price": 11.29,
+    "OdometerStart": 93962.0,
+    "OdometerEnd": 94312.0,
+    "IsPartial": false,
+    "FuelType": "okko 95"
+  },
+  {
+    "Id": "755b9942-df53-4af6-b80f-13ec286932f7",
+    "Date": "2012-12-29T09:26:39+02:00",
+    "Volume": 34.45,
+    "Price": 11.29,
+    "OdometerStart": 94312.0,
+    "OdometerEnd": 94654.0,
+    "IsPartial": false,
+    "FuelType": "okko 95"
+  },
+  {
+    "Id": "9061711c-0ff9-4c29-9a67-dc27c54bddf9",
+    "Date": "2013-01-09T20:50:30+02:00",
+    "Volume": 36.15,
+    "Price": 11.29,
+    "OdometerStart": 94654.0,
+    "OdometerEnd": 95023.0,
+    "IsPartial": false,
+    "FuelType": "okko 95"
+  },
+  {
+    "Id": "beb9865d-bd1b-453d-ad57-cf30d9fa25b2",
+    "Date": "2013-01-16T19:54:46+02:00",
+    "Volume": 35.86,
+    "Price": 11.19,
+    "OdometerStart": 95023.0,
+    "OdometerEnd": 95362.0,
+    "IsPartial": false,
+    "FuelType": "okko 95"
+  },
+  {
+    "Id": "dc56c8f0-bec0-4d6a-8eae-f0eb4f07cef4",
+    "Date": "2013-01-23T19:41:37+02:00",
+    "Volume": 39.77,
+    "Price": 11.19,
+    "OdometerStart": 95362.0,
+    "OdometerEnd": 95723.0,
+    "IsPartial": false,
+    "FuelType": "okko 95"
+  },
+  {
+    "Id": "9854ca6a-fdc5-4568-9905-ddfaf7327b06",
+    "Date": "2013-01-29T19:38:08+02:00",
+    "Volume": 32.54,
+    "Price": 12.29,
+    "OdometerStart": 95723.0,
+    "OdometerEnd": 96057.0,
+    "IsPartial": false,
+    "FuelType": "okko pulls"
+  },
+  {
+    "Id": "e5af7c8e-5923-4083-a061-baf6e0f3001d",
+    "Date": "2013-02-08T19:41:56+02:00",
+    "Volume": 42.13,
+    "Price": 12.39,
+    "OdometerStart": 96057.0,
+    "OdometerEnd": 96446.0,
+    "IsPartial": false,
+    "FuelType": "okko pulls"
+  },
+  {
+    "Id": "0c5a14d3-b173-4b5a-bdae-adba0bdf53e4",
+    "Date": "2013-02-15T20:47:36+02:00",
+    "Volume": 34.04,
+    "Price": 12.39,
+    "OdometerStart": 96446.0,
+    "OdometerEnd": 96775.0,
+    "IsPartial": false,
+    "FuelType": "okko pulls"
+  },
+  {
+    "Id": "68bc343c-e694-4d08-9860-2af0a5bd4836",
+    "Date": "2013-02-23T17:17:36+02:00",
+    "Volume": 37.34,
+    "Price": 12.59,
+    "OdometerStart": 96775.0,
+    "OdometerEnd": 97139.0,
+    "IsPartial": false,
+    "FuelType": "okko pulls"
+  },
+  {
+    "Id": "867e66a8-ece2-4cfe-aeae-4436e6486c43",
+    "Date": "2013-03-02T21:24:01+02:00",
+    "Volume": 39.16,
+    "Price": 12.59,
+    "OdometerStart": 97139.0,
+    "OdometerEnd": 97512.0,
+    "IsPartial": false,
+    "FuelType": "okko pulls"
+  }
+]
