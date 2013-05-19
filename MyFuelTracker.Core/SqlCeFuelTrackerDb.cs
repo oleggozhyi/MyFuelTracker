@@ -27,7 +27,9 @@ namespace MyFuelTracker.Core
         {
             return Task.Run(() =>
             {
-                Fillups.InsertOnSubmit(fillup);
+                if (!Fillups.Any(f => f.Id == fillup.Id))
+                    Fillups.InsertOnSubmit(fillup);
+
                 SubmitChanges();
             });
         }
@@ -44,7 +46,7 @@ namespace MyFuelTracker.Core
         public Task<Fillup[]> LoadAllFillupsAsync()
         {
             EnsureDatabase();
-            return Task.Run(() => Fillups.OrderBy(f=>f.Date).ToArray());
+            return Task.Run(() => Fillups.OrderBy(f => f.Date).ToArray());
         }
 
         private void EnsureDatabase()
