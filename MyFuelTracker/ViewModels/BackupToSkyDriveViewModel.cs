@@ -74,44 +74,22 @@ namespace MyFuelTracker.ViewModels
 
         public async void DoBackup()
         {
-            var liveConnectClient = new LiveConnectClient(_session);
-            var result = await liveConnectClient.GetAsync("me/skydrive/files");
-            dynamic res = result.Result;
-            string folderId = null;
-            foreach (dynamic folder in res.data)
-            {
-                if (folder.name == "MyFuelTracker")
-                {
-                    folderId = folder.id;
-                    break;
-                }
-            }
-            if (folderId == null)
-            {
-                _messageBox.Show("Folder MyFuelTracker not found");
-                return;
-            }
             var fillupHistoryItems = await _fillupService.GetHistoryAsync();
             var fillups = fillupHistoryItems.Select(h => h.Fillup).ToArray();
-            var serializeObject = JsonConvert.SerializeObject(fillups);
+            var fillupsJson = JsonConvert.SerializeObject(fillups, Formatting.Indented);
+            var skyDriveManager = new SkyDriveManager(_session);
+            string fileName = "fillups_" + DateTime.Now.ToString("yyyy-MM-ddTHH-mm-ss") + ".txt";
 
-            using (var ms = new MemoryStream())
-            using (var w = new StreamWriter(ms))
+            try
             {
-                w.Write(serializeObject);
-                w.Flush();
-                ms.Position = 0;
-
-                var liveOperationResult = await liveConnectClient.UploadAsync(folderId, "fillups_" + DateTime.Now.ToString("yyyy-MM-ddTHH-mm-ss") + ".txt", ms, OverwriteOption.Overwrite);
-                _messageBox.Show("backup uploaded");
+                await skyDriveManager.SaveTextFileAsync("MyFuelTracker", fileName, fillupsJson);
             }
-
-
-
-
+            catch (Exception ex)
+            {
+                _messageBox.Show(ex.Message);                
+            }
         }
 
         #endregion
-
     }
 }
