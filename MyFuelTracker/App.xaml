@@ -11,7 +11,7 @@
     <!--Application Resources-->
     <Application.Resources>
         <caliburnMicro:Bootstrapper x:Key="bootstrapper" />
-        <micro:BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter"/>
+        <infrastructure:MyBooleanToVisibilityConverter x:Key="booleanToVisibilityConverter"/>
         
         <infrastructure:LocalizedStrings xmlns:local="clr-namespace:MyFuelTracker" x:Key="LocalizedStrings"/>
         <Style x:Key="PageTitle" BasedOn="{StaticResource PhoneTextTitle1Style}" TargetType="TextBlock">
