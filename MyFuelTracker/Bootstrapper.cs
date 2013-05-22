@@ -50,6 +50,7 @@ namespace MyFuelTracker
 			Container.Singleton<IFillupService, FillupService>();
 			Container.Singleton<IFuelTrackerDb, SqlCeFuelTrackerDb>();
 			Container.Singleton<IStatisticsService, StatisticsService>();
+	        Container.PerRequest<IProgressIndicatorService, ProgressIndicatorService>();
 
 			LogManager.GetLog = type => new DebugLogger(type);
 		}

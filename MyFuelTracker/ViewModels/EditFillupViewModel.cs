@@ -210,7 +210,7 @@ namespace MyFuelTracker.ViewModels
             }
             catch (ValidationException ex)
             {
-                _messageBox.Show(ex.Message, "cannot save fillup");
+                _messageBox.Error(ex.Message, "cannot save fillup");
                 return;
             }
             await _fillupService.SaveFillupAsync(_fillup);

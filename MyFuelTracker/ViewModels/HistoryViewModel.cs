@@ -146,7 +146,7 @@ namespace MyFuelTracker.ViewModels
 
         public void GoToSettings()
         {
-            _messageBox.Show("not implemented");
+            _messageBox.Info("not implemented");
         }
 
         public async Task UpdateAsync()

@@ -46,7 +46,7 @@ namespace MyFuelTracker.ViewModels
 
         private void RestoreFromSkyDrive()
         {
-            _messageBox.Show("restore");
+            _messageBox.Info("restore");
         }
     }
 }

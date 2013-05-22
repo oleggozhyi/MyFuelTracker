@@ -8,22 +8,31 @@ namespace MyFuelTracker.Infrastructure
 {
 	public class MyMessageBox : IMessageBox
 	{
-		public void Show(string message, string title = null)
+		public void Error(string message, string title = null)
 		{
-			var toast = new ToastPrompt
-			{
-				Title = title,
-				Message = message,
-				Background = new SolidColorBrush(Color.FromArgb(255,255,100,100)),
-				MillisecondsUntilHidden = 2000,
-				TextWrapping = TextWrapping.Wrap
-			
-			};
-			toast.Show();
-
+		    Message(Color.FromArgb(255, 255, 100, 100), message, title);
 		}
 
-		public bool Confirm(string message, string title = null)
+        public void Info(string message, string title = null)
+        {
+            Message(Color.FromArgb(255, 100, 200, 255), message, title);
+        }
+
+	    private void Message(Color bg, string message, string title = null)
+	    {
+
+            var toast = new ToastPrompt
+            {
+                Title = title,
+                Message = message,
+                Background = new SolidColorBrush(bg),
+                MillisecondsUntilHidden = 2000,
+                TextWrapping = TextWrapping.Wrap
+            };
+            toast.Show();
+	    }
+
+	    public bool Confirm(string message, string title = null)
 		{
 			var messageBoxResult = MessageBox.Show(message, title ?? "confirm", MessageBoxButton.OKCancel);
 			return messageBoxResult == MessageBoxResult.OK;

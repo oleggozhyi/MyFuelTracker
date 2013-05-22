@@ -105,6 +105,8 @@
     <Compile Include="Infrastructure\HslColor.cs" />
     <Compile Include="Infrastructure\Icons.cs" />
     <Compile Include="Infrastructure\IMessageBox.cs" />
+    <Compile Include="Infrastructure\ProgressIndicatorService.cs" />
+    <Compile Include="Infrastructure\IProgressIndicatorService.cs" />
     <Compile Include="Infrastructure\MyMessageBox.cs" />
     <Compile Include="Infrastructure\FuelTypeAddedEvent.cs" />
     <Compile Include="Infrastructure\SkyDriveManager.cs" />
