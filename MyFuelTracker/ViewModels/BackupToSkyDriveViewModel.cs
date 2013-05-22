@@ -8,6 +8,7 @@ using Caliburn.Micro;
 using Microsoft.Live;
 using Microsoft.Live.Controls;
 using MyFuelTracker.Core;
+using MyFuelTracker.Core.Models;
 using MyFuelTracker.Infrastructure;
 using Newtonsoft.Json;
 
@@ -24,6 +25,7 @@ namespace MyFuelTracker.ViewModels
         private bool _exportToExcel;
         private LiveConnectSession _session;
         private bool _canBackup;
+        private int _hideStoryboardFrom;
 
         #endregion
 
@@ -36,11 +38,23 @@ namespace MyFuelTracker.ViewModels
             _progressIndicatorService = progressIndicatorService;
             _progressIndicatorService.AttachIndicatorToView();
             _progressIndicatorService.ShowIndeterminate("signing in...");
+            HideStoryboardFrom = 2000;
         }
 
         #endregion
 
         #region Properties
+
+        public int HideStoryboardFrom   
+        {
+            get { return _hideStoryboardFrom; }
+            set
+            {
+                if (value == _hideStoryboardFrom) return;
+                _hideStoryboardFrom = value;
+                NotifyOfPropertyChange(() => HideStoryboardFrom);
+            }
+        }
 
         public bool IsSignedIn
         {
@@ -85,9 +99,14 @@ namespace MyFuelTracker.ViewModels
             _progressIndicatorService.Stop();
             if (args.Status == LiveConnectSessionStatus.Connected)
             {
+                HideStoryboardFrom = 0;
                 IsSignedIn = true;
                 _session = args.Session;
-                _progressIndicatorService.Stop();
+            }
+            else 
+            {
+                IsSignedIn = false;
+                _session = null;
             }
         }
 
@@ -105,7 +124,15 @@ namespace MyFuelTracker.ViewModels
 
 
                 await skyDriveManager.SaveTextFileAsync("MyFuelTracker", fileName, fillupsJson);
-                _messageBox.Info("data was successfully backed up to SkyDrive");
+                if (ExportToExcel)
+                {
+                    var csv = CreateCsv(fillupHistoryItems);
+                    fileName = "Export_" + DateTime.Now.ToString("yyyy-MM-ddTHH-mm-ss") + ".csv";
+                    await skyDriveManager.SaveTextFileAsync("MyFuelTracker", fileName, csv);
+                }
+                _messageBox.Info("data was successfully backed up to SkyDrive", "BACKUP");
+
+
             }
             catch (Exception ex)
             {
@@ -116,6 +143,34 @@ namespace MyFuelTracker.ViewModels
                 CanBackup = true;
                 _progressIndicatorService.Stop();
             }
+        }
+
+        private string CreateCsv(IEnumerable<FillupHistoryItem> fillupHistoryItems)
+        {
+            var builder = new StringBuilder();
+            var header = string.Join(";", new[]
+                {
+                    "Date", "Previous odometer", "Current odometer", "Distance", "Volume", "Fuel type", "Fuel price", "Fillup cost", "Is partial", "consumption"
+                });
+            builder.AppendLine(header);
+            foreach (var item in fillupHistoryItems )
+            {
+                var line = string.Join(";", new[]
+                {
+                   item.Fillup.Date.ToString("dd/MM/yyyy"),
+                   item.Fillup.OdometerStart.FormatForDisplay(0),
+                   item.Fillup.OdometerEnd.FormatForDisplay(0),
+                   (item.Fillup.OdometerEnd - item.Fillup.OdometerStart).FormatForDisplay(0),
+                   item.Fillup.Volume.FormatForDisplay(2),
+                   item.Fillup.FuelType,
+                   item.Fillup.Price.FormatForDisplay(2),
+                   (item.Fillup.Volume*item.Fillup.Price).FormatForDisplay(2),
+                   item.Fillup.IsPartial ? "yes": "no",
+                   item.Consumption.HasValue? item.Consumption.Value.FormatForDisplay(2) : ""
+                });
+                builder.AppendLine(line);
+            }
+            return builder.ToString();
         }
 
         #endregion

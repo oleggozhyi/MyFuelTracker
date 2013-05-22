@@ -10,12 +10,12 @@ namespace MyFuelTracker.Infrastructure
 	{
 		public void Error(string message, string title = null)
 		{
-		    Message(Color.FromArgb(255, 255, 100, 100), message, title);
+		    Message(Color.FromArgb(255, 200, 40, 40), message, title);
 		}
 
         public void Info(string message, string title = null)
         {
-            Message(Color.FromArgb(255, 100, 200, 255), message, title);
+            Message(Color.FromArgb(255, 0, 80, 200), message, title);
         }
 
 	    private void Message(Color bg, string message, string title = null)
@@ -27,7 +27,8 @@ namespace MyFuelTracker.Infrastructure
                 Message = message,
                 Background = new SolidColorBrush(bg),
                 MillisecondsUntilHidden = 2000,
-                TextWrapping = TextWrapping.Wrap
+                TextWrapping = TextWrapping.Wrap,
+                FontSize = 24
             };
             toast.Show();
 	    }

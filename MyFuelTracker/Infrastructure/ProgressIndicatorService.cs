@@ -18,6 +18,9 @@ namespace MyFuelTracker.Infrastructure
 
         public void ShowIndeterminate(string text)
         {
+            if(SystemTray.ProgressIndicator == null)
+                return;
+            
             SystemTray.ProgressIndicator.Text = text;
             SystemTray.ProgressIndicator.IsIndeterminate = true;
             SystemTray.ProgressIndicator.IsVisible = true;
@@ -25,6 +28,9 @@ namespace MyFuelTracker.Infrastructure
 
         public void Stop()
         {
+            if (SystemTray.ProgressIndicator == null)
+                return;
+
             SystemTray.ProgressIndicator.IsVisible = false;
         }
     }
