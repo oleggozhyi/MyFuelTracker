@@ -11,14 +11,21 @@
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
     xmlns:ec="clr-namespace:Microsoft.Expression.Interactivity.Core;assembly=Microsoft.Expression.Interactions"
     xmlns:eim="clr-namespace:Microsoft.Expression.Interactivity.Media;assembly=Microsoft.Expression.Interactions"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="True"
+    toolkit:TransitionService.NavigationInTransition="{StaticResource navigationInTransition}"
+    toolkit:TransitionService.NavigationOutTransition="{StaticResource navigationOutTransition}">
+   
     <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
+    <Grid x:Name="LayoutRoot">
+        <Grid.Background>
+            <ImageBrush ImageSource="/Assets/black-wood-background.jpg"></ImageBrush>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -47,6 +54,7 @@
                                 <ExponentialEase Exponent="12" EasingMode="EaseOut"/>
                             </DoubleAnimation.EasingFunction>
                         </DoubleAnimation>
+                        <DoubleAnimation From="0" To="1" Duration="00:00:00.8" Storyboard.TargetName="Panel" Storyboard.TargetProperty="(FrameworkElement.Opacity)" />
                     </Storyboard>
                     <Storyboard x:Key="HidePanelAnimation" TargetName="Panel" TargetProperty="(FrameworkElement.RenderTransform).(TranslateTransform.Y)">
                         <DoubleAnimation From="{Binding HideStoryboardFrom}" To="2000" Duration="00:00:00.8" >
@@ -54,6 +62,7 @@
                                 <ExponentialEase Exponent="12" EasingMode="EaseIn"/>
                             </DoubleAnimation.EasingFunction>
                         </DoubleAnimation>
+                        <DoubleAnimation From="1" To="0" Duration="00:00:00.8" Storyboard.TargetName="Panel" Storyboard.TargetProperty="(FrameworkElement.Opacity)" />
                     </Storyboard>
                 </StackPanel.Resources>
                 <StackPanel.RenderTransform>

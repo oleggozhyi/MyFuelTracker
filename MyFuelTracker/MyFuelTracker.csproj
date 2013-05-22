@@ -225,6 +225,7 @@
     <Content Include="Assets\ApplicationIcon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\black-wood-background.jpg" />
     <Content Include="Assets\view_less.png" />
     <Content Include="Assets\feature.settings.png" />
     <Content Include="Assets\fuel.png" />

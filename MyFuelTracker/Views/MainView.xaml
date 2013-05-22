@@ -11,6 +11,7 @@
     xmlns:local="clr-namespace:MyFuelTracker.Infrastructure"
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
     mc:Ignorable="d"
+    
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -20,9 +21,13 @@
     toolkit:TransitionService.NavigationInTransition="{StaticResource navigationInTransition}"
     toolkit:TransitionService.NavigationOutTransition="{StaticResource navigationOutTransition}"
     >
+    <phone:PhoneApplicationPage.Background>
+        <ImageBrush ImageSource="/Assets/black-wood-background.jpg" Stretch="UniformToFill"></ImageBrush>
+    </phone:PhoneApplicationPage.Background>
 	<phone:PhoneApplicationPage.Resources>
 		<DataTemplate x:Key="FilllupTemplate">
 			<Grid >
+                
 				<Grid.RowDefinitions>
 					<RowDefinition Height="Auto"/>
 					<RowDefinition Height="Auto"/>
@@ -43,7 +48,7 @@
     </i:Interaction.Behaviors>
 
     <Grid x:Name="LayoutRoot">
-        <phone:Pivot x:Name="Items">
+        <phone:Pivot x:Name="Items" Background="{StaticResource AppBackground}">            
             <phone:Pivot.TitleTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">

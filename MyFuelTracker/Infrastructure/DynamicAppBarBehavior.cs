@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interactivity;
+using System.Windows.Media;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using MyFuelTracker.ViewModels;
@@ -47,7 +48,8 @@ namespace MyFuelTracker.Infrastructure
                 IsVisible = true,
                 Mode = ApplicationBarMode.Default,
                 Opacity = 1,
-                IsMenuEnabled = true
+                IsMenuEnabled = true,
+                BackgroundColor = Color.FromArgb(220,40,40,40)
             };
             _page.Loaded += (s, e) => Initialize();
         }
