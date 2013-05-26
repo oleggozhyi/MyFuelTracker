@@ -1,13 +1,13 @@
 ﻿<phone:PhoneApplicationPage
-    x:Class="MyFuelTracker.Views.BackupToSkyDriveView"
+    x:Class="MyFuelTracker.Views.RestoreFromSkyDriveView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:live="clr-namespace:Microsoft.Live.Controls;assembly=Microsoft.Live.Controls"
     xmlns:micro="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro"
+    xmlns:live="clr-namespace:Microsoft.Live.Controls;assembly=Microsoft.Live.Controls"
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
     xmlns:ec="clr-namespace:Microsoft.Expression.Interactivity.Core;assembly=Microsoft.Expression.Interactions"
     xmlns:eim="clr-namespace:Microsoft.Expression.Interactivity.Media;assembly=Microsoft.Expression.Interactions"
@@ -17,13 +17,11 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
-    shell:SystemTray.IsVisible="True"
-    toolkit:TransitionService.NavigationInTransition="{StaticResource navigationInTransition}"
-    toolkit:TransitionService.NavigationOutTransition="{StaticResource navigationOutTransition}">
-   
+	toolkit:TiltEffect.IsTiltEnabled="True"
+    shell:SystemTray.IsVisible="True">
+
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="{StaticResource AppBackground}">
-        
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -35,15 +33,15 @@
                 <Image Source="/Assets/fuel.png" Width="25" Height="25"></Image>
                 <TextBlock Text="MY FUEL TRACKER" Style="{StaticResource PhoneTextNormalStyle}" FontWeight="Bold"/>
             </StackPanel>
-            <TextBlock Text="skydrive backup" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock Text="skydrive restore" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
         <StackPanel x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <live:SignInButton ClientId="000000004C0F1406" Branding="Skydrive" TextType="SignIn" SignInText="skydrive sign in" SignOutText="sign out"
-                Scopes="wl.skydrive_update" IsEnabled="{Binding CanBackup}"
-                               micro:Message.Attach="[Event SessionChanged] = [Action OnSessionChanged($eventargs)]" />
-            <StackPanel x:Name="Panel">
+                Scopes="wl.skydrive_update" 
+                micro:Message.Attach="[Event SessionChanged] = [Action OnSessionChanged($eventargs)]" />
+			<StackPanel x:Name="Panel">
                 <StackPanel.Resources>
                     <Storyboard x:Key="ShowPanelAnimation">
                         <DoubleAnimation From="2000" To="0" Duration="00:00:00.8" Storyboard.TargetName="Panel" Storyboard.TargetProperty="(FrameworkElement.RenderTransform).(TranslateTransform.Y)" >
@@ -66,19 +64,51 @@
                     <TranslateTransform Y="2000"/>
                 </StackPanel.RenderTransform>
                 <i:Interaction.Triggers>
-                    <ec:DataTrigger Binding="{Binding IsSignedIn}" Value="true">
+					<ec:DataTrigger Binding="{Binding FillupsDownloaded}" Value="true">
                         <eim:ControlStoryboardAction ControlStoryboardOption="Play" Storyboard="{StaticResource ShowPanelAnimation}" />
                     </ec:DataTrigger>
-                    <ec:DataTrigger Binding="{Binding IsSignedIn}" Value="false">
+					<ec:DataTrigger Binding="{Binding FillupsDownloaded}" Value="false">
                         <eim:ControlStoryboardAction ControlStoryboardOption="Play" Storyboard="{StaticResource HidePanelAnimation}" />
                     </ec:DataTrigger>
                 </i:Interaction.Triggers>
                 <Rectangle Height="1" Stroke="White" Margin="0 20 0 20" />
-                <TextBlock  FontSize="{StaticResource PhoneFontSizeMediumLarge}" Text="This will create a backup file on you SkyDrive into the ''MyFuelTracker' folder" TextWrapping="Wrap"/>
-                <CheckBox IsEnabled="{Binding CanBackup}" FontSize="{StaticResource PhoneFontSizeMediumLarge}" Content="export history to Excel*" IsChecked="{Binding ExportToExcel, Mode=TwoWay}"/>
-                <TextBlock Margin="60 0 0 0" TextWrapping="Wrap" FontSize="{StaticResource PhoneFontSizeSmall}" Text="*Actually it will be exported to a tabulated text file which is understood by Excel quite well."></TextBlock>
-                <Button Content="backup" IsEnabled="{Binding CanBackup}" micro:Message.Attach="[Event Click] = [Action DoBackup]"></Button>
+				<StackPanel x:Name="NoBackupsView"  Visibility="{Binding BackupsAvailable, Converter={StaticResource booleanToVisibilityConverter}, ConverterParameter=true}" >
+					<TextBlock Text="No backups found on  SkyDrive." FontSize="{StaticResource PhoneFontSizeLarge}"/>
+					<TextBlock  Margin="0 20 0 0" Text="There should be the folder 'MyFuelTracker' on your SkyDrive and  it should contain at least one file with the name starting from 'fillups_'" TextWrapping="Wrap" FontSize="{StaticResource PhoneFontSizeNormal}"/>
+				</StackPanel>
+				<StackPanel x:Name="RestoreFromBackupView" Visibility="{Binding BackupsAvailable, Converter={StaticResource booleanToVisibilityConverter}}" >
+					<TextBlock Text="Select backup you want to restore" FontSize="{StaticResource PhoneFontSizeMediumLarge}"/>
+					<phone:LongListSelector ItemsSource="{Binding Backups}">
+						<phone:LongListSelector.ItemTemplate>
+							<DataTemplate>
+								<Border Margin="0 20 0 20" Background="#80A05555">
+								<Grid Margin="5" >
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="Auto"/>
+										<ColumnDefinition Width="20"/>
+										<ColumnDefinition Width="*"/>
+									</Grid.ColumnDefinitions>
+									<Grid.RowDefinitions>
+										<RowDefinition/>
+										<RowDefinition/>
+										<RowDefinition/>
+									</Grid.RowDefinitions>
+									<TextBlock Grid.Row="0" Text="backup date" FontSize="{StaticResource PhoneFontSizeMedium}" Foreground="Gray"/>
+									<TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding BackupDate}" FontSize="{StaticResource PhoneFontSizeMedium}" Foreground="White"/>
+
+									<TextBlock Grid.Row="1" Text="last fillup date" FontSize="{StaticResource PhoneFontSizeMedium}" Foreground="Gray"/>
+									<TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding LastFillupDate}" FontSize="{StaticResource PhoneFontSizeMedium}" Foreground="White"/>
+
+									<TextBlock Grid.Row="2" Text="last odometer value" FontSize="{StaticResource PhoneFontSizeMedium}" Foreground="Gray"/>
+									<TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding LastOdometer}" FontSize="{StaticResource PhoneFontSizeMedium}" Foreground="White"/>
+								</Grid>
+								</Border>
+							</DataTemplate>
+						</phone:LongListSelector.ItemTemplate>
+					</phone:LongListSelector>
+				</StackPanel>
             </StackPanel>
+
         </StackPanel>
     </Grid>
 

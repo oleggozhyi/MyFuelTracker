@@ -124,6 +124,7 @@
     <Compile Include="ViewModels\HistoryViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Infrastructure\MyBooleanToVisibilityConverter.cs" />
+    <Compile Include="ViewModels\RestoreFromSkyDriveViewModel.cs" />
     <Compile Include="ViewModels\SummaryViewModel.cs" />
     <Compile Include="Views\AddFuelTypeView.xaml.cs">
       <DependentUpon>AddFuelTypeView.xaml</DependentUpon>
@@ -152,6 +153,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AppResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RestoreFromSkyDriveView.xaml.cs">
+      <DependentUpon>RestoreFromSkyDriveView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SummaryView.xaml.cs">
       <DependentUpon>SummaryView.xaml</DependentUpon>
@@ -197,6 +201,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\RestoreFromSkyDriveView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\SummaryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -226,6 +234,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\black-wood-background.jpg" />
+    <Content Include="Assets\simple-black-ipad-background1.jpg" />
     <Content Include="Assets\view_less.png" />
     <Content Include="Assets\feature.settings.png" />
     <Content Include="Assets\fuel.png" />

@@ -89,7 +89,10 @@
     <Compile Include="DataAccess\IFuelTrackerDb.cs" />
     <Compile Include="DataAccess\InMemoryFuelTrackerDb.cs" />
     <Compile Include="FillupService.cs" />
+    <Compile Include="FillupsHolder.cs" />
+    <Compile Include="FillupsSerializer.cs" />
     <Compile Include="IFillupService.cs" />
+    <Compile Include="IFillupsSerializer.cs" />
     <Compile Include="IStatisticsService.cs" />
     <Compile Include="Models\Fillup.cs" />
     <Compile Include="Models\FillupHistoryItem.cs" />

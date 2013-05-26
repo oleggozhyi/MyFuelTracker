@@ -10,7 +10,7 @@
 
     <!--Application Resources-->
     <Application.Resources>
-        <ImageBrush x:Key="AppBackground" ImageSource="/Assets/black-wood-background.jpg"/>
+        <ImageBrush x:Key="AppBackground" ImageSource="/Assets/simple-black-ipad-background1.jpg"/>
         <caliburnMicro:Bootstrapper x:Key="bootstrapper" />
         <infrastructure:MyBooleanToVisibilityConverter x:Key="booleanToVisibilityConverter"/>
 

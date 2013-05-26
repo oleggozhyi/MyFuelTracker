@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Live;
+using MyFuelTracker.Core;
 
 namespace MyFuelTracker.Infrastructure
 {
@@ -84,43 +85,46 @@ namespace MyFuelTracker.Infrastructure
             return null;
         }
 
+	    public async Task<FillupsHolder[]> GetAllFillupsAsync()
+	    {
+			var skyDriveClient = new LiveConnectClient(_session);
+			var serializer = new FillupsSerializer();
 
-        /*
-         *  var liveConnectClient = new LiveConnectClient(_session);
-            var result = await liveConnectClient.GetAsync("me/skydrive/files");
-            dynamic res = result.Result;
-            string folderId = null;
-            foreach (dynamic folder in res.data)
-            {
-                if (folder.name == "MyFuelTracker")
-                {
-                    folderId = folder.id;
-                    break;
-                }
-            }
-            if (folderId == null)
-            {
-                _messageBox.Show("Folder MyFuelTracker not found");
-                return;
-            }
+			var liveOperationResult = await skyDriveClient.GetAsync("me/skydrive/files");
+			var folderContents = (IEnumerable)liveOperationResult.Result["data"];
+			string folderId = FindFolder("MyFuelTracker", folderContents);
+		    if (folderId == null)
+			    return new FillupsHolder[0];
+
+			liveOperationResult = await skyDriveClient.GetAsync(folderId + "/files");
+			folderContents = (IEnumerable)liveOperationResult.Result["data"];
+
+			var backupFiles = new List<FillupsHolder>();
+			foreach (dynamic folderObject in folderContents)
+			{
+
+				if (folderObject.type == "file" && ((string)folderObject.name).StartsWith("fillups"))
+				{
+					var downloadOperationResult = await skyDriveClient.DownloadAsync((string)folderObject.id + "/content");
+					try
+					{
+						var fileContent = new StreamReader(downloadOperationResult.Stream).ReadToEnd();
+						var fillupsHolder = serializer.Deserialize(fileContent);
+						backupFiles.Add(fillupsHolder);
+					}
+					catch (Exception)
+					{
+					}
+					finally
+					{
+						downloadOperationResult.Stream.Dispose();
+					}
+				}
+			}
+			return backupFiles.ToArray();
+	    }
 
 
-            using (var ms = new MemoryStream())
-            using (var w = new StreamWriter(ms))
-            {
-                w.Write(serializeObject);
-                w.Flush();
-                ms.Position = 0;
-
-                var liveOperationResult = await liveConnectClient.UploadAsync(folderId, "fillups_" + DateTime.Now.ToString("yyyy-MM-ddTHH-mm-ss") + ".txt", ms, OverwriteOption.Overwrite);
-                _messageBox.Show("backup uploaded");
-            }
-
-
-
-         */
-        #endregion
-
-
+	    #endregion
     }
 }

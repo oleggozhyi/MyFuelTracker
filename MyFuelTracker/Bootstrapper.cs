@@ -43,6 +43,7 @@ namespace MyFuelTracker
 			Container.PerRequest<AddFuelTypeViewModel>();
 			Container.PerRequest<DisplayFillupViewModel>();
             Container.PerRequest<BackupToSkyDriveViewModel>();
+            Container.PerRequest<RestoreFromSkyDriveViewModel>();
             
 			Container.PerRequest<ILog, DebugLogger>();
 	        Container.Singleton<AppBarMenuModel>();
@@ -51,6 +52,7 @@ namespace MyFuelTracker
 			Container.Singleton<IFuelTrackerDb, SqlCeFuelTrackerDb>();
 			Container.Singleton<IStatisticsService, StatisticsService>();
 	        Container.PerRequest<IProgressIndicatorService, ProgressIndicatorService>();
+		    Container.Singleton<IFillupsSerializer, FillupsSerializer>();
 
 			LogManager.GetLog = type => new DebugLogger(type);
 		}

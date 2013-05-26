@@ -20,7 +20,8 @@ namespace MyFuelTracker.ViewModels
 
         private readonly IMessageBox _messageBox;
         private readonly IFillupService _fillupService;
-        private readonly IProgressIndicatorService _progressIndicatorService;
+	    private readonly IFillupsSerializer _fillupsSerializer;
+	    private readonly IProgressIndicatorService _progressIndicatorService;
         private bool _isSignedIn;
         private bool _exportToExcel;
         private LiveConnectSession _session;
@@ -31,11 +32,15 @@ namespace MyFuelTracker.ViewModels
 
         #region ctor
 
-        public BackupToSkyDriveViewModel(IMessageBox messageBox, IFillupService fillupService, IProgressIndicatorService progressIndicatorService)
+        public BackupToSkyDriveViewModel(IMessageBox messageBox, 
+										IFillupService fillupService, 
+										IFillupsSerializer fillupsSerializer,
+										IProgressIndicatorService progressIndicatorService)
         {
             _messageBox = messageBox;
             _fillupService = fillupService;
-            _progressIndicatorService = progressIndicatorService;
+	        _fillupsSerializer = fillupsSerializer;
+	        _progressIndicatorService = progressIndicatorService;
             _progressIndicatorService.AttachIndicatorToView();
             _progressIndicatorService.ShowIndeterminate("signing in...");
             HideStoryboardFrom = 2000;
@@ -118,7 +123,7 @@ namespace MyFuelTracker.ViewModels
                 _progressIndicatorService.ShowIndeterminate("backing up to SkyDrive...");
                 var fillupHistoryItems = await _fillupService.GetHistoryAsync();
                 var fillups = fillupHistoryItems.Select(h => h.Fillup).ToArray();
-                var fillupsJson = JsonConvert.SerializeObject(fillups, Formatting.Indented);
+	            var fillupsJson = _fillupsSerializer.Serialize(fillups);
                 var skyDriveManager = new SkyDriveManager(_session);
                 string fileName = "fillups_" + DateTime.Now.ToString("yyyy-MM-ddTHH-mm-ss") + ".txt";
 
@@ -126,8 +131,8 @@ namespace MyFuelTracker.ViewModels
                 await skyDriveManager.SaveTextFileAsync("MyFuelTracker", fileName, fillupsJson);
                 if (ExportToExcel)
                 {
-                    var csv = CreateCsv(fillupHistoryItems);
-                    fileName = "Export_" + DateTime.Now.ToString("yyyy-MM-ddTHH-mm-ss") + ".csv";
+                    var csv = CreateTabulatedText(fillupHistoryItems);
+                    fileName = "Export_" + DateTime.Now.ToString("yyyy-MM-ddTHH-mm-ss") + ".txt";
                     await skyDriveManager.SaveTextFileAsync("MyFuelTracker", fileName, csv);
                 }
                 _messageBox.Info("data was successfully backed up to SkyDrive", "BACKUP");
@@ -145,17 +150,17 @@ namespace MyFuelTracker.ViewModels
             }
         }
 
-        private string CreateCsv(IEnumerable<FillupHistoryItem> fillupHistoryItems)
+        private string CreateTabulatedText(IEnumerable<FillupHistoryItem> fillupHistoryItems)
         {
             var builder = new StringBuilder();
-            var header = string.Join(";", new[]
+            var header = string.Join("\t", new[]
                 {
                     "Date", "Previous odometer", "Current odometer", "Distance", "Volume", "Fuel type", "Fuel price", "Fillup cost", "Is partial", "consumption"
                 });
             builder.AppendLine(header);
             foreach (var item in fillupHistoryItems )
             {
-                var line = string.Join(";", new[]
+                var line = string.Join("\t", new[]
                 {
                    item.Fillup.Date.ToString("dd/MM/yyyy"),
                    item.Fillup.OdometerStart.FormatForDisplay(0),

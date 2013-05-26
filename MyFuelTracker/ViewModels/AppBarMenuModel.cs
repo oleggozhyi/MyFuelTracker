@@ -16,7 +16,7 @@ namespace MyFuelTracker.ViewModels
         private readonly INavigationService _navigationService;
 
         private readonly DynamicAppBarItem _backupToSkydriveMenuItem = new DynamicAppBarItem { Text = "backup to skydrive" };
-        private readonly DynamicAppBarItem _restoreFromSkydriveMenuItem = new DynamicAppBarItem { Text = "restore to skydrive" };
+        private readonly DynamicAppBarItem _restoreFromSkydriveMenuItem = new DynamicAppBarItem { Text = "restore from skydrive" };
 
         #endregion
 
@@ -46,7 +46,8 @@ namespace MyFuelTracker.ViewModels
 
         private void RestoreFromSkyDrive()
         {
-            _messageBox.Info("restore");
+			_navigationService.UriFor<RestoreFromSkyDriveViewModel>().Navigate();
+
         }
     }
 }
