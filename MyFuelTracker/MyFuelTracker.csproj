@@ -117,6 +117,7 @@
     <Compile Include="ViewModels\AddFuelTypeViewModel.cs" />
     <Compile Include="ViewModels\AppBarMenuModel.cs" />
     <Compile Include="ViewModels\BackupToSkyDriveViewModel.cs" />
+    <Compile Include="ViewModels\BackupViewModel.cs" />
     <Compile Include="ViewModels\DisplayFillupViewModel.cs" />
     <Compile Include="ViewModels\EditFillupViewModel.cs" />
     <Compile Include="ViewModels\FillupHistoryGroupViewModel.cs" />

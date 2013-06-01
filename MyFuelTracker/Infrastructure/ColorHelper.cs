@@ -19,6 +19,8 @@ namespace MyFuelTracker.Infrastructure
 
         public static Color GetColor(double currentValue, double minValue, double avgValue, double maxValue, bool foreground = true)
         {
+			if(Math.Abs(minValue - maxValue) < 0.001)
+				return new HslColor { A = 1, H = MIN_HUE, L = foreground ? 0.5 : 0.35, S = 1 }.ToColor(); 
             double currentValueHue;
             if (currentValue >= minValue &&
                 currentValue < avgValue)

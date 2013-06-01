@@ -37,8 +37,12 @@ namespace MyFuelTracker.ViewModels
         private string _avgFillupCost;
         private string _mostOftenFuelType;
         private string _lastFillupCost;
+	    private bool _historyEmpty = true;
+	    private int _hideStoryboardFrom = 2000;
+	    private bool _showNoHistoryMessage;
+	    private bool _statisticsReady;
 
-        #endregion
+	    #endregion
 
         #region ctor
 
@@ -65,9 +69,31 @@ namespace MyFuelTracker.ViewModels
 
         #region Properties
 
-        public IEnumerable<DynamicAppBarButton> Buttons { get { return _buttons; } }
+		public IEnumerable<DynamicAppBarButton> Buttons { get { return _buttons; } }
 
-        public string ConsumptionDimension { get { return "L/100km"; } }
+		public bool ShowNoHistoryMessage
+		{
+			get { return _showNoHistoryMessage; }
+			set
+			{
+				if (value.Equals(_showNoHistoryMessage)) return;
+				_showNoHistoryMessage = value;
+				NotifyOfPropertyChange(() => ShowNoHistoryMessage);
+			}
+		}
+
+		public bool StatisticsReady
+		{
+			get { return _statisticsReady; }
+			set
+			{
+				if (value.Equals(_statisticsReady)) return;
+				_statisticsReady = value;
+				NotifyOfPropertyChange(() => StatisticsReady);
+			}
+		}
+
+	    public string ConsumptionDimension { get { return "L/100km"; } }
 
         public string CostDimension { get { return "hr"; } }
 
@@ -237,6 +263,17 @@ namespace MyFuelTracker.ViewModels
             }
         }
 
+		public int HideStoryboardFrom
+		{
+			get { return _hideStoryboardFrom; }
+			set
+			{
+				if (value == _hideStoryboardFrom) return;
+				_hideStoryboardFrom = value;
+				NotifyOfPropertyChange(() => HideStoryboardFrom);
+			}
+		}
+
         #endregion
 
         #region methods
@@ -253,9 +290,18 @@ namespace MyFuelTracker.ViewModels
 
         public async Task UpdateAsync()
         {
+			HideStoryboardFrom = 0;
             var statistics = await _fillupService.GetStatisticsAsync();
+	        if (statistics == null)
+	        {
+		        ShowNoHistoryMessage = true;
+		        StatisticsReady = false;
+		        return;
+	        }
+			StatisticsReady = true;
+			ShowNoHistoryMessage = false;
 
-            AllTimeAvgConsumption = statistics.AllTimeAvgConsumption.FormatForDisplay(2);
+	        AllTimeAvgConsumption = statistics.AllTimeAvgConsumption.FormatForDisplay(2);
             AllTimeAvgConsumptionBrush = ColorHelper.AvgColor.ToBrush();
 
             MaxConsumption = statistics.MaxConsumption.FormatForDisplay(2);
@@ -286,6 +332,7 @@ namespace MyFuelTracker.ViewModels
             LastFillupCost = statistics.LastFillupCost.FormatForDisplay(2);
 
             MostOftenFuelType = statistics.MostOftenFuelType;
+
         }
 
         public async void Handle(FillupHistoryChangedEvent message)

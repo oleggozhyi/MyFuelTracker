@@ -17,23 +17,28 @@ namespace MyFuelTracker.ViewModels
 
 		private IMessageBox _messageBox;
 		private IFillupService _fillupService;
+		private readonly IEventAggregator _eventAggregator;
 		private readonly IProgressIndicatorService _progressIndicatorService;
 		private int _hideStoryboardFrom;
 		private bool _isSignedIn;
 		private LiveConnectSession _session;
-		private bool _backupsAvailable;
-		private bool _fillupsDownloaded;
-		private IEnumerable<BackupViewModel> _backups;
+		private bool _restoreSourceAvailable;
+		private bool _backupDownloaded;
+		private BackupViewModel _restoreSource;
+		private bool _canRestore;
 
 		#endregion
 
 		#region ctor
 
-		public RestoreFromSkyDriveViewModel(IMessageBox messageBox, IFillupService fillupService,
+		public RestoreFromSkyDriveViewModel(IMessageBox messageBox, 
+											IFillupService fillupService,
+											IEventAggregator eventAggregator,
 											IProgressIndicatorService progressIndicatorService)
 		{
 			_messageBox = messageBox;
 			_fillupService = fillupService;
+			_eventAggregator = eventAggregator;
 			_progressIndicatorService = progressIndicatorService;
 			_progressIndicatorService.AttachIndicatorToView();
 			_progressIndicatorService.ShowIndeterminate("signing in...");
@@ -44,28 +49,27 @@ namespace MyFuelTracker.ViewModels
 
 		#region Properties
 
-		public IEnumerable<BackupViewModel> Backups
+		public BackupViewModel RestoreSource
 		{
-			get { return _backups; }
+			get { return _restoreSource; }
 			set
 			{
-				if (Equals(value, _backups)) return;
-				_backups = value;
-				NotifyOfPropertyChange(() => Backups);
+				if (Equals(value, _restoreSource)) return;
+				_restoreSource = value;
+				NotifyOfPropertyChange(() => RestoreSource);
 			}
 		}
 
-		public bool BackupsAvailable
+		public bool RestoreSourceAvailable
 		{
-			get { return _backupsAvailable; }
+			get { return _restoreSourceAvailable; }
 			set
 			{
-				if (value.Equals(_backupsAvailable)) return;
-				_backupsAvailable = value;
-				NotifyOfPropertyChange(() => BackupsAvailable);
+				if (value.Equals(_restoreSourceAvailable)) return;
+				_restoreSourceAvailable = value;
+				NotifyOfPropertyChange(() => RestoreSourceAvailable);
 			}
 		}
-
 
 		public int HideStoryboardFrom
 		{
@@ -89,20 +93,58 @@ namespace MyFuelTracker.ViewModels
 			}
 		}
 
-		public bool FillupsDownloaded
+		public bool BackupDownloaded
 		{
-			get { return _fillupsDownloaded; }
+			get { return _backupDownloaded; }
 			set
 			{
-				if (value.Equals(_fillupsDownloaded)) return;
-				_fillupsDownloaded = value;
-				NotifyOfPropertyChange(() => FillupsDownloaded);
+				if (value.Equals(_backupDownloaded)) return;
+				_backupDownloaded = value;
+				NotifyOfPropertyChange(() => BackupDownloaded);
+			}
+		}
+
+		public bool CanRestore
+		{
+			get { return _canRestore; }
+			set
+			{
+				if (value.Equals(_canRestore)) return;
+				_canRestore = value;
+				NotifyOfPropertyChange(() => CanRestore);
 			}
 		}
 
 		#endregion
 
 		#region Methods
+
+		public async void Restore()
+		{
+			var restore = _messageBox.Confirm("Are you sure you want to restore? \n\n" 
+						+ "Tap OK to continue", "Restore");
+			if(!restore)
+				return;
+
+			try
+			{
+				_progressIndicatorService.ShowIndeterminate("Restoring...");
+				CanRestore = false;
+				await _fillupService.RestoreDataAsync(RestoreSource.FillupsHolder.Fillups);
+				_messageBox.Info("Your fillups data was successfully restored", "restore");
+
+				_eventAggregator.Publish(new FillupHistoryChangedEvent());
+			}
+			catch (Exception ex)
+			{
+				_messageBox.Error(ex.Message);
+			}
+			finally
+			{
+				CanRestore = true;
+				_progressIndicatorService.Stop();
+			}
+		}
 
 		public void OnSessionChanged(LiveConnectSessionChangedEventArgs args)
 		{
@@ -112,7 +154,7 @@ namespace MyFuelTracker.ViewModels
 				HideStoryboardFrom = 0;
 				IsSignedIn = true;
 				_session = args.Session;
-				LoadBackups();
+				LoadLastBackup();
 			}
 			else
 			{
@@ -121,50 +163,32 @@ namespace MyFuelTracker.ViewModels
 			}
 		}
 
-		private async void LoadBackups()
+		private async void LoadLastBackup()
 		{
 			try
 			{
-				_progressIndicatorService.ShowIndeterminate("gettings backups info...");
+				_progressIndicatorService.ShowIndeterminate("gettings latest backup info...");
 				var skyDriveManager = new SkyDriveManager(_session);
-				FillupsHolder[] fillupsHolders = await skyDriveManager.GetAllFillupsAsync();
-				FillupsDownloaded = true;
-				if (!fillupsHolders.Any())
+				var fillupsHolder = await skyDriveManager.GetLatestBackupAsync();
+				if (fillupsHolder != null)
 				{
-					BackupsAvailable = false;
-					return;
+					RestoreSource = new BackupViewModel {FillupsHolder = fillupsHolder};
+					RestoreSourceAvailable = true;
+					CanRestore = true;
 				}
-				BackupsAvailable = true;
-				Backups = fillupsHolders.Select(f => new BackupViewModel { FillupsHolder = f }).ToArray();
+				BackupDownloaded = true;
+			}
+			catch (Exception ex)
+			{
+				_messageBox.Error(ex.Message);
 			}
 			finally
 			{
-
 				_progressIndicatorService.Stop();
 			}
-
 		}
 
 		#endregion
 
-	}
-
-	public class BackupViewModel
-	{
-		public string BackupDate
-		{
-			get { return FillupsHolder.Timestamp.ToString("dd MMM yyyy HH:mm:ss"); }
-		}
-
-		public string LastFillupDate
-		{
-			get { return FillupsHolder.Fillups.First().Date.ToString("dd MMM yyyy"); }
-		}
-
-		public string LastOdometer
-		{
-			get { return FillupsHolder.Fillups.First().OdometerEnd.FormatForDisplay(0); }
-		}
-		public FillupsHolder FillupsHolder { get; set; }
 	}
 }

@@ -76,11 +76,14 @@
     <!--LayoutRoot is the root grid where all page content is placed-->
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+
+		<TextBlock Text="This page will display fillups history once you've entered at least one fillup" 
+				 FontSize="{StaticResource PhoneFontSizeMediumLarge}" TextWrapping="Wrap"
+				 Visibility="{Binding HistoryEmpty, Converter={StaticResource booleanToVisibilityConverter}}"
+				 />
+			
         <phone:LongListSelector x:Name="FillupsList"
+								Visibility="{Binding HistoryEmpty, Converter={StaticResource booleanToVisibilityConverter}, ConverterParameter=true}"
                                 ItemsSource="{Binding Items}" 
                                 ItemTemplate="{StaticResource fillupItemTemplate}" 
                                 IsGroupingEnabled="{Binding ShowAllFillups}"

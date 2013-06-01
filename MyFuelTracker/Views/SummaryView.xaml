@@ -7,6 +7,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro" xmlns:views="clr-namespace:MyFuelTracker.Views"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:ec="clr-namespace:Microsoft.Expression.Interactivity.Core;assembly=Microsoft.Expression.Interactions"
+    xmlns:eim="clr-namespace:Microsoft.Expression.Interactivity.Media;assembly=Microsoft.Expression.Interactions"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -40,81 +43,117 @@
     </UserControl.Resources>
     <!--ContentPanel - place additional content here-->
     <Grid x:Name="ContentPanel">
-        <ScrollViewer>
-            <Grid Margin="15 0 0 0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="10"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="10"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
+		<TextBlock Text="This page will display statistics on fillups once you've entered at least one fillup" 
+				 FontSize="{StaticResource PhoneFontSizeMediumLarge}" TextWrapping="Wrap"
+				 Visibility="{Binding ShowNoHistoryMessage, Converter={StaticResource booleanToVisibilityConverter}}"
+				 />
+		<StackPanel  x:Name="Panel"  Visibility="{Binding StatisticsReady, Converter={StaticResource booleanToVisibilityConverter}}">
+			<StackPanel.Resources>
+				<Storyboard x:Key="ShowPanelAnimation">
+					<DoubleAnimation From="2000" To="0" Duration="00:00:01" Storyboard.TargetName="Panel" Storyboard.TargetProperty="(FrameworkElement.RenderTransform).(TranslateTransform.Y)" >
+						<DoubleAnimation.EasingFunction>
+							<ExponentialEase Exponent="12" EasingMode="EaseOut"/>
+						</DoubleAnimation.EasingFunction>
+					</DoubleAnimation>
+					<DoubleAnimation From="0" To="1" Duration="00:00:01" Storyboard.TargetName="Panel" Storyboard.TargetProperty="(FrameworkElement.Opacity)" />
+				</Storyboard>
+				<Storyboard x:Key="HidePanelAnimation" TargetName="Panel" TargetProperty="(FrameworkElement.RenderTransform).(TranslateTransform.Y)">
+					<DoubleAnimation From="{Binding HideStoryboardFrom}" To="2000" Duration="00:00:00.8" >
+						<DoubleAnimation.EasingFunction>
+							<ExponentialEase Exponent="12" EasingMode="EaseIn"/>
+						</DoubleAnimation.EasingFunction>
+					</DoubleAnimation>
+					<DoubleAnimation From="1" To="0" Duration="00:00:01" Storyboard.TargetName="Panel" Storyboard.TargetProperty="(FrameworkElement.Opacity)" />
+				</Storyboard>
+			</StackPanel.Resources>
+			<StackPanel.RenderTransform>
+				<TranslateTransform Y="2000"/>
+			</StackPanel.RenderTransform>
+			<i:Interaction.Triggers>
+				<ec:DataTrigger Binding="{Binding StatisticsReady}" Value="true">
+					<eim:ControlStoryboardAction ControlStoryboardOption="Play" Storyboard="{StaticResource ShowPanelAnimation}" />
+				</ec:DataTrigger>
+				<ec:DataTrigger Binding="{Binding StatisticsReady}" Value="false">
+					<eim:ControlStoryboardAction ControlStoryboardOption="Play" Storyboard="{StaticResource HidePanelAnimation}" />
+				</ec:DataTrigger>
+			</i:Interaction.Triggers>
+			<ScrollViewer>
+				<Grid Margin="15 0 0 0">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto"/>
+						<RowDefinition Height="10"/>
+						<RowDefinition Height="Auto"/>
+						<RowDefinition Height="Auto"/>
+						<RowDefinition Height="Auto"/>
+						<RowDefinition Height="Auto"/>
+						<RowDefinition Height="Auto"/>
+						<RowDefinition Height="Auto"/>
+						<RowDefinition Height="Auto"/>
+						<RowDefinition Height="Auto"/>
+						<RowDefinition Height="Auto"/>
+						<RowDefinition Height="Auto"/>
+						<RowDefinition Height="Auto"/>
+						<RowDefinition Height="10"/>
+						<RowDefinition Height="Auto"/>
+						<RowDefinition Height="Auto"/>
+						<RowDefinition Height="Auto"/>
+						<RowDefinition Height="Auto"/>
 
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="consumptions" Style="{StaticResource groupHeader}" />
-                <Rectangle Grid.Row="1" Grid.ColumnSpan="2" Height="1" Stroke="White" />
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="Auto"/>
+						<ColumnDefinition Width="Auto"/>
+					</Grid.ColumnDefinitions>
+					<TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="consumptions" Style="{StaticResource groupHeader}" />
+					<Rectangle Grid.Row="1" Grid.ColumnSpan="2" Height="1" Stroke="White" />
 
-                <TextBlock Grid.Row="2" Text="last" Style="{StaticResource valueLabel}"/>
-                <TextBlock Grid.Row="3" Text="average" Style="{StaticResource valueLabel}"/>
-                <TextBlock Grid.Row="4" Text="last 4 average" Style="{StaticResource valueLabel}"/>
-                <TextBlock Grid.Row="5" Text="min" Style="{StaticResource valueLabel}"/>
-                <TextBlock Grid.Row="6" Text="max" Style="{StaticResource valueLabel}"/>
+					<TextBlock Grid.Row="2" Text="last" Style="{StaticResource valueLabel}"/>
+					<TextBlock Grid.Row="3" Text="average" Style="{StaticResource valueLabel}"/>
+					<TextBlock Grid.Row="4" Text="last 4 average" Style="{StaticResource valueLabel}"/>
+					<TextBlock Grid.Row="5" Text="min" Style="{StaticResource valueLabel}"/>
+					<TextBlock Grid.Row="6" Text="max" Style="{StaticResource valueLabel}"/>
 
-                <views:ValueWithDimention Grid.Row="2" Grid.Column="1" Style="{StaticResource detail}"
+					<views:ValueWithDimention Grid.Row="2" Grid.Column="1" Style="{StaticResource detail}"
                                               ValueTextBrush="{Binding LastConsumptionBrush}"
                                               ValueText="{Binding LastConsumption}" ValueDimension="{Binding ConsumptionDimension}"/>
-                <views:ValueWithDimention Grid.Row="3" Grid.Column="1" Style="{StaticResource detail}"
+					<views:ValueWithDimention Grid.Row="3" Grid.Column="1" Style="{StaticResource detail}"
                                               ValueTextBrush="{Binding AllTimeAvgConsumptionBrush}"
                                               ValueText="{Binding AllTimeAvgConsumption}" ValueDimension="{Binding ConsumptionDimension}"/>
-                <views:ValueWithDimention Grid.Row="4" Grid.Column="1" Style="{StaticResource detail}"
+					<views:ValueWithDimention Grid.Row="4" Grid.Column="1" Style="{StaticResource detail}"
                                               ValueTextBrush="{Binding Last4FillupsAvgConsumptionBrush}"
                                               ValueText="{Binding Last4FillupsAvgConsumption}" ValueDimension="{Binding ConsumptionDimension}"/>
-                <views:ValueWithDimention Grid.Row="5" Grid.Column="1" Style="{StaticResource detail}"
+					<views:ValueWithDimention Grid.Row="5" Grid.Column="1" Style="{StaticResource detail}"
                                               ValueTextBrush="{Binding MinConsumptionBrush}"
                                               ValueText="{Binding MinConsumption}" ValueDimension="{Binding ConsumptionDimension}"/>
-                <views:ValueWithDimention Grid.Row="6" Grid.Column="1" Style="{StaticResource detail}"
+					<views:ValueWithDimention Grid.Row="6" Grid.Column="1" Style="{StaticResource detail}"
                                               ValueTextBrush="{Binding MaxConsumptionBrush}"
                                               ValueText="{Binding MaxConsumption}" ValueDimension="{Binding ConsumptionDimension}"/>
-                <TextBlock Grid.Row="7" Grid.ColumnSpan="2" Text="costs" Style="{StaticResource groupHeader}"></TextBlock>
-                <Rectangle Grid.Row="8" Grid.ColumnSpan="2" Height="1" Stroke="White" />
-                
-                <TextBlock Grid.Row="9" Text="last fillup" Style="{StaticResource valueLabel}"/>
-                <TextBlock Grid.Row="10" Text="average fillup" Style="{StaticResource valueLabel}"/>
-                <TextBlock Grid.Row="11" Text="last month" Style="{StaticResource valueLabel}"/>
-                <TextBlock Grid.Row="12" Text="average month" Style="{StaticResource valueLabel}"/>
+					<TextBlock Grid.Row="7" Grid.ColumnSpan="2" Text="costs" Style="{StaticResource groupHeader}"></TextBlock>
+					<Rectangle Grid.Row="8" Grid.ColumnSpan="2" Height="1" Stroke="White" />
 
-                <views:ValueWithDimention Grid.Row="9" Grid.Column="1" Style="{StaticResource detail}"
+					<TextBlock Grid.Row="9" Text="last fillup" Style="{StaticResource valueLabel}"/>
+					<TextBlock Grid.Row="10" Text="average fillup" Style="{StaticResource valueLabel}"/>
+					<TextBlock Grid.Row="11" Text="last month" Style="{StaticResource valueLabel}"/>
+					<TextBlock Grid.Row="12" Text="average month" Style="{StaticResource valueLabel}"/>
+
+					<views:ValueWithDimention Grid.Row="9" Grid.Column="1" Style="{StaticResource detail}"
                                                 ValueText="{Binding LastFillupCost}" ValueDimension="{Binding CostDimension}"/>
-                <views:ValueWithDimention Grid.Row="10" Grid.Column="1" Style="{StaticResource detail}"
+					<views:ValueWithDimention Grid.Row="10" Grid.Column="1" Style="{StaticResource detail}"
                                                 ValueText="{Binding AvgFillupCost}" ValueDimension="{Binding CostDimension}"/>
-                <views:ValueWithDimention Grid.Row="11" Grid.Column="1" Style="{StaticResource detail}"
+					<views:ValueWithDimention Grid.Row="11" Grid.Column="1" Style="{StaticResource detail}"
                                                 ValueText="{Binding LastMonthCost}" ValueDimension="{Binding CostDimension}"/>
 
-                <views:ValueWithDimention Grid.Row="12" Grid.Column="1" Style="{StaticResource detail}"
+					<views:ValueWithDimention Grid.Row="12" Grid.Column="1" Style="{StaticResource detail}"
                                                 ValueText="{Binding AllTimeAvgMonthCost}" ValueDimension="{Binding CostDimension}"/>
 
-                <TextBlock Grid.Row="15" Grid.ColumnSpan="2" Text="misc" Style="{StaticResource groupHeader}"></TextBlock>
-                <Rectangle Grid.Row="16" Grid.ColumnSpan="2" Height="1" Stroke="White" />
+					<TextBlock Grid.Row="15" Grid.ColumnSpan="2" Text="misc" Style="{StaticResource groupHeader}"></TextBlock>
+					<Rectangle Grid.Row="16" Grid.ColumnSpan="2" Height="1" Stroke="White" />
 
-                <TextBlock Grid.Row="17" Text="most used fuel type" Style="{StaticResource valueLabel}"/>
-                <TextBlock Grid.Row="18" Grid.Column="1"  Text="{Binding MostOftenFuelType}" Foreground="DeepSkyBlue" Style="{StaticResource value}"/>
-            </Grid>
-        </ScrollViewer>
+					<TextBlock Grid.Row="17" Text="most used fuel type" Style="{StaticResource valueLabel}"/>
+					<TextBlock Grid.Row="18" Grid.Column="1"  Text="{Binding MostOftenFuelType}" Foreground="DeepSkyBlue" Style="{StaticResource value}"/>
+				</Grid>
+			</ScrollViewer>
+		</StackPanel>
+		
     </Grid>
 </UserControl>

@@ -182,13 +182,13 @@ namespace MyFuelTracker.ViewModels
             _historyItems = await _fillupService.GetHistoryAsync();
             Date = _fillup.Date;
             IsPartial = _fillup.IsPartial;
-            OdometerEnd = _fillup.OdometerEnd.FormatForDisplay(0);
-            OdometerStart = _fillup.OdometerStart.FormatForDisplay(0);
-            Volume = _fillup.Volume == default(double) ? String.Empty : _fillup.Volume.FormatForDisplay(2);
+	        OdometerEnd = _fillup.OdometerEnd > 0 ? _fillup.OdometerEnd.FormatForDisplay(0) : String.Empty;
+			OdometerStart = _fillup.OdometerStart > 0 ? _fillup.OdometerStart.FormatForDisplay(0) : String.Empty;
+	        Volume = _fillup.Volume > 0 ? _fillup.Volume.FormatForDisplay(2) : String.Empty;
+			Price = _fillup.Price > 0 ? _fillup.Price.FormatForDisplay(2) : String.Empty;
+	        
             var fuelTypes = _historyItems.Select(i => i.Fillup.FuelType).Distinct(StringComparer.OrdinalIgnoreCase).ToList();
-
             FuelTypes = fuelTypes;
-            Price = _fillup.Price.FormatForDisplay(2);
             FuelType = _fillup.FuelType;
         }
 

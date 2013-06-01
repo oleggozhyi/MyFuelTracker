@@ -22,22 +22,21 @@ namespace MyFuelTracker.ViewModels
 
 
         private readonly IFillupService _fillupService;
-        private readonly IStatisticsService _statisticsService;
         private readonly IEventAggregator _eventAggregator;
         private readonly IMessageBox _messageBox;
         private readonly INavigationService _navigationService;
         private IEnumerable _items;
         private FillupHistoryItemViewModel[] _fullHistory;
         private bool _showAllFillups;
+	    private bool _historyEmpty = true;
 
-        #endregion
+	    #endregion
 
         #region ctors
 
         public HistoryViewModel() { /* for design time support */ }
 
         public HistoryViewModel(IFillupService fillupService,
-                                IStatisticsService statisticsService,
                                 IEventAggregator eventAggregator,
                                 IMessageBox messageBox,
                                 INavigationService navigationService,
@@ -46,7 +45,6 @@ namespace MyFuelTracker.ViewModels
             Debug.WriteLine("HistoryViewModel created");
             DisplayName = "history";
             _fillupService = fillupService;
-            _statisticsService = statisticsService;
             _eventAggregator = eventAggregator;
             _messageBox = messageBox;
             _navigationService = navigationService;
@@ -61,7 +59,18 @@ namespace MyFuelTracker.ViewModels
 
         #region properties
 
-        public IEnumerable<DynamicAppBarButton> Buttons
+		public bool HistoryEmpty
+		{
+			get { return _historyEmpty; }
+			set
+			{
+				if (value.Equals(_historyEmpty)) return;
+				_historyEmpty = value;
+				NotifyOfPropertyChange(() => HistoryEmpty);
+			}
+		}
+
+	    public IEnumerable<DynamicAppBarButton> Buttons
         {
             get
             {
@@ -152,9 +161,15 @@ namespace MyFuelTracker.ViewModels
         public async Task UpdateAsync()
         {
             var historyItems = await _fillupService.GetHistoryAsync();
-            var statistics = await _statisticsService.CalculateStatisticsAsync(historyItems);
-            _fullHistory = historyItems.Select(i => new FillupHistoryItemViewModel(i, statistics)).ToArray();
+	        if (!historyItems.Any())
+	        {
+		        HistoryEmpty = true;
+		        return;
+	        }
 
+			HistoryEmpty = false;
+	        var statistics = await _fillupService.GetStatisticsAsync();
+	        _fullHistory = historyItems.Select(i => new FillupHistoryItemViewModel(i, statistics)).ToArray();
             SetItemsSource();
         }
 

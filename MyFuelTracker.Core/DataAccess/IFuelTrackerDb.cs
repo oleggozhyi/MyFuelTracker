@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using MyFuelTracker.Core.Models;
 
@@ -9,5 +10,6 @@ namespace MyFuelTracker.Core.DataAccess
 		Task SaveFillupAsync(Fillup fillup);
 		Task DeleteFillupAsync(Fillup fillup);
 		Task<Fillup[]> LoadAllFillupsAsync();
+		Task RestoreAsync(IEnumerable<Fillup> fillupsData);
 	}
 }

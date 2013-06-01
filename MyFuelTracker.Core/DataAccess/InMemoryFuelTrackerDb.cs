@@ -57,6 +57,11 @@ namespace MyFuelTracker.Core.DataAccess
 		    return fillups;
 		}
 
+		public Task RestoreAsync(IEnumerable<Fillup> fillupsData)
+		{
+			throw new NotImplementedException();
+		}
+
 		private static DateTime ParseDate(string date)
 		{
 			return DateTime.Parse(date, CultureInfo.CurrentCulture);

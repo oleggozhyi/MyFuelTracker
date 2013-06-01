@@ -59,6 +59,9 @@ namespace MyFuelTracker.Core
         public async Task<FuelConsumptionStatistics> GetStatisticsAsync()
         {
             FillupHistoryItem[] fillupHistoryItems = await GetHistoryAsync();
+	        if (!fillupHistoryItems.Any())
+		        return null;
+
             if (_calculateStatisticsTask == null)
                 lock (_sync3)
                 {
@@ -106,7 +109,13 @@ namespace MyFuelTracker.Core
             return fillups.First(f => f.Id == id);
         }
 
-        private FillupHistoryItem[] CalculateHistory(Fillup[] fillups)
+		public async Task RestoreDataAsync(IEnumerable<Fillup> fillupsData)
+	    {
+		    await Db.RestoreAsync(fillupsData);
+		    ClearCache();
+	    }
+
+	    private FillupHistoryItem[] CalculateHistory(Fillup[] fillups)
         {
             var historyItems = new List<FillupHistoryItem>();
             lock (this)

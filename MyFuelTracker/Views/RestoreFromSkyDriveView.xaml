@@ -19,97 +19,116 @@
     mc:Ignorable="d"
 	toolkit:TiltEffect.IsTiltEnabled="True"
     shell:SystemTray.IsVisible="True">
+	<phone:PhoneApplicationPage.Resources>
+		<DataTemplate x:Key="BackupTemplate">
+			<Border Margin="0 20 0 20" Background="#80555555"  micro:Message.Attach="[Event Tap] = [Action Restore($datacontext)]">
+				<Grid Margin="5" >
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="Auto"/>
+						<ColumnDefinition Width="20"/>
+						<ColumnDefinition Width="*"/>
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition/>
+						<RowDefinition/>
+						<RowDefinition/>
+					</Grid.RowDefinitions>
+					<TextBlock Grid.Row="0" Text="backup date" FontSize="{StaticResource PhoneFontSizeMedium}" Foreground="Gray"/>
+					<TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding BackupDate}" FontSize="{StaticResource PhoneFontSizeMedium}" Foreground="White"/>
 
-    <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="{StaticResource AppBackground}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+					<TextBlock Grid.Row="1" Text="last fillup date" FontSize="{StaticResource PhoneFontSizeMedium}" Foreground="Gray"/>
+					<TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding LastFillupDate}" FontSize="{StaticResource PhoneFontSizeMedium}" Foreground="White"/>
 
-        <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <StackPanel Orientation="Horizontal">
-                <Image Source="/Assets/fuel.png" Width="25" Height="25"></Image>
-                <TextBlock Text="MY FUEL TRACKER" Style="{StaticResource PhoneTextNormalStyle}" FontWeight="Bold"/>
-            </StackPanel>
-            <TextBlock Text="skydrive restore" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
-        </StackPanel>
+					<TextBlock Grid.Row="2" Text="last odometer value" FontSize="{StaticResource PhoneFontSizeMedium}" Foreground="Gray"/>
+					<TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding LastOdometer}" FontSize="{StaticResource PhoneFontSizeMedium}" Foreground="White"/>
+				</Grid>
+			</Border>
+		</DataTemplate>
+	</phone:PhoneApplicationPage.Resources>
+	<!--LayoutRoot is the root grid where all page content is placed-->
+	<Grid x:Name="LayoutRoot" Background="{StaticResource AppBackground}">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
 
-        <!--ContentPanel - place additional content here-->
-        <StackPanel x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <live:SignInButton ClientId="000000004C0F1406" Branding="Skydrive" TextType="SignIn" SignInText="skydrive sign in" SignOutText="sign out"
-                Scopes="wl.skydrive_update" 
+		<!--TitlePanel contains the name of the application and page title-->
+		<StackPanel Grid.Row="0" Margin="12,17,0,28">
+			<StackPanel Orientation="Horizontal">
+				<Image Source="/Assets/fuel.png" Width="25" Height="25"></Image>
+				<TextBlock Text="MY FUEL TRACKER" Style="{StaticResource PhoneTextNormalStyle}" FontWeight="Bold"/>
+			</StackPanel>
+			<TextBlock Text="skydrive restore" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+		</StackPanel>
+
+		<!--ContentPanel - place additional content here-->
+		<StackPanel x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+			<live:SignInButton ClientId="000000004C0F1406" Branding="Skydrive" TextType="SignIn" SignInText="skydrive sign in" SignOutText="sign out"
+                Scopes="wl.skydrive_update"  IsEnabled="{Binding CanRestore}"
                 micro:Message.Attach="[Event SessionChanged] = [Action OnSessionChanged($eventargs)]" />
 			<StackPanel x:Name="Panel">
-                <StackPanel.Resources>
-                    <Storyboard x:Key="ShowPanelAnimation">
-                        <DoubleAnimation From="2000" To="0" Duration="00:00:00.8" Storyboard.TargetName="Panel" Storyboard.TargetProperty="(FrameworkElement.RenderTransform).(TranslateTransform.Y)" >
-                            <DoubleAnimation.EasingFunction>
-                                <ExponentialEase Exponent="12" EasingMode="EaseOut"/>
-                            </DoubleAnimation.EasingFunction>
-                        </DoubleAnimation>
-                        <DoubleAnimation From="0" To="1" Duration="00:00:01" Storyboard.TargetName="Panel" Storyboard.TargetProperty="(FrameworkElement.Opacity)" />
-                    </Storyboard>
-                    <Storyboard x:Key="HidePanelAnimation" TargetName="Panel" TargetProperty="(FrameworkElement.RenderTransform).(TranslateTransform.Y)">
-                        <DoubleAnimation From="{Binding HideStoryboardFrom}" To="2000" Duration="00:00:00.8" >
-                            <DoubleAnimation.EasingFunction>
-                                <ExponentialEase Exponent="12" EasingMode="EaseIn"/>
-                            </DoubleAnimation.EasingFunction>
-                        </DoubleAnimation>
-                        <DoubleAnimation From="1" To="0" Duration="00:00:01" Storyboard.TargetName="Panel" Storyboard.TargetProperty="(FrameworkElement.Opacity)" />
-                    </Storyboard>
-                </StackPanel.Resources>
-                <StackPanel.RenderTransform>
-                    <TranslateTransform Y="2000"/>
-                </StackPanel.RenderTransform>
-                <i:Interaction.Triggers>
-					<ec:DataTrigger Binding="{Binding FillupsDownloaded}" Value="true">
-                        <eim:ControlStoryboardAction ControlStoryboardOption="Play" Storyboard="{StaticResource ShowPanelAnimation}" />
-                    </ec:DataTrigger>
-					<ec:DataTrigger Binding="{Binding FillupsDownloaded}" Value="false">
-                        <eim:ControlStoryboardAction ControlStoryboardOption="Play" Storyboard="{StaticResource HidePanelAnimation}" />
-                    </ec:DataTrigger>
-                </i:Interaction.Triggers>
-                <Rectangle Height="1" Stroke="White" Margin="0 20 0 20" />
-				<StackPanel x:Name="NoBackupsView"  Visibility="{Binding BackupsAvailable, Converter={StaticResource booleanToVisibilityConverter}, ConverterParameter=true}" >
+				<StackPanel.Resources>
+					<Storyboard x:Key="ShowPanelAnimation">
+						<DoubleAnimation From="2000" To="0" Duration="00:00:00.8" Storyboard.TargetName="Panel" Storyboard.TargetProperty="(FrameworkElement.RenderTransform).(TranslateTransform.Y)" >
+							<DoubleAnimation.EasingFunction>
+								<ExponentialEase Exponent="12" EasingMode="EaseOut"/>
+							</DoubleAnimation.EasingFunction>
+						</DoubleAnimation>
+						<DoubleAnimation From="0" To="1" Duration="00:00:01" Storyboard.TargetName="Panel" Storyboard.TargetProperty="(FrameworkElement.Opacity)" />
+					</Storyboard>
+					<Storyboard x:Key="HidePanelAnimation" TargetName="Panel" TargetProperty="(FrameworkElement.RenderTransform).(TranslateTransform.Y)">
+						<DoubleAnimation From="{Binding HideStoryboardFrom}" To="2000" Duration="00:00:00.8" >
+							<DoubleAnimation.EasingFunction>
+								<ExponentialEase Exponent="12" EasingMode="EaseIn"/>
+							</DoubleAnimation.EasingFunction>
+						</DoubleAnimation>
+						<DoubleAnimation From="1" To="0" Duration="00:00:01" Storyboard.TargetName="Panel" Storyboard.TargetProperty="(FrameworkElement.Opacity)" />
+					</Storyboard>
+				</StackPanel.Resources>
+				<StackPanel.RenderTransform>
+					<TranslateTransform Y="2000"/>
+				</StackPanel.RenderTransform>
+				<i:Interaction.Triggers>
+					<ec:DataTrigger Binding="{Binding BackupDownloaded}" Value="true">
+						<eim:ControlStoryboardAction ControlStoryboardOption="Play" Storyboard="{StaticResource ShowPanelAnimation}" />
+					</ec:DataTrigger>
+					<ec:DataTrigger Binding="{Binding BackupDownloaded}" Value="false">
+						<eim:ControlStoryboardAction ControlStoryboardOption="Play" Storyboard="{StaticResource HidePanelAnimation}" />
+					</ec:DataTrigger>
+				</i:Interaction.Triggers>
+				<Rectangle Height="1" Stroke="White" Margin="0 20 0 20" />
+				<StackPanel x:Name="NoBackupsView"  Visibility="{Binding RestoreSourceAvailable, Converter={StaticResource booleanToVisibilityConverter}, ConverterParameter=true}" >
 					<TextBlock Text="No backups found on  SkyDrive." FontSize="{StaticResource PhoneFontSizeLarge}"/>
-					<TextBlock  Margin="0 20 0 0" Text="There should be the folder 'MyFuelTracker' on your SkyDrive and  it should contain at least one file with the name starting from 'fillups_'" TextWrapping="Wrap" FontSize="{StaticResource PhoneFontSizeNormal}"/>
+					<TextBlock  Margin="0 20 0 0" Text="There should be the folder 'MyFuelTracker' on your SkyDrive and  it should a file with the name 'latest_backup.txt'" TextWrapping="Wrap" FontSize="{StaticResource PhoneFontSizeNormal}"/>
 				</StackPanel>
-				<StackPanel x:Name="RestoreFromBackupView" Visibility="{Binding BackupsAvailable, Converter={StaticResource booleanToVisibilityConverter}}" >
-					<TextBlock Text="Select backup you want to restore" FontSize="{StaticResource PhoneFontSizeMediumLarge}"/>
-					<phone:LongListSelector ItemsSource="{Binding Backups}">
-						<phone:LongListSelector.ItemTemplate>
-							<DataTemplate>
-								<Border Margin="0 20 0 20" Background="#80A05555">
-								<Grid Margin="5" >
-									<Grid.ColumnDefinitions>
-										<ColumnDefinition Width="Auto"/>
-										<ColumnDefinition Width="20"/>
-										<ColumnDefinition Width="*"/>
-									</Grid.ColumnDefinitions>
-									<Grid.RowDefinitions>
-										<RowDefinition/>
-										<RowDefinition/>
-										<RowDefinition/>
-									</Grid.RowDefinitions>
-									<TextBlock Grid.Row="0" Text="backup date" FontSize="{StaticResource PhoneFontSizeMedium}" Foreground="Gray"/>
-									<TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding BackupDate}" FontSize="{StaticResource PhoneFontSizeMedium}" Foreground="White"/>
+				<StackPanel x:Name="RestoreFromBackupView" Visibility="{Binding RestoreSourceAvailable, Converter={StaticResource booleanToVisibilityConverter}}" >
+					<TextBlock Text="Backup found on your skydrive"   FontSize="{StaticResource PhoneFontSizeLarge}"/>
+					<Grid Margin="5" >
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="Auto"/>
+							<ColumnDefinition Width="20"/>
+							<ColumnDefinition Width="*"/>
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition/>
+							<RowDefinition/>
+							<RowDefinition/>
+						</Grid.RowDefinitions>
+						<TextBlock Grid.Row="0" Text="backup date" FontSize="{StaticResource PhoneFontSizeMedium}" Foreground="Gray"/>
+						<TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding RestoreSource.BackupDate}" FontSize="{StaticResource PhoneFontSizeMedium}" Foreground="White"/>
 
-									<TextBlock Grid.Row="1" Text="last fillup date" FontSize="{StaticResource PhoneFontSizeMedium}" Foreground="Gray"/>
-									<TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding LastFillupDate}" FontSize="{StaticResource PhoneFontSizeMedium}" Foreground="White"/>
+						<TextBlock Grid.Row="1" Text="last fillup date" FontSize="{StaticResource PhoneFontSizeMedium}" Foreground="Gray"/>
+						<TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding RestoreSource.LastFillupDate}" FontSize="{StaticResource PhoneFontSizeMedium}" Foreground="White"/>
 
-									<TextBlock Grid.Row="2" Text="last odometer value" FontSize="{StaticResource PhoneFontSizeMedium}" Foreground="Gray"/>
-									<TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding LastOdometer}" FontSize="{StaticResource PhoneFontSizeMedium}" Foreground="White"/>
-								</Grid>
-								</Border>
-							</DataTemplate>
-						</phone:LongListSelector.ItemTemplate>
-					</phone:LongListSelector>
+						<TextBlock Grid.Row="2" Text="last odometer value" FontSize="{StaticResource PhoneFontSizeMedium}" Foreground="Gray"/>
+						<TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding RestoreSource.LastOdometer}" FontSize="{StaticResource PhoneFontSizeMedium}" Foreground="White"/>
+					</Grid>
+
+					<Button Content="Restore" micro:Message.Attach="[Event Tap] = [Action Restore]" IsEnabled="{Binding CanRestore}" />
 				</StackPanel>
-            </StackPanel>
+			</StackPanel>
 
-        </StackPanel>
-    </Grid>
+		</StackPanel>
+	</Grid>
 
 </phone:PhoneApplicationPage>

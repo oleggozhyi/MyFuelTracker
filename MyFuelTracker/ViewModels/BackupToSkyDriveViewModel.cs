@@ -125,19 +125,17 @@ namespace MyFuelTracker.ViewModels
                 var fillups = fillupHistoryItems.Select(h => h.Fillup).ToArray();
 	            var fillupsJson = _fillupsSerializer.Serialize(fillups);
                 var skyDriveManager = new SkyDriveManager(_session);
-                string fileName = "fillups_" + DateTime.Now.ToString("yyyy-MM-ddTHH-mm-ss") + ".txt";
+				string fileName = "fillups_" + DateTime.Now.ToString(SkyDriveManager.BACKUP_DATE_FORMAT) + ".txt";
 
-
-                await skyDriveManager.SaveTextFileAsync("MyFuelTracker", fileName, fillupsJson);
+				await skyDriveManager.SaveTextFileAsync("MyFuelTracker", fileName, fillupsJson);
+				await skyDriveManager.SaveTextFileAsync("MyFuelTracker", SkyDriveManager.LATEST_BACKUP_FILE, fillupsJson, true);
                 if (ExportToExcel)
                 {
                     var csv = CreateTabulatedText(fillupHistoryItems);
-                    fileName = "Export_" + DateTime.Now.ToString("yyyy-MM-ddTHH-mm-ss") + ".txt";
+					fileName = "Export_" + DateTime.Now.ToString(SkyDriveManager.BACKUP_DATE_FORMAT) + ".txt";
                     await skyDriveManager.SaveTextFileAsync("MyFuelTracker", fileName, csv);
                 }
                 _messageBox.Info("data was successfully backed up to SkyDrive", "BACKUP");
-
-
             }
             catch (Exception ex)
             {
