@@ -23,6 +23,8 @@ namespace MyFuelTracker.Core
 				DateTime last = fillups.First().Fillup.Date.Date.AddDays(1);
 
 				double monthsCount = (double)((last - start).TotalDays) / 30.0;
+				if (monthsCount < 1)
+					monthsCount = 1;
 
 				var statistics = new FuelConsumptionStatistics();
 

@@ -11,150 +11,159 @@ using MyFuelTracker.ViewModels;
 
 namespace MyFuelTracker.Infrastructure
 {
-    public class DynamicAppBarBehavior : Behavior<PhoneApplicationPage>
-    {
-        #region Fields
+	public class DynamicAppBarBehavior : Behavior<PhoneApplicationPage>
+	{
+		#region Fields
 
-        private bool _appBarInitialized;
-        private Pivot _pivot;
-        private PhoneApplicationPage _page;
-        private object _selected;
-        private readonly Dictionary<DynamicAppBarButton, ApplicationBarIconButton> _buttons = new Dictionary<DynamicAppBarButton, ApplicationBarIconButton>();
+		private bool _appBarInitialized;
+		private Pivot _pivot;
+		private PhoneApplicationPage _page;
+		private object _selected;
+		private readonly Dictionary<DynamicAppBarButton, ApplicationBarIconButton> _buttons = new Dictionary<DynamicAppBarButton, ApplicationBarIconButton>();
 
-        #endregion
+		#endregion
 
-        #region  Properties
+		#region  Properties
 
-        public string PivotElementName
-        {
-            get { return (string)GetValue(PivotElementNameProperty); }
-            set { SetValue(PivotElementNameProperty, value); }
-        }
+		public string PivotElementName
+		{
+			get { return (string)GetValue(PivotElementNameProperty); }
+			set { SetValue(PivotElementNameProperty, value); }
+		}
 
-        public static readonly DependencyProperty PivotElementNameProperty =
-            DependencyProperty.Register("PivotElementName", typeof(string), typeof(DynamicAppBarBehavior), new PropertyMetadata(String.Empty));
+		public static readonly DependencyProperty PivotElementNameProperty =
+			DependencyProperty.Register("PivotElementName", typeof(string), typeof(DynamicAppBarBehavior), new PropertyMetadata(String.Empty));
 
-        #endregion
+		#endregion
 
-        #region Methods
+		#region Methods
 
-        protected override void OnAttached()
-        {
-            base.OnAttached();
+		protected override void OnAttached()
+		{
+			base.OnAttached();
 
-            _page = AssociatedObject;
-            _page.ApplicationBar = new ApplicationBar
-            {
-                IsVisible = true,
-                Mode = ApplicationBarMode.Default,
-                Opacity = 1,
-                IsMenuEnabled = true,
-                BackgroundColor = Color.FromArgb(220,40,40,40)
-            };
-            _page.Loaded += (s, e) => Initialize();
-        }
+			_page = AssociatedObject;
+			_page.ApplicationBar = new ApplicationBar
+			{
+				IsVisible = true,
+				Mode = ApplicationBarMode.Default,
+				Opacity = 1,
+				IsMenuEnabled = true,
+				BackgroundColor = Color.FromArgb(220, 40, 40, 40)
+			};
+			_page.Loaded += (s, e) => Initialize();
+		}
 
-        private void Initialize()
-        {
-            if (_appBarInitialized)
-                return;
+		private void Initialize()
+		{
+			if (_appBarInitialized)
+				return;
 
-            _pivot = _page.FindName(PivotElementName) as Pivot;
-            if (_pivot != null)
-            {
-                _pivot.SelectionChanged += OnPivotSelectionChanged;
-                UpdateAppBarButtons(_pivot.SelectedItem as IAppBarButtonsProvider);
-                foreach (var item in _pivot.Items)
-                {
-                    SubscribeToButtonsChange(item as IDynamicAppBarButtonsProvider);
-                }
-            }
-            else
-            {
-                UpdateAppBarButtons(_page.DataContext as IAppBarButtonsProvider);
-                SubscribeToButtonsChange(_page.DataContext as IDynamicAppBarButtonsProvider);
-            }
-            SetAppBarMenu();
-            _appBarInitialized = true;
-        }
+			_pivot = _page.FindName(PivotElementName) as Pivot;
+			if (_pivot != null)
+			{
+				_pivot.SelectionChanged += OnPivotSelectionChanged;
+				UpdateAppBarButtons(_pivot.SelectedItem as IAppBarItemsProvider);
+				UpdateAppBarMenu(_pivot.SelectedItem as IAppBarItemsProvider);
+				foreach (var item in _pivot.Items)
+				{
+					SubscribeToButtonsChange(item as IDynamicAppBarItemsProvider);
+				}
+			}
+			else
+			{
+				UpdateAppBarButtons(_page.DataContext as IAppBarItemsProvider);
+				SubscribeToButtonsChange(_page.DataContext as IDynamicAppBarItemsProvider);
+				UpdateAppBarMenu(_page.DataContext as IAppBarItemsProvider);
+			}
 
-        private void SetAppBarMenu()
-        {
-            //TODO: there should be a better way of managing menu items. 
-            var appBarMenuModel = Bootstrapper.Current.Resolve<AppBarMenuModel>();
-            foreach (var item in appBarMenuModel.MenuItems)
-            {
-                var menuItem = new ApplicationBarMenuItem { Text = item.Text };
-                var tempItem = item;
-                menuItem.Click += (s, e) => tempItem.OnClick();
-                _page.ApplicationBar.MenuItems.Add(menuItem);
-            }
-        }
+			_appBarInitialized = true;
+		}
 
-        private void SubscribeToButtonsChange(IDynamicAppBarButtonsProvider provider)
-        {
-            if (provider == null)
-                return;
-            provider.ButtonsChanged += (s, e) => UpdateAppBarButtons(provider);
-        }
+		private void UpdateAppBarMenu(IAppBarItemsProvider appBarItemsProvider)
+		{
+			if (appBarItemsProvider == null)
+				return;
 
-        private void OnPivotSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (_selected == _pivot.SelectedItem)
-                return;
+			_page.ApplicationBar.MenuItems.Clear();
+			foreach (var item in appBarItemsProvider.MenuItems)
+			{
+				var menuItem = new ApplicationBarMenuItem { Text = item.Text };
+				var tempItem = item;
+				menuItem.Click += (s, e) => tempItem.OnClick();
+				_page.ApplicationBar.MenuItems.Add(menuItem);
+			}
+		}
 
-            UpdateAppBarButtons(_pivot.SelectedItem as IAppBarButtonsProvider);
-            _selected = _pivot.SelectedItem;
-        }
+		private void SubscribeToButtonsChange(IDynamicAppBarItemsProvider provider)
+		{
+			if (provider == null)
+				return;
+			provider.Changed += (s, e) =>
+				{
+					UpdateAppBarButtons(provider);
+					UpdateAppBarMenu(provider);
+				};
+		}
 
-        private void UpdateAppBarButtons(IAppBarButtonsProvider appBarButtonsProvider)
-        {
-            if (appBarButtonsProvider == null)
-            {
-                _page.ApplicationBar.Mode = ApplicationBarMode.Minimized;
-                return;
-            }
-            _page.ApplicationBar.Mode = ApplicationBarMode.Default;
-            _page.ApplicationBar.Buttons.Clear();
+		private void OnPivotSelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			if (_selected == _pivot.SelectedItem)
+				return;
 
-            foreach (var b in appBarButtonsProvider.Buttons)
-            {
-                ApplicationBarIconButton button;
-                if (_buttons.ContainsKey(b))
-                    button = _buttons[b];
-                else
-                {
-                    button = new ApplicationBarIconButton { IconUri = new Uri(b.IconUri, UriKind.RelativeOrAbsolute), Text = b.Text };
-                    DynamicAppBarButton b1 = b;
-                    button.Click += delegate { b1.OnClick(); };
-                    _buttons[b] = button;
-                }
+			UpdateAppBarButtons(_pivot.SelectedItem as IAppBarItemsProvider);
+			_selected = _pivot.SelectedItem;
+		}
 
-                _page.ApplicationBar.Buttons.Add(button);
-            }
-        }
+		private void UpdateAppBarButtons(IAppBarItemsProvider appBarItemsProvider)
+		{
+			if (appBarItemsProvider == null)
+			{
+				_page.ApplicationBar.Mode = ApplicationBarMode.Minimized;
+				return;
+			}
+			_page.ApplicationBar.Mode = ApplicationBarMode.Default;
+			_page.ApplicationBar.Buttons.Clear();
 
-        #endregion
-    }
+			foreach (var b in appBarItemsProvider.Buttons)
+			{
+				ApplicationBarIconButton button;
+				if (_buttons.ContainsKey(b))
+					button = _buttons[b];
+				else
+				{
+					button = new ApplicationBarIconButton { IconUri = new Uri(b.IconUri, UriKind.RelativeOrAbsolute), Text = b.Text };
+					DynamicAppBarButton b1 = b;
+					button.Click += delegate { b1.OnClick(); };
+					_buttons[b] = button;
+				}
 
-    public interface IAppBarButtonsProvider
-    {
-        IEnumerable<DynamicAppBarButton> Buttons { get; }
-    }
+				_page.ApplicationBar.Buttons.Add(button);
+			}
+		}
 
-    public interface IDynamicAppBarButtonsProvider : IAppBarButtonsProvider
-    {
-        event EventHandler ButtonsChanged;
-    }
+		#endregion
+	}
 
-    public class DynamicAppBarButton : DynamicAppBarItem
-    {
-        public string IconUri { get; set; }
-    }
+	public interface IAppBarItemsProvider
+	{
+		IEnumerable<DynamicAppBarButton> Buttons { get; }
+		IEnumerable<DynamicAppBarItem> MenuItems { get; }
+	}
 
-    public class DynamicAppBarItem
-    {
-        public string Text { get; set; }
-        public System.Action OnClick { get; set; }
-    }
+	public interface IDynamicAppBarItemsProvider : IAppBarItemsProvider
+	{
+		event EventHandler Changed;
+	}
+
+	public class DynamicAppBarButton : DynamicAppBarItem
+	{
+		public string IconUri { get; set; }
+	}
+
+	public class DynamicAppBarItem
+	{
+		public string Text { get; set; }
+		public System.Action OnClick { get; set; }
+	}
 }

@@ -10,7 +10,7 @@ using MyFuelTracker.Infrastructure;
 
 namespace MyFuelTracker.ViewModels
 {
-    public class DisplayFillupViewModel : Screen, IHandle<FillupHistoryChangedEvent>, IAppBarButtonsProvider
+    public class DisplayFillupViewModel : Screen, IHandle<FillupHistoryChangedEvent>, IAppBarItemsProvider
     {
         private readonly INavigationService _navigationService;
         private readonly IFillupService _fillupService;
@@ -27,6 +27,7 @@ namespace MyFuelTracker.ViewModels
         private readonly DynamicAppBarButton[] _appBarButtons;
 
         public IEnumerable<DynamicAppBarButton> Buttons { get { return _appBarButtons; } }
+		public IEnumerable<DynamicAppBarItem> MenuItems { get { return Enumerable.Empty<DynamicAppBarItem>(); } }
 
         public string FillupId { get; set; }
 

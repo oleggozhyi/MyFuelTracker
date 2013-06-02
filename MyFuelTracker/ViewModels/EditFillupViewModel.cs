@@ -12,7 +12,7 @@ using MyFuelTracker.Infrastructure;
 
 namespace MyFuelTracker.ViewModels
 {
-    public class EditFillupViewModel : Screen, IHandle<FuelTypeAddedEvent>, IAppBarButtonsProvider
+    public class EditFillupViewModel : Screen, IHandle<FuelTypeAddedEvent>, IAppBarItemsProvider
     {
         #region Fields
         private readonly DynamicAppBarButton _goBackButton = new DynamicAppBarButton { IconUri = Icons.Back, Text = "go back" };
@@ -67,6 +67,8 @@ namespace MyFuelTracker.ViewModels
         #endregion
 
         #region Properties
+
+		public IEnumerable<DynamicAppBarItem> MenuItems { get { return Enumerable.Empty<DynamicAppBarItem>(); } }
 
         public IEnumerable<DynamicAppBarButton> Buttons { get { return _appBarButtons; } }
 
