@@ -12,6 +12,7 @@ using MyFuelTracker.Resources;
 using MyFuelTracker.Core;
 using MyFuelTracker.ViewModels;
 
+
 namespace MyFuelTracker.Views
 {
 	public partial class MainView : PhoneApplicationPage
@@ -20,12 +21,6 @@ namespace MyFuelTracker.Views
 		{
 			InitializeComponent();
 		}
-
-        private void ApplicationBarIconButton_Click(object sender, EventArgs e)
-        {
-            var eventAggregator = (IEventAggregator)Bootstrapper.Current.Container.GetAllInstances(typeof(IEventAggregator)).First();
-            eventAggregator.Publish("");
-        }
 	}
 
 }

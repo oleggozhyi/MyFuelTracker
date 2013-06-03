@@ -97,6 +97,7 @@
     <Compile Include="Models\Fillup.cs" />
     <Compile Include="Models\FillupHistoryItem.cs" />
     <Compile Include="Models\FuelConsumptionStatistics.cs" />
+    <Compile Include="Models\UserPreferences.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DataAccess\SqlCeFuelTrackerDb.cs" />

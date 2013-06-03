@@ -8,6 +8,7 @@ namespace MyFuelTracker.Infrastructure
 {
     public static class Icons
     {
+	    public const string ListCheck = "/Assets/AppBar/appbar.list.check.png";
         public const string ViewMore = "/Assets/view_more.png";
         public const string ViewLess = "/Assets/view_less.png";
         public const string Add = "/Assets/add.png";

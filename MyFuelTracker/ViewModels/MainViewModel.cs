@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.ComponentModel;
+using System.Diagnostics;
 using System.Windows.Input;
 using Caliburn.Micro;
 using MyFuelTracker.Core;
@@ -19,6 +20,8 @@ namespace MyFuelTracker.ViewModels
 
 		public SummaryViewModel SummaryViewModel { get; set; }
 		public HistoryViewModel HistoryViewModel { get; set; }
+		public object SelectedItem { get; set; }
+
 
 		#endregion
 
@@ -58,6 +61,14 @@ namespace MyFuelTracker.ViewModels
 			base.OnViewLoaded(view);
 			Debug.WriteLine("MainViewModel OnViewLoaded");
 			_eventAggregator.Publish(new FillupHistoryChangedEvent());
+		}
+
+		public void OnBackKeyPress(CancelEventArgs args)
+		{
+			if (this.SelectedItem == HistoryViewModel)
+			{
+				HistoryViewModel.OnNavigating(args);
+			}
 		}
 
 		#endregion

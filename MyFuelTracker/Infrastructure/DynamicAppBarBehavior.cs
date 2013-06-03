@@ -19,7 +19,6 @@ namespace MyFuelTracker.Infrastructure
 		private Pivot _pivot;
 		private PhoneApplicationPage _page;
 		private object _selected;
-		private readonly Dictionary<DynamicAppBarButton, ApplicationBarIconButton> _buttons = new Dictionary<DynamicAppBarButton, ApplicationBarIconButton>();
 
 		#endregion
 
@@ -99,7 +98,7 @@ namespace MyFuelTracker.Infrastructure
 		{
 			if (provider == null)
 				return;
-			provider.Changed += (s, e) =>
+			provider.AppBarChanged += (s, e) =>
 				{
 					UpdateAppBarButtons(provider);
 					UpdateAppBarMenu(provider);
@@ -123,23 +122,29 @@ namespace MyFuelTracker.Infrastructure
 				return;
 			}
 			_page.ApplicationBar.Mode = ApplicationBarMode.Default;
-			_page.ApplicationBar.Buttons.Clear();
+			_page.ApplicationBar.Buttons
+					.OfType<IApplicationBarIconButton>()
+					.Where(b => appBarItemsProvider.Buttons.All(b1 => b1.Text != b.Text))
+					.ToArray()
+					.Foreach(_page.ApplicationBar.Buttons.Remove);
 
-			foreach (var b in appBarItemsProvider.Buttons)
+			var dynamicAppBarButtons = appBarItemsProvider.Buttons.ToArray();
+			for (int i = 0; i < dynamicAppBarButtons.Length; i++)
 			{
-				ApplicationBarIconButton button;
-				if (_buttons.ContainsKey(b))
-					button = _buttons[b];
-				else
+				var b = dynamicAppBarButtons[i];
+				var button = _page.ApplicationBar.Buttons
+												.OfType<IApplicationBarIconButton>()
+												.FirstOrDefault(but => but.Text == b.Text);
+				if (button == null)
 				{
-					button = new ApplicationBarIconButton { IconUri = new Uri(b.IconUri, UriKind.RelativeOrAbsolute), Text = b.Text };
+					button = new ApplicationBarIconButton {IconUri = new Uri(b.IconUri, UriKind.RelativeOrAbsolute), Text = b.Text};
 					DynamicAppBarButton b1 = b;
 					button.Click += delegate { b1.OnClick(); };
-					_buttons[b] = button;
+					_page.ApplicationBar.Buttons.Insert(i, button);
 				}
-
-				_page.ApplicationBar.Buttons.Add(button);
 			}
+
+			
 		}
 
 		#endregion
@@ -153,7 +158,7 @@ namespace MyFuelTracker.Infrastructure
 
 	public interface IDynamicAppBarItemsProvider : IAppBarItemsProvider
 	{
-		event EventHandler Changed;
+		event EventHandler AppBarChanged;
 	}
 
 	public class DynamicAppBarButton : DynamicAppBarItem

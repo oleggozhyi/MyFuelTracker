@@ -20,6 +20,7 @@
     toolkit:TiltEffect.IsTiltEnabled="True"
     toolkit:TransitionService.NavigationInTransition="{StaticResource navigationInTransition}"
     toolkit:TransitionService.NavigationOutTransition="{StaticResource navigationOutTransition}"
+	micro:Message.Attach="[Event BackKeyPress] = [Action OnBackKeyPress($eventargs)]"
     >
     <phone:PhoneApplicationPage.Background>
         <ImageBrush ImageSource="/Assets/black-wood-background.jpg" Stretch="UniformToFill"></ImageBrush>
@@ -48,7 +49,7 @@
     </i:Interaction.Behaviors>
 
     <Grid x:Name="LayoutRoot">
-        <phone:Pivot x:Name="Items" Background="{StaticResource AppBackground}">            
+		<phone:Pivot x:Name="Items" Background="{StaticResource AppBackground}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}">            
             <phone:Pivot.TitleTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">

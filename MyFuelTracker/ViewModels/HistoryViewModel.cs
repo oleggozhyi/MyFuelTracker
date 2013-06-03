@@ -2,13 +2,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Navigation;
 using Caliburn.Micro;
 using MyFuelTracker.Core;
 using MyFuelTracker.Core.Models;
 using MyFuelTracker.Infrastructure;
+using MyFuelTracker.Views;
 
 namespace MyFuelTracker.ViewModels
 {
@@ -19,6 +22,8 @@ namespace MyFuelTracker.ViewModels
 		private readonly DynamicAppBarButton _addFillupButton;
 		private readonly DynamicAppBarButton _viewMoreButton = new DynamicAppBarButton { IconUri = Icons.ViewMore, Text = "view more" };
 		private readonly DynamicAppBarButton _viewLessButton = new DynamicAppBarButton { IconUri = Icons.ViewLess, Text = "view less" };
+		private readonly DynamicAppBarButton _selectButton = new DynamicAppBarButton { IconUri = Icons.ListCheck, Text = "select" };
+		private readonly DynamicAppBarButton _deleteSelectedButton = new DynamicAppBarButton { IconUri = Icons.Delete, Text = "delete selected" };
 
 
 		private readonly IFillupService _fillupService;
@@ -30,6 +35,8 @@ namespace MyFuelTracker.ViewModels
 		private FillupHistoryItemViewModel[] _fullHistory;
 		private bool _showAllFillups;
 		private bool _historyEmpty = true;
+		private bool _isSelectionModeEnabled;
+		private ISelection _selection;
 
 		#endregion
 
@@ -52,15 +59,28 @@ namespace MyFuelTracker.ViewModels
 			_navigationService = navigationService;
 			_appBarMenuModel = appBarMenuModel;
 			eventAggregator.Subscribe(this);
-
 			_addFillupButton = summaryViewModel.AddFillupButton;
 			_viewMoreButton.OnClick = () => ToggleView(true);
-			_viewLessButton.OnClick = () => ToggleView(false); ;
+			_viewLessButton.OnClick = () => ToggleView(false);
+			_selectButton.OnClick = ChangeSelectionMode;
+			_deleteSelectedButton.OnClick = DeleteSelected;
 		}
 
 		#endregion
 
 		#region properties
+
+
+		public bool IsSelectionModeEnabled
+		{
+			get { return _isSelectionModeEnabled; }
+			set
+			{
+				if (value.Equals(_isSelectionModeEnabled)) return;
+				_isSelectionModeEnabled = value;
+				NotifyOfPropertyChange(() => IsSelectionModeEnabled);
+			}
+		}
 
 		public bool HistoryEmpty
 		{
@@ -77,10 +97,14 @@ namespace MyFuelTracker.ViewModels
 		{
 			get
 			{
-				if (ShowAllFillups)
-					return new[] { _addFillupButton, _viewLessButton };
+				var buttons = new List<DynamicAppBarButton>
+					{
+						_addFillupButton,
+						ShowAllFillups ? _viewLessButton : _viewMoreButton,
+						IsSelectionModeEnabled ? _deleteSelectedButton : _selectButton
+					};
 
-				return new[] { _addFillupButton, _viewMoreButton };
+				return buttons;
 			}
 		}
 
@@ -89,7 +113,7 @@ namespace MyFuelTracker.ViewModels
 			get { return _appBarMenuModel.MenuItems; }
 		}
 
-		public event EventHandler Changed;
+		public event EventHandler AppBarChanged;
 
 
 		public bool ShowAllFillups
@@ -118,9 +142,44 @@ namespace MyFuelTracker.ViewModels
 
 		#region methods
 
-		protected virtual void OnButtonsChanged()
+		private async void DeleteSelected()
 		{
-			EventHandler handler = Changed;
+			if(_selection.SelectedItems.Count == 0)
+				return;
+			
+			bool proceedWithDeletion = _messageBox.Confirm("are you sure to delete selected fillups?");
+			if (!proceedWithDeletion)
+				return;
+
+			IsSelectionModeEnabled = false;
+			foreach (FillupHistoryItemViewModel fillupViewModel in _selection.SelectedItems)
+			{
+				await _fillupService.DeleteFillupAsync(fillupViewModel.HistoryItem.Fillup);	
+			}
+			_eventAggregator.Publish(new FillupHistoryChangedEvent());
+			
+			RaiseAppBarChangedChanged();
+		}
+
+		private void ChangeSelectionMode()
+		{
+			IsSelectionModeEnabled = true;
+			RaiseAppBarChangedChanged();
+		}
+
+		public void OnNavigating(CancelEventArgs e)
+		{
+			if (IsSelectionModeEnabled)
+			{
+				IsSelectionModeEnabled = false;
+				e.Cancel = true;
+				RaiseAppBarChangedChanged();
+			}
+		}
+
+		protected virtual void RaiseAppBarChangedChanged()
+		{
+			EventHandler handler = AppBarChanged;
 			if (handler != null) handler(this, EventArgs.Empty);
 		}
 
@@ -139,7 +198,7 @@ namespace MyFuelTracker.ViewModels
 							  .Navigate();
 		}
 
-		public async void DeleteFillup(FillupHistoryItemViewModel viewModel)
+		public async void DeleteFillup(FillupHistoryItemViewModel viewModel)	
 		{
 			bool proceedWithDeletion = _messageBox.Confirm("are you sure to delete fillup on " + viewModel.Date + "?");
 			if (!proceedWithDeletion)
@@ -152,7 +211,7 @@ namespace MyFuelTracker.ViewModels
 		{
 			ShowAllFillups = more;
 			SetItemsSource();
-			OnButtonsChanged();
+			RaiseAppBarChangedChanged();
 		}
 
 
@@ -191,6 +250,12 @@ namespace MyFuelTracker.ViewModels
 			Items = ShowAllFillups
 						? (IEnumerable)FillupsGroupingHelper.GroupFillups(_fullHistory)
 						: (IEnumerable)_fullHistory.Take(5).ToArray();
+		}
+
+		protected override void OnViewLoaded(object view)
+		{
+			base.OnViewLoaded(view);
+			_selection = view as ISelection;
 		}
 
 		#endregion

@@ -42,5 +42,13 @@ namespace MyFuelTracker.Infrastructure
 
 			return result;
 		}
+
+		public static void Foreach<T>(this IEnumerable<T> collection, Action<T> action)
+		{
+			foreach (var element in collection)
+			{
+				action(element);
+			}
+		}
 	}
 }
