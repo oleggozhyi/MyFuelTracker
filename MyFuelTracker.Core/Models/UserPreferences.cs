@@ -8,10 +8,10 @@ namespace MyFuelTracker.Core.Models
 {
 	class UserPreferences
 	{
-		public ConsumptionStrategy ConsumptionStrategy { get; set; }
+		public FuelEconomyStrategy FuelEconomyStrategy { get; set; }
 	}
 
-	public enum ConsumptionStrategy
+	public enum FuelEconomyStrategy
 	{
 		Mpg,
 		KmL,

@@ -96,6 +96,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Infrastructure\Conveters\EnumToBoleanConverter.cs" />
     <Compile Include="Infrastructure\Events\FillupItemChangedEvent.cs" />
     <Compile Include="Infrastructure\Helpers\ColorHelper.cs" />
     <Compile Include="Infrastructure\DebugLogger.cs" />
@@ -128,7 +129,7 @@
     <Compile Include="Infrastructure\Conveters\MyBooleanToVisibilityConverter.cs" />
     <Compile Include="ViewModels\RestoreFromSkyDriveViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
-    <Compile Include="ViewModels\SummaryViewModel.cs" />
+    <Compile Include="ViewModels\StatisticsViewModel.cs" />
     <Compile Include="Views\AddFuelTypeView.xaml.cs">
       <DependentUpon>AddFuelTypeView.xaml</DependentUpon>
     </Compile>
@@ -179,7 +180,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SampleData\SummaryViewModel.xaml">
+    <Page Include="SampleData\StatisticsViewModel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

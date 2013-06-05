@@ -33,13 +33,13 @@ namespace MyFuelTracker.Tests
 			//act
 			var statistics = statisticsService.CalculateStatisticsAsync(history).WaitAndReturn();
 			//assert
-			statistics.AllTimeAvgConsumption.ShouldRoughlyBe((9.50 + 12.50 + 10.21 + 10.56 + 9.95 + 9.73 + 8.90 + 10.11) / 8.0, EPSILON);
-			statistics.Last4FillupsAvgConsumption.ShouldRoughlyBe((9.95 + 9.73 + 8.90 + 10.11) / 4.0, EPSILON);
-			statistics.LastConsumption.ShouldRoughlyBe(10.11, EPSILON);
+			statistics.AllTimeAvgFuelEconomy.ShouldRoughlyBe((9.50 + 12.50 + 10.21 + 10.56 + 9.95 + 9.73 + 8.90 + 10.11) / 8.0, EPSILON);
+			statistics.Last4FillupsAvgFuelEconomy.ShouldRoughlyBe((9.95 + 9.73 + 8.90 + 10.11) / 4.0, EPSILON);
+			statistics.LastFuelEconomy.ShouldRoughlyBe(10.11, EPSILON);
 			statistics.LastMonthCost.ShouldRoughlyBe((35.5 + 36.5 + 37.5 + 38.5) * 12.59, EPSILON);
 			statistics.AllTimeAvgMonthCost.ShouldRoughlyBe((31.5 + 32.5 + 33.5 + 34.5 + 35.5 + 36.5 + 37.5 + 38.5) * 12.59 / ((31.0 + 26.0) / 30.0), EPSILON);
-			statistics.MinConsumption.ShouldRoughlyBe(8.90, EPSILON);
-			statistics.MaxConsumption.ShouldRoughlyBe(12.50, EPSILON);
+			statistics.MinFuelEconomy.ShouldRoughlyBe(8.90, EPSILON);
+			statistics.MaxFuelEconomy.ShouldRoughlyBe(12.50, EPSILON);
 		}
 
 		private static StatisticsService CreateService()
@@ -47,11 +47,11 @@ namespace MyFuelTracker.Tests
 			return new StatisticsService();
 		}
 
-		private static FillupHistoryItem fillup(DateTime date, double price, double volume, double consumption, bool ispartial)
+		private static FillupHistoryItem fillup(DateTime date, double price, double volume, double fuelEconomy, bool ispartial)
 		{
 			return new FillupHistoryItem
 				   {
-					   Consumption = ispartial ? (double?)null : consumption,
+					   FuelEconomy = ispartial ? (double?)null : fuelEconomy,
 					   Fillup = new Fillup
 								{
 									Id = Guid.NewGuid(),

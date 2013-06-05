@@ -18,7 +18,6 @@ namespace MyFuelTracker.ViewModels
         private readonly IFillupService _fillupService;
         private readonly IMessageBox _messageBox;
         private readonly IEventAggregator _eventAggregator;
-        private readonly IStatisticsService _statisticsService;
         private FillupHistoryItemViewModel _details;
         private FillupHistoryItem _fillupHistoryItem;
         private bool _deleted;
@@ -36,14 +35,12 @@ namespace MyFuelTracker.ViewModels
         public DisplayFillupViewModel(INavigationService navigationService,
                                       IFillupService fillupService,
                                       IMessageBox messageBox,
-                                      IEventAggregator eventAggregator,
-                                      IStatisticsService statisticsService)
+                                      IEventAggregator eventAggregator)
         {
             _navigationService = navigationService;
             _fillupService = fillupService;
             _messageBox = messageBox;
             _eventAggregator = eventAggregator;
-            _statisticsService = statisticsService;
             _eventAggregator.Subscribe(this);
 
             _appBarButtons = new[] { _editFillupButton, _deleteFillupButton, _goBackButton };
@@ -91,9 +88,9 @@ namespace MyFuelTracker.ViewModels
             if (_deleted)
                 return;
             var historyItems = await _fillupService.GetHistoryAsync();
-            var fuelConsumptionStatistics = await _statisticsService.CalculateStatisticsAsync(historyItems);
+			var statistics = await _fillupService.GetStatisticsAsync();
             _fillupHistoryItem = historyItems.Single(h => h.Fillup.Id.ToString() == FillupId);
-            Details = new FillupHistoryItemViewModel(_fillupHistoryItem, fuelConsumptionStatistics);
+            Details = new FillupHistoryItemViewModel(_fillupHistoryItem, statistics);
         }
 
         public FillupHistoryItemViewModel Details

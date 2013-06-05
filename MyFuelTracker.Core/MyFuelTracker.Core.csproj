@@ -96,7 +96,7 @@
     <Compile Include="IStatisticsService.cs" />
     <Compile Include="Models\Fillup.cs" />
     <Compile Include="Models\FillupHistoryItem.cs" />
-    <Compile Include="Models\FuelConsumptionStatistics.cs" />
+    <Compile Include="Models\Statistics.cs" />
     <Compile Include="Models\UserPreferences.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

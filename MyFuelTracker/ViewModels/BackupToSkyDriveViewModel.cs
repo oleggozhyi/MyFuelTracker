@@ -171,7 +171,7 @@ namespace MyFuelTracker.ViewModels
             var builder = new StringBuilder();
             var header = string.Join("\t", new[]
                 {
-                    "Date", "Previous odometer", "Current odometer", "Distance", "Volume", "Fuel type", "Fuel price", "Fillup cost", "Is partial", "consumption"
+                    "Date", "Previous odometer", "Current odometer", "Distance", "Volume", "Fuel type", "Fuel price", "Fillup cost", "Is partial", "fuel economy"
                 });
             builder.AppendLine(header);
             foreach (var item in fillupHistoryItems )
@@ -187,7 +187,7 @@ namespace MyFuelTracker.ViewModels
                    item.Fillup.Price.FormatForDisplay(2),
                    (item.Fillup.Volume*item.Fillup.Price).FormatForDisplay(2),
                    item.Fillup.IsPartial ? "yes": "no",
-                   item.Consumption.HasValue? item.Consumption.Value.FormatForDisplay(2) : ""
+                   item.FuelEconomy.HasValue? item.FuelEconomy.Value.FormatForDisplay(2) : ""
                 });
                 builder.AppendLine(line);
             }

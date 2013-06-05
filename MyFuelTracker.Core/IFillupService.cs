@@ -8,7 +8,7 @@ namespace MyFuelTracker.Core
 	public interface IFillupService
 	{
         Task<FillupHistoryItem[]> GetHistoryAsync();
-        Task<FuelConsumptionStatistics> GetStatisticsAsync();
+        Task<Statistics> GetStatisticsAsync();
         Task<Fillup> CreateNewFillupAsync();
         Task SaveFillupAsync(Fillup fillup);
 		Task DeleteFillupAsync(Fillup fillup);

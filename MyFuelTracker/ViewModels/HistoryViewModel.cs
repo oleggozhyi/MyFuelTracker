@@ -53,7 +53,7 @@ namespace MyFuelTracker.ViewModels
 								IMessageBox messageBox,
 								INavigationService navigationService,
 								AppBarMenuModel appBarMenuModel,
-								SummaryViewModel summaryViewModel)
+								StatisticsViewModel statisticsViewModel)
 		{
 			Debug.WriteLine("HistoryViewModel created");
 			DisplayName = "history";
@@ -63,7 +63,7 @@ namespace MyFuelTracker.ViewModels
 			_navigationService = navigationService;
 			_appBarMenuModel = appBarMenuModel;
 			eventAggregator.Subscribe(this);
-			_addFillupButton = summaryViewModel.AddFillupButton;
+			_addFillupButton = statisticsViewModel.AddFillupButton;
 			_viewMoreButton.OnClick = () => ToggleView(true);
 			_viewLessButton.OnClick = () => ToggleView(false);
 			_selectButton.OnClick = ChangeSelectionMode;

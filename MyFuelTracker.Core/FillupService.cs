@@ -15,7 +15,7 @@ namespace MyFuelTracker.Core
         private IFuelTrackerDb Db { get; set; }
         private volatile Task<Fillup[]> _loadFillupsTasks;
         private volatile Task<FillupHistoryItem[]> _calculateHistoryTask;
-        private volatile Task<FuelConsumptionStatistics> _calculateStatisticsTask;
+        private volatile Task<Statistics> _calculateStatisticsTask;
         private readonly object _sync1 = new object();
         private readonly object _sync2 = new object();
         private readonly object _sync3 = new object();
@@ -56,7 +56,7 @@ namespace MyFuelTracker.Core
             return await _calculateHistoryTask;
         }
 
-        public async Task<FuelConsumptionStatistics> GetStatisticsAsync()
+        public async Task<Statistics> GetStatisticsAsync()
         {
             FillupHistoryItem[] fillupHistoryItems = await GetHistoryAsync();
 	        if (!fillupHistoryItems.Any())
@@ -141,7 +141,7 @@ namespace MyFuelTracker.Core
                         double actualVolume = fillup.Volume + partialFillupVolume;
                         double actualDistance = fillup.OdometerEnd -
                                                 (partialFillupOdoStart > 0 ? partialFillupOdoStart : fillup.OdometerStart);
-                        historyItem.Consumption = actualVolume * 100 / actualDistance;
+                        historyItem.FuelEconomy = actualVolume * 100 / actualDistance;
 
                         partialFillupOdoStart = -1;
                         partialFillupVolume = 0;

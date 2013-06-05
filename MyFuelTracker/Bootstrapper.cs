@@ -38,7 +38,7 @@ namespace MyFuelTracker
 
 			Container.RegisterPhoneServices();
 			Container.PerRequest<MainViewModel>();
-			Container.PerRequest<SummaryViewModel>();
+			Container.PerRequest<StatisticsViewModel>();
 			Container.PerRequest<HistoryViewModel>();
 			Container.PerRequest<EditFillupViewModel>();
 			Container.PerRequest<AddFuelTypeViewModel>();

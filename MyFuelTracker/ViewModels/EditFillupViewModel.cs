@@ -25,7 +25,7 @@ namespace MyFuelTracker.ViewModels
 
         private const double DISTANCE_TRESHOLD = 2000.0;
         private const double VOLUME_TRESHOLD = 1000.0;
-        private const double CONSUMPTION_TRESHOLD = 25.0;
+        private const double FUEL_ECONOMY_TRESHOLD = 25.0;
 
         private readonly INavigationService _navigationService;
         private readonly ILog _log;
@@ -228,7 +228,7 @@ namespace MyFuelTracker.ViewModels
         {
             bool cancel = false;
             double distance = fillup.OdometerEnd - fillup.OdometerStart;
-            double consumption = fillup.Volume * 100.0 / distance;
+			double fuelEconomy = fillup.Volume * 100.0 / distance;
             if (distance > DISTANCE_TRESHOLD)
             {
                 cancel = !_messageBox.Confirm("The distance seems to be too big (" + distance.FormatForDisplay(0) + "km), are you sure to save this fillup? ", "Please confirm");
@@ -242,9 +242,9 @@ namespace MyFuelTracker.ViewModels
                 if (cancel)
                     return true;
             }
-            if (consumption > CONSUMPTION_TRESHOLD)
+            if (fuelEconomy > FUEL_ECONOMY_TRESHOLD)
             {
-                cancel = !_messageBox.Confirm("The comsumption seems to be too big (" + consumption.FormatForDisplay(2) + "L/100km), are you sure to save this fillup? ", "Please confirm");
+                cancel = !_messageBox.Confirm("The fuel economy seems to be too big (" + fuelEconomy.FormatForDisplay(2) + "L/100km), are you sure to save this fillup? ", "Please confirm");
                 if (cancel)
                     return true;
             }

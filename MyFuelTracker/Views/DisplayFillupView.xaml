@@ -92,7 +92,7 @@
                     <TextBlock Grid.Row="7" Style="{StaticResource Label}" Text="fuel price" />
                     <TextBlock Grid.Row="8" Style="{StaticResource Label}" Text="fillup cost" />
                     <TextBlock Grid.Row="9" Style="{StaticResource Label}" Text="is partial fillup" />
-                    <TextBlock Grid.Row="10" Style="{StaticResource Label}" Text="consumption" Visibility="{Binding ShowConsumption, Converter={StaticResource booleanToVisibilityConverter}}" />
+					<TextBlock Grid.Row="10" Style="{StaticResource Label}" Text="fuel economy" Visibility="{Binding ShowFuelEconomy, Converter={StaticResource booleanToVisibilityConverter}}" />
 
                     <TextBlock                Grid.Column="1" Grid.Row="0" Style="{StaticResource Value}"  Text="{Binding Details.Date}" Foreground="White" />
                     <views:ValueWithDimention Grid.Column="1" Grid.Row="2" ValueText="{Binding Details.OdometerStart}" ValueDimension="{Binding Details.DistanceDimension}"  />
@@ -103,7 +103,7 @@
                     <views:ValueWithDimention Grid.Column="1" Grid.Row="7" ValueText="{Binding Details.Price}" ValueDimension="{Binding Details.CostDimension}"  />
                     <views:ValueWithDimention Grid.Column="1" Grid.Row="8" ValueText="{Binding Details.Cost}" ValueDimension="{Binding Details.CostDimension}"  />
                     <TextBlock                Grid.Column="1" Grid.Row="9" Style="{StaticResource Value}"  Text="{Binding Details.IsPartialFillup}" />
-                    <views:ValueWithDimention Grid.Column="1" Grid.Row="10" ValueText="{Binding Details.Consumption}" ValueDimension="{Binding Details.ConsumptionDimension}" ValueTextBrush="{Binding Details.FillupBrush}" Visibility="{Binding ShowConsumption, Converter={StaticResource booleanToVisibilityConverter}}"/>
+					<views:ValueWithDimention Grid.Column="1" Grid.Row="10" ValueText="{Binding Details.FuelEconomy}" ValueDimension="{Binding Details.FuelEconomyDimension}" ValueTextBrush="{Binding Details.FillupBrush}" Visibility="{Binding ShowFuelEconomy, Converter={StaticResource booleanToVisibilityConverter}}"/>
 
                 </Grid>
             </ScrollViewer>

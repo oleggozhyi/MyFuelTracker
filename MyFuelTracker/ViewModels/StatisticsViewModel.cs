@@ -14,7 +14,7 @@ using MyFuelTracker.Infrastructure.UiServices;
 
 namespace MyFuelTracker.ViewModels
 {
-	public class SummaryViewModel : Screen, IHandle<FillupHistoryChangedEvent>, IAppBarItemsProvider
+	public class StatisticsViewModel : Screen, IHandle<FillupHistoryChangedEvent>, IAppBarItemsProvider
 	{
 		#region Fields
 
@@ -28,18 +28,17 @@ namespace MyFuelTracker.ViewModels
 		private readonly IMessageBox _messageBox;
 		private readonly IFillupService _fillupService;
 		private readonly AppBarMenuModel _appBarMenuModel;
-		private string _lastConsumption;
-		private string _minConsumption;
-		private string _maxConsumption;
-		private string _allTimeAvgConsumption;
-		private string _last4FillupsAvgConsumption;
-		private string _allTimeAvgMonthCost;
+		private string _lastFuelEconomy;
+		private string _minFuelEconomy;
+		private string _maxFuelEconomy;
+		private string _allTimeAvgFuelEconomy;
+		private string _last4FillupsAvgFuelEconomy;
 		private string _lastMonthCost;
-		private Brush _lastConsumptionBrush;
-		private Brush _minConsumptionBrush;
-		private Brush _maxConsumptionBrush;
-		private Brush _allTimeAvgConsumptionBrush;
-		private Brush _last4FillupsAvgConsumptionBrush;
+		private Brush _lastFuelEconomyBrush;
+		private Brush _minFuelEconomyBrush;
+		private Brush _maxFuelEconomyBrush;
+		private Brush _allTimeAvgFuelEconomyBrush;
+		private Brush _last4FillupsAvgFuelEconomyBrush;
 		private string _avgFillupCost;
 		private string _mostOftenFuelType;
 		private string _lastFillupCost;
@@ -49,9 +48,9 @@ namespace MyFuelTracker.ViewModels
 
 		#region ctor
 
-		public SummaryViewModel() { /* for design time support */ }
+		public StatisticsViewModel() { /* for design time support */ }
 
-		public SummaryViewModel(INavigationService navigationService,
+		public StatisticsViewModel(INavigationService navigationService,
 								IMessageBox messageBox,
 								IFillupService fillupService,
 								AppBarMenuModel appBarMenuModel,
@@ -61,8 +60,8 @@ namespace MyFuelTracker.ViewModels
 			_messageBox = messageBox;
 			_fillupService = fillupService;
 			_appBarMenuModel = appBarMenuModel;
-			Debug.WriteLine("SummaryViewModel created");
-			DisplayName = "summary";
+			Debug.WriteLine("StatisticsViewModel created");
+			DisplayName = "statistics";
 			eventAggregator.Subscribe(this);
 
 			AddFillupButton.OnClick = GoToAddFillup;
@@ -96,125 +95,114 @@ namespace MyFuelTracker.ViewModels
 
 		public string CostDimension { get { return "hr"; } }
 
-		public string LastConsumption
+		public string LastFuelEconomy
 		{
-			get { return _lastConsumption; }
+			get { return _lastFuelEconomy; }
 			set
 			{
-				if (value.Equals(_lastConsumption)) return;
-				_lastConsumption = value;
-				NotifyOfPropertyChange(() => LastConsumption);
+				if (value.Equals(_lastFuelEconomy)) return;
+				_lastFuelEconomy = value;
+				NotifyOfPropertyChange(() => LastFuelEconomy);
 			}
 		}
 
-		public Brush LastConsumptionBrush
+		public Brush LastFuelEconomyBrush
 		{
-			get { return _lastConsumptionBrush; }
+			get { return _lastFuelEconomyBrush; }
 			set
 			{
-				if (Equals(value, _lastConsumptionBrush)) return;
-				_lastConsumptionBrush = value;
-				NotifyOfPropertyChange(() => LastConsumptionBrush);
+				if (Equals(value, _lastFuelEconomyBrush)) return;
+				_lastFuelEconomyBrush = value;
+				NotifyOfPropertyChange(() => LastFuelEconomyBrush);
 			}
 		}
 
 
-		public string MinConsumption
+		public string MinFuelEconomy
 		{
-			get { return _minConsumption; }
+			get { return _minFuelEconomy; }
 			set
 			{
-				if (value.Equals(_minConsumption)) return;
-				_minConsumption = value;
-				NotifyOfPropertyChange(() => MinConsumption);
+				if (value.Equals(_minFuelEconomy)) return;
+				_minFuelEconomy = value;
+				NotifyOfPropertyChange(() => MinFuelEconomy);
 			}
 		}
 
-		public Brush MinConsumptionBrush
+		public Brush MinFuelEconomyBrush
 		{
-			get { return _minConsumptionBrush; }
+			get { return _minFuelEconomyBrush; }
 			set
 			{
-				if (Equals(value, _minConsumptionBrush)) return;
-				_minConsumptionBrush = value;
-				NotifyOfPropertyChange(() => MinConsumptionBrush);
+				if (Equals(value, _minFuelEconomyBrush)) return;
+				_minFuelEconomyBrush = value;
+				NotifyOfPropertyChange(() => MinFuelEconomyBrush);
 			}
 		}
 
-		public string MaxConsumption
+		public string MaxFuelEconomy
 		{
-			get { return _maxConsumption; }
+			get { return _maxFuelEconomy; }
 			set
 			{
-				if (value.Equals(_maxConsumption)) return;
-				_maxConsumption = value;
-				NotifyOfPropertyChange(() => MaxConsumption);
+				if (value.Equals(_maxFuelEconomy)) return;
+				_maxFuelEconomy = value;
+				NotifyOfPropertyChange(() => MaxFuelEconomy);
 			}
 		}
 
-		public Brush MaxConsumptionBrush
+		public Brush MaxFuelEconomyBrush
 		{
-			get { return _maxConsumptionBrush; }
+			get { return _maxFuelEconomyBrush; }
 			set
 			{
-				if (Equals(value, _maxConsumptionBrush)) return;
-				_maxConsumptionBrush = value;
-				NotifyOfPropertyChange(() => MaxConsumptionBrush);
+				if (Equals(value, _maxFuelEconomyBrush)) return;
+				_maxFuelEconomyBrush = value;
+				NotifyOfPropertyChange(() => MaxFuelEconomyBrush);
 			}
 		}
 
-		public string AllTimeAvgConsumption
+		public string AllTimeAvgFuelEconomy
 		{
-			get { return _allTimeAvgConsumption; }
+			get { return _allTimeAvgFuelEconomy; }
 			set
 			{
-				if (value.Equals(_allTimeAvgConsumption)) return;
-				_allTimeAvgConsumption = value;
-				NotifyOfPropertyChange(() => AllTimeAvgConsumption);
+				if (value.Equals(_allTimeAvgFuelEconomy)) return;
+				_allTimeAvgFuelEconomy = value;
+				NotifyOfPropertyChange(() => AllTimeAvgFuelEconomy);
 			}
 		}
 
-		public Brush AllTimeAvgConsumptionBrush
+		public Brush AllTimeAvgFuelEconomyBrush
 		{
-			get { return _allTimeAvgConsumptionBrush; }
+			get { return _allTimeAvgFuelEconomyBrush; }
 			set
 			{
-				if (Equals(value, _allTimeAvgConsumptionBrush)) return;
-				_allTimeAvgConsumptionBrush = value;
-				NotifyOfPropertyChange(() => AllTimeAvgConsumptionBrush);
+				if (Equals(value, _allTimeAvgFuelEconomyBrush)) return;
+				_allTimeAvgFuelEconomyBrush = value;
+				NotifyOfPropertyChange(() => AllTimeAvgFuelEconomyBrush);
 			}
 		}
 
-		public string Last4FillupsAvgConsumption
+		public string Last4FillupsAvgFuelEconomy
 		{
-			get { return _last4FillupsAvgConsumption; }
+			get { return _last4FillupsAvgFuelEconomy; }
 			set
 			{
-				if (value.Equals(_last4FillupsAvgConsumption)) return;
-				_last4FillupsAvgConsumption = value;
-				NotifyOfPropertyChange(() => Last4FillupsAvgConsumption);
+				if (value.Equals(_last4FillupsAvgFuelEconomy)) return;
+				_last4FillupsAvgFuelEconomy = value;
+				NotifyOfPropertyChange(() => Last4FillupsAvgFuelEconomy);
 			}
 		}
 
-		public Brush Last4FillupsAvgConsumptionBrush
+		public Brush Last4FillupsAvgFuelEconomyBrush
 		{
-			get { return _last4FillupsAvgConsumptionBrush; }
+			get { return _last4FillupsAvgFuelEconomyBrush; }
 			set
 			{
-				if (Equals(value, _last4FillupsAvgConsumptionBrush)) return;
-				_last4FillupsAvgConsumptionBrush = value;
-				NotifyOfPropertyChange(() => Last4FillupsAvgConsumptionBrush);
-			}
-		}
-
-		public string AllTimeAvgMonthCost
-		{
-			get { return _allTimeAvgMonthCost; }
-			set
-			{
-				if (value.Equals(_allTimeAvgMonthCost)) return;
-				_allTimeAvgMonthCost = value;
-				NotifyOfPropertyChange(() => AllTimeAvgMonthCost);
+				if (Equals(value, _last4FillupsAvgFuelEconomyBrush)) return;
+				_last4FillupsAvgFuelEconomyBrush = value;
+				NotifyOfPropertyChange(() => Last4FillupsAvgFuelEconomyBrush);
 			}
 		}
 
@@ -287,7 +275,7 @@ namespace MyFuelTracker.ViewModels
 
 		}
 
-		private void Update(FuelConsumptionStatistics statistics)
+		private void Update(Statistics statistics)
 		{
 			if (statistics == null)
 			{
@@ -296,31 +284,30 @@ namespace MyFuelTracker.ViewModels
 			}
 			ShowNoHistoryMessage = false;
 
-			AllTimeAvgConsumption = statistics.AllTimeAvgConsumption.FormatForDisplay(2);
-			AllTimeAvgConsumptionBrush = ColorHelper.AvgColor.ToBrush();
+			AllTimeAvgFuelEconomy = statistics.AllTimeAvgFuelEconomy.FormatForDisplay(2);
+			AllTimeAvgFuelEconomyBrush = ColorHelper.AvgColor.ToBrush();
 
-			MaxConsumption = statistics.MaxConsumption.FormatForDisplay(2);
-			MaxConsumptionBrush = ColorHelper.MaxColor.ToBrush();
+			MaxFuelEconomy = statistics.MaxFuelEconomy.FormatForDisplay(2);
+			MaxFuelEconomyBrush = ColorHelper.MaxColor.ToBrush();
 
-			MinConsumption = statistics.MinConsumption.FormatForDisplay(2);
-			MinConsumptionBrush = ColorHelper.MinColor.ToBrush();
+			MinFuelEconomy = statistics.MinFuelEconomy.FormatForDisplay(2);
+			MinFuelEconomyBrush = ColorHelper.MinColor.ToBrush();
 
-			Last4FillupsAvgConsumption = statistics.Last4FillupsAvgConsumption.FormatForDisplay(2);
-			Last4FillupsAvgConsumptionBrush = ColorHelper.GetColor(statistics.Last4FillupsAvgConsumption,
-																	statistics.MinConsumption,
-																	statistics.AllTimeAvgConsumption,
-																	statistics.MaxConsumption)
+			Last4FillupsAvgFuelEconomy = statistics.Last4FillupsAvgFuelEconomy.FormatForDisplay(2);
+			Last4FillupsAvgFuelEconomyBrush = ColorHelper.GetColor(statistics.Last4FillupsAvgFuelEconomy,
+																	statistics.MinFuelEconomy,
+																	statistics.AllTimeAvgFuelEconomy,
+																	statistics.MaxFuelEconomy)
 														.ToBrush();
-			LastConsumption = statistics.LastConsumption.FormatForDisplay(2);
-			LastConsumptionBrush = ColorHelper.GetColor(statistics.LastConsumption,
-																	statistics.MinConsumption,
-																	statistics.AllTimeAvgConsumption,
-																	statistics.MaxConsumption)
+			LastFuelEconomy = statistics.LastFuelEconomy.FormatForDisplay(2);
+			LastFuelEconomyBrush = ColorHelper.GetColor(statistics.LastFuelEconomy,
+																	statistics.MinFuelEconomy,
+																	statistics.AllTimeAvgFuelEconomy,
+																	statistics.MaxFuelEconomy)
 														.ToBrush();
 
 
 
-			AllTimeAvgMonthCost = statistics.AllTimeAvgMonthCost.FormatForDisplay(2);
 			LastMonthCost = statistics.LastMonthCost.FormatForDisplay(2);
 
 			AvgFillupCost = statistics.AvgFillupCost.FormatForDisplay(2);
@@ -334,7 +321,7 @@ namespace MyFuelTracker.ViewModels
 			if (_loadingFirstTime)
 			{
 				_loadingFirstTime = false;
-				FuelConsumptionStatistics statistics;
+				Statistics statistics;
 				if (IsolatedStorageSettings.ApplicationSettings.TryGetValue("statistics", out statistics))
 				{
 					Update(statistics);

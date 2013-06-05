@@ -19,7 +19,7 @@ namespace MyFuelTracker.ViewModels
 
 		#region properties
 
-		public SummaryViewModel SummaryViewModel { get; set; }
+		public StatisticsViewModel StatisticsViewModel { get; set; }
 		public HistoryViewModel HistoryViewModel { get; set; }
 		public object SelectedItem { get; set; }
 
@@ -30,14 +30,14 @@ namespace MyFuelTracker.ViewModels
 
 		public MainViewModel() { /* for design time support */ }
 
-		public MainViewModel(SummaryViewModel summaryViewModel,
+		public MainViewModel(StatisticsViewModel statisticsViewModel,
 							 HistoryViewModel historyViewModel,
 							 IEventAggregator eventAggregator)
 		{
 			_eventAggregator = eventAggregator;
 			Debug.WriteLine("MainViewModel created");
 
-			SummaryViewModel = summaryViewModel;
+			StatisticsViewModel = statisticsViewModel;
 			HistoryViewModel = historyViewModel;
 			_eventAggregator.Subscribe(this);
 		}
@@ -51,10 +51,10 @@ namespace MyFuelTracker.ViewModels
 			Debug.WriteLine("MainViewModel OnInitialize");
 			base.OnInitialize();
 
-			Items.Add(SummaryViewModel);
+			Items.Add(StatisticsViewModel);
 			Items.Add(HistoryViewModel);
 
-			ActivateItem(SummaryViewModel);
+			ActivateItem(StatisticsViewModel);
 		}
 
 		protected override void OnViewLoaded(object view)

@@ -6,6 +6,6 @@ namespace MyFuelTracker.Core
 {
 	public interface IStatisticsService
 	{
-		Task<FuelConsumptionStatistics> CalculateStatisticsAsync(IEnumerable<FillupHistoryItem> fillups);
+		Task<Statistics> CalculateStatisticsAsync(IEnumerable<FillupHistoryItem> fillups);
 	}
 }

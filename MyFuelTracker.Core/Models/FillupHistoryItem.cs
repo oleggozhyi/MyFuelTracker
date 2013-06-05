@@ -9,6 +9,6 @@ namespace MyFuelTracker.Core.Models
 	public class FillupHistoryItem
 	{
 		public Fillup Fillup { get; set; }
-		public double? Consumption { get; set; }
+		public double? FuelEconomy { get; set; }
 	}
 }

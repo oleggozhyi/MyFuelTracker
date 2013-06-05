@@ -25,25 +25,6 @@
     <phone:PhoneApplicationPage.Background>
         <ImageBrush ImageSource="/Assets/black-wood-background.jpg" Stretch="UniformToFill"></ImageBrush>
     </phone:PhoneApplicationPage.Background>
-	<phone:PhoneApplicationPage.Resources>
-		<DataTemplate x:Key="FilllupTemplate">
-			<Grid >
-                
-				<Grid.RowDefinitions>
-					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="Auto"/>
-				</Grid.RowDefinitions>
-                <StackPanel Orientation="Horizontal" >
-                    <TextBlock  Text="{Binding Date}" FontWeight="ExtraBold" />
-                    <TextBlock Margin="20 0 0 0" Text="{Binding Consumption}" FontWeight="ExtraBold" />
-                </StackPanel>
-                <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10 0 0 0">
-                    <TextBlock  Text="{Binding Volume}" />
-                    <TextBlock Margin="20 0 0 0" Text="{Binding Price}"  />
-                </StackPanel>
-			</Grid>
-		</DataTemplate>
-	</phone:PhoneApplicationPage.Resources>
     <i:Interaction.Behaviors>
         <local:DynamicAppBarBehavior PivotElementName="Items" />
     </i:Interaction.Behaviors>

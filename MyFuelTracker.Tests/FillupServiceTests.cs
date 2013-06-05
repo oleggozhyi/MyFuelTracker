@@ -99,8 +99,8 @@ namespace MyFuelTracker.Tests
 			var fillupHistoryItem = fillupService.GetHistoryAsync().WaitAndReturn().Single();
 
 			//assert
-			fillupHistoryItem.Consumption.HasValue.ShouldBe(true);
-			fillupHistoryItem.Consumption.Value.ShouldBe(45.0 * 100.0 / (1500.0 - 1000.0));
+			fillupHistoryItem.FuelEconomy.HasValue.ShouldBe(true);
+			fillupHistoryItem.FuelEconomy.Value.ShouldBe(45.0 * 100.0 / (1500.0 - 1000.0));
 		}
 
 		[TestMethod]
@@ -116,7 +116,7 @@ namespace MyFuelTracker.Tests
 
 			//act
 			var fillupHistoryItem = fillupService.GetHistoryAsync().WaitAndReturn().Single();
-			fillupHistoryItem.Consumption.HasValue.ShouldBe(false);
+			fillupHistoryItem.FuelEconomy.HasValue.ShouldBe(false);
 		}
 
 		[TestMethod]
@@ -163,8 +163,8 @@ namespace MyFuelTracker.Tests
 
 			//act
 			var latestFillup = fillupService.GetHistoryAsync().WaitAndReturn().First();
-			latestFillup.Consumption.HasValue.ShouldBe(true);
-			latestFillup.Consumption.Value.ShouldBe((25.0 + 20.0 + 50.0) * 100.0 / (2700.0 - 1500.0));
+			latestFillup.FuelEconomy.HasValue.ShouldBe(true);
+			latestFillup.FuelEconomy.Value.ShouldBe((25.0 + 20.0 + 50.0) * 100.0 / (2700.0 - 1500.0));
 		}
 
 

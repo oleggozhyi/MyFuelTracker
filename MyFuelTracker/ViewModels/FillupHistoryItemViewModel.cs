@@ -17,11 +17,11 @@ namespace MyFuelTracker.ViewModels
 
 		public FillupHistoryItemViewModel() { /* for design time support */}
 
-		public FillupHistoryItemViewModel(FillupHistoryItem historyItem, FuelConsumptionStatistics statistics)
+		public FillupHistoryItemViewModel(FillupHistoryItem historyItem, Statistics statistics)
 		{
 			HistoryItem = historyItem;
 			_isPartial = historyItem.Fillup.IsPartial;
-			Consumption = historyItem.Consumption.HasValue ? historyItem.Consumption.Value.FormatForDisplay(2) : "<partial>";
+			FuelEconomy = historyItem.FuelEconomy.HasValue ? historyItem.FuelEconomy.Value.FormatForDisplay(2) : "<partial>";
 			Date = historyItem.Fillup.Date.ToString("dd MMM yyyy");
 			FillupBrush = GetFillupBrush(historyItem, statistics);
 
@@ -34,18 +34,18 @@ namespace MyFuelTracker.ViewModels
 			OdometerStart = HistoryItem.Fillup.OdometerStart.FormatForDisplay(0);
 			OdometerEnd = HistoryItem.Fillup.OdometerEnd.FormatForDisplay(0);
 			Price = HistoryItem.Fillup.Price.FormatForDisplay(2);
-			ShowConsumption = !historyItem.Fillup.IsPartial;
+			ShowfuelEconomy = !historyItem.Fillup.IsPartial;
 			IsPartialFillup = historyItem.Fillup.IsPartial ? "yes" : "no";
 		}
 
-		private Brush GetFillupBrush(FillupHistoryItem historyItem, FuelConsumptionStatistics statistics)
+		private Brush GetFillupBrush(FillupHistoryItem historyItem, Statistics statistics)
 		{
 			if (historyItem.Fillup.IsPartial)
                 return new SolidColorBrush(Colors.Gray);
 
-			double consumption = historyItem.Consumption.Value;
-			var color = ColorHelper.GetColor(consumption, statistics.MinConsumption,
-                                            statistics.AllTimeAvgConsumption, statistics.MaxConsumption);
+			double fuelEconomy = historyItem.FuelEconomy.Value;
+			var color = ColorHelper.GetColor(fuelEconomy, statistics.MinFuelEconomy,
+                                            statistics.AllTimeAvgFuelEconomy, statistics.MaxFuelEconomy);
 			
 			return new SolidColorBrush(color);
 		}
@@ -58,7 +58,7 @@ namespace MyFuelTracker.ViewModels
 
 		public string Date { get; set; }
 
-		public string Consumption { get; set; }
+		public string FuelEconomy { get; set; }
 
         public Brush FillupBrush { get; set; }
 
@@ -68,7 +68,7 @@ namespace MyFuelTracker.ViewModels
 
 		public string Volume { get; set; }
 
-		public string ConsumptionDimension { get { return _isPartial ? "" : "L/100km"; } }
+		public string FuelEconomyDimension { get { return _isPartial ? "" : "L/100km"; } }
 
 		public string CostDimension { get { return "hr"; } }
 
@@ -81,6 +81,6 @@ namespace MyFuelTracker.ViewModels
 		public string OdometerEnd { get; set; }
 
 		public string IsPartialFillup { get; set; }
-		public bool ShowConsumption { get; set; }
+		public bool ShowfuelEconomy { get; set; }
 	}
 }

@@ -6,14 +6,13 @@ using System.Threading.Tasks;
 
 namespace MyFuelTracker.Core.Models
 {
-	public class FuelConsumptionStatistics
+	public class Statistics
 	{
-		public double LastConsumption { get; set; }
-		public double MinConsumption { get; set; }
-		public double MaxConsumption { get; set; }
-		public double AllTimeAvgConsumption { get; set; }
-		public double Last4FillupsAvgConsumption { get; set; }
-		public double AllTimeAvgMonthCost { get; set; }
+		public double LastFuelEconomy { get; set; }
+		public double MinFuelEconomy { get; set; }
+		public double MaxFuelEconomy { get; set; }
+		public double AllTimeAvgFuelEconomy { get; set; }
+		public double Last4FillupsAvgFuelEconomy { get; set; }
 		public double LastMonthCost { get; set; }
 		public double AvgFillupCost { get; set; }
 		public double LastFillupCost { get; set; }

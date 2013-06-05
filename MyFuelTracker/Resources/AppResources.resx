@@ -125,25 +125,4 @@
     <value>en-US</value>
     <comment>Controls the Language and ensures that the font for all elements in the RootFrame aligns with the app's language. Set to the language code of this resource file's language.</comment>
   </data>
-  <data name="ApplicationTitle" xml:space="preserve">
-    <value>My Fuel Tracker</value>
-  </data>
-  <data name="AppBarButtonText" xml:space="preserve">
-    <value>add</value>
-  </data>
-  <data name="AppBarMenuItemText" xml:space="preserve">
-    <value>Menu Item</value>
-  </data>
-  <data name="AvgConsumptionLabel" xml:space="preserve">
-    <value>Average Consumption</value>
-  </data>
-  <data name="MaxConsumptionLabel" xml:space="preserve">
-    <value>Max Consumption</value>
-  </data>
-  <data name="MinConsumptionLabel" xml:space="preserve">
-    <value>Min Consumption</value>
-  </data>
-  <data name="SampleProperty" xml:space="preserve">
-    <value>xxx</value>
-  </data>
 </root>
