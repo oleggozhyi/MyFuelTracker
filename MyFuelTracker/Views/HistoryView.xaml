@@ -32,7 +32,10 @@
         </Style>
 
         <DataTemplate x:Key="fillupItemTemplate">
-            <StackPanel  Tag="{Binding DataContext, ElementName=LayoutRoot}" Background="#01000000" micro:Message.Attach="[Event Tap] = [Action DisplayFillupDetails($datacontext)]" >
+            <StackPanel  Tag="{Binding DataContext, ElementName=LayoutRoot}" 
+						 Background="#01000000" 
+						 Margin="0 -24 0 15"
+						 micro:Message.Attach="[Event Tap] = [Action DisplayFillupDetails($datacontext)]" >
                 <toolkit:ContextMenuService.ContextMenu>
                     <toolkit:ContextMenu IsZoomEnabled="False" micro:Action.TargetWithoutContext="{Binding DataContext, ElementName=FillupsList}">
                         <toolkit:MenuItem Header="edit" micro:Message.Attach="[Event Click] = [Action EditFillup($datacontext)]" />
@@ -89,7 +92,8 @@
                                 IsGroupingEnabled="{Binding ShowAllFillups}"
                                 GroupHeaderTemplate="{StaticResource fillupGroupHeaderTemplate}" 
                                 HideEmptyGroups="True"
-								IsSelectionEnabled="{Binding IsSelectionModeEnabled}"
+								EnforceIsSelectionEnabled="{Binding EnforceIsSelectionModeEnabled}"
+								IsSelectionEnabled="{Binding IsSelectionModeEnabled, Mode=TwoWay}"
 								SelectionChanged="FillupsList_OnSelectionChanged"
                                 JumpListStyle="{StaticResource JumpListStyle}"/>
     </Grid>

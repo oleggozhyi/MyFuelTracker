@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -27,8 +28,9 @@ namespace MyFuelTracker.ViewModels
         private LiveConnectSession _session;
         private bool _canBackup;
         private int _hideStoryboardFrom;
+	    private string _userName;
 
-        #endregion
+	    #endregion
 
         #region ctor
 
@@ -95,18 +97,32 @@ namespace MyFuelTracker.ViewModels
             }
         }
 
-        #endregion
+		public string UserName
+		{
+			get { return _userName; }
+			set
+			{
+				if (value == _userName) return;
+				_userName = value;
+				NotifyOfPropertyChange(() => UserName);
+			}
+		}
+
+	    #endregion
 
         #region Methods
 
-        public void OnSessionChanged(LiveConnectSessionChangedEventArgs args)
+        public async void OnSessionChanged(LiveConnectSessionChangedEventArgs args)
         {
             _progressIndicatorService.Stop();
             if (args.Status == LiveConnectSessionStatus.Connected)
             {
+				_session = args.Session;
+				dynamic userInfo = (await new LiveConnectClient(_session).GetAsync("me")).Result;
+				UserName = userInfo.name;
                 HideStoryboardFrom = 0;
                 IsSignedIn = true;
-                _session = args.Session;
+				
             }
             else 
             {

@@ -26,6 +26,7 @@ namespace MyFuelTracker.ViewModels
 		private bool _backupDownloaded;
 		private BackupViewModel _restoreSource;
 		private bool _canRestore;
+		private string _userName;
 
 		#endregion
 
@@ -115,6 +116,17 @@ namespace MyFuelTracker.ViewModels
 			}
 		}
 
+		public string UserName
+		{
+			get { return _userName; }
+			set
+			{
+				if (value == _userName) return;
+				_userName = value;
+				NotifyOfPropertyChange(() => UserName);
+			}
+		}
+
 		#endregion
 
 		#region Methods
@@ -146,14 +158,16 @@ namespace MyFuelTracker.ViewModels
 			}
 		}
 
-		public void OnSessionChanged(LiveConnectSessionChangedEventArgs args)
+		public async void OnSessionChanged(LiveConnectSessionChangedEventArgs args)
 		{
 			_progressIndicatorService.Stop();
 			if (args.Status == LiveConnectSessionStatus.Connected)
 			{
+				_session = args.Session;
+				dynamic userInfo = (await new LiveConnectClient(_session).GetAsync("me")).Result;
+				UserName = userInfo.name;
 				HideStoryboardFrom = 0;
 				IsSignedIn = true;
-				_session = args.Session;
 				LoadLastBackup();
 			}
 			else
@@ -162,6 +176,8 @@ namespace MyFuelTracker.ViewModels
 				_session = null;
 			}
 		}
+
+		
 
 		private async void LoadLastBackup()
 		{

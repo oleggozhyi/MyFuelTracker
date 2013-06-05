@@ -26,6 +26,14 @@ namespace MyFuelTracker.Views
 			set { SetValue(SelectedItemsProperty, value); }
 		}
 
+		public event EventHandler SelectionChanged;
+
+		protected virtual void OnSelectionChanged()
+		{
+			var handler = SelectionChanged;
+			if (handler != null) handler(this, EventArgs.Empty);
+		}
+
 		public static readonly DependencyProperty SelectedItemsProperty =
 			DependencyProperty.Register("SelectedItems", typeof(IList), typeof(HistoryView), new PropertyMetadata(new object[0]));
 
@@ -33,11 +41,13 @@ namespace MyFuelTracker.Views
 		private void FillupsList_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 			SelectedItems = FillupsList.SelectedItems;
+			OnSelectionChanged();
 		}
 	}
 
 	public interface ISelection
 	{
 		IList SelectedItems { get; }
+		event EventHandler SelectionChanged;
 	}
 }

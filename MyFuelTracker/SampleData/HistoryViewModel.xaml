@@ -1,6 +1,7 @@
 ﻿<vm:HistoryViewModel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                      xmlns:vm="clr-namespace:MyFuelTracker.ViewModels"
-                     xmlns:sampleData="clr-namespace:MyFuelTracker.SampleData">
+                     xmlns:sampleData="clr-namespace:MyFuelTracker.SampleData"
+					 HistoryEmpty="False">
     <vm:HistoryViewModel.Items>
         <sampleData:XamlFriendlyCollectionOfFillupHistoryItemViewModel>
             <vm:FillupHistoryItemViewModel Date="31 Jan 2013" Consumption="12.57" FillupBrush="Red"  Cost="1885" Distance="352" Volume="36.5" FuelType="okko pulls" />

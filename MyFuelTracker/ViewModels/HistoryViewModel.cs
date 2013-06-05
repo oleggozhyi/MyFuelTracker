@@ -37,6 +37,7 @@ namespace MyFuelTracker.ViewModels
 		private bool _historyEmpty = true;
 		private bool _isSelectionModeEnabled;
 		private ISelection _selection;
+		private bool _enforceIsSelectionModeEnabled;
 
 		#endregion
 
@@ -70,6 +71,16 @@ namespace MyFuelTracker.ViewModels
 
 		#region properties
 
+		public bool EnforceIsSelectionModeEnabled
+		{
+			get { return _enforceIsSelectionModeEnabled; }
+			set
+			{
+				if (value.Equals(_enforceIsSelectionModeEnabled)) return;
+				_enforceIsSelectionModeEnabled = value;
+				NotifyOfPropertyChange(() => EnforceIsSelectionModeEnabled);
+			}
+		}
 
 		public bool IsSelectionModeEnabled
 		{
@@ -79,6 +90,7 @@ namespace MyFuelTracker.ViewModels
 				if (value.Equals(_isSelectionModeEnabled)) return;
 				_isSelectionModeEnabled = value;
 				NotifyOfPropertyChange(() => IsSelectionModeEnabled);
+				RaiseAppBarChangedChanged();
 			}
 		}
 
@@ -151,7 +163,7 @@ namespace MyFuelTracker.ViewModels
 			if (!proceedWithDeletion)
 				return;
 
-			IsSelectionModeEnabled = false;
+			EnforceIsSelectionModeEnabled = false;
 			foreach (FillupHistoryItemViewModel fillupViewModel in _selection.SelectedItems)
 			{
 				await _fillupService.DeleteFillupAsync(fillupViewModel.HistoryItem.Fillup);	
@@ -163,8 +175,7 @@ namespace MyFuelTracker.ViewModels
 
 		private void ChangeSelectionMode()
 		{
-			IsSelectionModeEnabled = true;
-			RaiseAppBarChangedChanged();
+			EnforceIsSelectionModeEnabled = true;
 		}
 
 		public void OnNavigating(CancelEventArgs e)
@@ -190,9 +201,8 @@ namespace MyFuelTracker.ViewModels
 							  .Navigate();
 		}
 
-		public async void EditFillup(FillupHistoryItemViewModel viewModel)
+		public void EditFillup(FillupHistoryItemViewModel viewModel)
 		{
-			//await Task.Delay(500);
 			_navigationService.UriFor<EditFillupViewModel>()
 							  .WithParam(e => e.FillupId, viewModel.HistoryItem.Fillup.Id.ToString())
 							  .Navigate();
@@ -256,6 +266,15 @@ namespace MyFuelTracker.ViewModels
 		{
 			base.OnViewLoaded(view);
 			_selection = view as ISelection;
+			_selection.SelectionChanged += (s, e) => OnSelectionChanged();
+		}
+
+		private void OnSelectionChanged()
+		{
+			if (_selection.SelectedItems.Count == 0)
+			{
+				EnforceIsSelectionModeEnabled = false;
+			}
 		}
 
 		#endregion
