@@ -18,7 +18,7 @@ namespace MyFuelTracker.ViewModels
 
 		private readonly DynamicAppBarItem _backupToSkydriveMenuItem = new DynamicAppBarItem { Text = "backup to skydrive" };
 		private readonly DynamicAppBarItem _restoreFromSkydriveMenuItem = new DynamicAppBarItem { Text = "restore from skydrive" };
-		private readonly DynamicAppBarItem _settingsMenuItem = new DynamicAppBarItem { Text = "settins" };
+		private readonly DynamicAppBarItem _settingsMenuItem = new DynamicAppBarItem { Text = "settings" };
 
 		#endregion
 

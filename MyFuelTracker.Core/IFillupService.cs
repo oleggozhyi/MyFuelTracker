@@ -14,5 +14,6 @@ namespace MyFuelTracker.Core
 		Task DeleteFillupAsync(Fillup fillup);
         Task<Fillup> GetFillupAsync(Guid id);
 		Task RestoreDataAsync(IEnumerable<Fillup> fillupsData);
+		void ClearCache();
 	}
 }

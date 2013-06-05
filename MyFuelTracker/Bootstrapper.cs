@@ -8,6 +8,7 @@ using Caliburn.Micro;
 using Microsoft.Phone.Controls;
 using MyFuelTracker.Core;
 using MyFuelTracker.Core.DataAccess;
+using MyFuelTracker.Core.Models;
 using MyFuelTracker.Infrastructure;
 using MyFuelTracker.Infrastructure.UiServices;
 using MyFuelTracker.ViewModels;
@@ -49,6 +50,9 @@ namespace MyFuelTracker
             
 			Container.PerRequest<ILog, DebugLogger>();
 	        Container.Singleton<AppBarMenuModel>();
+			Container.Singleton<UserSetttingsManager>();
+			Container.Singleton<IFuelEconomyStrategyProvider, FuelEconomyStrategyProvider>();
+
 			Container.Singleton<IMessageBox, MyMessageBox>();
 			Container.Singleton<IFillupService, FillupService>();
 			Container.Singleton<IFuelTrackerDb, SqlCeFuelTrackerDb>();
