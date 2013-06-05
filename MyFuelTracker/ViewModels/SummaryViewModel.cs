@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO.IsolatedStorage;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using Caliburn.Micro;
@@ -14,6 +15,7 @@ namespace MyFuelTracker.ViewModels
 	{
 		#region Fields
 
+		private bool _loadingFirstTime = true;
 		public readonly DynamicAppBarButton AddFillupButton = new DynamicAppBarButton { IconUri = Icons.Add, Text = "add fillup" };
 		private readonly DynamicAppBarButton[] _buttons;
 
@@ -38,10 +40,7 @@ namespace MyFuelTracker.ViewModels
 		private string _avgFillupCost;
 		private string _mostOftenFuelType;
 		private string _lastFillupCost;
-		private bool _historyEmpty = true;
-		private int _hideStoryboardFrom = 2000;
 		private bool _showNoHistoryMessage;
-		private bool _statisticsReady;
 
 		#endregion
 
@@ -87,17 +86,6 @@ namespace MyFuelTracker.ViewModels
 				if (value.Equals(_showNoHistoryMessage)) return;
 				_showNoHistoryMessage = value;
 				NotifyOfPropertyChange(() => ShowNoHistoryMessage);
-			}
-		}
-
-		public bool StatisticsReady
-		{
-			get { return _statisticsReady; }
-			set
-			{
-				if (value.Equals(_statisticsReady)) return;
-				_statisticsReady = value;
-				NotifyOfPropertyChange(() => StatisticsReady);
 			}
 		}
 
@@ -271,17 +259,6 @@ namespace MyFuelTracker.ViewModels
 			}
 		}
 
-		public int HideStoryboardFrom
-		{
-			get { return _hideStoryboardFrom; }
-			set
-			{
-				if (value == _hideStoryboardFrom) return;
-				_hideStoryboardFrom = value;
-				NotifyOfPropertyChange(() => HideStoryboardFrom);
-			}
-		}
-
 		#endregion
 
 		#region methods
@@ -295,18 +272,25 @@ namespace MyFuelTracker.ViewModels
 		{
 			_messageBox.Info("not implemented");
 		}
-
+		
 		public async Task UpdateAsync()
 		{
-			HideStoryboardFrom = 0;
 			var statistics = await _fillupService.GetStatisticsAsync();
+
+			IsolatedStorageSettings.ApplicationSettings["statistics"]=  statistics;
+			IsolatedStorageSettings.ApplicationSettings.Save();
+
+			Update(statistics);
+
+		}
+
+		private void Update(FuelConsumptionStatistics statistics)
+		{
 			if (statistics == null)
 			{
 				ShowNoHistoryMessage = true;
-				StatisticsReady = false;
 				return;
 			}
-			StatisticsReady = true;
 			ShowNoHistoryMessage = false;
 
 			AllTimeAvgConsumption = statistics.AllTimeAvgConsumption.FormatForDisplay(2);
@@ -340,11 +324,21 @@ namespace MyFuelTracker.ViewModels
 			LastFillupCost = statistics.LastFillupCost.FormatForDisplay(2);
 
 			MostOftenFuelType = statistics.MostOftenFuelType;
-
-		}
+	}
 
 		public async void Handle(FillupHistoryChangedEvent message)
 		{
+			if (_loadingFirstTime)
+			{
+				_loadingFirstTime = false;
+				FuelConsumptionStatistics statistics;
+				if (IsolatedStorageSettings.ApplicationSettings.TryGetValue("statistics", out statistics))
+				{
+					Update(statistics);
+					return;
+				}
+				
+			}
 			await UpdateAsync();
 		}
 

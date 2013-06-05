@@ -47,36 +47,7 @@
 				 FontSize="{StaticResource PhoneFontSizeMediumLarge}" TextWrapping="Wrap"
 				 Visibility="{Binding ShowNoHistoryMessage, Converter={StaticResource booleanToVisibilityConverter}}"
 				 />
-		<StackPanel  x:Name="Panel"  Visibility="{Binding StatisticsReady, Converter={StaticResource booleanToVisibilityConverter}}">
-			<StackPanel.Resources>
-				<Storyboard x:Key="ShowPanelAnimation">
-					<DoubleAnimation From="2000" To="0" Duration="00:00:01" Storyboard.TargetName="Panel" Storyboard.TargetProperty="(FrameworkElement.RenderTransform).(TranslateTransform.Y)" >
-						<DoubleAnimation.EasingFunction>
-							<ExponentialEase Exponent="12" EasingMode="EaseOut"/>
-						</DoubleAnimation.EasingFunction>
-					</DoubleAnimation>
-					<DoubleAnimation From="0" To="1" Duration="00:00:01" Storyboard.TargetName="Panel" Storyboard.TargetProperty="(FrameworkElement.Opacity)" />
-				</Storyboard>
-				<Storyboard x:Key="HidePanelAnimation" TargetName="Panel" TargetProperty="(FrameworkElement.RenderTransform).(TranslateTransform.Y)">
-					<DoubleAnimation From="{Binding HideStoryboardFrom}" To="2000" Duration="00:00:00.8" >
-						<DoubleAnimation.EasingFunction>
-							<ExponentialEase Exponent="12" EasingMode="EaseIn"/>
-						</DoubleAnimation.EasingFunction>
-					</DoubleAnimation>
-					<DoubleAnimation From="1" To="0" Duration="00:00:01" Storyboard.TargetName="Panel" Storyboard.TargetProperty="(FrameworkElement.Opacity)" />
-				</Storyboard>
-			</StackPanel.Resources>
-			<StackPanel.RenderTransform>
-				<TranslateTransform Y="2000"/>
-			</StackPanel.RenderTransform>
-			<i:Interaction.Triggers>
-				<ec:DataTrigger Binding="{Binding StatisticsReady}" Value="true">
-					<eim:ControlStoryboardAction ControlStoryboardOption="Play" Storyboard="{StaticResource ShowPanelAnimation}" />
-				</ec:DataTrigger>
-				<ec:DataTrigger Binding="{Binding StatisticsReady}" Value="false">
-					<eim:ControlStoryboardAction ControlStoryboardOption="Play" Storyboard="{StaticResource HidePanelAnimation}" />
-				</ec:DataTrigger>
-			</i:Interaction.Triggers>
+		
 			<ScrollViewer>
 				<Grid Margin="15 0 0 0">
 					<Grid.RowDefinitions>
@@ -153,7 +124,5 @@
 					<TextBlock Grid.Row="18" Grid.Column="1"  Text="{Binding MostOftenFuelType}" Foreground="DeepSkyBlue" Style="{StaticResource value}"/>
 				</Grid>
 			</ScrollViewer>
-		</StackPanel>
-		
     </Grid>
 </UserControl>
