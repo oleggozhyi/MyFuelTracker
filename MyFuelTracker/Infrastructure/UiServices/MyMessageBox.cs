@@ -1,10 +1,8 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using Coding4Fun.Toolkit.Controls;
 
-namespace MyFuelTracker.Infrastructure
+namespace MyFuelTracker.Infrastructure.UiServices
 {
 	public class MyMessageBox : IMessageBox
 	{

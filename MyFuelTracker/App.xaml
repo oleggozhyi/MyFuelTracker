@@ -6,13 +6,14 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:caliburnMicro="clr-namespace:MyFuelTracker" xmlns:infrastructure="clr-namespace:MyFuelTracker.Infrastructure"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
-    xmlns:micro="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro">
+    xmlns:micro="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro"
+    xmlns:conveters="clr-namespace:MyFuelTracker.Infrastructure.Conveters">
 
     <!--Application Resources-->
     <Application.Resources>
         <ImageBrush x:Key="AppBackground" ImageSource="/Assets/simple-black-ipad-background1.jpg"/>
         <caliburnMicro:Bootstrapper x:Key="bootstrapper" />
-        <infrastructure:MyBooleanToVisibilityConverter x:Key="booleanToVisibilityConverter"/>
+        <conveters:MyBooleanToVisibilityConverter x:Key="booleanToVisibilityConverter"/>
 
         <infrastructure:LocalizedStrings xmlns:local="clr-namespace:MyFuelTracker" x:Key="LocalizedStrings"/>
         <Style x:Key="PageTitle" BasedOn="{StaticResource PhoneTextTitle1Style}" TargetType="TextBlock">

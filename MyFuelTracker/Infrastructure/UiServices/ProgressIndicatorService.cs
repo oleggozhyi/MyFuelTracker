@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using Microsoft.Phone.Shell;
+﻿using Microsoft.Phone.Shell;
 
-namespace MyFuelTracker.Infrastructure
+namespace MyFuelTracker.Infrastructure.UiServices
 {
     public class ProgressIndicatorService : IProgressIndicatorService
     {

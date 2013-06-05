@@ -96,19 +96,20 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
-    <Compile Include="Infrastructure\ColorHelper.cs" />
+    <Compile Include="Infrastructure\Events\FillupItemChangedEvent.cs" />
+    <Compile Include="Infrastructure\Helpers\ColorHelper.cs" />
     <Compile Include="Infrastructure\DebugLogger.cs" />
     <Compile Include="Infrastructure\DynamicAppBarBehavior.cs" />
-    <Compile Include="Infrastructure\ExtensionHelpers.cs" />
-    <Compile Include="Infrastructure\FillupHistoryChangedEvent.cs" />
-    <Compile Include="Infrastructure\FillupsGroupingHelper.cs" />
-    <Compile Include="Infrastructure\HslColor.cs" />
+    <Compile Include="Infrastructure\Helpers\ExtensionHelpers.cs" />
+    <Compile Include="Infrastructure\Events\FillupHistoryChangedEvent.cs" />
+    <Compile Include="Infrastructure\Helpers\FillupsGroupingHelper.cs" />
+    <Compile Include="Infrastructure\Helpers\HslColor.cs" />
     <Compile Include="Infrastructure\Icons.cs" />
-    <Compile Include="Infrastructure\IMessageBox.cs" />
-    <Compile Include="Infrastructure\ProgressIndicatorService.cs" />
-    <Compile Include="Infrastructure\IProgressIndicatorService.cs" />
-    <Compile Include="Infrastructure\MyMessageBox.cs" />
-    <Compile Include="Infrastructure\FuelTypeAddedEvent.cs" />
+    <Compile Include="Infrastructure\UiServices\IMessageBox.cs" />
+    <Compile Include="Infrastructure\UiServices\ProgressIndicatorService.cs" />
+    <Compile Include="Infrastructure\UiServices\IProgressIndicatorService.cs" />
+    <Compile Include="Infrastructure\UiServices\MyMessageBox.cs" />
+    <Compile Include="Infrastructure\Events\FuelTypeAddedEvent.cs" />
     <Compile Include="Infrastructure\SkyDriveManager.cs" />
     <Compile Include="Infrastructure\ValidationException.cs" />
     <Compile Include="SampleData\XamlFriendlyCollection.cs">
@@ -124,8 +125,9 @@
     <Compile Include="ViewModels\FillupHistoryItemViewModel.cs" />
     <Compile Include="ViewModels\HistoryViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
-    <Compile Include="Infrastructure\MyBooleanToVisibilityConverter.cs" />
+    <Compile Include="Infrastructure\Conveters\MyBooleanToVisibilityConverter.cs" />
     <Compile Include="ViewModels\RestoreFromSkyDriveViewModel.cs" />
+    <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\SummaryViewModel.cs" />
     <Compile Include="Views\AddFuelTypeView.xaml.cs">
       <DependentUpon>AddFuelTypeView.xaml</DependentUpon>
@@ -157,6 +159,9 @@
     </Compile>
     <Compile Include="Views\RestoreFromSkyDriveView.xaml.cs">
       <DependentUpon>RestoreFromSkyDriveView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingsView.xaml.cs">
+      <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SummaryView.xaml.cs">
       <DependentUpon>SummaryView.xaml</DependentUpon>
@@ -203,6 +208,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\RestoreFromSkyDriveView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\SettingsView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

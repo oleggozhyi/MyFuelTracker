@@ -2,6 +2,7 @@
 using System.Windows;
 using MyFuelTracker.Core;
 using MyFuelTracker.Infrastructure;
+using MyFuelTracker.Infrastructure.Helpers;
 
 namespace MyFuelTracker.ViewModels
 {

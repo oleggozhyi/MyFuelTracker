@@ -7,6 +7,7 @@ using System.Windows.Interactivity;
 using System.Windows.Media;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using MyFuelTracker.Infrastructure.Helpers;
 using MyFuelTracker.ViewModels;
 
 namespace MyFuelTracker.Infrastructure

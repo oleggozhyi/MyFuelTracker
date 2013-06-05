@@ -47,7 +47,6 @@
 				 FontSize="{StaticResource PhoneFontSizeMediumLarge}" TextWrapping="Wrap"
 				 Visibility="{Binding ShowNoHistoryMessage, Converter={StaticResource booleanToVisibilityConverter}}"
 				 />
-		
 			<ScrollViewer>
 				<Grid Margin="15 0 0 0">
 					<Grid.RowDefinitions>

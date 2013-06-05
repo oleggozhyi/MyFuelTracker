@@ -9,6 +9,9 @@ using Caliburn.Micro;
 using MyFuelTracker.Core;
 using MyFuelTracker.Core.Models;
 using MyFuelTracker.Infrastructure;
+using MyFuelTracker.Infrastructure.Events;
+using MyFuelTracker.Infrastructure.Helpers;
+using MyFuelTracker.Infrastructure.UiServices;
 
 namespace MyFuelTracker.ViewModels
 {

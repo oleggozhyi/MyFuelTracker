@@ -1,4 +1,4 @@
-﻿namespace MyFuelTracker.Infrastructure
+﻿namespace MyFuelTracker.Infrastructure.UiServices
 {
 	public interface IMessageBox
 	{

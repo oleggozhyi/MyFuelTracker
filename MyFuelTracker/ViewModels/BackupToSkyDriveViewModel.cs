@@ -11,6 +11,8 @@ using Microsoft.Live.Controls;
 using MyFuelTracker.Core;
 using MyFuelTracker.Core.Models;
 using MyFuelTracker.Infrastructure;
+using MyFuelTracker.Infrastructure.Helpers;
+using MyFuelTracker.Infrastructure.UiServices;
 using Newtonsoft.Json;
 
 namespace MyFuelTracker.ViewModels

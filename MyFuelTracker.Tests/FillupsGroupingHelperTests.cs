@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 using MyFuelTracker.Infrastructure;
+using MyFuelTracker.Infrastructure.Helpers;
 using MyFuelTracker.ViewModels;
 using MyFuelTracker.Tests.TestInfrastructure;
 

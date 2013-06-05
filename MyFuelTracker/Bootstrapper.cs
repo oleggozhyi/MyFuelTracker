@@ -9,6 +9,7 @@ using Microsoft.Phone.Controls;
 using MyFuelTracker.Core;
 using MyFuelTracker.Core.DataAccess;
 using MyFuelTracker.Infrastructure;
+using MyFuelTracker.Infrastructure.UiServices;
 using MyFuelTracker.ViewModels;
 
 namespace MyFuelTracker
@@ -43,7 +44,8 @@ namespace MyFuelTracker
 			Container.PerRequest<AddFuelTypeViewModel>();
 			Container.PerRequest<DisplayFillupViewModel>();
             Container.PerRequest<BackupToSkyDriveViewModel>();
-            Container.PerRequest<RestoreFromSkyDriveViewModel>();
+			Container.PerRequest<RestoreFromSkyDriveViewModel>();
+			Container.PerRequest<SettingsViewModel>();
             
 			Container.PerRequest<ILog, DebugLogger>();
 	        Container.Singleton<AppBarMenuModel>();

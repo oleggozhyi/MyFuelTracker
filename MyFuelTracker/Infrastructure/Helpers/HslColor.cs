@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Media;
 
-namespace MyFuelTracker.Infrastructure
+namespace MyFuelTracker.Infrastructure.Helpers
 {
 	public struct HslColor
 	{

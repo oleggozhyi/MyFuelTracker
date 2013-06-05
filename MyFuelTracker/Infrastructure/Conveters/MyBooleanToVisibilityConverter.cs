@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 
-namespace MyFuelTracker.Infrastructure
+namespace MyFuelTracker.Infrastructure.Conveters
 {
 
     public sealed class MyBooleanToVisibilityConverter : IValueConverter

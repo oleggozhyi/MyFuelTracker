@@ -3,6 +3,7 @@ using System.Linq;
 using Caliburn.Micro;
 using MyFuelTracker.Core;
 using MyFuelTracker.Infrastructure;
+using MyFuelTracker.Infrastructure.Events;
 
 namespace MyFuelTracker.ViewModels
 {

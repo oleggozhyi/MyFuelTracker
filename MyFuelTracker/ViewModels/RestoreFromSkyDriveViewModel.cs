@@ -8,6 +8,8 @@ using Microsoft.Live;
 using Microsoft.Live.Controls;
 using MyFuelTracker.Core;
 using MyFuelTracker.Infrastructure;
+using MyFuelTracker.Infrastructure.Events;
+using MyFuelTracker.Infrastructure.UiServices;
 
 namespace MyFuelTracker.ViewModels
 {

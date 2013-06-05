@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyFuelTracker.Infrastructure
+namespace MyFuelTracker.ViewModels
 {
-	public class FuelTypeAddedEvent
+	class SettingsViewModel
 	{
-		public string FuelType { get; set; }
 	}
 }

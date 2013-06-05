@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Media;
 using MyFuelTracker.Core.Models;
 using MyFuelTracker.Infrastructure;
+using MyFuelTracker.Infrastructure.Helpers;
 
 namespace MyFuelTracker.ViewModels
 {

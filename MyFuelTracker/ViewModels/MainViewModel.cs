@@ -4,6 +4,7 @@ using System.Windows.Input;
 using Caliburn.Micro;
 using MyFuelTracker.Core;
 using MyFuelTracker.Infrastructure;
+using MyFuelTracker.Infrastructure.Events;
 
 namespace MyFuelTracker.ViewModels
 {
