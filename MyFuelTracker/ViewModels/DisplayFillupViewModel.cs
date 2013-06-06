@@ -89,8 +89,9 @@ namespace MyFuelTracker.ViewModels
                 return;
             var historyItems = await _fillupService.GetHistoryAsync();
 			var statistics = await _fillupService.GetStatisticsAsync();
-            _fillupHistoryItem = historyItems.Single(h => h.Fillup.Id.ToString() == FillupId);
-            Details = new FillupHistoryItemViewModel(_fillupHistoryItem, statistics);
+            _fillupHistoryItem = historyItems.SingleOrDefault(h => h.Fillup.Id.ToString() == FillupId);
+			if (_fillupHistoryItem != null)
+				Details = new FillupHistoryItemViewModel(_fillupHistoryItem, statistics);
         }
 
         public FillupHistoryItemViewModel Details

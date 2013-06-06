@@ -8,7 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-    xmlns:local="clr-namespace:MyFuelTracker.Infrastructure"
+    xmlns:local="clr-namespace:MyFuelTracker.Infrastructure" xmlns:views="clr-namespace:MyFuelTracker.Views"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -30,11 +30,8 @@
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <StackPanel Orientation="Horizontal">
-                <Image Source="/Assets/fuel.png" Width="25" Height="25"></Image>
-                <TextBlock Text="MY FUEL TRACKER" Style="{StaticResource PhoneTextNormalStyle}" FontWeight="Bold"/>
-            </StackPanel>
-            <TextBlock Text="add fuel type" Margin="9,-7,0,0" Style="{StaticResource PageTitle}"/>
+			<views:HeaderControl />
+			<TextBlock Text="add fuel type" Margin="9,-7,0,0" Style="{StaticResource PageTitle}"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->

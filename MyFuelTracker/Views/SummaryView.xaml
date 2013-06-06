@@ -16,7 +16,7 @@
     mc:Ignorable="d"
         Background="#FF222222"
     cal:Bind.AtDesignTime="True"
-    d:DataContext="{d:DesignData Source=/SampleData/SummaryViewModel.xaml}"
+    d:DataContext="{d:DesignData Source=/SampleData/StatisticsViewModel.xaml}"
     shell:SystemTray.IsVisible="True">
 	<UserControl.Resources>
 		<Style TargetType="views:ValueWithDimention" x:Key="detail">
@@ -47,7 +47,7 @@
 				 FontSize="{StaticResource PhoneFontSizeMediumLarge}" TextWrapping="Wrap"
 				 Visibility="{Binding ShowNoHistoryMessage, Converter={StaticResource booleanToVisibilityConverter}}"
 				 />
-		<ScrollViewer>
+		<ScrollViewer Visibility="{Binding ShowNoHistoryMessage, Converter={StaticResource booleanToVisibilityConverter}, ConverterParameter=true}">
 			<Grid Margin="15 0 0 0">
 				<Grid.RowDefinitions>
 					<RowDefinition Height="Auto"/>

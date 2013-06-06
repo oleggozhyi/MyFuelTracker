@@ -10,6 +10,8 @@
     xmlns:micro="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro"
     xmlns:local="clr-namespace:MyFuelTracker.Infrastructure"
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:controls="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
+    xmlns:views="clr-namespace:MyFuelTracker.Views"
     mc:Ignorable="d"
     
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
@@ -33,10 +35,7 @@
 		<phone:Pivot x:Name="Items" Background="{StaticResource AppBackground}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}">            
             <phone:Pivot.TitleTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="/Assets/fuel.png" Width="25" Height="25"></Image>
-                        <TextBlock Text="MY FUEL TRACKER" Style="{StaticResource PhoneTextNormalStyle}" FontWeight="Bold"/>
-                    </StackPanel>
+					<views:HeaderControl />
                 </DataTemplate>
             </phone:Pivot.TitleTemplate>
             <phone:Pivot.HeaderTemplate>
