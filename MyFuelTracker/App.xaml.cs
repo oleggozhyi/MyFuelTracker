@@ -1,4 +1,6 @@
-﻿using Microsoft.Phone.Controls;
+﻿using System.Globalization;
+using System.Threading;
+using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System.Diagnostics;
 using System.Windows;
@@ -18,6 +20,7 @@ namespace MyFuelTracker
 		/// </summary>
 		public App()
 		{
+			//Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
 
 			// Standard XAML initialization
 			InitializeComponent();

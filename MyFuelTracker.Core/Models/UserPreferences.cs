@@ -12,9 +12,11 @@ namespace MyFuelTracker.Core.Models
 		public UserSetttings()
 		{
 			FuelEconomyType = FuelEconomyType.L100Km;
+			Locale = "en-US";
 		}
 
 		public FuelEconomyType FuelEconomyType { get; set; }
+		public string Locale { get; set; }
 	}
 
 	public class UserSetttingsManager

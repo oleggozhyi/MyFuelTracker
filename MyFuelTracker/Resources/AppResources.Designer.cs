@@ -77,5 +77,14 @@ namespace MyFuelTracker.Resources {
                 return ResourceManager.GetString("ResourceLanguage", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to statistics.
+        /// </summary>
+        public static string Statistics_Title {
+            get {
+                return ResourceManager.GetString("Statistics_Title", resourceCulture);
+            }
+        }
     }
 }

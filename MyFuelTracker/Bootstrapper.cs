@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Globalization;
 using System.Linq;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using Caliburn.Micro;
@@ -61,6 +63,15 @@ namespace MyFuelTracker
 		    Container.Singleton<IFillupsSerializer, FillupsSerializer>();
 
 			LogManager.GetLog = type => new DebugLogger(type);
+		    SetCurrentLanguage();
+		}
+
+		private void SetCurrentLanguage()
+		{
+			string locale = Resolve<UserSetttingsManager>().Settings.Locale;
+			var cultureInfo = new CultureInfo(locale);
+			Thread.CurrentThread.CurrentCulture = cultureInfo;
+			Thread.CurrentThread.CurrentUICulture = cultureInfo;
 		}
 
 		protected override void OnUnhandledException(object sender, ApplicationUnhandledExceptionEventArgs e)

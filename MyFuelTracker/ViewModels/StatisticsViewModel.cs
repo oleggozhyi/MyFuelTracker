@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO.IsolatedStorage;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using Caliburn.Micro;
@@ -11,6 +13,7 @@ using MyFuelTracker.Infrastructure;
 using MyFuelTracker.Infrastructure.Events;
 using MyFuelTracker.Infrastructure.Helpers;
 using MyFuelTracker.Infrastructure.UiServices;
+using MyFuelTracker.Resources;
 
 namespace MyFuelTracker.ViewModels
 {
@@ -61,7 +64,7 @@ namespace MyFuelTracker.ViewModels
 			_fillupService = fillupService;
 			_appBarMenuModel = appBarMenuModel;
 			Debug.WriteLine("StatisticsViewModel created");
-			DisplayName = "statistics";
+			DisplayName = AppResources.Statistics_Title;
 			eventAggregator.Subscribe(this);
 
 			AddFillupButton.OnClick = GoToAddFillup;
