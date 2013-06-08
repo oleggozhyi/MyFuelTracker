@@ -71,7 +71,7 @@
 
 				</Grid.RowDefinitions>
 				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="Auto"/>
+					<ColumnDefinition Width="Auto" />
 					<ColumnDefinition Width="Auto"/>
 				</Grid.ColumnDefinitions>
 				<TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="fuel economy" Style="{StaticResource groupHeader}" />

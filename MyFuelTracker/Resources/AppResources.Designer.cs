@@ -79,6 +79,123 @@ namespace MyFuelTracker.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to costs.
+        /// </summary>
+        public static string Statistics_Costs {
+            get {
+                return ResourceManager.GetString("Statistics_Costs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to average fillup.
+        /// </summary>
+        public static string Statistics_Costs_Avg_Fillup {
+            get {
+                return ResourceManager.GetString("Statistics_Costs_Avg_Fillup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to last fillup.
+        /// </summary>
+        public static string Statistics_Costs_Last_Fillup {
+            get {
+                return ResourceManager.GetString("Statistics_Costs_Last_Fillup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to last month.
+        /// </summary>
+        public static string Statistics_Costs_Last_Month {
+            get {
+                return ResourceManager.GetString("Statistics_Costs_Last_Month", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to fuel economy.
+        /// </summary>
+        public static string Statistics_FuelEconomy {
+            get {
+                return ResourceManager.GetString("Statistics_FuelEconomy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to average.
+        /// </summary>
+        public static string Statistics_FuelEconomy_Avg {
+            get {
+                return ResourceManager.GetString("Statistics_FuelEconomy_Avg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to last.
+        /// </summary>
+        public static string Statistics_FuelEconomy_Last {
+            get {
+                return ResourceManager.GetString("Statistics_FuelEconomy_Last", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to last 4 average.
+        /// </summary>
+        public static string Statistics_FuelEconomy_Last_4_Avg {
+            get {
+                return ResourceManager.GetString("Statistics_FuelEconomy_Last_4_Avg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to max.
+        /// </summary>
+        public static string Statistics_FuelEconomy_Max {
+            get {
+                return ResourceManager.GetString("Statistics_FuelEconomy_Max", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to min.
+        /// </summary>
+        public static string Statistics_FuelEconomy_Min {
+            get {
+                return ResourceManager.GetString("Statistics_FuelEconomy_Min", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to misc.
+        /// </summary>
+        public static string Statistics_Misc {
+            get {
+                return ResourceManager.GetString("Statistics_Misc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to preferred fuel.
+        /// </summary>
+        public static string Statistics_Misc_Most_Used_Fuel {
+            get {
+                return ResourceManager.GetString("Statistics_Misc_Most_Used_Fuel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This page will display statistics on fillups once you&apos;ve entered at least one fillup.
+        /// </summary>
+        public static string Statistics_NoFillups_Message {
+            get {
+                return ResourceManager.GetString("Statistics_NoFillups_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to statistics.
         /// </summary>
         public static string Statistics_Title {

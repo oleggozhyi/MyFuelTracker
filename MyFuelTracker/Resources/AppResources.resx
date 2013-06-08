@@ -125,6 +125,45 @@
     <value>en-US</value>
     <comment>Controls the Language and ensures that the font for all elements in the RootFrame aligns with the app's language. Set to the language code of this resource file's language.</comment>
   </data>
+  <data name="Statistics_Costs" xml:space="preserve">
+    <value>costs</value>
+  </data>
+  <data name="Statistics_Costs_Avg_Fillup" xml:space="preserve">
+    <value>average fillup</value>
+  </data>
+  <data name="Statistics_Costs_Last_Fillup" xml:space="preserve">
+    <value>last fillup</value>
+  </data>
+  <data name="Statistics_Costs_Last_Month" xml:space="preserve">
+    <value>last month</value>
+  </data>
+  <data name="Statistics_FuelEconomy" xml:space="preserve">
+    <value>fuel economy</value>
+  </data>
+  <data name="Statistics_FuelEconomy_Avg" xml:space="preserve">
+    <value>average</value>
+  </data>
+  <data name="Statistics_FuelEconomy_Last" xml:space="preserve">
+    <value>last</value>
+  </data>
+  <data name="Statistics_FuelEconomy_Last_4_Avg" xml:space="preserve">
+    <value>last 4 average</value>
+  </data>
+  <data name="Statistics_FuelEconomy_Max" xml:space="preserve">
+    <value>max</value>
+  </data>
+  <data name="Statistics_FuelEconomy_Min" xml:space="preserve">
+    <value>min</value>
+  </data>
+  <data name="Statistics_Misc" xml:space="preserve">
+    <value>misc</value>
+  </data>
+  <data name="Statistics_Misc_Most_Used_Fuel" xml:space="preserve">
+    <value>preferred fuel</value>
+  </data>
+  <data name="Statistics_NoFillups_Message" xml:space="preserve">
+    <value>This page will display statistics on fillups once you've entered at least one fillup</value>
+  </data>
   <data name="Statistics_Title" xml:space="preserve">
     <value>statistics</value>
   </data>

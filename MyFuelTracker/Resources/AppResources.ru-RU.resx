@@ -125,6 +125,48 @@
     <value>ru-RU</value>
     <comment>Controls the Language and ensures that the font for all elements in the RootFrame aligns with the app's language. Set to the language code of this resource file's language.</comment>
   </data>
+  <data name="Stati" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Statistics_Costs" xml:space="preserve">
+    <value>стоимости</value>
+  </data>
+  <data name="Statistics_Costs_Avg_Fillup" xml:space="preserve">
+    <value>средняя по заправкам </value>
+  </data>
+  <data name="Statistics_Costs_Last_Fillup" xml:space="preserve">
+    <value>последняя заправка</value>
+  </data>
+  <data name="Statistics_Costs_Last_Month" xml:space="preserve">
+    <value>последний месяц</value>
+  </data>
+  <data name="Statistics_FuelEconomy" xml:space="preserve">
+    <value>расход топлива</value>
+  </data>
+  <data name="Statistics_FuelEconomy_Avg" xml:space="preserve">
+    <value>средний</value>
+  </data>
+  <data name="Statistics_FuelEconomy_Last" xml:space="preserve">
+    <value>последний</value>
+  </data>
+  <data name="Statistics_FuelEconomy_Last_4_Avg" xml:space="preserve">
+    <value>средний за 4 последних</value>
+  </data>
+  <data name="Statistics_FuelEconomy_Max" xml:space="preserve">
+    <value>максимальный</value>
+  </data>
+  <data name="Statistics_FuelEconomy_Min" xml:space="preserve">
+    <value>минимальный</value>
+  </data>
+  <data name="Statistics_Misc" xml:space="preserve">
+    <value>разное</value>
+  </data>
+  <data name="Statistics_Misc_Most_Used_Fuel" xml:space="preserve">
+    <value>предпочитаемое топливо</value>
+  </data>
+  <data name="Statistics_NoFillups_Message" xml:space="preserve">
+    <value>здесь будет отображаться статистика потребления топлива как только вы введёте данные о хотя бы одной заправке</value>
+  </data>
   <data name="Statistics_Title" xml:space="preserve">
     <value>статистика</value>
   </data>
