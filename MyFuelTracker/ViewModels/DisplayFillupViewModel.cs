@@ -18,7 +18,8 @@ namespace MyFuelTracker.ViewModels
         private readonly IFillupService _fillupService;
         private readonly IMessageBox _messageBox;
         private readonly IEventAggregator _eventAggregator;
-        private FillupHistoryItemViewModel _details;
+	    private readonly IUserSetttingsManager _userSetttingsManager;
+	    private FillupHistoryItemViewModel _details;
         private FillupHistoryItem _fillupHistoryItem;
         private bool _deleted;
 
@@ -35,13 +36,15 @@ namespace MyFuelTracker.ViewModels
         public DisplayFillupViewModel(INavigationService navigationService,
                                       IFillupService fillupService,
                                       IMessageBox messageBox,
-                                      IEventAggregator eventAggregator)
+                                      IEventAggregator eventAggregator,  
+									  IUserSetttingsManager userSetttingsManager)
         {
             _navigationService = navigationService;
             _fillupService = fillupService;
             _messageBox = messageBox;
             _eventAggregator = eventAggregator;
-            _eventAggregator.Subscribe(this);
+	        _userSetttingsManager = userSetttingsManager;
+	        _eventAggregator.Subscribe(this);
 
             _appBarButtons = new[] { _editFillupButton, _deleteFillupButton, _goBackButton };
             _editFillupButton.OnClick = EditFillup;
@@ -90,8 +93,11 @@ namespace MyFuelTracker.ViewModels
             var historyItems = await _fillupService.GetHistoryAsync();
 			var statistics = await _fillupService.GetStatisticsAsync();
             _fillupHistoryItem = historyItems.SingleOrDefault(h => h.Fillup.Id.ToString() == FillupId);
-			if (_fillupHistoryItem != null)
-				Details = new FillupHistoryItemViewModel(_fillupHistoryItem, statistics);
+	        if (_fillupHistoryItem != null)
+	        {
+		        var units = _userSetttingsManager.GetCurrentUnits();
+				Details = new FillupHistoryItemViewModel(_fillupHistoryItem, statistics, units);
+	        }
         }
 
         public FillupHistoryItemViewModel Details

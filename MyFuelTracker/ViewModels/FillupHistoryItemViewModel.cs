@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using MyFuelTracker.Core.Models;
@@ -12,17 +13,19 @@ namespace MyFuelTracker.ViewModels
 {
 	public class FillupHistoryItemViewModel
 	{
+		private readonly Units _units;
 		public FillupHistoryItem HistoryItem { get; set; }
 		private bool _isPartial;
 
 		public FillupHistoryItemViewModel() { /* for design time support */}
 
-		public FillupHistoryItemViewModel(FillupHistoryItem historyItem, Statistics statistics)
+		public FillupHistoryItemViewModel(FillupHistoryItem historyItem, Statistics statistics, Units units)
 		{
+			_units = units;
 			HistoryItem = historyItem;
 			_isPartial = historyItem.Fillup.IsPartial;
 			FuelEconomy = historyItem.FuelEconomy.HasValue ? historyItem.FuelEconomy.Value.FormatForDisplay(2) : "<partial>";
-			Date = historyItem.Fillup.Date.ToString("dd MMM yyyy");
+			Date = historyItem.Fillup.Date.ToString("dd MMMM yyyy", Thread.CurrentThread.CurrentUICulture);
 			FillupBrush = GetFillupBrush(historyItem, statistics);
 
 			Distance = (historyItem.Fillup.OdometerEnd - historyItem.Fillup.OdometerStart).FormatForDisplay(0);
@@ -68,13 +71,13 @@ namespace MyFuelTracker.ViewModels
 
 		public string Volume { get; set; }
 
-		public string FuelEconomyDimension { get { return _isPartial ? "" : "L/100km"; } }
+		public string FuelEconomyDimension { get { return _isPartial ? "" : _units.Economy; } }
 
-		public string CostDimension { get { return "hr"; } }
+		public string CostDimension { get { return _units.Currency; } }
 
-		public string VolumeDimension { get { return "L"; } }
+		public string VolumeDimension { get { return _units.Volume; } }
 
-		public string DistanceDimension { get { return "km"; } }
+		public string DistanceDimension { get { return _units.Distance; } }
 
 		public string OdometerStart { get; set; }
 

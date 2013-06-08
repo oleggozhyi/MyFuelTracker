@@ -34,6 +34,7 @@ namespace MyFuelTracker.ViewModels
 		private readonly IMessageBox _messageBox;
 		private readonly INavigationService _navigationService;
 		private readonly AppBarMenuModel _appBarMenuModel;
+		private readonly IUserSetttingsManager _userSetttingsManager;
 		private IEnumerable _items;
 		private FillupHistoryItemViewModel[] _fullHistory;
 		private bool _showAllFillups;
@@ -53,7 +54,8 @@ namespace MyFuelTracker.ViewModels
 								IMessageBox messageBox,
 								INavigationService navigationService,
 								AppBarMenuModel appBarMenuModel,
-								StatisticsViewModel statisticsViewModel)
+								StatisticsViewModel statisticsViewModel,
+								IUserSetttingsManager userSetttingsManager)
 		{
 			Debug.WriteLine("HistoryViewModel created");
 			DisplayName = "history";
@@ -62,6 +64,7 @@ namespace MyFuelTracker.ViewModels
 			_messageBox = messageBox;
 			_navigationService = navigationService;
 			_appBarMenuModel = appBarMenuModel;
+			_userSetttingsManager = userSetttingsManager;
 			eventAggregator.Subscribe(this);
 			_addFillupButton = statisticsViewModel.AddFillupButton;
 			_viewMoreButton.OnClick = () => ToggleView(true);
@@ -249,7 +252,8 @@ namespace MyFuelTracker.ViewModels
 
 			HistoryEmpty = false;
 			var statistics = await _fillupService.GetStatisticsAsync();
-			_fullHistory = historyItems.Select(i => new FillupHistoryItemViewModel(i, statistics)).ToArray();
+			var currentUnits = _userSetttingsManager.GetCurrentUnits();
+			_fullHistory = historyItems.Select(i => new FillupHistoryItemViewModel(i, statistics, currentUnits)).ToArray();
 			SetItemsSource();
 		}
 
