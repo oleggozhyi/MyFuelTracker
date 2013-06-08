@@ -10,6 +10,7 @@
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
     xmlns:ec="clr-namespace:Microsoft.Expression.Interactivity.Core;assembly=Microsoft.Expression.Interactions"
     xmlns:eim="clr-namespace:Microsoft.Expression.Interactivity.Media;assembly=Microsoft.Expression.Interactions"
+    xmlns:a="clr-namespace:MyFuelTracker.Resources"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -43,7 +44,7 @@
 	</UserControl.Resources>
 	<!--ContentPanel - place additional content here-->
 	<Grid x:Name="ContentPanel">
-		<TextBlock Text="This page will display statistics on fillups once you've entered at least one fillup" 
+		<TextBlock Text="{Binding LocalizedResources.Statistics_NoFillups_Message, Source={StaticResource LocalizedStrings}}"  
 				 FontSize="{StaticResource PhoneFontSizeMediumLarge}" TextWrapping="Wrap"
 				 Visibility="{Binding ShowNoHistoryMessage, Converter={StaticResource booleanToVisibilityConverter}}"
 				 />
@@ -74,15 +75,36 @@
 					<ColumnDefinition Width="Auto" />
 					<ColumnDefinition Width="Auto"/>
 				</Grid.ColumnDefinitions>
-				<TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="fuel economy" Style="{StaticResource groupHeader}" />
+
 				<Rectangle Grid.Row="1" Grid.ColumnSpan="2" Height="1" Stroke="White" />
+				<Rectangle Grid.Row="8" Grid.ColumnSpan="2" Height="1" Stroke="White" />
+				<Rectangle Grid.Row="16" Grid.ColumnSpan="2" Height="1" Stroke="White" />
 
-				<TextBlock Grid.Row="2" Text="last" Style="{StaticResource valueLabel}"/>
-				<TextBlock Grid.Row="3" Text="average" Style="{StaticResource valueLabel}"/>
-				<TextBlock Grid.Row="4" Text="last 4 average" Style="{StaticResource valueLabel}"/>
-				<TextBlock Grid.Row="5" Text="min" Style="{StaticResource valueLabel}"/>
-				<TextBlock Grid.Row="6" Text="max" Style="{StaticResource valueLabel}"/>
-
+				<TextBlock Grid.Row="0" Text="{Binding LocalizedResources.Statistics_FuelEconomy, Source={StaticResource LocalizedStrings}}"  
+						   Grid.ColumnSpan="2" Style="{StaticResource groupHeader}" />
+				<TextBlock Grid.Row="2" Text="{Binding LocalizedResources.Statistics_FuelEconomy_Last, Source={StaticResource LocalizedStrings}}"  
+						   Style="{StaticResource valueLabel}"/>
+				<TextBlock Grid.Row="3" Text="{Binding LocalizedResources.Statistics_FuelEconomy_Avg, Source={StaticResource LocalizedStrings}}"   
+						   Style="{StaticResource valueLabel}"/>
+				<TextBlock Grid.Row="4" Text="{Binding LocalizedResources.Statistics_FuelEconomy_Last_4_Avg, Source={StaticResource LocalizedStrings}}"  
+						   Style="{StaticResource valueLabel}"/>
+				<TextBlock Grid.Row="5" Text="{Binding LocalizedResources.Statistics_FuelEconomy_Min, Source={StaticResource LocalizedStrings}}"   
+						   Style="{StaticResource valueLabel}"/>
+				<TextBlock Grid.Row="6" Text="{Binding LocalizedResources.Statistics_FuelEconomy_Max, Source={StaticResource LocalizedStrings}}"   
+						   Style="{StaticResource valueLabel}"/>
+				<TextBlock Grid.Row="7" Text="{Binding LocalizedResources.Statistics_Costs, Source={StaticResource LocalizedStrings}}"   
+						   Grid.ColumnSpan="2" Style="{StaticResource groupHeader}"/>
+				<TextBlock Grid.Row="9" Text="{Binding LocalizedResources.Statistics_Costs_Last_Fillup, Source={StaticResource LocalizedStrings}}"   
+						   Style="{StaticResource valueLabel}"/>
+				<TextBlock Grid.Row="10" Text="{Binding LocalizedResources.Statistics_Costs_Avg_Fillup, Source={StaticResource LocalizedStrings}}"  
+						   Style="{StaticResource valueLabel}"/>
+				<TextBlock Grid.Row="11" Text="{Binding LocalizedResources.Statistics_Costs_Last_Month, Source={StaticResource LocalizedStrings}}"  
+						   Style="{StaticResource valueLabel}"/>
+				<TextBlock Grid.Row="15" Text="{Binding LocalizedResources.Statistics_Misc, Source={StaticResource LocalizedStrings}}"  
+						   Grid.ColumnSpan="2" Style="{StaticResource groupHeader}"/>
+				<TextBlock Grid.Row="17" Text="{Binding LocalizedResources.Statistics_Misc_Most_Used_Fuel, Source={StaticResource LocalizedStrings}}"  
+						   Style="{StaticResource valueLabel}"/>
+				
 				<views:ValueWithDimention Grid.Row="2" Grid.Column="1" Style="{StaticResource detail}"
                                               ValueTextBrush="{Binding LastFuelEconomyBrush}"
                                               ValueText="{Binding LastFuelEconomy}" ValueDimension="{Binding ConsumptionDimension}"/>
@@ -98,12 +120,7 @@
 				<views:ValueWithDimention Grid.Row="6" Grid.Column="1" Style="{StaticResource detail}"
                                               ValueTextBrush="{Binding MaxFuelEconomyBrush}"
                                               ValueText="{Binding MaxFuelEconomy}" ValueDimension="{Binding ConsumptionDimension}"/>
-				<TextBlock Grid.Row="7" Grid.ColumnSpan="2" Text="costs" Style="{StaticResource groupHeader}"></TextBlock>
-				<Rectangle Grid.Row="8" Grid.ColumnSpan="2" Height="1" Stroke="White" />
 
-				<TextBlock Grid.Row="9" Text="last fillup" Style="{StaticResource valueLabel}"/>
-				<TextBlock Grid.Row="10" Text="average fillup" Style="{StaticResource valueLabel}"/>
-				<TextBlock Grid.Row="11" Text="last month" Style="{StaticResource valueLabel}"/>
 
 				<views:ValueWithDimention Grid.Row="9" Grid.Column="1" Style="{StaticResource detail}"
                                                 ValueText="{Binding LastFillupCost}" ValueDimension="{Binding CostDimension}"/>
@@ -112,12 +129,8 @@
 				<views:ValueWithDimention Grid.Row="11" Grid.Column="1" Style="{StaticResource detail}"
                                                 ValueText="{Binding LastMonthCost}" ValueDimension="{Binding CostDimension}"/>
 
-
-				<TextBlock Grid.Row="15" Grid.ColumnSpan="2" Text="misc" Style="{StaticResource groupHeader}"></TextBlock>
-				<Rectangle Grid.Row="16" Grid.ColumnSpan="2" Height="1" Stroke="White" />
-
-				<TextBlock Grid.Row="17" Text="most used fuel type" Style="{StaticResource valueLabel}"/>
 				<TextBlock Grid.Row="18" Grid.Column="1"  Text="{Binding MostOftenFuelType}" Foreground="DeepSkyBlue" Style="{StaticResource value}"/>
+
 			</Grid>
 		</ScrollViewer>
 	</Grid>
