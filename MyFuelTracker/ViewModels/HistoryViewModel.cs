@@ -14,6 +14,7 @@ using MyFuelTracker.Infrastructure;
 using MyFuelTracker.Infrastructure.Events;
 using MyFuelTracker.Infrastructure.Helpers;
 using MyFuelTracker.Infrastructure.UiServices;
+using MyFuelTracker.Resources;
 using MyFuelTracker.Views;
 
 namespace MyFuelTracker.ViewModels
@@ -23,10 +24,10 @@ namespace MyFuelTracker.ViewModels
 		#region fields
 
 		private readonly DynamicAppBarButton _addFillupButton;
-		private readonly DynamicAppBarButton _viewMoreButton = new DynamicAppBarButton { IconUri = Icons.ViewMore, Text = "view more" };
-		private readonly DynamicAppBarButton _viewLessButton = new DynamicAppBarButton { IconUri = Icons.ViewLess, Text = "view less" };
-		private readonly DynamicAppBarButton _selectButton = new DynamicAppBarButton { IconUri = Icons.ListCheck, Text = "select" };
-		private readonly DynamicAppBarButton _deleteSelectedButton = new DynamicAppBarButton { IconUri = Icons.Delete, Text = "delete selected" };
+		private readonly DynamicAppBarButton _viewMoreButton = new DynamicAppBarButton { IconUri = Icons.ViewMore, Text = AppResources.AppBar_View_More };
+		private readonly DynamicAppBarButton _viewLessButton = new DynamicAppBarButton { IconUri = Icons.ViewLess, Text = AppResources.AppBar_View_Less };
+		private readonly DynamicAppBarButton _selectButton = new DynamicAppBarButton { IconUri = Icons.ListCheck, Text = AppResources.AppBar_Select };
+		private readonly DynamicAppBarButton _deleteSelectedButton = new DynamicAppBarButton { IconUri = Icons.Delete, Text = AppResources.AppBar_Delete_Selected };
 
 
 		private readonly IFillupService _fillupService;
@@ -58,7 +59,7 @@ namespace MyFuelTracker.ViewModels
 								IUserSetttingsManager userSetttingsManager)
 		{
 			Debug.WriteLine("HistoryViewModel created");
-			DisplayName = "history";
+			DisplayName = AppResources.History_Title;
 			_fillupService = fillupService;
 			_eventAggregator = eventAggregator;
 			_messageBox = messageBox;
@@ -164,8 +165,8 @@ namespace MyFuelTracker.ViewModels
 		{
 			if(_selection.SelectedItems.Count == 0)
 				return;
-			
-			bool proceedWithDeletion = _messageBox.Confirm("are you sure to delete selected fillups?");
+
+			bool proceedWithDeletion = _messageBox.Confirm(string.Format(AppResources.History_Confirms_Delete_Selected, _selection.SelectedItems.Count));
 			if (!proceedWithDeletion)
 				return;
 
@@ -216,7 +217,7 @@ namespace MyFuelTracker.ViewModels
 
 		public async void DeleteFillup(FillupHistoryItemViewModel viewModel)	
 		{
-			bool proceedWithDeletion = _messageBox.Confirm("are you sure to delete fillup on " + viewModel.Date + "?");
+			bool proceedWithDeletion = _messageBox.Confirm(String.Format(AppResources.History_Confirms_Delete_Fillup, viewModel.Date));
 			if (!proceedWithDeletion)
 				return;
 			await _fillupService.DeleteFillupAsync(viewModel.HistoryItem.Fillup);

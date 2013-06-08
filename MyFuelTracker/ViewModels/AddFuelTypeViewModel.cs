@@ -4,13 +4,14 @@ using Caliburn.Micro;
 using MyFuelTracker.Core;
 using MyFuelTracker.Infrastructure;
 using MyFuelTracker.Infrastructure.Events;
+using MyFuelTracker.Resources;
 
 namespace MyFuelTracker.ViewModels
 {
     public class AddFuelTypeViewModel : Screen, IAppBarItemsProvider
     {
-        private readonly DynamicAppBarButton _saveFuelTypeButton = new DynamicAppBarButton { IconUri = Icons.Save, Text = "save fillup" };
-        private readonly DynamicAppBarButton _cancelButton = new DynamicAppBarButton { IconUri = Icons.Back, Text = "cancel" };
+        private readonly DynamicAppBarButton _saveFuelTypeButton = new DynamicAppBarButton { IconUri = Icons.Save, Text = AppResources.AppBar_Save_Fuel_Type };
+		private readonly DynamicAppBarButton _cancelButton = new DynamicAppBarButton { IconUri = Icons.Back, Text = AppResources.AppBar_Go_Back };
         private readonly DynamicAppBarButton[] _appButtons;
 
         private readonly INavigationService _navigationService;

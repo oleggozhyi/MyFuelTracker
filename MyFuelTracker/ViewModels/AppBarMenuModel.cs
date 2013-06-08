@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Caliburn.Micro;
 using MyFuelTracker.Infrastructure;
 using MyFuelTracker.Infrastructure.UiServices;
+using MyFuelTracker.Resources;
 
 namespace MyFuelTracker.ViewModels
 {
@@ -13,12 +14,11 @@ namespace MyFuelTracker.ViewModels
 	{
 		#region Fields
 
-		private readonly IMessageBox _messageBox;
 		private readonly INavigationService _navigationService;
 
-		private readonly DynamicAppBarItem _backupToSkydriveMenuItem = new DynamicAppBarItem { Text = "backup to skydrive" };
-		private readonly DynamicAppBarItem _restoreFromSkydriveMenuItem = new DynamicAppBarItem { Text = "restore from skydrive" };
-		private readonly DynamicAppBarItem _settingsMenuItem = new DynamicAppBarItem { Text = "settings" };
+		private readonly DynamicAppBarItem _backupToSkydriveMenuItem = new DynamicAppBarItem { Text = AppResources.Menu_Backup_To_SkyDrive };
+		private readonly DynamicAppBarItem _restoreFromSkydriveMenuItem = new DynamicAppBarItem { Text = AppResources.Menu_Restore_From_SkyDrive };
+		private readonly DynamicAppBarItem _settingsMenuItem = new DynamicAppBarItem { Text = AppResources.Menu_Settings };
 
 		#endregion
 
@@ -26,7 +26,6 @@ namespace MyFuelTracker.ViewModels
 
 		public AppBarMenuModel(IMessageBox messageBox, INavigationService navigationService)
 		{
-			_messageBox = messageBox;
 			_navigationService = navigationService;
 			_backupToSkydriveMenuItem.OnClick = BackupToSkyDrive;
 			_restoreFromSkydriveMenuItem.OnClick = RestoreFromSkyDrive;

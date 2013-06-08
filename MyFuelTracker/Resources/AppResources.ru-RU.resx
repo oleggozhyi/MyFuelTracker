@@ -117,6 +117,57 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AppBar_Add_Fillup" xml:space="preserve">
+    <value>добавить заправку</value>
+  </data>
+  <data name="AppBar_Delete_Fillup" xml:space="preserve">
+    <value>удалить заправку</value>
+  </data>
+  <data name="AppBar_Delete_Selected" xml:space="preserve">
+    <value>удалить выбранное</value>
+  </data>
+  <data name="AppBar_Edit_Fillup" xml:space="preserve">
+    <value>редактировать заправку</value>
+  </data>
+  <data name="AppBar_Go_Back" xml:space="preserve">
+    <value>назад</value>
+  </data>
+  <data name="AppBar_Save_Fillup" xml:space="preserve">
+    <value>сохранить заправку</value>
+  </data>
+  <data name="AppBar_Save_Fuel_Type" xml:space="preserve">
+    <value>сохранить тип топлива</value>
+  </data>
+  <data name="AppBar_Select" xml:space="preserve">
+    <value>выбрать</value>
+  </data>
+  <data name="AppBar_View_Less" xml:space="preserve">
+    <value>показать меньше</value>
+  </data>
+  <data name="AppBar_View_More" xml:space="preserve">
+    <value>показать больше</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>подтвердите</value>
+  </data>
+  <data name="History_Confirms_Delete_Fillup" xml:space="preserve">
+    <value>вы действительно хотите удалить данные о заправке за  {0}?</value>
+  </data>
+  <data name="History_Confirms_Delete_Selected" xml:space="preserve">
+    <value>вы действительно хотите удалить данные о {0} выделенных заправках?</value>
+  </data>
+  <data name="History_Title" xml:space="preserve">
+    <value>история</value>
+  </data>
+  <data name="Menu_Backup_To_SkyDrive" xml:space="preserve">
+    <value>сохранить на skydrive</value>
+  </data>
+  <data name="Menu_Restore_From_SkyDrive" xml:space="preserve">
+    <value>востановить с skydrive</value>
+  </data>
+  <data name="Menu_Settings" xml:space="preserve">
+    <value>настройки</value>
+  </data>
   <data name="ResourceFlowDirection" xml:space="preserve">
     <value>LeftToRight</value>
     <comment>Controls the FlowDirection for all elements in the RootFrame. Set to the traditional direction of this resource file's language</comment>

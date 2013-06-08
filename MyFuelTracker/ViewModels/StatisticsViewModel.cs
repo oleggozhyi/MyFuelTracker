@@ -22,7 +22,7 @@ namespace MyFuelTracker.ViewModels
 		#region Fields
 
 		private bool _loadingFirstTime = true;
-		public readonly DynamicAppBarButton AddFillupButton = new DynamicAppBarButton { IconUri = Icons.Add, Text = "add fillup" };
+		public readonly DynamicAppBarButton AddFillupButton = new DynamicAppBarButton { IconUri = Icons.Add, Text = AppResources.AppBar_Add_Fillup };
 		private readonly DynamicAppBarButton[] _buttons;
 
 		private const string L_100LM = "l/100km";

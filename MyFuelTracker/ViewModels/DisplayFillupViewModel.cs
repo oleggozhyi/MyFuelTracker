@@ -9,6 +9,7 @@ using MyFuelTracker.Core.Models;
 using MyFuelTracker.Infrastructure;
 using MyFuelTracker.Infrastructure.Events;
 using MyFuelTracker.Infrastructure.UiServices;
+using MyFuelTracker.Resources;
 
 namespace MyFuelTracker.ViewModels
 {
@@ -23,9 +24,9 @@ namespace MyFuelTracker.ViewModels
         private FillupHistoryItem _fillupHistoryItem;
         private bool _deleted;
 
-        private readonly DynamicAppBarButton _goBackButton = new DynamicAppBarButton { IconUri = Icons.Back, Text = "go back" };
-        private readonly DynamicAppBarButton _editFillupButton = new DynamicAppBarButton { IconUri = Icons.Edit, Text = "edit fillup" };
-        private readonly DynamicAppBarButton _deleteFillupButton = new DynamicAppBarButton { IconUri = Icons.Delete, Text = "delete fillup" };
+		private readonly DynamicAppBarButton _goBackButton = new DynamicAppBarButton { IconUri = Icons.Back, Text = AppResources.AppBar_Go_Back };
+		private readonly DynamicAppBarButton _editFillupButton = new DynamicAppBarButton { IconUri = Icons.Edit, Text = AppResources.AppBar_Edit_Fillup };
+        private readonly DynamicAppBarButton _deleteFillupButton = new DynamicAppBarButton { IconUri = Icons.Delete, Text = AppResources.AppBar_Delete_Fillup };
         private readonly DynamicAppBarButton[] _appBarButtons;
 
         public IEnumerable<DynamicAppBarButton> Buttons { get { return _appBarButtons; } }

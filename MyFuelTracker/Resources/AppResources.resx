@@ -117,6 +117,57 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AppBar_Add_Fillup" xml:space="preserve">
+    <value>add fillup</value>
+  </data>
+  <data name="AppBar_Delete_Fillup" xml:space="preserve">
+    <value>delete fillup</value>
+  </data>
+  <data name="AppBar_Delete_Selected" xml:space="preserve">
+    <value>delete selected</value>
+  </data>
+  <data name="AppBar_Edit_Fillup" xml:space="preserve">
+    <value>edit fillup</value>
+  </data>
+  <data name="AppBar_Go_Back" xml:space="preserve">
+    <value>go back</value>
+  </data>
+  <data name="AppBar_Save_Fillup" xml:space="preserve">
+    <value>save fillup</value>
+  </data>
+  <data name="AppBar_Save_Fuel_Type" xml:space="preserve">
+    <value>save fuel type</value>
+  </data>
+  <data name="AppBar_Select" xml:space="preserve">
+    <value>select</value>
+  </data>
+  <data name="AppBar_View_Less" xml:space="preserve">
+    <value>view less</value>
+  </data>
+  <data name="AppBar_View_More" xml:space="preserve">
+    <value>view more</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>confirm</value>
+  </data>
+  <data name="History_Confirms_Delete_Fillup" xml:space="preserve">
+    <value>"are you sure to delete fillup on {0}?"</value>
+  </data>
+  <data name="History_Confirms_Delete_Selected" xml:space="preserve">
+    <value>are you sure to delete {0} selected fillups?</value>
+  </data>
+  <data name="History_Title" xml:space="preserve">
+    <value>history</value>
+  </data>
+  <data name="Menu_Backup_To_SkyDrive" xml:space="preserve">
+    <value>backup to skydrive</value>
+  </data>
+  <data name="Menu_Restore_From_SkyDrive" xml:space="preserve">
+    <value>restore from skydrive</value>
+  </data>
+  <data name="Menu_Settings" xml:space="preserve">
+    <value>settings</value>
+  </data>
   <data name="ResourceFlowDirection" xml:space="preserve">
     <value>LeftToRight</value>
     <comment>Controls the FlowDirection for all elements in the RootFrame. Set to the traditional direction of this resource file's language</comment>

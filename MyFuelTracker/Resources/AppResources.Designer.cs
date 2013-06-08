@@ -61,6 +61,159 @@ namespace MyFuelTracker.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to add fillup.
+        /// </summary>
+        public static string AppBar_Add_Fillup {
+            get {
+                return ResourceManager.GetString("AppBar_Add_Fillup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to delete fillup.
+        /// </summary>
+        public static string AppBar_Delete_Fillup {
+            get {
+                return ResourceManager.GetString("AppBar_Delete_Fillup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to delete selected.
+        /// </summary>
+        public static string AppBar_Delete_Selected {
+            get {
+                return ResourceManager.GetString("AppBar_Delete_Selected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to edit fillup.
+        /// </summary>
+        public static string AppBar_Edit_Fillup {
+            get {
+                return ResourceManager.GetString("AppBar_Edit_Fillup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to go back.
+        /// </summary>
+        public static string AppBar_Go_Back {
+            get {
+                return ResourceManager.GetString("AppBar_Go_Back", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to save fillup.
+        /// </summary>
+        public static string AppBar_Save_Fillup {
+            get {
+                return ResourceManager.GetString("AppBar_Save_Fillup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to save fuel type.
+        /// </summary>
+        public static string AppBar_Save_Fuel_Type {
+            get {
+                return ResourceManager.GetString("AppBar_Save_Fuel_Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to select.
+        /// </summary>
+        public static string AppBar_Select {
+            get {
+                return ResourceManager.GetString("AppBar_Select", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to view less.
+        /// </summary>
+        public static string AppBar_View_Less {
+            get {
+                return ResourceManager.GetString("AppBar_View_Less", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to view more.
+        /// </summary>
+        public static string AppBar_View_More {
+            get {
+                return ResourceManager.GetString("AppBar_View_More", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to confirm.
+        /// </summary>
+        public static string Confirm {
+            get {
+                return ResourceManager.GetString("Confirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &quot;are you sure to delete fillup on {0}?&quot;.
+        /// </summary>
+        public static string History_Confirms_Delete_Fillup {
+            get {
+                return ResourceManager.GetString("History_Confirms_Delete_Fillup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to are you sure to delete {0} selected fillups?.
+        /// </summary>
+        public static string History_Confirms_Delete_Selected {
+            get {
+                return ResourceManager.GetString("History_Confirms_Delete_Selected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to history.
+        /// </summary>
+        public static string History_Title {
+            get {
+                return ResourceManager.GetString("History_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to backup to skydrive.
+        /// </summary>
+        public static string Menu_Backup_To_SkyDrive {
+            get {
+                return ResourceManager.GetString("Menu_Backup_To_SkyDrive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to restore from skydrive.
+        /// </summary>
+        public static string Menu_Restore_From_SkyDrive {
+            get {
+                return ResourceManager.GetString("Menu_Restore_From_SkyDrive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to settings.
+        /// </summary>
+        public static string Menu_Settings {
+            get {
+                return ResourceManager.GetString("Menu_Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to LeftToRight.
         /// </summary>
         public static string ResourceFlowDirection {

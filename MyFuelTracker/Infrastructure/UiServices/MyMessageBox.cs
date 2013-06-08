@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Media;
 using Coding4Fun.Toolkit.Controls;
+using MyFuelTracker.Resources;
 
 namespace MyFuelTracker.Infrastructure.UiServices
 {
@@ -33,7 +34,7 @@ namespace MyFuelTracker.Infrastructure.UiServices
 
 	    public bool Confirm(string message, string title = null)
 		{
-			var messageBoxResult = MessageBox.Show(message, title ?? "confirm", MessageBoxButton.OKCancel);
+			var messageBoxResult = MessageBox.Show(message, title ?? AppResources.Confirm, MessageBoxButton.OKCancel);
 			return messageBoxResult == MessageBoxResult.OK;
 		}
 	}

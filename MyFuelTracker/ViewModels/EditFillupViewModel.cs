@@ -12,14 +12,15 @@ using MyFuelTracker.Infrastructure;
 using MyFuelTracker.Infrastructure.Events;
 using MyFuelTracker.Infrastructure.Helpers;
 using MyFuelTracker.Infrastructure.UiServices;
+using MyFuelTracker.Resources;
 
 namespace MyFuelTracker.ViewModels
 {
     public class EditFillupViewModel : Screen, IHandle<FuelTypeAddedEvent>, IAppBarItemsProvider
     {
         #region Fields
-        private readonly DynamicAppBarButton _goBackButton = new DynamicAppBarButton { IconUri = Icons.Back, Text = "go back" };
-        private readonly DynamicAppBarButton _saveFillupButton = new DynamicAppBarButton { IconUri = Icons.Save, Text = "save fillup" };
+		private readonly DynamicAppBarButton _goBackButton = new DynamicAppBarButton { IconUri = Icons.Back, Text = AppResources.AppBar_Go_Back };
+		private readonly DynamicAppBarButton _saveFillupButton = new DynamicAppBarButton { IconUri = Icons.Save, Text = AppResources.AppBar_Save_Fillup };
         private readonly DynamicAppBarButton[] _appBarButtons;
 
 
