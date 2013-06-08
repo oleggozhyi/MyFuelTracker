@@ -31,6 +31,7 @@ namespace MyFuelTracker.ViewModels
 		private readonly IMessageBox _messageBox;
 		private readonly IFillupService _fillupService;
 		private readonly AppBarMenuModel _appBarMenuModel;
+		private readonly IUserSetttingsManager _userSetttingsManager;
 		private string _lastFuelEconomy;
 		private string _minFuelEconomy;
 		private string _maxFuelEconomy;
@@ -46,6 +47,8 @@ namespace MyFuelTracker.ViewModels
 		private string _mostOftenFuelType;
 		private string _lastFillupCost;
 		private bool _showNoHistoryMessage;
+		private string _fuelEconomyDimension;
+		private string _costDimension;
 
 		#endregion
 
@@ -57,12 +60,14 @@ namespace MyFuelTracker.ViewModels
 								IMessageBox messageBox,
 								IFillupService fillupService,
 								AppBarMenuModel appBarMenuModel,
-								IEventAggregator eventAggregator)
+								IEventAggregator eventAggregator,
+								IUserSetttingsManager userSetttingsManager)
 		{
 			_navigationService = navigationService;
 			_messageBox = messageBox;
 			_fillupService = fillupService;
 			_appBarMenuModel = appBarMenuModel;
+			_userSetttingsManager = userSetttingsManager;
 			Debug.WriteLine("StatisticsViewModel created");
 			DisplayName = AppResources.Statistics_Title;
 			eventAggregator.Subscribe(this);
@@ -76,12 +81,45 @@ namespace MyFuelTracker.ViewModels
 
 		#region Properties
 
-		public IEnumerable<DynamicAppBarButton> Buttons { get { return _buttons; } }
+		#region App Bar
+
+		public IEnumerable<DynamicAppBarButton> Buttons
+		{
+			get { return _buttons; }
+		}
 
 		public IEnumerable<DynamicAppBarItem> MenuItems
 		{
 			get { return _appBarMenuModel.MenuItems; }
 		}
+
+		#endregion
+
+		#region Dimensions
+
+		public string FuelEconomyDimension
+		{
+			get { return _fuelEconomyDimension; }
+			set
+			{
+				if (value == _fuelEconomyDimension) return;
+				_fuelEconomyDimension = value;
+				NotifyOfPropertyChange(() => FuelEconomyDimension);
+			}
+		}
+
+		public string CostDimension
+		{
+			get { return _costDimension; }
+			set
+			{
+				if (value == _costDimension) return;
+				_costDimension = value;
+				NotifyOfPropertyChange(() => CostDimension);
+			}
+		}
+
+		#endregion
 
 		public bool ShowNoHistoryMessage
 		{
@@ -93,10 +131,6 @@ namespace MyFuelTracker.ViewModels
 				NotifyOfPropertyChange(() => ShowNoHistoryMessage);
 			}
 		}
-
-		public string ConsumptionDimension { get { return "L/100km"; } }
-
-		public string CostDimension { get { return "hr"; } }
 
 		public string LastFuelEconomy
 		{
@@ -119,7 +153,6 @@ namespace MyFuelTracker.ViewModels
 				NotifyOfPropertyChange(() => LastFuelEconomyBrush);
 			}
 		}
-
 
 		public string MinFuelEconomy
 		{
@@ -275,7 +308,6 @@ namespace MyFuelTracker.ViewModels
 			IsolatedStorageSettings.ApplicationSettings.Save();
 
 			Update(statistics);
-
 		}
 
 		private void Update(Statistics statistics)
@@ -317,7 +349,11 @@ namespace MyFuelTracker.ViewModels
 			LastFillupCost = statistics.LastFillupCost.FormatForDisplay(2);
 
 			MostOftenFuelType = statistics.MostOftenFuelType;
-	}
+
+			Units currentUnits = _userSetttingsManager.GetCurrentUnits();
+			CostDimension = currentUnits.Currency;
+			FuelEconomyDimension = currentUnits.Economy;
+		}
 
 		public async void Handle(FillupHistoryChangedEvent message)
 		{

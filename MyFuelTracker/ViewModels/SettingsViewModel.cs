@@ -14,13 +14,13 @@ namespace MyFuelTracker.ViewModels
 	{
 		#region Fields
 
-		private readonly UserSetttingsManager _setttingsManager;
+		private readonly IUserSetttingsManager _setttingsManager;
 		private readonly IEventAggregator _eventAggregator;
 		private readonly IFillupService _fillupService;
 
 		#endregion
 
-		public SettingsViewModel(UserSetttingsManager setttingsManager, 
+		public SettingsViewModel(IUserSetttingsManager setttingsManager, 
 								IEventAggregator eventAggregator,
 								IFillupService fillupService)
 		{

@@ -107,19 +107,19 @@
 				
 				<views:ValueWithDimention Grid.Row="2" Grid.Column="1" Style="{StaticResource detail}"
                                               ValueTextBrush="{Binding LastFuelEconomyBrush}"
-                                              ValueText="{Binding LastFuelEconomy}" ValueDimension="{Binding ConsumptionDimension}"/>
+                                              ValueText="{Binding LastFuelEconomy}" ValueDimension="{Binding FuelEconomyDimension}"/>
 				<views:ValueWithDimention Grid.Row="3" Grid.Column="1" Style="{StaticResource detail}"
                                               ValueTextBrush="{Binding AllTimeAvgFuelEconomyBrush}"
-                                              ValueText="{Binding AllTimeAvgFuelEconomy}" ValueDimension="{Binding ConsumptionDimension}"/>
+                                              ValueText="{Binding AllTimeAvgFuelEconomy}" ValueDimension="{Binding FuelEconomyDimension}"/>
 				<views:ValueWithDimention Grid.Row="4" Grid.Column="1" Style="{StaticResource detail}"
                                               ValueTextBrush="{Binding Last4FillupsAvgFuelEconomyBrush}"
-                                              ValueText="{Binding Last4FillupsAvgFuelEconomy}" ValueDimension="{Binding ConsumptionDimension}"/>
+                                              ValueText="{Binding Last4FillupsAvgFuelEconomy}" ValueDimension="{Binding FuelEconomyDimension}"/>
 				<views:ValueWithDimention Grid.Row="5" Grid.Column="1" Style="{StaticResource detail}"
                                               ValueTextBrush="{Binding MinFuelEconomyBrush}"
-                                              ValueText="{Binding MinFuelEconomy}" ValueDimension="{Binding ConsumptionDimension}"/>
+                                              ValueText="{Binding MinFuelEconomy}" ValueDimension="{Binding FuelEconomyDimension}"/>
 				<views:ValueWithDimention Grid.Row="6" Grid.Column="1" Style="{StaticResource detail}"
                                               ValueTextBrush="{Binding MaxFuelEconomyBrush}"
-                                              ValueText="{Binding MaxFuelEconomy}" ValueDimension="{Binding ConsumptionDimension}"/>
+                                              ValueText="{Binding MaxFuelEconomy}" ValueDimension="{Binding FuelEconomyDimension}"/>
 
 
 				<views:ValueWithDimention Grid.Row="9" Grid.Column="1" Style="{StaticResource detail}"

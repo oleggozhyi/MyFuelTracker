@@ -203,5 +203,68 @@ namespace MyFuelTracker.Resources {
                 return ResourceManager.GetString("Statistics_Title", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to gal.
+        /// </summary>
+        public static string Units_Gallon {
+            get {
+                return ResourceManager.GetString("Units_Gallon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to km.
+        /// </summary>
+        public static string Units_Kilometers {
+            get {
+                return ResourceManager.GetString("Units_Kilometers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to km/L.
+        /// </summary>
+        public static string Units_KmL {
+            get {
+                return ResourceManager.GetString("Units_KmL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to L/100km.
+        /// </summary>
+        public static string Units_L100km {
+            get {
+                return ResourceManager.GetString("Units_L100km", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to L.
+        /// </summary>
+        public static string Units_Litres {
+            get {
+                return ResourceManager.GetString("Units_Litres", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to mi.
+        /// </summary>
+        public static string Units_Miles {
+            get {
+                return ResourceManager.GetString("Units_Miles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to mpg.
+        /// </summary>
+        public static string Units_Mpg {
+            get {
+                return ResourceManager.GetString("Units_Mpg", resourceCulture);
+            }
+        }
     }
 }

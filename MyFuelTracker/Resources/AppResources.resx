@@ -167,4 +167,25 @@
   <data name="Statistics_Title" xml:space="preserve">
     <value>statistics</value>
   </data>
+  <data name="Units_Gallon" xml:space="preserve">
+    <value>gal</value>
+  </data>
+  <data name="Units_Kilometers" xml:space="preserve">
+    <value>km</value>
+  </data>
+  <data name="Units_KmL" xml:space="preserve">
+    <value>km/L</value>
+  </data>
+  <data name="Units_L100km" xml:space="preserve">
+    <value>L/100km</value>
+  </data>
+  <data name="Units_Litres" xml:space="preserve">
+    <value>L</value>
+  </data>
+  <data name="Units_Miles" xml:space="preserve">
+    <value>mi</value>
+  </data>
+  <data name="Units_Mpg" xml:space="preserve">
+    <value>mpg</value>
+  </data>
 </root>

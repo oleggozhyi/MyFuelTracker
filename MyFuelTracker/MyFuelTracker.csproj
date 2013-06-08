@@ -111,6 +111,7 @@
     <Compile Include="Infrastructure\UiServices\MyMessageBox.cs" />
     <Compile Include="Infrastructure\Events\FuelTypeAddedEvent.cs" />
     <Compile Include="Infrastructure\SkyDriveManager.cs" />
+    <Compile Include="Infrastructure\UserSetttingsManager.cs" />
     <Compile Include="Infrastructure\ValidationException.cs" />
     <Compile Include="SampleData\XamlFriendlyCollection.cs">
       <SubType>Code</SubType>

@@ -52,7 +52,7 @@ namespace MyFuelTracker
             
 			Container.PerRequest<ILog, DebugLogger>();
 	        Container.Singleton<AppBarMenuModel>();
-			Container.Singleton<UserSetttingsManager>();
+			Container.Singleton<IUserSetttingsManager, UserSetttingsManager>();
 			Container.Singleton<IFuelEconomyStrategyProvider, FuelEconomyStrategyProvider>();
 
 			Container.Singleton<IMessageBox, MyMessageBox>();
@@ -63,13 +63,13 @@ namespace MyFuelTracker
 		    Container.Singleton<IFillupsSerializer, FillupsSerializer>();
 
 			LogManager.GetLog = type => new DebugLogger(type);
+
 		    SetCurrentLanguage();
 		}
 
 		private void SetCurrentLanguage()
 		{
-			var cultureInfo = Resolve<UserSetttingsManager>().GetCurrentCulture();
-			Thread.CurrentThread.CurrentCulture = cultureInfo;
+			var cultureInfo = Resolve<IUserSetttingsManager>().GetCurrentCulture();
 			Thread.CurrentThread.CurrentUICulture = cultureInfo;
 		}
 

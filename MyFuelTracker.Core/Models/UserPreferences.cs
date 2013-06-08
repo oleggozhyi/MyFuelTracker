@@ -26,37 +26,19 @@ namespace MyFuelTracker.Core.Models
 		ru_RU
 	}
 
-	public class UserSetttingsManager
+	public class Units
 	{
-		public UserSetttings Settings
-		{
-			get
-			{
-				UserSetttings settings;
-				if (!IsolatedStorageSettings.ApplicationSettings.TryGetValue("UserSetttings", out settings))
-				{
-					IsolatedStorageSettings.ApplicationSettings["UserSetttings"] = settings
-																				   = new UserSetttings();
-					IsolatedStorageSettings.ApplicationSettings.Save();
-				}
-				return settings;
-			}
-		}
-
-		public CultureInfo GetCurrentCulture()
-		{
-			switch (Settings.Locale)
-			{
-				case SupportedLocale.en_US: return new CultureInfo("en-US");
-				case SupportedLocale.ru_RU: return new CultureInfo("ru-RU");
-				default: throw new ArgumentOutOfRangeException();
-			}
-		}
-
-		public void Save()
-		{
-			IsolatedStorageSettings.ApplicationSettings.Save();
-		}
+		public string Currency { get; set; }
+		public string Distance { get; set; }
+		public string Volume { get; set; }
+		public string Economy { get; set; }
+	}
+	public interface IUserSetttingsManager
+	{
+		UserSetttings Settings { get; }
+		CultureInfo GetCurrentCulture();
+		void Save();
+		Units GetCurrentUnits();
 	}
 
 	public interface IFuelEconomyStrategyProvider
@@ -66,7 +48,7 @@ namespace MyFuelTracker.Core.Models
 
 	public class FuelEconomyStrategyProvider : IFuelEconomyStrategyProvider
 	{
-		private readonly UserSetttingsManager _manager;
+		private readonly IUserSetttingsManager _manager;
 		private Dictionary<FuelEconomyType, IFuelEconomyStrategy> _strategies = new Dictionary<FuelEconomyType, IFuelEconomyStrategy>
 			{
 				{ FuelEconomyType.Mpg, new MpgFuelEconomyStrategy()},
@@ -74,7 +56,7 @@ namespace MyFuelTracker.Core.Models
 				{ FuelEconomyType.KmL, new KmLFuelEconomyStrategy()}
 			};
 
-		public FuelEconomyStrategyProvider(UserSetttingsManager manager)
+		public FuelEconomyStrategyProvider(IUserSetttingsManager manager)
 		{
 			_manager = manager;
 		}
