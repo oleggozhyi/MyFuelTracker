@@ -68,8 +68,7 @@ namespace MyFuelTracker
 
 		private void SetCurrentLanguage()
 		{
-			string locale = Resolve<UserSetttingsManager>().Settings.Locale;
-			var cultureInfo = new CultureInfo(locale);
+			var cultureInfo = Resolve<UserSetttingsManager>().GetCurrentCulture();
 			Thread.CurrentThread.CurrentCulture = cultureInfo;
 			Thread.CurrentThread.CurrentUICulture = cultureInfo;
 		}

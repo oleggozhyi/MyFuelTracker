@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO.IsolatedStorage;
 using System.Linq;
 using System.Text;
@@ -12,11 +13,17 @@ namespace MyFuelTracker.Core.Models
 		public UserSetttings()
 		{
 			FuelEconomyType = FuelEconomyType.L100Km;
-			Locale = "en-US";
+			Locale = SupportedLocale.en_US;
 		}
 
 		public FuelEconomyType FuelEconomyType { get; set; }
-		public string Locale { get; set; }
+		public SupportedLocale Locale { get; set; }
+	}
+
+	public enum SupportedLocale
+	{
+		en_US,
+		ru_RU
 	}
 
 	public class UserSetttingsManager
@@ -33,6 +40,16 @@ namespace MyFuelTracker.Core.Models
 					IsolatedStorageSettings.ApplicationSettings.Save();
 				}
 				return settings;
+			}
+		}
+
+		public CultureInfo GetCurrentCulture()
+		{
+			switch (Settings.Locale)
+			{
+				case SupportedLocale.en_US: return new CultureInfo("en-US");
+				case SupportedLocale.ru_RU: return new CultureInfo("ru-RU");
+				default: throw new ArgumentOutOfRangeException();
 			}
 		}
 

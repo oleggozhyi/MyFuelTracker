@@ -43,6 +43,22 @@ namespace MyFuelTracker.ViewModels
 			}
 		}
 
+		public SupportedLocale Locale
+		{
+			get { return _setttingsManager.Settings.Locale; }
+			set
+			{
+				if (value == _setttingsManager.Settings.Locale) return;
+				_setttingsManager.Settings.Locale = value;
+				SaveSettings();
+				NotifyOfPropertyChange(() => Locale);
+			}
+		}
+
+		#endregion
+
+		#region methods
+
 		public void SaveSettings()
 		{
 			_setttingsManager.Save();
@@ -51,6 +67,7 @@ namespace MyFuelTracker.ViewModels
 		}
 
 		#endregion
+
 
 	}
 }
