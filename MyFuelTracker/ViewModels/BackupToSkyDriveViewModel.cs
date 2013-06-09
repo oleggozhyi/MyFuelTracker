@@ -13,6 +13,7 @@ using MyFuelTracker.Core.Models;
 using MyFuelTracker.Infrastructure;
 using MyFuelTracker.Infrastructure.Helpers;
 using MyFuelTracker.Infrastructure.UiServices;
+using MyFuelTracker.Resources;
 using Newtonsoft.Json;
 
 namespace MyFuelTracker.ViewModels
@@ -36,7 +37,8 @@ namespace MyFuelTracker.ViewModels
 
         #region ctor
 
-        public BackupToSkyDriveViewModel(IMessageBox messageBox, 
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+		public BackupToSkyDriveViewModel(IMessageBox messageBox, 
 										IFillupService fillupService, 
 										IFillupsSerializer fillupsSerializer,
 										IProgressIndicatorService progressIndicatorService)
@@ -46,7 +48,7 @@ namespace MyFuelTracker.ViewModels
 	        _fillupsSerializer = fillupsSerializer;
 	        _progressIndicatorService = progressIndicatorService;
             _progressIndicatorService.AttachIndicatorToView();
-            _progressIndicatorService.ShowIndeterminate("signing in...");
+            _progressIndicatorService.ShowIndeterminate(AppResources.Backup_Signing_in);
             HideStoryboardFrom = 2000;
         }
 
@@ -138,7 +140,7 @@ namespace MyFuelTracker.ViewModels
             try
             {
                 CanBackup = false;
-                _progressIndicatorService.ShowIndeterminate("backing up to SkyDrive...");
+                _progressIndicatorService.ShowIndeterminate(AppResources.Backup_Backing_Up);
                 var fillupHistoryItems = await _fillupService.GetHistoryAsync();
                 var fillups = fillupHistoryItems.Select(h => h.Fillup).ToArray();
 	            var fillupsJson = _fillupsSerializer.Serialize(fillups);
@@ -153,7 +155,7 @@ namespace MyFuelTracker.ViewModels
 					fileName = "Export_" + DateTime.Now.ToString(SkyDriveManager.BACKUP_DATE_FORMAT) + ".txt";
                     await skyDriveManager.SaveTextFileAsync("MyFuelTracker", fileName, csv);
                 }
-                _messageBox.Info("data was successfully backed up to SkyDrive", "BACKUP");
+				_messageBox.Info(AppResources.Backup_Message_Successfully_Saved);
             }
             catch (Exception ex)
             {

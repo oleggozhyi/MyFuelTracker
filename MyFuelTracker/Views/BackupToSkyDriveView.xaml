@@ -33,17 +33,21 @@
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
 			<views:HeaderControl />
-			<TextBlock Text="skydrive backup" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+			<TextBlock Text="{Binding LocalizedResources.Backup_Title, Source={StaticResource LocalizedStrings}}" 
+					   Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
         <StackPanel x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
 			<StackPanel Orientation="Horizontal" Visibility="{Binding IsSignedIn, Converter={StaticResource booleanToVisibilityConverter}}">
-				<TextBlock Text="You're signed in as "/>
+				<TextBlock Text="{Binding LocalizedResources.SkyDrive_Signed_Is_As, Source={StaticResource LocalizedStrings}}" />
 				<TextBlock Text="{Binding UserName}"/>
 			</StackPanel>
-			<TextBlock Text="You're not signed in" Visibility="{Binding IsSignedIn, Converter={StaticResource booleanToVisibilityConverter}, ConverterParameter=true}" />
-            <live:SignInButton ClientId="000000004C0F1406" Branding="Skydrive" TextType="Custom" SignInText="skydrive sign in" SignOutText="sign out"
+			<TextBlock Text="{Binding LocalizedResources.SkyDrive_Not_Signed_In, Source={StaticResource LocalizedStrings}}" 
+					   Visibility="{Binding IsSignedIn, Converter={StaticResource booleanToVisibilityConverter}, ConverterParameter=true}" />
+            <live:SignInButton ClientId="000000004C0F1406" Branding="Skydrive" TextType="Custom" 
+							   SignInText="{Binding LocalizedResources.SkyDrive_Sign_In, Source={StaticResource LocalizedStrings}}" 
+							   SignOutText="{Binding LocalizedResources.SkyDrive_Sign_Out, Source={StaticResource LocalizedStrings}}" 
                 Scopes="wl.skydrive_update" IsEnabled="{Binding CanBackup}" 
                                micro:Message.Attach="[Event SessionChanged] = [Action OnSessionChanged($eventargs)]" />
             <StackPanel x:Name="Panel">
@@ -77,10 +81,14 @@
                     </ec:DataTrigger>
                 </i:Interaction.Triggers>
                 <Rectangle Height="1" Stroke="White" Margin="0 20 0 20" />
-                <TextBlock  FontSize="{StaticResource PhoneFontSizeMediumLarge}" Text="This will create a backup file on you SkyDrive into the ''MyFuelTracker' folder" TextWrapping="Wrap"/>
-                <CheckBox IsEnabled="{Binding CanBackup}" FontSize="{StaticResource PhoneFontSizeMediumLarge}" Content="export history to Excel*" IsChecked="{Binding ExportToExcel, Mode=TwoWay}"/>
-                <TextBlock Margin="60 0 0 0" TextWrapping="Wrap" FontSize="{StaticResource PhoneFontSizeSmall}" Text="*Actually it will be exported to a tabulated text file which is understood by Excel quite well."></TextBlock>
-                <Button Content="backup" IsEnabled="{Binding CanBackup}" micro:Message.Attach="[Event Click] = [Action DoBackup]"></Button>
+				<TextBlock  FontSize="{StaticResource PhoneFontSizeMediumLarge}" TextWrapping="Wrap"
+							Text="{Binding LocalizedResources.Backup_Backup_Description, Source={StaticResource LocalizedStrings}}" />
+				<CheckBox IsEnabled="{Binding CanBackup}" FontSize="{StaticResource PhoneFontSizeMediumLarge}" Content="{Binding LocalizedResources.Backup_Export, Source={StaticResource LocalizedStrings}}"
+						  IsChecked="{Binding ExportToExcel, Mode=TwoWay}"/>
+                <TextBlock Margin="60 0 0 0" TextWrapping="Wrap" FontSize="{StaticResource PhoneFontSizeSmall}" 
+						   Text="{Binding LocalizedResources.Backup_Export_Explanation, Source={StaticResource LocalizedStrings}}"/>
+				<Button Content="{Binding LocalizedResources.Backup_Backup, Source={StaticResource LocalizedStrings}}" 
+						IsEnabled="{Binding CanBackup}" micro:Message.Attach="[Event Click] = [Action DoBackup]"></Button>
             </StackPanel>
         </StackPanel>
     </Grid>

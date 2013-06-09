@@ -154,11 +154,17 @@
   <data name="AppBar_View_More" xml:space="preserve">
     <value>view more</value>
   </data>
-  <data name="Backup_Not_Signed_In" xml:space="preserve">
-    <value>You're not signed in</value>
+  <data name="Backup_Backup" xml:space="preserve">
+    <value>backup</value>
   </data>
-  <data name="Backup_Signed_In_As" xml:space="preserve">
-    <value>You're signed in as </value>
+  <data name="Backup_Backup_Description" xml:space="preserve">
+    <value>This will create a backup file on you SkyDrive into the 'MyFuelTracker' folder</value>
+  </data>
+  <data name="Backup_Export" xml:space="preserve">
+    <value>export history to Excel*</value>
+  </data>
+  <data name="Backup_Export_Explanation" xml:space="preserve">
+    <value>*Actually it will be exported to a tabulated text file which is understood by Excel quite well</value>
   </data>
   <data name="Backup_Title" xml:space="preserve">
     <value>skydrive backup</value>
@@ -273,6 +279,18 @@
     <value>en-US</value>
     <comment>Controls the Language and ensures that the font for all elements in the RootFrame aligns with the app's language. Set to the language code of this resource file's language.</comment>
   </data>
+  <data name="SkyDrive_Not_Signed_In" xml:space="preserve">
+    <value>you're not signed in</value>
+  </data>
+  <data name="SkyDrive_Signed_Is_As" xml:space="preserve">
+    <value>you're signed in as</value>
+  </data>
+  <data name="SkyDrive_Sign_In" xml:space="preserve">
+    <value>sign in</value>
+  </data>
+  <data name="SkyDrive_Sign_Out" xml:space="preserve">
+    <value>sign out</value>
+  </data>
   <data name="Statistics_Costs" xml:space="preserve">
     <value>costs</value>
   </data>
@@ -338,5 +356,14 @@
   </data>
   <data name="Yes" xml:space="preserve">
     <value>yes</value>
+  </data>
+  <data name="Backup_Backing_Up" xml:space="preserve">
+    <value>backing up to SkyDrive...</value>
+  </data>
+  <data name="Backup_Message_Successfully_Saved" xml:space="preserve">
+    <value>data was successfully backed up to SkyDrive</value>
+  </data>
+  <data name="Backup_Signing_in" xml:space="preserve">
+    <value>signing in...</value>
   </data>
 </root>

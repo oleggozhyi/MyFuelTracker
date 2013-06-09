@@ -56,6 +56,7 @@ namespace MyFuelTracker.ViewModels
 
 		public StatisticsViewModel() { /* for design time support */ }
 
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
 		public StatisticsViewModel(INavigationService navigationService,
 								IMessageBox messageBox,
 								IFillupService fillupService,

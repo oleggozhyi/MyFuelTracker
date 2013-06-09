@@ -169,20 +169,65 @@ namespace MyFuelTracker.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You&apos;re not signed in.
+        ///   Looks up a localized string similar to backing up to SkyDrive....
         /// </summary>
-        public static string Backup_Not_Signed_In {
+        public static string Backup_Backing_Up {
             get {
-                return ResourceManager.GetString("Backup_Not_Signed_In", resourceCulture);
+                return ResourceManager.GetString("Backup_Backing_Up", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You&apos;re signed in as .
+        ///   Looks up a localized string similar to backup.
         /// </summary>
-        public static string Backup_Signed_In_As {
+        public static string Backup_Backup {
             get {
-                return ResourceManager.GetString("Backup_Signed_In_As", resourceCulture);
+                return ResourceManager.GetString("Backup_Backup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This will create a backup file on you SkyDrive into the &apos;MyFuelTracker&apos; folder.
+        /// </summary>
+        public static string Backup_Backup_Description {
+            get {
+                return ResourceManager.GetString("Backup_Backup_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to export history to Excel*.
+        /// </summary>
+        public static string Backup_Export {
+            get {
+                return ResourceManager.GetString("Backup_Export", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to *Actually it will be exported to a tabulated text file which is understood by Excel quite well.
+        /// </summary>
+        public static string Backup_Export_Explanation {
+            get {
+                return ResourceManager.GetString("Backup_Export_Explanation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to data was successfully backed up to SkyDrive.
+        /// </summary>
+        public static string Backup_Message_Successfully_Saved {
+            get {
+                return ResourceManager.GetString("Backup_Message_Successfully_Saved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to signing in....
+        /// </summary>
+        public static string Backup_Signing_in {
+            get {
+                return ResourceManager.GetString("Backup_Signing_in", resourceCulture);
             }
         }
         
@@ -516,6 +561,42 @@ namespace MyFuelTracker.Resources {
         public static string ResourceLanguage {
             get {
                 return ResourceManager.GetString("ResourceLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to you&apos;re not signed in.
+        /// </summary>
+        public static string SkyDrive_Not_Signed_In {
+            get {
+                return ResourceManager.GetString("SkyDrive_Not_Signed_In", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to sign in.
+        /// </summary>
+        public static string SkyDrive_Sign_In {
+            get {
+                return ResourceManager.GetString("SkyDrive_Sign_In", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to sign out.
+        /// </summary>
+        public static string SkyDrive_Sign_Out {
+            get {
+                return ResourceManager.GetString("SkyDrive_Sign_Out", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to you&apos;re signed in as.
+        /// </summary>
+        public static string SkyDrive_Signed_Is_As {
+            get {
+                return ResourceManager.GetString("SkyDrive_Signed_Is_As", resourceCulture);
             }
         }
         

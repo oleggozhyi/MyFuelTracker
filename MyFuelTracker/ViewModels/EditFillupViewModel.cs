@@ -49,7 +49,8 @@ namespace MyFuelTracker.ViewModels
 
         #region ctor
 
-        public EditFillupViewModel(INavigationService navigationService,
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+		public EditFillupViewModel(INavigationService navigationService,
                                     ILog log,
                                     IMessageBox messageBox,
                                     IFillupService fillupService,

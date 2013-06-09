@@ -34,6 +34,7 @@ namespace MyFuelTracker.ViewModels
 
 		#region ctor
 
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
 		public RestoreFromSkyDriveViewModel(IMessageBox messageBox, 
 											IFillupService fillupService,
 											IEventAggregator eventAggregator,

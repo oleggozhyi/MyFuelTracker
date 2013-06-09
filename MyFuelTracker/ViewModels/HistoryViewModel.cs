@@ -50,6 +50,7 @@ namespace MyFuelTracker.ViewModels
 
 		public HistoryViewModel() { /* for design time support */ }
 
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
 		public HistoryViewModel(IFillupService fillupService,
 								IEventAggregator eventAggregator,
 								IMessageBox messageBox,
