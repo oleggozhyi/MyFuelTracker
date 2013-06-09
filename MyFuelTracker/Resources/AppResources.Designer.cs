@@ -61,6 +61,24 @@ namespace MyFuelTracker.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to fuel type.
+        /// </summary>
+        public static string AddFuelType_Fuel_Type {
+            get {
+                return ResourceManager.GetString("AddFuelType_Fuel_Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to add fuel type.
+        /// </summary>
+        public static string AddFuelType_Title {
+            get {
+                return ResourceManager.GetString("AddFuelType_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to add fillup.
         /// </summary>
         public static string AppBar_Add_Fillup {
@@ -147,6 +165,33 @@ namespace MyFuelTracker.Resources {
         public static string AppBar_View_More {
             get {
                 return ResourceManager.GetString("AppBar_View_More", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You&apos;re not signed in.
+        /// </summary>
+        public static string Backup_Not_Signed_In {
+            get {
+                return ResourceManager.GetString("Backup_Not_Signed_In", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You&apos;re signed in as .
+        /// </summary>
+        public static string Backup_Signed_In_As {
+            get {
+                return ResourceManager.GetString("Backup_Signed_In_As", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to skydrive backup.
+        /// </summary>
+        public static string Backup_Title {
+            get {
+                return ResourceManager.GetString("Backup_Title", resourceCulture);
             }
         }
         
@@ -255,6 +300,132 @@ namespace MyFuelTracker.Resources {
         public static string DisplayFillup_Fillup_Details_Volume {
             get {
                 return ResourceManager.GetString("DisplayFillup_Fillup_Details_Volume", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to add fillup.
+        /// </summary>
+        public static string EditFillup_Add_Title {
+            get {
+                return ResourceManager.GetString("EditFillup_Add_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to current.
+        /// </summary>
+        public static string EditFillup_Current {
+            get {
+                return ResourceManager.GetString("EditFillup_Current", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to date.
+        /// </summary>
+        public static string EditFillup_Date {
+            get {
+                return ResourceManager.GetString("EditFillup_Date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to edit fillup.
+        /// </summary>
+        public static string EditFillup_Edit_Title {
+            get {
+                return ResourceManager.GetString("EditFillup_Edit_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to price.
+        /// </summary>
+        public static string EditFillup_Fuel_Price {
+            get {
+                return ResourceManager.GetString("EditFillup_Fuel_Price", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to fuel type.
+        /// </summary>
+        public static string EditFillup_Fuel_Type {
+            get {
+                return ResourceManager.GetString("EditFillup_Fuel_Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to is partial.
+        /// </summary>
+        public static string EditFillup_Is_Partial {
+            get {
+                return ResourceManager.GetString("EditFillup_Is_Partial", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The distance seems to be too big ({0}{1}), are you sure to save this fillup?.
+        /// </summary>
+        public static string EditFillup_Message_Big_Distance {
+            get {
+                return ResourceManager.GetString("EditFillup_Message_Big_Distance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The volume seems to be too big ({0}{1}), are you sure to save this fillup?.
+        /// </summary>
+        public static string EditFillup_Message_Big_Volume {
+            get {
+                return ResourceManager.GetString("EditFillup_Message_Big_Volume", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to can&apos;t save fillup.
+        /// </summary>
+        public static string EditFillup_Message_Cant_Save {
+            get {
+                return ResourceManager.GetString("EditFillup_Message_Cant_Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to enter current odometer value - it should be greater than previous value.
+        /// </summary>
+        public static string EditFillup_Message_Enter_Odometer {
+            get {
+                return ResourceManager.GetString("EditFillup_Message_Enter_Odometer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to odometer.
+        /// </summary>
+        public static string EditFillup_Odometer {
+            get {
+                return ResourceManager.GetString("EditFillup_Odometer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to previous.
+        /// </summary>
+        public static string EditFillup_Previous {
+            get {
+                return ResourceManager.GetString("EditFillup_Previous", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to volume.
+        /// </summary>
+        public static string EditFillup_Volume {
+            get {
+                return ResourceManager.GetString("EditFillup_Volume", resourceCulture);
             }
         }
         

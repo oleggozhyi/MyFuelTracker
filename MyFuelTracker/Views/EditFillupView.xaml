@@ -67,10 +67,12 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Text="date" Grid.Row="1" Grid.Column="0" />
+                    <TextBlock Text="{Binding LocalizedResources.EditFillup_Date, Source={StaticResource LocalizedStrings}}"
+							   Grid.Row="1" Grid.Column="0" />
                     <toolkit:DatePicker Value="{Binding Date, Mode=TwoWay}" ValueStringFormat="{}{0:dd MMM yyyy}" Grid.Row="1" Grid.Column="1"  />
 
-                    <TextBlock Text="fuel type" Grid.Row="2" Grid.Column="0" />
+					<TextBlock Text="{Binding LocalizedResources.EditFillup_Fuel_Type, Source={StaticResource LocalizedStrings}}"
+							   Grid.Row="2" Grid.Column="0" />
                     <Grid Grid.Row="2" Grid.Column="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -87,26 +89,28 @@
                         </controls:RoundButton>
                     </Grid>
 
-                    <TextBlock Text="price" Grid.Row="3" Grid.Column="0" />
+					<TextBlock Text="{Binding LocalizedResources.EditFillup_Fuel_Price, Source={StaticResource LocalizedStrings}}"
+							   Grid.Row="3" Grid.Column="0" />
                     <toolkit:PhoneTextBox  x:Name="Price" Grid.Row="3" Grid.Column="1" Hint="price" InputScope="Number"/>
 
 
                     <StackPanel Grid.Column="0" VerticalAlignment="Center"   >
-                        <TextBlock Text="previous" />
-                        <TextBlock Text="odometer" />
-                    </StackPanel>
+						<TextBlock Text="{Binding LocalizedResources.EditFillup_Previous, Source={StaticResource LocalizedStrings}}" />
+						<TextBlock Text="{Binding LocalizedResources.EditFillup_Odometer, Source={StaticResource LocalizedStrings}}" />
+					</StackPanel>
                     <toolkit:PhoneTextBox x:Name="OdometerStart" Grid.Column="1"  Hint="previous odometer"  InputScope="Number"/>
 
                     <StackPanel Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" >
-                        <TextBlock Text="current" />
-                        <TextBlock Text="odometer" />
-                    </StackPanel>
+						<TextBlock Text="{Binding LocalizedResources.EditFillup_Current, Source={StaticResource LocalizedStrings}}" />
+						<TextBlock Text="{Binding LocalizedResources.EditFillup_Odometer, Source={StaticResource LocalizedStrings}}" />
+					</StackPanel>
                     <toolkit:PhoneTextBox x:Name="OdometerEnd" Grid.Row="4" Grid.Column="1"  Hint="current odometer"  InputScope="Number"/>
 
-                    <TextBlock Text="volume" Grid.Row="5" Grid.Column="0" />
+					<TextBlock Text="{Binding LocalizedResources.EditFillup_Volume, Source={StaticResource LocalizedStrings}}"
+								Grid.Row="5" Grid.Column="0" />
                     <toolkit:PhoneTextBox x:Name="Volume" Grid.Row="5" Grid.Column="1"  Hint="volume" InputScope="Number"/>
 
-                    <CheckBox  x:Name="IsPartial" Grid.Row="6" Grid.Column="1" Content="is partial fillup" />
+					<CheckBox  x:Name="IsPartial" Grid.Row="6" Grid.Column="1" Content="{Binding LocalizedResources.EditFillup_Is_Partial, Source={StaticResource LocalizedStrings}}" />
                 </Grid>
             </ScrollViewer>
         </Grid>

@@ -43,7 +43,7 @@
 				<TextBlock Text="{Binding UserName}"/>
 			</StackPanel>
 			<TextBlock Text="You're not signed in" Visibility="{Binding IsSignedIn, Converter={StaticResource booleanToVisibilityConverter}, ConverterParameter=true}" />
-            <live:SignInButton ClientId="000000004C0F1406" Branding="Skydrive" TextType="SignIn" SignInText="skydrive sign in" SignOutText="sign out"
+            <live:SignInButton ClientId="000000004C0F1406" Branding="Skydrive" TextType="Custom" SignInText="skydrive sign in" SignOutText="sign out"
                 Scopes="wl.skydrive_update" IsEnabled="{Binding CanBackup}" 
                                micro:Message.Attach="[Event SessionChanged] = [Action OnSessionChanged($eventargs)]" />
             <StackPanel x:Name="Panel">

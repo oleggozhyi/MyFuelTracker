@@ -31,7 +31,8 @@
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
 			<views:HeaderControl />
-			<TextBlock Text="add fuel type" Margin="9,-7,0,0" Style="{StaticResource PageTitle}"/>
+			<TextBlock Text="{Binding LocalizedResources.AddFuelType_Title, Source={StaticResource LocalizedStrings}}" 
+					   Margin="9,-7,0,0" Style="{StaticResource PageTitle}"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
@@ -39,7 +40,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
-            <toolkit:PhoneTextBox x:Name="FuelType" Grid.Column="1" Hint="fuel type"/>
+			<toolkit:PhoneTextBox x:Name="FuelType" Grid.Column="1" Hint="{Binding LocalizedResources.AddFuelType_Fuel_Type, Source={StaticResource LocalizedStrings}}" />
         </Grid>
     </Grid>
 

@@ -117,6 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddFuelType_Fuel_Type" xml:space="preserve">
+    <value>fuel type</value>
+  </data>
+  <data name="AddFuelType_Title" xml:space="preserve">
+    <value>add fuel type</value>
+    <comment>_Ti</comment>
+  </data>
   <data name="AppBar_Add_Fillup" xml:space="preserve">
     <value>add fillup</value>
   </data>
@@ -146,6 +153,15 @@
   </data>
   <data name="AppBar_View_More" xml:space="preserve">
     <value>view more</value>
+  </data>
+  <data name="Backup_Not_Signed_In" xml:space="preserve">
+    <value>You're not signed in</value>
+  </data>
+  <data name="Backup_Signed_In_As" xml:space="preserve">
+    <value>You're signed in as </value>
+  </data>
+  <data name="Backup_Title" xml:space="preserve">
+    <value>skydrive backup</value>
   </data>
   <data name="Confirm" xml:space="preserve">
     <value>confirm</value>
@@ -181,6 +197,48 @@
     <value>previous odometer</value>
   </data>
   <data name="DisplayFillup_Fillup_Details_Volume" xml:space="preserve">
+    <value>volume</value>
+  </data>
+  <data name="EditFillup_Add_Title" xml:space="preserve">
+    <value>add fillup</value>
+  </data>
+  <data name="EditFillup_Current" xml:space="preserve">
+    <value>current</value>
+  </data>
+  <data name="EditFillup_Date" xml:space="preserve">
+    <value>date</value>
+  </data>
+  <data name="EditFillup_Edit_Title" xml:space="preserve">
+    <value>edit fillup</value>
+  </data>
+  <data name="EditFillup_Fuel_Price" xml:space="preserve">
+    <value>price</value>
+  </data>
+  <data name="EditFillup_Fuel_Type" xml:space="preserve">
+    <value>fuel type</value>
+  </data>
+  <data name="EditFillup_Is_Partial" xml:space="preserve">
+    <value>is partial</value>
+  </data>
+  <data name="EditFillup_Message_Big_Distance" xml:space="preserve">
+    <value>The distance seems to be too big ({0}{1}), are you sure to save this fillup?</value>
+  </data>
+  <data name="EditFillup_Message_Big_Volume" xml:space="preserve">
+    <value>The volume seems to be too big ({0}{1}), are you sure to save this fillup?</value>
+  </data>
+  <data name="EditFillup_Message_Cant_Save" xml:space="preserve">
+    <value>can't save fillup</value>
+  </data>
+  <data name="EditFillup_Message_Enter_Odometer" xml:space="preserve">
+    <value>enter current odometer value - it should be greater than previous value</value>
+  </data>
+  <data name="EditFillup_Odometer" xml:space="preserve">
+    <value>odometer</value>
+  </data>
+  <data name="EditFillup_Previous" xml:space="preserve">
+    <value>previous</value>
+  </data>
+  <data name="EditFillup_Volume" xml:space="preserve">
     <value>volume</value>
   </data>
   <data name="History_Confirms_Delete_Fillup" xml:space="preserve">

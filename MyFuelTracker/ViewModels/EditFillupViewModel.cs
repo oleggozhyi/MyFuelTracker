@@ -26,7 +26,6 @@ namespace MyFuelTracker.ViewModels
 
         private const double DISTANCE_TRESHOLD = 2000.0;
         private const double VOLUME_TRESHOLD = 1000.0;
-        private const double FUEL_ECONOMY_TRESHOLD = 25.0;
 
         private readonly INavigationService _navigationService;
         private readonly ILog _log;
@@ -34,7 +33,7 @@ namespace MyFuelTracker.ViewModels
         private readonly IFillupService _fillupService;
         private readonly IEventAggregator _eventAggregator;
 
-        private bool _isPartial;
+	    private bool _isPartial;
         private DateTime _date;
         private string _volume;
         private string _price;
@@ -44,8 +43,9 @@ namespace MyFuelTracker.ViewModels
         private string _fuelType;
         private List<string> _fuelTypes;
         private IEnumerable<FillupHistoryItem> _historyItems;
+	    private readonly Units _currentUnits;
 
-        #endregion
+	    #endregion
 
         #region ctor
 
@@ -53,14 +53,17 @@ namespace MyFuelTracker.ViewModels
                                     ILog log,
                                     IMessageBox messageBox,
                                     IFillupService fillupService,
-                                    IEventAggregator eventAggregator)
+                                    IEventAggregator eventAggregator,
+									IUserSetttingsManager userSetttingsManager)
         {
             _navigationService = navigationService;
             _log = log;
             _messageBox = messageBox;
             _fillupService = fillupService;
             _eventAggregator = eventAggregator;
-            _eventAggregator.Subscribe(this);
+			_currentUnits = userSetttingsManager.GetCurrentUnits();
+
+	        _eventAggregator.Subscribe(this);
             FuelTypes = new List<string>();
 
             _saveFillupButton.OnClick = SaveFillup;
@@ -177,12 +180,12 @@ namespace MyFuelTracker.ViewModels
             if (FillupId != null)
             {
                 _fillup = await _fillupService.GetFillupAsync(Guid.Parse(FillupId));
-                DisplayName = "edit fillup";
+	            DisplayName = AppResources.EditFillup_Edit_Title;
             }
             else
             {
                 _fillup = await _fillupService.CreateNewFillupAsync();
-                DisplayName = "add fillup";
+				DisplayName = AppResources.EditFillup_Add_Title;
             }
 
             _historyItems = await _fillupService.GetHistoryAsync();
@@ -205,10 +208,10 @@ namespace MyFuelTracker.ViewModels
                 _fillup.Date = Date;
                 _fillup.FuelType = FuelType;
                 _fillup.IsPartial = IsPartial;
-                _fillup.OdometerEnd = OdometerEnd.GetPositiveDoubleFor("previos odometer");
-                _fillup.OdometerStart = OdometerStart.GetPositiveDoubleFor("current odometer");
-                _fillup.Volume = Volume.GetPositiveDoubleFor("volume");
-                _fillup.Price = Price.GetPositiveDoubleFor("price");
+                _fillup.OdometerEnd = OdometerEnd.GetPositiveDoubleFor(AppResources.EditFillup_Previous + " " + AppResources.EditFillup_Odometer);
+				_fillup.OdometerStart = OdometerStart.GetPositiveDoubleFor(AppResources.EditFillup_Current + " " + AppResources.EditFillup_Odometer);
+				_fillup.Volume = Volume.GetPositiveDoubleFor(AppResources.EditFillup_Volume);
+				_fillup.Price = Price.GetPositiveDoubleFor(AppResources.EditFillup_Fuel_Price);
                 ValidateFillup(_fillup);
                 bool userCancelled = CheckForExtremalValues(_fillup);
                 if (userCancelled)
@@ -216,7 +219,7 @@ namespace MyFuelTracker.ViewModels
             }
             catch (ValidationException ex)
             {
-                _messageBox.Error(ex.Message, "cannot save fillup");
+                _messageBox.Error(ex.Message, AppResources.EditFillup_Message_Cant_Save);
                 return;
             }
             await _fillupService.SaveFillupAsync(_fillup);
@@ -229,23 +232,22 @@ namespace MyFuelTracker.ViewModels
         {
             bool cancel = false;
             double distance = fillup.OdometerEnd - fillup.OdometerStart;
-			double fuelEconomy = fillup.Volume * 100.0 / distance;
             if (distance > DISTANCE_TRESHOLD)
             {
-                cancel = !_messageBox.Confirm("The distance seems to be too big (" + distance.FormatForDisplay(0) + "km), are you sure to save this fillup? ", "Please confirm");
+                cancel = !_messageBox.Confirm(
+											String.Format(AppResources.EditFillup_Message_Big_Distance,
+															distance.FormatForDisplay(0), _currentUnits.Distance), 
+											AppResources.Confirm);
                 if (cancel)
                     return true;
             }
 
             if (fillup.Volume > VOLUME_TRESHOLD)
             {
-                cancel = !_messageBox.Confirm("The volume seems to be too big (" + fillup.Volume.FormatForDisplay(2) + "L), are you sure to save this fillup? ", "Please confirm");
-                if (cancel)
-                    return true;
-            }
-            if (fuelEconomy > FUEL_ECONOMY_TRESHOLD)
-            {
-                cancel = !_messageBox.Confirm("The fuel economy seems to be too big (" + fuelEconomy.FormatForDisplay(2) + "L/100km), are you sure to save this fillup? ", "Please confirm");
+                cancel = !_messageBox.Confirm(
+									String.Format(AppResources.EditFillup_Message_Big_Volume,
+										fillup.Volume.FormatForDisplay(0),_currentUnits.Volume), 
+									AppResources.Confirm);
                 if (cancel)
                     return true;
             }
@@ -261,7 +263,7 @@ namespace MyFuelTracker.ViewModels
         private static void ValidateFillup(Fillup f)
         {
             if (f.OdometerStart >= f.OdometerEnd)
-                throw new ValidationException("enter current odometer value - it should be greater than previous value");
+                throw new ValidationException(AppResources.EditFillup_Message_Enter_Odometer);
         }
 
         public void AddFuelType()

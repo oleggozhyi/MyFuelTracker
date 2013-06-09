@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddFuelType_Fuel_Type" xml:space="preserve">
+    <value>тип топлива</value>
+  </data>
+  <data name="AddFuelType_Title" xml:space="preserve">
+    <value>добавить топливо</value>
+  </data>
   <data name="AppBar_Add_Fillup" xml:space="preserve">
     <value>добавить заправку</value>
   </data>
@@ -151,7 +157,7 @@
     <value>подтвердите</value>
   </data>
   <data name="DisplayFillup_Fillup_Details" xml:space="preserve">
-    <value>подробно о заправке</value>
+    <value>заправке</value>
   </data>
   <data name="DisplayFillup_Fillup_Details_Current_Odometer" xml:space="preserve">
     <value>текущий одометр</value>
@@ -175,13 +181,55 @@
     <value>тип топлива</value>
   </data>
   <data name="DisplayFillup_Fillup_Details_Is_Partial" xml:space="preserve">
-    <value>до полного бака</value>
+    <value>неполный бак</value>
   </data>
   <data name="DisplayFillup_Fillup_Details_Previous_Odometer" xml:space="preserve">
     <value>пред. одометр</value>
   </data>
   <data name="DisplayFillup_Fillup_Details_Volume" xml:space="preserve">
     <value>количество топлива</value>
+  </data>
+  <data name="EditFillup_Add_Title" xml:space="preserve">
+    <value>добавтить</value>
+  </data>
+  <data name="EditFillup_Current" xml:space="preserve">
+    <value>текущий</value>
+  </data>
+  <data name="EditFillup_Date" xml:space="preserve">
+    <value>дата</value>
+  </data>
+  <data name="EditFillup_Edit_Title" xml:space="preserve">
+    <value>редактировать</value>
+  </data>
+  <data name="EditFillup_Fuel_Price" xml:space="preserve">
+    <value>цена</value>
+  </data>
+  <data name="EditFillup_Fuel_Type" xml:space="preserve">
+    <value>топливо</value>
+  </data>
+  <data name="EditFillup_Is_Partial" xml:space="preserve">
+    <value>неполный бак</value>
+  </data>
+  <data name="EditFillup_Message_Big_Distance" xml:space="preserve">
+    <value>Расстояние слишком большое ({0}{1}), aвы уверены что вы хотите сохранить заправку?</value>
+  </data>
+  <data name="EditFillup_Message_Big_Volume" xml:space="preserve">
+    <value>Количество топлива слишком большое ({0}{1}), вы уверены что вы хотите сохранить заправку?</value>
+  </data>
+  <data name="EditFillup_Message_Cant_Save" xml:space="preserve">
+    <value>не могу сохранить</value>
+  </data>
+  <data name="EditFillup_Message_Enter_Odometer" xml:space="preserve">
+    <value>Введите текущее показание одометра - оно должно быть больше чем предыдущее</value>
+  </data>
+  <data name="EditFillup_Odometer" xml:space="preserve">
+    <value>одометр</value>
+  </data>
+  <data name="EditFillup_Previous" xml:space="preserve">
+    <value>пред.</value>
+  </data>
+  <data name="EditFillup_Volume" xml:space="preserve">
+    <value>количество</value>
   </data>
   <data name="History_Confirms_Delete_Fillup" xml:space="preserve">
     <value>вы действительно хотите удалить данные о заправке за  {0}?</value>
@@ -205,7 +253,7 @@
     <value>нет</value>
   </data>
   <data name="Partial" xml:space="preserve">
-    <value>частичная</value>
+    <value>неполный бак</value>
   </data>
   <data name="ResourceFlowDirection" xml:space="preserve">
     <value>LeftToRight</value>
