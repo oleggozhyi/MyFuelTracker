@@ -248,7 +248,7 @@
     <value>volume</value>
   </data>
   <data name="History_Confirms_Delete_Fillup" xml:space="preserve">
-    <value>"are you sure to delete fillup on {0}?"</value>
+    <value>are you sure to delete fillup on {0}?</value>
   </data>
   <data name="History_Confirms_Delete_Selected" xml:space="preserve">
     <value>are you sure to delete {0} selected fillups?</value>

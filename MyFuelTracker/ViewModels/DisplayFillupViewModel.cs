@@ -68,7 +68,7 @@ namespace MyFuelTracker.ViewModels
 
         public async void DeleteFillup()
         {
-            bool proceedWithDeletion = _messageBox.Confirm(AppResources.History_Confirms_Delete_Fillup);
+            bool proceedWithDeletion = _messageBox.Confirm(AppResources.History_Confirms_Delete_Fillup, Details.Date);
             if (!proceedWithDeletion)
                 return;
             await _fillupService.DeleteFillupAsync(_fillupHistoryItem.Fillup);

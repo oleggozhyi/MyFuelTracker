@@ -466,7 +466,7 @@ namespace MyFuelTracker.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &quot;are you sure to delete fillup on {0}?&quot;.
+        ///   Looks up a localized string similar to are you sure to delete fillup on {0}?.
         /// </summary>
         public static string History_Confirms_Delete_Fillup {
             get {
