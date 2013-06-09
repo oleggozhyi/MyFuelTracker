@@ -10,6 +10,7 @@ using MyFuelTracker.Core;
 using MyFuelTracker.Infrastructure;
 using MyFuelTracker.Infrastructure.Events;
 using MyFuelTracker.Infrastructure.UiServices;
+using MyFuelTracker.Resources;
 
 namespace MyFuelTracker.ViewModels
 {
@@ -45,7 +46,7 @@ namespace MyFuelTracker.ViewModels
 			_eventAggregator = eventAggregator;
 			_progressIndicatorService = progressIndicatorService;
 			_progressIndicatorService.AttachIndicatorToView();
-			_progressIndicatorService.ShowIndeterminate("signing in...");
+			_progressIndicatorService.ShowIndeterminate(AppResources.SkyDrive_Signing_in);
 			HideStoryboardFrom = 2000;
 		}
 
@@ -136,17 +137,16 @@ namespace MyFuelTracker.ViewModels
 
 		public async void Restore()
 		{
-			var restore = _messageBox.Confirm("Are you sure you want to restore? \n\n" 
-						+ "Tap OK to continue", "Restore");
+			var restore = _messageBox.Confirm(AppResources.Restore_Confirm_Want_To_Restore, AppResources.Confirm);
 			if(!restore)
 				return;
 
 			try
 			{
-				_progressIndicatorService.ShowIndeterminate("Restoring...");
+				_progressIndicatorService.ShowIndeterminate(AppResources.Restore_Restoring);
 				CanRestore = false;
 				await _fillupService.RestoreDataAsync(RestoreSource.FillupsHolder.Fillups);
-				_messageBox.Info("Your fillups data was successfully restored", "restore");
+				_messageBox.Info(AppResources.Restore_Message_Restore_Successfull);
 
 				_eventAggregator.Publish(new FillupHistoryChangedEvent());
 			}
@@ -186,7 +186,7 @@ namespace MyFuelTracker.ViewModels
 		{
 			try
 			{
-				_progressIndicatorService.ShowIndeterminate("gettings latest backup info...");
+				_progressIndicatorService.ShowIndeterminate(AppResources.Restore_Getting_Latest_Backup_Info);
 				var skyDriveManager = new SkyDriveManager(_session);
 				var fillupsHolder = await skyDriveManager.GetLatestBackupAsync();
 				if (fillupsHolder != null)

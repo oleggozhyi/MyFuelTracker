@@ -223,15 +223,6 @@ namespace MyFuelTracker.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to signing in....
-        /// </summary>
-        public static string Backup_Signing_in {
-            get {
-                return ResourceManager.GetString("Backup_Signing_in", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to skydrive backup.
         /// </summary>
         public static string Backup_Title {
@@ -565,6 +556,116 @@ namespace MyFuelTracker.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to backup date.
+        /// </summary>
+        public static string Restore_Backup_Date {
+            get {
+                return ResourceManager.GetString("Restore_Backup_Date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Backup found on your skydrive.
+        /// </summary>
+        public static string Restore_Backup_Found {
+            get {
+                return ResourceManager.GetString("Restore_Backup_Found", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to restore? 
+        ///
+        ///Tap OK to continue.
+        /// </summary>
+        public static string Restore_Confirm_Want_To_Restore {
+            get {
+                return ResourceManager.GetString("Restore_Confirm_Want_To_Restore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to gettings latest backup info....
+        /// </summary>
+        public static string Restore_Getting_Latest_Backup_Info {
+            get {
+                return ResourceManager.GetString("Restore_Getting_Latest_Backup_Info", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to last fillup date.
+        /// </summary>
+        public static string Restore_Last_Fillup_date {
+            get {
+                return ResourceManager.GetString("Restore_Last_Fillup_date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to last odometer value.
+        /// </summary>
+        public static string Restore_Last_Odometer {
+            get {
+                return ResourceManager.GetString("Restore_Last_Odometer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to your fillups data was successfully restored.
+        /// </summary>
+        public static string Restore_Message_Restore_Successfull {
+            get {
+                return ResourceManager.GetString("Restore_Message_Restore_Successfull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No backups found on  SkyDrive.
+        /// </summary>
+        public static string Restore_No_Backups_Found {
+            get {
+                return ResourceManager.GetString("Restore_No_Backups_Found", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There should be the folder &apos;MyFuelTracker&apos; on your SkyDrive and  it should a file with the name &apos;latest_backup.txt&apos;.
+        /// </summary>
+        public static string Restore_No_Backups_Found_Detailed {
+            get {
+                return ResourceManager.GetString("Restore_No_Backups_Found_Detailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to restore.
+        /// </summary>
+        public static string Restore_Restore {
+            get {
+                return ResourceManager.GetString("Restore_Restore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to restoring....
+        /// </summary>
+        public static string Restore_Restoring {
+            get {
+                return ResourceManager.GetString("Restore_Restoring", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to skydrive restore.
+        /// </summary>
+        public static string Restore_Title {
+            get {
+                return ResourceManager.GetString("Restore_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to you&apos;re not signed in.
         /// </summary>
         public static string SkyDrive_Not_Signed_In {
@@ -597,6 +698,15 @@ namespace MyFuelTracker.Resources {
         public static string SkyDrive_Signed_Is_As {
             get {
                 return ResourceManager.GetString("SkyDrive_Signed_Is_As", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to signing in....
+        /// </summary>
+        public static string SkyDrive_Signing_in {
+            get {
+                return ResourceManager.GetString("SkyDrive_Signing_in", resourceCulture);
             }
         }
         

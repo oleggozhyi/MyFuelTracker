@@ -157,7 +157,7 @@
     <value>сохранить</value>
   </data>
   <data name="Backup_Backup_Description" xml:space="preserve">
-    <value>Это создаст файл для востановления на вашем SkyDrive в папке 'MyFuelTracker'</value>
+    <value>Это создаст файл для восстановления на вашем SkyDrive в папке 'MyFuelTracker'</value>
   </data>
   <data name="Backup_Export" xml:space="preserve">
     <value>экспорт истории в Excel*</value>
@@ -367,5 +367,43 @@
   </data>
   <data name="Backup_Signing_in" xml:space="preserve">
     <value>выполняется вход...</value>
+  </data>
+  <data name="Restore_Backup_Date" xml:space="preserve">
+    <value>дата сохранения</value>
+  </data>
+  <data name="Restore_Backup_Found" xml:space="preserve">
+    <value>данные найдены.</value>
+  </data>
+  <data name="Restore_Confirm_Want_To_Restore" xml:space="preserve">
+    <value>Вы действительно желаете восстановть данные с SkyDrive?
+
+Нажмите OK для продолжения</value>
+  </data>
+  <data name="Restore_Getting_Latest_Backup_Info" xml:space="preserve">
+    <value>получение данных для восстановления...</value>
+  </data>
+  <data name="Restore_Last_Fillup_date" xml:space="preserve">
+    <value>дата посл. запраки</value>
+  </data>
+  <data name="Restore_Last_Odometer" xml:space="preserve">
+    <value>посл. знач. одометра</value>
+  </data>
+  <data name="Restore_Message_Restore_Successfull" xml:space="preserve">
+    <value>ваши данные были успешно восстановлены</value>
+  </data>
+  <data name="Restore_No_Backups_Found" xml:space="preserve">
+    <value>данные не найдены.</value>
+  </data>
+  <data name="Restore_No_Backups_Found_Detailed" xml:space="preserve">
+    <value>На вашем SkyDrive должна быть папка 'MyFuelTracker' и в ней должен быть файл с именем 'latest_backup.txt'</value>
+  </data>
+  <data name="Restore_Restore" xml:space="preserve">
+    <value>восстановить</value>
+  </data>
+  <data name="Restore_Restoring" xml:space="preserve">
+    <value>данные восстанавливаются...</value>
+  </data>
+  <data name="Restore_Title" xml:space="preserve">
+    <value>skydrive восстановление</value>
   </data>
 </root>

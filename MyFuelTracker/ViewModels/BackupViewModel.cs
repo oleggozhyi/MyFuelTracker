@@ -10,12 +10,12 @@ namespace MyFuelTracker.ViewModels
 	{
 		public string BackupDate
 		{
-			get { return FillupsHolder.Timestamp.ToString("dd MMM yyyy HH:mm:ss"); }
+			get { return FillupsHolder.Timestamp.ToString("dd/MM/yyyy HH:mm:ss"); }
 		}
 
 		public string LastFillupDate
 		{
-			get { return FillupsHolder.Fillups.First().Date.ToString("dd MMM yyyy"); }
+			get { return FillupsHolder.Fillups.First().Date.ToString("dd/MM/yyyy"); }
 		}
 
 		public string LastOdometer

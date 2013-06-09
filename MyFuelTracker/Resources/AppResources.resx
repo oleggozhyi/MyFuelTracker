@@ -363,7 +363,45 @@
   <data name="Backup_Message_Successfully_Saved" xml:space="preserve">
     <value>data was successfully backed up to SkyDrive</value>
   </data>
-  <data name="Backup_Signing_in" xml:space="preserve">
+  <data name="Restore_Backup_Date" xml:space="preserve">
+    <value>backup date</value>
+  </data>
+  <data name="Restore_Backup_Found" xml:space="preserve">
+    <value>Backup found on your skydrive</value>
+  </data>
+  <data name="Restore_Confirm_Want_To_Restore" xml:space="preserve">
+    <value>Are you sure you want to restore? 
+
+Tap OK to continue</value>
+  </data>
+  <data name="Restore_Getting_Latest_Backup_Info" xml:space="preserve">
+    <value>gettings latest backup info...</value>
+  </data>
+  <data name="Restore_Last_Fillup_date" xml:space="preserve">
+    <value>last fillup date</value>
+  </data>
+  <data name="Restore_Last_Odometer" xml:space="preserve">
+    <value>last odometer value</value>
+  </data>
+  <data name="Restore_Message_Restore_Successfull" xml:space="preserve">
+    <value>your fillups data was successfully restored</value>
+  </data>
+  <data name="Restore_No_Backups_Found" xml:space="preserve">
+    <value>No backups found on  SkyDrive</value>
+  </data>
+  <data name="Restore_No_Backups_Found_Detailed" xml:space="preserve">
+    <value>There should be the folder 'MyFuelTracker' on your SkyDrive and  it should a file with the name 'latest_backup.txt'</value>
+  </data>
+  <data name="Restore_Restore" xml:space="preserve">
+    <value>restore</value>
+  </data>
+  <data name="Restore_Restoring" xml:space="preserve">
+    <value>restoring...</value>
+  </data>
+  <data name="Restore_Title" xml:space="preserve">
+    <value>skydrive restore</value>
+  </data>
+  <data name="SkyDrive_Signing_in" xml:space="preserve">
     <value>signing in...</value>
   </data>
 </root>

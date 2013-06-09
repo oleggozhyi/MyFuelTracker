@@ -45,12 +45,12 @@
 			</StackPanel>
 			<TextBlock Text="{Binding LocalizedResources.SkyDrive_Not_Signed_In, Source={StaticResource LocalizedStrings}}" 
 					   Visibility="{Binding IsSignedIn, Converter={StaticResource booleanToVisibilityConverter}, ConverterParameter=true}" />
-            <live:SignInButton ClientId="000000004C0F1406" Branding="Skydrive" TextType="Custom" 
+			<live:SignInButton ClientId="000000004C0F1406" Branding="Skydrive" TextType="Custom" 
 							   SignInText="{Binding LocalizedResources.SkyDrive_Sign_In, Source={StaticResource LocalizedStrings}}" 
 							   SignOutText="{Binding LocalizedResources.SkyDrive_Sign_Out, Source={StaticResource LocalizedStrings}}" 
                 Scopes="wl.skydrive_update" IsEnabled="{Binding CanBackup}" 
                                micro:Message.Attach="[Event SessionChanged] = [Action OnSessionChanged($eventargs)]" />
-            <StackPanel x:Name="Panel">
+			<StackPanel x:Name="Panel">
                 <StackPanel.Resources>
                     <Storyboard x:Key="ShowPanelAnimation">
                         <DoubleAnimation From="2000" To="0" Duration="00:00:00.8" Storyboard.TargetName="Panel" Storyboard.TargetProperty="(FrameworkElement.RenderTransform).(TranslateTransform.Y)" >

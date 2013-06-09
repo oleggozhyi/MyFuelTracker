@@ -48,7 +48,7 @@ namespace MyFuelTracker.ViewModels
 	        _fillupsSerializer = fillupsSerializer;
 	        _progressIndicatorService = progressIndicatorService;
             _progressIndicatorService.AttachIndicatorToView();
-            _progressIndicatorService.ShowIndeterminate(AppResources.Backup_Signing_in);
+			_progressIndicatorService.ShowIndeterminate(AppResources.SkyDrive_Signing_in);
             HideStoryboardFrom = 2000;
         }
 
