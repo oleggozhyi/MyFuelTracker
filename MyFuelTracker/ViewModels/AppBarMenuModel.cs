@@ -24,7 +24,7 @@ namespace MyFuelTracker.ViewModels
 
 		#region ctor
 
-		public AppBarMenuModel(IMessageBox messageBox, INavigationService navigationService)
+		public AppBarMenuModel(INavigationService navigationService)
 		{
 			_navigationService = navigationService;
 			_backupToSkydriveMenuItem.OnClick = BackupToSkyDrive;

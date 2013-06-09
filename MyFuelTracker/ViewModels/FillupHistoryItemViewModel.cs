@@ -8,6 +8,7 @@ using System.Windows.Media;
 using MyFuelTracker.Core.Models;
 using MyFuelTracker.Infrastructure;
 using MyFuelTracker.Infrastructure.Helpers;
+using MyFuelTracker.Resources;
 
 namespace MyFuelTracker.ViewModels
 {
@@ -24,7 +25,7 @@ namespace MyFuelTracker.ViewModels
 			_units = units;
 			HistoryItem = historyItem;
 			_isPartial = historyItem.Fillup.IsPartial;
-			FuelEconomy = historyItem.FuelEconomy.HasValue ? historyItem.FuelEconomy.Value.FormatForDisplay(2) : "<partial>";
+			FuelEconomy = historyItem.FuelEconomy.HasValue ? historyItem.FuelEconomy.Value.FormatForDisplay(2) : String.Format("<{0}>", AppResources.Partial);
 			Date = historyItem.Fillup.Date.ToString("dd MMMM yyyy", Thread.CurrentThread.CurrentUICulture);
 			FillupBrush = GetFillupBrush(historyItem, statistics);
 
@@ -38,7 +39,7 @@ namespace MyFuelTracker.ViewModels
 			OdometerEnd = HistoryItem.Fillup.OdometerEnd.FormatForDisplay(0);
 			Price = HistoryItem.Fillup.Price.FormatForDisplay(2);
 			ShowfuelEconomy = !historyItem.Fillup.IsPartial;
-			IsPartialFillup = historyItem.Fillup.IsPartial ? "yes" : "no";
+			IsPartialFillup = historyItem.Fillup.IsPartial ? AppResources.Yes : AppResources.No;
 		}
 
 		private Brush GetFillupBrush(FillupHistoryItem historyItem, Statistics statistics)

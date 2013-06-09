@@ -160,6 +160,105 @@ namespace MyFuelTracker.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to fillup details.
+        /// </summary>
+        public static string DisplayFillup_Fillup_Details {
+            get {
+                return ResourceManager.GetString("DisplayFillup_Fillup_Details", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to current odometer.
+        /// </summary>
+        public static string DisplayFillup_Fillup_Details_Current_Odometer {
+            get {
+                return ResourceManager.GetString("DisplayFillup_Fillup_Details_Current_Odometer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to date.
+        /// </summary>
+        public static string DisplayFillup_Fillup_Details_Date {
+            get {
+                return ResourceManager.GetString("DisplayFillup_Fillup_Details_Date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to distance.
+        /// </summary>
+        public static string DisplayFillup_Fillup_Details_Distance {
+            get {
+                return ResourceManager.GetString("DisplayFillup_Fillup_Details_Distance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to fillup cost.
+        /// </summary>
+        public static string DisplayFillup_Fillup_Details_Fillup_Cost {
+            get {
+                return ResourceManager.GetString("DisplayFillup_Fillup_Details_Fillup_Cost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to fuel economy.
+        /// </summary>
+        public static string DisplayFillup_Fillup_Details_Fuel_Economy {
+            get {
+                return ResourceManager.GetString("DisplayFillup_Fillup_Details_Fuel_Economy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to fuel price.
+        /// </summary>
+        public static string DisplayFillup_Fillup_Details_Fuel_Price {
+            get {
+                return ResourceManager.GetString("DisplayFillup_Fillup_Details_Fuel_Price", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to fuel type.
+        /// </summary>
+        public static string DisplayFillup_Fillup_Details_Fuel_Type {
+            get {
+                return ResourceManager.GetString("DisplayFillup_Fillup_Details_Fuel_Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to is partial fillup.
+        /// </summary>
+        public static string DisplayFillup_Fillup_Details_Is_Partial {
+            get {
+                return ResourceManager.GetString("DisplayFillup_Fillup_Details_Is_Partial", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to previous odometer.
+        /// </summary>
+        public static string DisplayFillup_Fillup_Details_Previous_Odometer {
+            get {
+                return ResourceManager.GetString("DisplayFillup_Fillup_Details_Previous_Odometer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to volume.
+        /// </summary>
+        public static string DisplayFillup_Fillup_Details_Volume {
+            get {
+                return ResourceManager.GetString("DisplayFillup_Fillup_Details_Volume", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &quot;are you sure to delete fillup on {0}?&quot;.
         /// </summary>
         public static string History_Confirms_Delete_Fillup {
@@ -210,6 +309,24 @@ namespace MyFuelTracker.Resources {
         public static string Menu_Settings {
             get {
                 return ResourceManager.GetString("Menu_Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to no.
+        /// </summary>
+        public static string No {
+            get {
+                return ResourceManager.GetString("No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to partial.
+        /// </summary>
+        public static string Partial {
+            get {
+                return ResourceManager.GetString("Partial", resourceCulture);
             }
         }
         
@@ -417,6 +534,15 @@ namespace MyFuelTracker.Resources {
         public static string Units_Mpg {
             get {
                 return ResourceManager.GetString("Units_Mpg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to yes.
+        /// </summary>
+        public static string Yes {
+            get {
+                return ResourceManager.GetString("Yes", resourceCulture);
             }
         }
     }

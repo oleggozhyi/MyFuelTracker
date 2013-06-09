@@ -150,6 +150,39 @@
   <data name="Confirm" xml:space="preserve">
     <value>подтвердите</value>
   </data>
+  <data name="DisplayFillup_Fillup_Details" xml:space="preserve">
+    <value>подробно о заправке</value>
+  </data>
+  <data name="DisplayFillup_Fillup_Details_Current_Odometer" xml:space="preserve">
+    <value>текущий одометр</value>
+  </data>
+  <data name="DisplayFillup_Fillup_Details_Date" xml:space="preserve">
+    <value>дата</value>
+  </data>
+  <data name="DisplayFillup_Fillup_Details_Distance" xml:space="preserve">
+    <value>расстояние</value>
+  </data>
+  <data name="DisplayFillup_Fillup_Details_Fillup_Cost" xml:space="preserve">
+    <value>стоимость заправки</value>
+  </data>
+  <data name="DisplayFillup_Fillup_Details_Fuel_Economy" xml:space="preserve">
+    <value>расход топлива</value>
+  </data>
+  <data name="DisplayFillup_Fillup_Details_Fuel_Price" xml:space="preserve">
+    <value>цена топлива</value>
+  </data>
+  <data name="DisplayFillup_Fillup_Details_Fuel_Type" xml:space="preserve">
+    <value>тип топлива</value>
+  </data>
+  <data name="DisplayFillup_Fillup_Details_Is_Partial" xml:space="preserve">
+    <value>до полного бака</value>
+  </data>
+  <data name="DisplayFillup_Fillup_Details_Previous_Odometer" xml:space="preserve">
+    <value>пред. одометр</value>
+  </data>
+  <data name="DisplayFillup_Fillup_Details_Volume" xml:space="preserve">
+    <value>количество топлива</value>
+  </data>
   <data name="History_Confirms_Delete_Fillup" xml:space="preserve">
     <value>вы действительно хотите удалить данные о заправке за  {0}?</value>
   </data>
@@ -167,6 +200,12 @@
   </data>
   <data name="Menu_Settings" xml:space="preserve">
     <value>настройки</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>нет</value>
+  </data>
+  <data name="Partial" xml:space="preserve">
+    <value>частичная</value>
   </data>
   <data name="ResourceFlowDirection" xml:space="preserve">
     <value>LeftToRight</value>
@@ -241,5 +280,8 @@
   </data>
   <data name="Units_Mpg" xml:space="preserve">
     <value>миль/гал</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>да</value>
   </data>
 </root>

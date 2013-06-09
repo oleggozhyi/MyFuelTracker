@@ -150,6 +150,39 @@
   <data name="Confirm" xml:space="preserve">
     <value>confirm</value>
   </data>
+  <data name="DisplayFillup_Fillup_Details" xml:space="preserve">
+    <value>fillup details</value>
+  </data>
+  <data name="DisplayFillup_Fillup_Details_Current_Odometer" xml:space="preserve">
+    <value>current odometer</value>
+  </data>
+  <data name="DisplayFillup_Fillup_Details_Date" xml:space="preserve">
+    <value>date</value>
+  </data>
+  <data name="DisplayFillup_Fillup_Details_Distance" xml:space="preserve">
+    <value>distance</value>
+  </data>
+  <data name="DisplayFillup_Fillup_Details_Fillup_Cost" xml:space="preserve">
+    <value>fillup cost</value>
+  </data>
+  <data name="DisplayFillup_Fillup_Details_Fuel_Economy" xml:space="preserve">
+    <value>fuel economy</value>
+  </data>
+  <data name="DisplayFillup_Fillup_Details_Fuel_Price" xml:space="preserve">
+    <value>fuel price</value>
+  </data>
+  <data name="DisplayFillup_Fillup_Details_Fuel_Type" xml:space="preserve">
+    <value>fuel type</value>
+  </data>
+  <data name="DisplayFillup_Fillup_Details_Is_Partial" xml:space="preserve">
+    <value>is partial fillup</value>
+  </data>
+  <data name="DisplayFillup_Fillup_Details_Previous_Odometer" xml:space="preserve">
+    <value>previous odometer</value>
+  </data>
+  <data name="DisplayFillup_Fillup_Details_Volume" xml:space="preserve">
+    <value>volume</value>
+  </data>
   <data name="History_Confirms_Delete_Fillup" xml:space="preserve">
     <value>"are you sure to delete fillup on {0}?"</value>
   </data>
@@ -167,6 +200,12 @@
   </data>
   <data name="Menu_Settings" xml:space="preserve">
     <value>settings</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>no</value>
+  </data>
+  <data name="Partial" xml:space="preserve">
+    <value>partial</value>
   </data>
   <data name="ResourceFlowDirection" xml:space="preserve">
     <value>LeftToRight</value>
@@ -238,5 +277,8 @@
   </data>
   <data name="Units_Mpg" xml:space="preserve">
     <value>mpg</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>yes</value>
   </data>
 </root>

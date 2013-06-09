@@ -55,7 +55,8 @@
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
 			<views:HeaderControl />
-			<TextBlock Text="fillup details" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+			<TextBlock Text="{Binding LocalizedResources.DisplayFillup_Fillup_Details, Source={StaticResource LocalizedStrings}}" 
+					   Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
@@ -79,17 +80,18 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Row="0" Style="{StaticResource Label}"  Text="date" />
+					<TextBlock Grid.Row="0" Style="{StaticResource Label}" Text="{Binding LocalizedResources.DisplayFillup_Fillup_Details_Date, Source={StaticResource LocalizedStrings}}" />
                     <Rectangle  Grid.Row="1" Grid.ColumnSpan="2" Height="1" Stroke="White"/>
-                    <TextBlock Grid.Row="2" Style="{StaticResource Label}" Text="previos odometer"/>
-                    <TextBlock Grid.Row="3" Style="{StaticResource Label}" Text="current odometer"  />
-                    <TextBlock Grid.Row="4" Style="{StaticResource Label}" Text="distance" />
-                    <TextBlock Grid.Row="5" Style="{StaticResource Label}" Text="volume" />
-                    <TextBlock Grid.Row="6" Style="{StaticResource Label}" Text="fuel type" />
-                    <TextBlock Grid.Row="7" Style="{StaticResource Label}" Text="fuel price" />
-                    <TextBlock Grid.Row="8" Style="{StaticResource Label}" Text="fillup cost" />
-                    <TextBlock Grid.Row="9" Style="{StaticResource Label}" Text="is partial fillup" />
-					<TextBlock Grid.Row="10" Style="{StaticResource Label}" Text="fuel economy" Visibility="{Binding ShowFuelEconomy, Converter={StaticResource booleanToVisibilityConverter}}" />
+					<TextBlock Grid.Row="2" Style="{StaticResource Label}" Text="{Binding LocalizedResources.DisplayFillup_Fillup_Details_Previous_Odometer, Source={StaticResource LocalizedStrings}}" />
+					<TextBlock Grid.Row="3" Style="{StaticResource Label}" Text="{Binding LocalizedResources.DisplayFillup_Fillup_Details_Current_Odometer, Source={StaticResource LocalizedStrings}}" />
+					<TextBlock Grid.Row="4" Style="{StaticResource Label}" Text="{Binding LocalizedResources.DisplayFillup_Fillup_Details_Distance, Source={StaticResource LocalizedStrings}}" />
+					<TextBlock Grid.Row="5" Style="{StaticResource Label}" Text="{Binding LocalizedResources.DisplayFillup_Fillup_Details_Volume, Source={StaticResource LocalizedStrings}}" />
+					<TextBlock Grid.Row="6" Style="{StaticResource Label}" Text="{Binding LocalizedResources.DisplayFillup_Fillup_Details_Fuel_Type, Source={StaticResource LocalizedStrings}}" />
+					<TextBlock Grid.Row="7" Style="{StaticResource Label}" Text="{Binding LocalizedResources.DisplayFillup_Fillup_Details_Fuel_Price, Source={StaticResource LocalizedStrings}}" />
+					<TextBlock Grid.Row="8" Style="{StaticResource Label}" Text="{Binding LocalizedResources.DisplayFillup_Fillup_Details_Fillup_Cost, Source={StaticResource LocalizedStrings}}" />
+					<TextBlock Grid.Row="9" Style="{StaticResource Label}" Text="{Binding LocalizedResources.DisplayFillup_Fillup_Details_Is_Partial, Source={StaticResource LocalizedStrings}}" />
+					<TextBlock Grid.Row="10" Style="{StaticResource Label}" Text="{Binding LocalizedResources.DisplayFillup_Fillup_Details_Fuel_Economy, Source={StaticResource LocalizedStrings}}" 
+							   Visibility="{Binding ShowFuelEconomy, Converter={StaticResource booleanToVisibilityConverter}}" />
 
                     <TextBlock                Grid.Column="1" Grid.Row="0" Style="{StaticResource Value}"  Text="{Binding Details.Date}" Foreground="White" />
                     <views:ValueWithDimention Grid.Column="1" Grid.Row="2" ValueText="{Binding Details.OdometerStart}" ValueDimension="{Binding Details.DistanceDimension}"  />
