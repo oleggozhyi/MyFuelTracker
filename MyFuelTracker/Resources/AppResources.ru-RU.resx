@@ -172,7 +172,7 @@
     <value>подтвердите</value>
   </data>
   <data name="DisplayFillup_Fillup_Details" xml:space="preserve">
-    <value>заправке</value>
+    <value>заправка</value>
   </data>
   <data name="DisplayFillup_Fillup_Details_Current_Odometer" xml:space="preserve">
     <value>текущий одометр</value>
@@ -368,6 +368,9 @@
   <data name="Backup_Signing_in" xml:space="preserve">
     <value>выполняется вход...</value>
   </data>
+  <data name="History_No_Fillups_Message" xml:space="preserve">
+    <value>здесь будет отображаться история заправок как только вы введёте данные о хотя бы одной заправке</value>
+  </data>
   <data name="Restore_Backup_Date" xml:space="preserve">
     <value>дата сохранения</value>
   </data>
@@ -405,5 +408,32 @@
   </data>
   <data name="Restore_Title" xml:space="preserve">
     <value>skydrive восстановление</value>
+  </data>
+  <data name="Settings_App_Lang" xml:space="preserve">
+    <value>Язык приложения</value>
+  </data>
+  <data name="Settings_App_Lang_Caution" xml:space="preserve">
+    <value>* вы должны перезапустить преложения для того, чтобы изменение вступило в силу</value>
+  </data>
+  <data name="Settings_Select_Economy_Unit" xml:space="preserve">
+    <value>Выберите в чем измерять расход</value>
+  </data>
+  <data name="Settings_Title" xml:space="preserve">
+    <value>настройки</value>
+  </data>
+  <data name="Settings_Unit_km_L" xml:space="preserve">
+    <value>километров на литр (km/L)</value>
+  </data>
+  <data name="Settings_Unit_L_100km" xml:space="preserve">
+    <value>Литров на 100 километров (L/100km)</value>
+  </data>
+  <data name="Settings_Unit_Mpg" xml:space="preserve">
+    <value>Миль на галлон (mpg)</value>
+  </data>
+  <data name="Validation_Should_Be_Positive_Number" xml:space="preserve">
+    <value>'{0}' должно быть позитивным числом</value>
+  </data>
+  <data name="Validation_Should_Not_Be_Empty" xml:space="preserve">
+    <value>введите '{0}'</value>
   </data>
 </root>

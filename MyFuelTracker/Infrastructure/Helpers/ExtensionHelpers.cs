@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Windows.Media;
+using MyFuelTracker.Resources;
 
 namespace MyFuelTracker.Infrastructure.Helpers
 {
@@ -30,12 +31,12 @@ namespace MyFuelTracker.Infrastructure.Helpers
 		public static double GetPositiveDoubleFor(this string s, string fieldName)
 		{
 			if (s.IsNullOrWhitespace())
-				throw new ValidationException(string.Format("'{0}' should not be empty", fieldName));
+				throw new ValidationException(string.Format(AppResources.Validation_Should_Not_Be_Empty, fieldName));
 			s = s.Replace(",", ".");
 
 			double result;
 			if (!double.TryParse(s, NumberStyles.Float, CultureInfo.InvariantCulture, out result) || result < 0)
-				throw new ValidationException(string.Format("'{0}' should be a postitive number", fieldName));
+				throw new ValidationException(string.Format(AppResources.Validation_Should_Be_Positive_Number, fieldName));
 
 			return result;
 		}

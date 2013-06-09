@@ -80,7 +80,7 @@
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
 
-		<TextBlock Text="This page will display fillups history once you've entered at least one fillup" 
+		<TextBlock Text="{Binding LocalizedResources.History_No_Fillups_Message, Source={StaticResource LocalizedStrings}}" 
 				 FontSize="{StaticResource PhoneFontSizeMediumLarge}" TextWrapping="Wrap"
 				 Visibility="{Binding HistoryEmpty, Converter={StaticResource booleanToVisibilityConverter}}"
 				 />

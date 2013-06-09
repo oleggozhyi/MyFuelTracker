@@ -484,6 +484,15 @@ namespace MyFuelTracker.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This page will display fillups history once you&apos;ve entered at least one fillup.
+        /// </summary>
+        public static string History_No_Fillups_Message {
+            get {
+                return ResourceManager.GetString("History_No_Fillups_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to history.
         /// </summary>
         public static string History_Title {
@@ -662,6 +671,69 @@ namespace MyFuelTracker.Resources {
         public static string Restore_Title {
             get {
                 return ResourceManager.GetString("Restore_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to App language.
+        /// </summary>
+        public static string Settings_App_Lang {
+            get {
+                return ResourceManager.GetString("Settings_App_Lang", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to * you must restart the app in order for the change to take effect.
+        /// </summary>
+        public static string Settings_App_Lang_Caution {
+            get {
+                return ResourceManager.GetString("Settings_App_Lang_Caution", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select a unit of measure for fuel economy.
+        /// </summary>
+        public static string Settings_Select_Economy_Unit {
+            get {
+                return ResourceManager.GetString("Settings_Select_Economy_Unit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to settings.
+        /// </summary>
+        public static string Settings_Title {
+            get {
+                return ResourceManager.GetString("Settings_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to kilometers per litre (km/L).
+        /// </summary>
+        public static string Settings_Unit_km_L {
+            get {
+                return ResourceManager.GetString("Settings_Unit_km_L", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Litres per 100 kilometers (L/100km).
+        /// </summary>
+        public static string Settings_Unit_L_100km {
+            get {
+                return ResourceManager.GetString("Settings_Unit_L_100km", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Miles per gallon (mpg).
+        /// </summary>
+        public static string Settings_Unit_Mpg {
+            get {
+                return ResourceManager.GetString("Settings_Unit_Mpg", resourceCulture);
             }
         }
         
@@ -896,6 +968,24 @@ namespace MyFuelTracker.Resources {
         public static string Units_Mpg {
             get {
                 return ResourceManager.GetString("Units_Mpg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; should be a postitive number.
+        /// </summary>
+        public static string Validation_Should_Be_Positive_Number {
+            get {
+                return ResourceManager.GetString("Validation_Should_Be_Positive_Number", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; should not be empty.
+        /// </summary>
+        public static string Validation_Should_Not_Be_Empty {
+            get {
+                return ResourceManager.GetString("Validation_Should_Not_Be_Empty", resourceCulture);
             }
         }
         

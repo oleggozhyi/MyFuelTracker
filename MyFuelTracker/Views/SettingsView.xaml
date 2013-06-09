@@ -27,20 +27,27 @@
 		<!--TitlePanel contains the name of the application and page title-->
 		<StackPanel Grid.Row="0" Margin="12,17,0,28">
 			<views:HeaderControl />
-			<TextBlock Text="settings" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+			<TextBlock Text="{Binding LocalizedResources.Settings_Title, Source={StaticResource LocalizedStrings}}" 
+					   Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
 		</StackPanel>
 
 		<!--ContentPanel - place additional content here-->
         <StackPanel x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
 			<StackPanel>
-				<TextBlock Text="Select a unit of measure for fuel economy" FontSize="{StaticResource PhoneFontSizeLarge}" TextWrapping="Wrap"/>
-				<RadioButton Content="Litres per 100 kilometers" IsChecked="{Binding FuelEconomyType, Converter={StaticResource enumBooleanConverter}, ConverterParameter=L100Km, Mode=TwoWay}" />
-				<RadioButton Content="kilometers per litre" IsChecked="{Binding FuelEconomyType, Converter={StaticResource enumBooleanConverter}, ConverterParameter=KmL, Mode=TwoWay}" />
-				<RadioButton Content="Miles per gallon" IsChecked="{Binding FuelEconomyType, Converter={StaticResource enumBooleanConverter}, ConverterParameter=Mpg, Mode=TwoWay}" />
+				<TextBlock Text="{Binding LocalizedResources.Settings_Select_Economy_Unit, Source={StaticResource LocalizedStrings}}" 
+						   FontSize="{StaticResource PhoneFontSizeLarge}" TextWrapping="Wrap"/>
+				<RadioButton Content="{Binding LocalizedResources.Settings_Unit_L_100km, Source={StaticResource LocalizedStrings}}" 
+							 IsChecked="{Binding FuelEconomyType, Converter={StaticResource enumBooleanConverter}, ConverterParameter=L100Km, Mode=TwoWay}" />
+				<RadioButton Content="{Binding LocalizedResources.Settings_Unit_km_L, Source={StaticResource LocalizedStrings}}" 
+							 IsChecked="{Binding FuelEconomyType, Converter={StaticResource enumBooleanConverter}, ConverterParameter=KmL, Mode=TwoWay}" />
+				<RadioButton Content="{Binding LocalizedResources.Settings_Unit_Mpg, Source={StaticResource LocalizedStrings}}" 
+							 IsChecked="{Binding FuelEconomyType, Converter={StaticResource enumBooleanConverter}, ConverterParameter=Mpg, Mode=TwoWay}" />
 			</StackPanel>
 			<StackPanel Margin="0 15 0 0">
-				<TextBlock Text="App language" FontSize="{StaticResource PhoneFontSizeLarge}" TextWrapping="Wrap"/>
-				<TextBlock Text="* you must restart the app in order for the change to take effect" FontSize="{StaticResource PhoneFontSizeNormal}" TextWrapping="Wrap"/>
+				<TextBlock Text="{Binding LocalizedResources.Settings_App_Lang, Source={StaticResource LocalizedStrings}}" 
+						   FontSize="{StaticResource PhoneFontSizeLarge}" TextWrapping="Wrap"/>
+				<TextBlock Text="{Binding LocalizedResources.Settings_App_Lang_Caution, Source={StaticResource LocalizedStrings}}"
+						   FontSize="{StaticResource PhoneFontSizeNormal}" TextWrapping="Wrap"/>
 				<RadioButton Content="English" IsChecked="{Binding Locale, Converter={StaticResource enumBooleanConverter}, ConverterParameter=en_US, Mode=TwoWay}" />
 				<RadioButton Content="Русский" IsChecked="{Binding Locale, Converter={StaticResource enumBooleanConverter}, ConverterParameter=ru_RU, Mode=TwoWay}" />
 			</StackPanel>
