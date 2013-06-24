@@ -440,4 +440,10 @@ Tap OK to continue</value>
   <data name="FuelEconomyType_Mpg" xml:space="preserve">
     <value>Miles per gallon (mpg)</value>
   </data>
+  <data name="EditFillup_Current_Odometer" xml:space="preserve">
+    <value>current odometer</value>
+  </data>
+  <data name="EditFillup_Previous_Odometer" xml:space="preserve">
+    <value>previous odometer</value>
+  </data>
 </root>

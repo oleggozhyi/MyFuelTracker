@@ -171,7 +171,6 @@ namespace MyFuelTracker.ViewModels
 			if (!proceedWithDeletion)
 				return;
 
-			EnforceIsSelectionModeEnabled = false;
 			foreach (FillupHistoryItemViewModel fillupViewModel in _selection.SelectedItems)
 			{
 				await _fillupService.DeleteFillupAsync(fillupViewModel.HistoryItem.Fillup);	
@@ -179,6 +178,7 @@ namespace MyFuelTracker.ViewModels
 			_eventAggregator.Publish(new FillupHistoryChangedEvent());
 			
 			RaiseAppBarChangedChanged();
+			EnforceIsSelectionModeEnabled = false;
 		}
 
 		private void ChangeSelectionMode()

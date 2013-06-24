@@ -439,4 +439,10 @@
   <data name="FuelEconomyType_Mpg" xml:space="preserve">
     <value>Миль на галлон (миль/гал)</value>
   </data>
+  <data name="EditFillup_Current_Odometer" xml:space="preserve">
+    <value>текущий одометр</value>
+  </data>
+  <data name="EditFillup_Previous_Odometer" xml:space="preserve">
+    <value>пред. одометр</value>
+  </data>
 </root>

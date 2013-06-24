@@ -376,6 +376,15 @@ namespace MyFuelTracker.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to current odometer.
+        /// </summary>
+        public static string EditFillup_Current_Odometer {
+            get {
+                return ResourceManager.GetString("EditFillup_Current_Odometer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to date.
         /// </summary>
         public static string EditFillup_Date {
@@ -471,6 +480,15 @@ namespace MyFuelTracker.Resources {
         public static string EditFillup_Previous {
             get {
                 return ResourceManager.GetString("EditFillup_Previous", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to previous odometer.
+        /// </summary>
+        public static string EditFillup_Previous_Odometer {
+            get {
+                return ResourceManager.GetString("EditFillup_Previous_Odometer", resourceCulture);
             }
         }
         

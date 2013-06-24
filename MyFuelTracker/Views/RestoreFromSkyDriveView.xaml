@@ -64,7 +64,7 @@
 		<StackPanel x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
 			<StackPanel Orientation="Horizontal" Visibility="{Binding IsSignedIn, Converter={StaticResource booleanToVisibilityConverter}}">
 				<TextBlock Text="{Binding LocalizedResources.SkyDrive_Signed_Is_As, Source={StaticResource LocalizedStrings}}" />
-				<TextBlock Text="{Binding UserName}"/>
+				<TextBlock Margin="10 0 0 0" Text="{Binding UserName}" Foreground="Aqua"/>
 			</StackPanel>
 			<TextBlock Text="{Binding LocalizedResources.SkyDrive_Not_Signed_In, Source={StaticResource LocalizedStrings}}"
 					   Visibility="{Binding IsSignedIn, Converter={StaticResource booleanToVisibilityConverter}, ConverterParameter=true}" />
