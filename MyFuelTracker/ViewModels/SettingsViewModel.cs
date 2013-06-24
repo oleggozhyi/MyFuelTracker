@@ -61,9 +61,12 @@ namespace MyFuelTracker.ViewModels
 
 		public void SaveSettings()
 		{
-			_setttingsManager.Save();
-			_fillupService.ClearCache();
-			_eventAggregator.Publish(new FillupHistoryChangedEvent());
+			Task.Run(() =>
+				{
+					_setttingsManager.Save();
+					_fillupService.ClearCache();
+					_eventAggregator.Publish(new FillupHistoryChangedEvent());
+				});
 		}
 
 		#endregion

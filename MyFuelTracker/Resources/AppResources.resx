@@ -416,15 +416,6 @@ Tap OK to continue</value>
   <data name="Settings_Title" xml:space="preserve">
     <value>settings</value>
   </data>
-  <data name="Settings_Unit_km_L" xml:space="preserve">
-    <value>kilometers per litre (km/L)</value>
-  </data>
-  <data name="Settings_Unit_L_100km" xml:space="preserve">
-    <value>Litres per 100 kilometers (L/100km)</value>
-  </data>
-  <data name="Settings_Unit_Mpg" xml:space="preserve">
-    <value>Miles per gallon (mpg)</value>
-  </data>
   <data name="SkyDrive_Signing_in" xml:space="preserve">
     <value>signing in...</value>
   </data>
@@ -433,5 +424,20 @@ Tap OK to continue</value>
   </data>
   <data name="Validation_Should_Not_Be_Empty" xml:space="preserve">
     <value>'{0}' should not be empty</value>
+  </data>
+  <data name="AppLanguage_en_US" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="AppLanguage_ru_RU" xml:space="preserve">
+    <value>Русский</value>
+  </data>
+  <data name="FuelEconomyType_KmL" xml:space="preserve">
+    <value>km per litre (km/L)</value>
+  </data>
+  <data name="FuelEconomyType_L100Km" xml:space="preserve">
+    <value>Litres per 100 km (L/100km)</value>
+  </data>
+  <data name="FuelEconomyType_Mpg" xml:space="preserve">
+    <value>Miles per gallon (mpg)</value>
   </data>
 </root>

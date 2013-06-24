@@ -11,10 +11,14 @@
 
     <!--Application Resources-->
     <Application.Resources>
-        <ImageBrush x:Key="AppBackground" ImageSource="/Assets/simple-black-ipad-background1.jpg"/>
+
+		<conveters:MyBooleanToVisibilityConverter x:Key="booleanToVisibilityConverter"/>
+		<conveters:EnumToIntConverter x:Key="enumToIntConverter"/>
+		<conveters:EnumToIEnumerableConverter x:Key="enumToIEnumerableConverter"/>
+
+
+		<ImageBrush x:Key="AppBackground" ImageSource="/Assets/simple-black-ipad-background1.jpg"/>
         <caliburnMicro:Bootstrapper x:Key="bootstrapper" />
-        <conveters:MyBooleanToVisibilityConverter x:Key="booleanToVisibilityConverter"/>
-		<conveters:EnumBooleanConverter x:Key="enumBooleanConverter"/>
 		<infrastructure:LocalizedStrings xmlns:local="clr-namespace:MyFuelTracker" x:Key="LocalizedStrings"/>
         <Style x:Key="PageTitle" BasedOn="{StaticResource PhoneTextTitle1Style}" TargetType="TextBlock">
         </Style>

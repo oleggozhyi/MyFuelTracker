@@ -95,7 +95,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
-    <Compile Include="Infrastructure\Conveters\EnumToBoleanConverter.cs" />
+    <Compile Include="Infrastructure\Conveters\EnumToIEnumerableConverter.cs" />
+    <Compile Include="Infrastructure\Conveters\EnumToIntConverter.cs" />
     <Compile Include="Infrastructure\Events\FillupItemChangedEvent.cs" />
     <Compile Include="Infrastructure\Helpers\ColorHelper.cs" />
     <Compile Include="Infrastructure\DebugLogger.cs" />

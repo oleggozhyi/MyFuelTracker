@@ -290,9 +290,6 @@
   <data name="SkyDrive_Sign_Out" xml:space="preserve">
     <value>Выйти</value>
   </data>
-  <data name="Stati" xml:space="preserve">
-    <value />
-  </data>
   <data name="Statistics_Costs" xml:space="preserve">
     <value>стоимости</value>
   </data>
@@ -421,19 +418,25 @@
   <data name="Settings_Title" xml:space="preserve">
     <value>настройки</value>
   </data>
-  <data name="Settings_Unit_km_L" xml:space="preserve">
-    <value>километров на литр (km/L)</value>
-  </data>
-  <data name="Settings_Unit_L_100km" xml:space="preserve">
-    <value>Литров на 100 километров (L/100km)</value>
-  </data>
-  <data name="Settings_Unit_Mpg" xml:space="preserve">
-    <value>Миль на галлон (mpg)</value>
-  </data>
   <data name="Validation_Should_Be_Positive_Number" xml:space="preserve">
     <value>'{0}' должно быть позитивным числом</value>
   </data>
   <data name="Validation_Should_Not_Be_Empty" xml:space="preserve">
     <value>введите '{0}'</value>
+  </data>
+  <data name="AppLanguage_en_US" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="AppLanguage_ru_RU" xml:space="preserve">
+    <value>Русский</value>
+  </data>
+  <data name="FuelEconomyType_KmL" xml:space="preserve">
+    <value>км на литр (км/л)</value>
+  </data>
+  <data name="FuelEconomyType_L100Km" xml:space="preserve">
+    <value>Литров на 100 км (л/100км)</value>
+  </data>
+  <data name="FuelEconomyType_Mpg" xml:space="preserve">
+    <value>Миль на галлон (миль/гал)</value>
   </data>
 </root>

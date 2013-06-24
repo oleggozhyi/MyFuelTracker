@@ -16,13 +16,20 @@
     shell:SystemTray.IsVisible="True"
 	toolkit:TransitionService.NavigationInTransition="{StaticResource navigationInTransition}"
     toolkit:TransitionService.NavigationOutTransition="{StaticResource navigationOutTransition}">
-
-    <!--LayoutRoot is the root grid where all page content is placed-->
+	<phone:PhoneApplicationPage.Resources>
+		<Style TargetType="TextBlock">
+			<Setter Property="FontSize" Value="{StaticResource PhoneFontSizeNormal}"/>
+			<Setter Property="Foreground" Value="Silver"/>
+			<Setter Property="TextWrapping" Value="Wrap"/>
+			<Setter Property="Margin" Value="15 0 0 0"/>
+		</Style>
+	</phone:PhoneApplicationPage.Resources>
+	<!--LayoutRoot is the root grid where all page content is placed-->
 	<Grid x:Name="LayoutRoot" Background="{StaticResource AppBackground}">
 		<Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
 
 		<!--TitlePanel contains the name of the application and page title-->
 		<StackPanel Grid.Row="0" Margin="12,17,0,28">
@@ -32,26 +39,27 @@
 		</StackPanel>
 
 		<!--ContentPanel - place additional content here-->
-        <StackPanel x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+		<StackPanel x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
 			<StackPanel>
 				<TextBlock Text="{Binding LocalizedResources.Settings_Select_Economy_Unit, Source={StaticResource LocalizedStrings}}" 
-						   FontSize="{StaticResource PhoneFontSizeLarge}" TextWrapping="Wrap"/>
-				<RadioButton Content="{Binding LocalizedResources.Settings_Unit_L_100km, Source={StaticResource LocalizedStrings}}" 
-							 IsChecked="{Binding FuelEconomyType, Converter={StaticResource enumBooleanConverter}, ConverterParameter=L100Km, Mode=TwoWay}" />
-				<RadioButton Content="{Binding LocalizedResources.Settings_Unit_km_L, Source={StaticResource LocalizedStrings}}" 
-							 IsChecked="{Binding FuelEconomyType, Converter={StaticResource enumBooleanConverter}, ConverterParameter=KmL, Mode=TwoWay}" />
-				<RadioButton Content="{Binding LocalizedResources.Settings_Unit_Mpg, Source={StaticResource LocalizedStrings}}" 
-							 IsChecked="{Binding FuelEconomyType, Converter={StaticResource enumBooleanConverter}, ConverterParameter=Mpg, Mode=TwoWay}" />
+						   />
+				<toolkit:ListPicker ItemsSource="{Binding FuelEconomyType, Converter={StaticResource enumToIEnumerableConverter}, Mode=OneTime}" 
+						  SelectedIndex="{Binding FuelEconomyType, Mode=TwoWay, Converter={StaticResource enumToIntConverter}}"/>
 			</StackPanel>
 			<StackPanel Margin="0 15 0 0">
-				<TextBlock Text="{Binding LocalizedResources.Settings_App_Lang, Source={StaticResource LocalizedStrings}}" 
-						   FontSize="{StaticResource PhoneFontSizeLarge}" TextWrapping="Wrap"/>
+				<TextBlock Text="{Binding LocalizedResources.Settings_App_Lang, Source={StaticResource LocalizedStrings}}" />
 				<TextBlock Text="{Binding LocalizedResources.Settings_App_Lang_Caution, Source={StaticResource LocalizedStrings}}"
-						   FontSize="{StaticResource PhoneFontSizeNormal}" TextWrapping="Wrap"/>
-				<RadioButton Content="English" IsChecked="{Binding Locale, Converter={StaticResource enumBooleanConverter}, ConverterParameter=en_US, Mode=TwoWay}" />
-				<RadioButton Content="Русский" IsChecked="{Binding Locale, Converter={StaticResource enumBooleanConverter}, ConverterParameter=ru_RU, Mode=TwoWay}" />
+						   Margin="60 0 0 0" Foreground="LightPink" FontSize="{StaticResource PhoneFontSizeSmall}"/>
+
+				<toolkit:ListPicker ItemsSource="{Binding Locale, Mode=OneTime, Converter={StaticResource enumToIEnumerableConverter}}" 
+						  SelectedIndex="{Binding Locale, Mode=TwoWay, Converter={StaticResource enumToIntConverter}}"/>
+			
 			</StackPanel>
-        </StackPanel>
-    </Grid>
+			<StackPanel>
+				<toolkit:ToggleSwitch Header="confirm when distance is too big"/>
+				<toolkit:ToggleSwitch Header="confirm when volume is too big"/>
+			</StackPanel>
+		</StackPanel>
+	</Grid>
 
 </phone:PhoneApplicationPage>

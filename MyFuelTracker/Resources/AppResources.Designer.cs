@@ -169,6 +169,24 @@ namespace MyFuelTracker.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to English.
+        /// </summary>
+        public static string AppLanguage_en_US {
+            get {
+                return ResourceManager.GetString("AppLanguage_en_US", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Русский.
+        /// </summary>
+        public static string AppLanguage_ru_RU {
+            get {
+                return ResourceManager.GetString("AppLanguage_ru_RU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to backing up to SkyDrive....
         /// </summary>
         public static string Backup_Backing_Up {
@@ -466,6 +484,33 @@ namespace MyFuelTracker.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to km per litre (km/L).
+        /// </summary>
+        public static string FuelEconomyType_KmL {
+            get {
+                return ResourceManager.GetString("FuelEconomyType_KmL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Litres per 100 km (L/100km).
+        /// </summary>
+        public static string FuelEconomyType_L100Km {
+            get {
+                return ResourceManager.GetString("FuelEconomyType_L100Km", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Miles per gallon (mpg).
+        /// </summary>
+        public static string FuelEconomyType_Mpg {
+            get {
+                return ResourceManager.GetString("FuelEconomyType_Mpg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to are you sure to delete fillup on {0}?.
         /// </summary>
         public static string History_Confirms_Delete_Fillup {
@@ -707,33 +752,6 @@ namespace MyFuelTracker.Resources {
         public static string Settings_Title {
             get {
                 return ResourceManager.GetString("Settings_Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to kilometers per litre (km/L).
-        /// </summary>
-        public static string Settings_Unit_km_L {
-            get {
-                return ResourceManager.GetString("Settings_Unit_km_L", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Litres per 100 kilometers (L/100km).
-        /// </summary>
-        public static string Settings_Unit_L_100km {
-            get {
-                return ResourceManager.GetString("Settings_Unit_L_100km", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Miles per gallon (mpg).
-        /// </summary>
-        public static string Settings_Unit_Mpg {
-            get {
-                return ResourceManager.GetString("Settings_Unit_Mpg", resourceCulture);
             }
         }
         

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
 using System.IO.IsolatedStorage;
 using System.Linq;
@@ -22,7 +23,9 @@ namespace MyFuelTracker.Core.Models
 
 	public enum SupportedLocale
 	{
+		[Description("AppLanguage_en_US")]
 		en_US,
+		[Description("AppLanguage_ru_RU")]
 		ru_RU
 	}
 
@@ -110,8 +113,11 @@ namespace MyFuelTracker.Core.Models
 
 	public enum FuelEconomyType
 	{
+		[Description("FuelEconomyType_Mpg")]
 		Mpg,
+		[Description("FuelEconomyType_KmL")]
 		KmL,
+		[Description("FuelEconomyType_L100Km")]
 		L100Km
 	}
 }
