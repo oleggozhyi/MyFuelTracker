@@ -52,7 +52,7 @@ namespace MyFuelTracker.Core.Models
 	public class FuelEconomyStrategyProvider : IFuelEconomyStrategyProvider
 	{
 		private readonly IUserSetttingsManager _manager;
-		private Dictionary<FuelEconomyType, IFuelEconomyStrategy> _strategies = new Dictionary<FuelEconomyType, IFuelEconomyStrategy>
+		private readonly Dictionary<FuelEconomyType, IFuelEconomyStrategy> _strategies = new Dictionary<FuelEconomyType, IFuelEconomyStrategy>
 			{
 				{ FuelEconomyType.Mpg, new MpgFuelEconomyStrategy()},
 				{ FuelEconomyType.L100Km, new L100KmFuelEconomyStrategy()},

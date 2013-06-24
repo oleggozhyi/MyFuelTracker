@@ -55,7 +55,7 @@
 						  SelectedIndex="{Binding Locale, Mode=TwoWay, Converter={StaticResource enumToIntConverter}}"/>
 			
 			</StackPanel>
-			<StackPanel>
+			<StackPanel Visibility="Collapsed">
 				<toolkit:ToggleSwitch Header="confirm when distance is too big"/>
 				<toolkit:ToggleSwitch Header="confirm when volume is too big"/>
 			</StackPanel>
