@@ -101,6 +101,8 @@ namespace MyFuelTracker.Infrastructure
 				return;
 			provider.AppBarChanged += (s, e) =>
 				{
+					if (_pivot != null && _pivot.SelectedItem != s)
+						return;
 					UpdateAppBarButtons(provider);
 					UpdateAppBarMenu(provider);
 				};

@@ -37,7 +37,7 @@ namespace MyFuelTracker.ViewModels
 		private readonly AppBarMenuModel _appBarMenuModel;
 		private readonly IUserSetttingsManager _userSetttingsManager;
 		private IEnumerable _items;
-		private FillupHistoryItemViewModel[] _fullHistory;
+		private FillupHistoryItemViewModel[] _fullHistory = new FillupHistoryItemViewModel[0];
 		private bool _showAllFillups;
 		private bool _historyEmpty = true;
 		private bool _isSelectionModeEnabled;
@@ -117,13 +117,12 @@ namespace MyFuelTracker.ViewModels
 		{
 			get
 			{
-				var buttons = new List<DynamicAppBarButton>
-					{
-						_addFillupButton,
-						ShowAllFillups ? _viewLessButton : _viewMoreButton,
-						IsSelectionModeEnabled ? _deleteSelectedButton : _selectButton
-					};
-
+				var buttons = new List<DynamicAppBarButton>();
+				buttons.Add(_addFillupButton);
+				if (_fullHistory.Count() > 5)
+					buttons.Add(ShowAllFillups ? _viewLessButton : _viewMoreButton);
+				if (_fullHistory.Any())
+					buttons.Add(IsSelectionModeEnabled ? _deleteSelectedButton : _selectButton);
 				return buttons;
 			}
 		}
@@ -164,7 +163,7 @@ namespace MyFuelTracker.ViewModels
 
 		private async void DeleteSelected()
 		{
-			if(_selection.SelectedItems.Count == 0)
+			if (_selection.SelectedItems.Count == 0)
 				return;
 
 			bool proceedWithDeletion = _messageBox.Confirm(string.Format(AppResources.History_Confirms_Delete_Selected, _selection.SelectedItems.Count));
@@ -173,10 +172,10 @@ namespace MyFuelTracker.ViewModels
 
 			foreach (FillupHistoryItemViewModel fillupViewModel in _selection.SelectedItems)
 			{
-				await _fillupService.DeleteFillupAsync(fillupViewModel.HistoryItem.Fillup);	
+				await _fillupService.DeleteFillupAsync(fillupViewModel.HistoryItem.Fillup);
 			}
 			_eventAggregator.Publish(new FillupHistoryChangedEvent());
-			
+
 			RaiseAppBarChangedChanged();
 			EnforceIsSelectionModeEnabled = false;
 		}
@@ -216,7 +215,7 @@ namespace MyFuelTracker.ViewModels
 							  .Navigate();
 		}
 
-		public async void DeleteFillup(FillupHistoryItemViewModel viewModel)	
+		public async void DeleteFillup(FillupHistoryItemViewModel viewModel)
 		{
 			bool proceedWithDeletion = _messageBox.Confirm(String.Format(AppResources.History_Confirms_Delete_Fillup, viewModel.Date));
 			if (!proceedWithDeletion)
@@ -249,14 +248,17 @@ namespace MyFuelTracker.ViewModels
 			if (!historyItems.Any())
 			{
 				HistoryEmpty = true;
-				return;
+				_fullHistory = new FillupHistoryItemViewModel[0];
 			}
-
-			HistoryEmpty = false;
-			var statistics = await _fillupService.GetStatisticsAsync();
-			var currentUnits = _userSetttingsManager.GetCurrentUnits();
-			_fullHistory = historyItems.Select(i => new FillupHistoryItemViewModel(i, statistics, currentUnits)).ToArray();
-			SetItemsSource();
+			else
+			{
+				HistoryEmpty = false;
+				var statistics = await _fillupService.GetStatisticsAsync();
+				var currentUnits = _userSetttingsManager.GetCurrentUnits();
+				_fullHistory = historyItems.Select(i => new FillupHistoryItemViewModel(i, statistics, currentUnits)).ToArray();
+				SetItemsSource();
+			}
+			RaiseAppBarChangedChanged();
 		}
 
 		public async void Handle(FillupHistoryChangedEvent message)

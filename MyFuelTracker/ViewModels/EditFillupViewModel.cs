@@ -209,10 +209,10 @@ namespace MyFuelTracker.ViewModels
                 _fillup.Date = Date;
                 _fillup.FuelType = FuelType;
                 _fillup.IsPartial = IsPartial;
-                _fillup.OdometerEnd = OdometerEnd.GetPositiveDoubleFor(AppResources.EditFillup_Previous + " " + AppResources.EditFillup_Odometer);
-				_fillup.OdometerStart = OdometerStart.GetPositiveDoubleFor(AppResources.EditFillup_Current + " " + AppResources.EditFillup_Odometer);
-				_fillup.Volume = Volume.GetPositiveDoubleFor(AppResources.EditFillup_Volume);
+				_fillup.OdometerStart = OdometerStart.GetPositiveDoubleFor(AppResources.EditFillup_Previous_Odometer);
 				_fillup.Price = Price.GetPositiveDoubleFor(AppResources.EditFillup_Fuel_Price);
+                _fillup.OdometerEnd = OdometerEnd.GetPositiveDoubleFor(AppResources.EditFillup_Current_Odometer);
+				_fillup.Volume = Volume.GetPositiveDoubleFor(AppResources.EditFillup_Volume);
                 ValidateFillup(_fillup);
                 bool userCancelled = CheckForExtremalValues(_fillup);
                 if (userCancelled)

@@ -205,7 +205,7 @@
     <value>количество топлива</value>
   </data>
   <data name="EditFillup_Add_Title" xml:space="preserve">
-    <value>добавтить</value>
+    <value>добавить</value>
   </data>
   <data name="EditFillup_Current" xml:space="preserve">
     <value>текущий</value>
@@ -327,7 +327,7 @@
     <value>предпочитаемое топливо</value>
   </data>
   <data name="Statistics_NoFillups_Message" xml:space="preserve">
-    <value>здесь будет отображаться статистика потребления топлива как только вы введёте данные о хотя бы одной заправке</value>
+    <value>здесь будет отображаться статистика потребления топлива как только вы введёте данные хотя бы одной об заправке</value>
   </data>
   <data name="Statistics_Title" xml:space="preserve">
     <value>статистика</value>
@@ -366,7 +366,7 @@
     <value>выполняется вход...</value>
   </data>
   <data name="History_No_Fillups_Message" xml:space="preserve">
-    <value>здесь будет отображаться история заправок как только вы введёте данные о хотя бы одной заправке</value>
+    <value>здесь будет отображаться история заправок как только вы введёте данные хотя бы об одной заправке</value>
   </data>
   <data name="Restore_Backup_Date" xml:space="preserve">
     <value>дата сохранения</value>
