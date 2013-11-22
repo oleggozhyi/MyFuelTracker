@@ -75,7 +75,6 @@ namespace MyFuelTracker.Core.DataAccess
 		{
 			if (_initialized)
 				return;
-
 			if (!_dataContext.DatabaseExists())
 			{
 				_dataContext.CreateDatabase();

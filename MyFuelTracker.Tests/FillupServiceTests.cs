@@ -47,7 +47,7 @@ namespace MyFuelTracker.Tests
 			//act
 			var fillup = fillupService.CreateNewFillupAsync().WaitAndReturn();
 
-			//asseet
+			//assert
 			fillup.OdometerStart.ShouldBe(2700);
 			fillup.OdometerEnd.ShouldBe(2700);
 		}
@@ -170,7 +170,7 @@ namespace MyFuelTracker.Tests
 
 		public FillupService CreateService()
 		{
-			return new FillupService(DB, new StatisticsService());
+			return new FillupService(DB, new StatisticsService(), new FuelEconomyStrategyProvider(null));
 		}
 	}
 }

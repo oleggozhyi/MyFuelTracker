@@ -19,21 +19,21 @@ namespace MyFuelTracker
 {
 	public class Bootstrapper : PhoneBootstrapper
 	{
-	    public static Bootstrapper Current
-	    {
-	        get
-	        {
-	            var bootstrapper = Application.Current.Resources["bootstrapper"] as Bootstrapper;
-                if(bootstrapper == null)
-                    throw new InvalidOperationException("bootstrapper was not found in app resources");
+		public static Bootstrapper Current
+		{
+			get
+			{
+				var bootstrapper = Application.Current.Resources["bootstrapper"] as Bootstrapper;
+				if(bootstrapper == null)
+					throw new InvalidOperationException("bootstrapper was not found in app resources");
 
-	            return bootstrapper;
-	        }
-	    }
+				return bootstrapper;
+			}
+		}
 
-        public PhoneContainer Container { get; set; }
+		public PhoneContainer Container { get; set; }
 
-	    protected override void Configure()
+		protected override void Configure()
 		{
 			Debug.WriteLine("Configure CM Bootstrapper");
 
@@ -46,12 +46,12 @@ namespace MyFuelTracker
 			Container.PerRequest<EditFillupViewModel>();
 			Container.PerRequest<AddFuelTypeViewModel>();
 			Container.PerRequest<DisplayFillupViewModel>();
-            Container.PerRequest<BackupToSkyDriveViewModel>();
+			Container.PerRequest<BackupToSkyDriveViewModel>();
 			Container.PerRequest<RestoreFromSkyDriveViewModel>();
 			Container.PerRequest<SettingsViewModel>();
-            
+			
 			Container.PerRequest<ILog, DebugLogger>();
-	        Container.Singleton<AppBarMenuModel>();
+			Container.Singleton<AppBarMenuModel>();
 			Container.Singleton<IUserSetttingsManager, UserSetttingsManager>();
 			Container.Singleton<IFuelEconomyStrategyProvider, FuelEconomyStrategyProvider>();
 
@@ -59,12 +59,12 @@ namespace MyFuelTracker
 			Container.Singleton<IFillupService, FillupService>();
 			Container.Singleton<IFuelTrackerDb, SqlCeFuelTrackerDb>();
 			Container.Singleton<IStatisticsService, StatisticsService>();
-	        Container.PerRequest<IProgressIndicatorService, ProgressIndicatorService>();
-		    Container.Singleton<IFillupsSerializer, FillupsSerializer>();
+			Container.PerRequest<IProgressIndicatorService, ProgressIndicatorService>();
+			Container.Singleton<IFillupsSerializer, FillupsSerializer>();
 
 			LogManager.GetLog = type => new DebugLogger(type);
 
-		    SetCurrentLanguage();
+			SetCurrentLanguage();
 		}
 
 		private void SetCurrentLanguage()
@@ -107,9 +107,9 @@ namespace MyFuelTracker
 			Container.BuildUp(instance);
 		}
 
-	    public T Resolve<T>()
-	    {
-	        return GetAllInstances(typeof (T)).Cast<T>().Single();
-	    }
+		public T Resolve<T>()
+		{
+			return GetAllInstances(typeof (T)).Cast<T>().Single();
+		}
 	}
 }

@@ -37,7 +37,6 @@ namespace MyFuelTracker.Tests
 			statistics.Last4FillupsAvgFuelEconomy.ShouldRoughlyBe((9.95 + 9.73 + 8.90 + 10.11) / 4.0, EPSILON);
 			statistics.LastFuelEconomy.ShouldRoughlyBe(10.11, EPSILON);
 			statistics.LastMonthCost.ShouldRoughlyBe((35.5 + 36.5 + 37.5 + 38.5) * 12.59, EPSILON);
-			statistics.AllTimeAvgMonthCost.ShouldRoughlyBe((31.5 + 32.5 + 33.5 + 34.5 + 35.5 + 36.5 + 37.5 + 38.5) * 12.59 / ((31.0 + 26.0) / 30.0), EPSILON);
 			statistics.MinFuelEconomy.ShouldRoughlyBe(8.90, EPSILON);
 			statistics.MaxFuelEconomy.ShouldRoughlyBe(12.50, EPSILON);
 		}
